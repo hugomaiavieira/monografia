@@ -1,0 +1,151 @@
+\chapter{Fundamentação teórica}
+
+\section{Agilismo}
+
+Em 2001 um grupo de dezessete especialistas, reconhecidos pela comunidade como
+grandes nomes do desenvolvimento software, se reuniram para discutir sobre um
+crescente conjunto de métodos que vinham surgindo e decidiram usar o termo
+Agilismo para descrever essa nova geração de métodos ágeis \cite{AgileStory}.
+Eles também escreveram o Manifesto Ágil \cite{AgileManifesto}, delineando um
+conjunto de valores e princípios que, em resumo, trilham um
+caminho para a eliminação de documentação e processos desnecessários, buscando
+a simplicidade, com foco na geração de valor e proximidade com o cliente, além
+de possibilitar respostas rápidas e eficazes às mudanças.
+
+Pode-se dizer então, que o Desenvolvendo Ágil, ou Agilismo, é um rótulo genérico
+para os métodos de desenvolvimento de software baseados no Manifesto Ágil
+\cite{BDDRodrigo}.
+
+
+\section{Técnicas}
+
+\subsection{Test-Driven Development}
+``Apenas escrever código para corrigir um teste falhando". Segundo
+\citeonline{TestDrivenKoskela}, isto é \textit{Test-Driven Development} (TDD)
+\cite{TDDbyExample} em apenas uma sentença.
+
+O TDD é uma técnica onde o desenvolvimento do software é guiado por testes
+automatizados, que são escritos antes de qualquer linha de código. Primeiro
+escreve-se um teste, depois escreve-se o código para passar neste teste. Em
+seguida, o código é refatorado para encontrar um design melhor, contanto sempre
+com os testes existentes para que não sejam introduzidas falhas em outras partes
+do sistema.
+
+Esta abordagem encoraja bom design, produz código testável e mantém longe a
+sobre-engenharia por conta de falsas suposições, pois, nos testes, é
+especificado o que é desejado e escreve-se o código para fazer apenas aquilo que
+realmente é necessário. \cite{TestDrivenKoskela, TDDbyExample, EmpiricalTDD}
+
+Mas TDD é uma técnica emergente? Não e sim.
+
+O TDD vem sendo utilizado esporadicamente há anos, contudo, não existia um nome
+para identificar essa forma de desenvolver software. No entanto, em termos de
+adoção, TDD continua sendo novo. \cite{TestDrivenKoskela, TDDbyExample, EmpiricalTDD}
+Hoje, esta técnica tem um nome e começa a ganhar força, sendo utilizada em times
+de grandes empresas como Google, Yahoo, Microsoft e IBM. \cite{EmpiricalTDD}
+
+
+
+\subsection{Behaviour-Driven Development}
+
+Criado em 2006 \cite{IntroducingBDD}, Behaviour-Driven Development (BDD) é uma
+técnica de desenvolvimento de software cuja amplitude se estende às atividades
+de design, documentação, validação e verificação, tratando-as de modo unificado
+\cite{BDDRodrigo}.
+
+O BDD é uma evolução do TDD. A grande diferença entre os dois, é que TDD não
+abrange a validação do software, ou seja, se o software atende os requisitos.
+Isso muda tudo, pois em BDD, o pensamento não é voltado à verificação, mas sim
+no comportamento, em \textbf{validar} que o software faz o que deveria fazer,
+sem deixar também de \textbf{verificar} se está funcionando como deveria.
+
+BDD vem se tornando um consenso em automação de testes. Contudo, existe
+controvérsia sobre seu modo de utilização.
+
+
+
+
+
+\subsection{Integração contínua}
+
+Em uma equipe com vários desenvolvedores, todos trabalhando na elaboração de um
+mesmo sistema, existe o problema de unificar as diversas alterações feitas na
+base de código, assegurando que a base continua consistente \cite{ImproveitCI}.
+Para resolver esse problema, entra em cena a Integração Contínua (IC), que além
+disso, tem como ponto chave dar um feedback rápido quando a base não está
+consistente.
+
+\cite{FowlerCI} definiu a IC da seguinte maneira:
+
+\begin{citacao}
+Integração Contínua é uma prática de desenvolvimento de software onde os membros
+de um time integram seu trabalho frequentemente, geralmente cada pessoa integra
+ao menos uma vez ao dia - podendo haver múltiplas integrações por dia. Cada
+integração é verificada por um \textit{build} automatizado (incluindo testes)
+para detectar erros de integração o mais rápido possível. Muitos times acham que
+essa abordagem leva a uma significante redução nos problemas de integração e
+permite que um time desenvolva software coeso mais rapidamente.
+\end{citacao}
+
+A IC é um dos pilares da agilidade, pois garante que todo o sistema funcione de
+forma coesa a cada \textit{build}, mesmo que sua equipe seja grande e diversas
+partes do código estejam sendo alteradas ao mesmo tempo \cite{CaelumCI}.
+
+Existe um debate sobre a periodicidade da integração, que tem relação direta com
+o tempo de execução da \textit{build}. Para assegurar o rápido feedback, esse
+tempo de execução deve ser o menor possível, tentando manter sempre menor do que
+dez minutos \cite{FowlerCI}.
+
+
+
+\subsection{Dublês de Teste}
+
+Em algumas ocasiões é difícil testar alguns componentes porque eles dependem de
+outros componentes que não podem ser utilizados em ambiente de teste. Estas
+situações podem acontecer por esses componentes não estarem disponíveis, por
+eles não retornam os resultados necessários ou porque executá-los iria trazer
+efeitos colaterais indesejados. Em outros casos, nossa estratégia de testes
+requer que nós tenhamos mais controle do comportamento interno do componente.
+
+Quando estamos escrevendo um teste onde não podemos/escolhemos usar componentes
+reais, podemos substitui-los pelos Dublês de Teste que oferecem uma maneira de
+isolar as dependências ao criar seus testes, permitindo a utilização de
+componentes falsos para cumprir os papéis de componentes reais. Com isso,
+eliminamos complexidade do código dos testes, pois mantemos o código de
+implementação dos objetos pequeno e com baixo acoplamento.
+
+Os Dublês de Teste não precisam se comportar exatamente como o componente real,
+eles devem apenas prover a mesma API que o componente real.
+
+\citeonline{XUnit} Define cinco categorias de Dublês de Teste:
+
+\begin{itemize}
+    \item
+        Objetos \textbf{\textit{Dummy}} geralmente são utilizados apenas para
+        preencher uma lista de parâmetros e nunca são realmente usados.
+
+    \item
+        Objetos \textbf{\textit{Fake}} são utilizados para substituir
+        funcionalidades reais de um componente por razões diferentes de
+        verificações indiretas de entradas e saídas do componente a ser testado.
+
+    \item
+        Os \textbf{\textit{Stubs}} provêm respostas prontas para chamadas feitas
+        durante os testes, geralmente não respondendo a qualquer chamada
+        diferente das pré-definidas.
+
+    \item
+        Os \textbf{\textit{Spies}} são \textit{Stubs} que também tem gravam
+        algumas informações baseadas em como eles são chamados. Um exemplo pode
+        ser um serviço de email que grava quantas mensagens foram enviadas.
+
+    \item
+        \textbf{\textit{Mocks}} são objetos pré-programados para receber
+        determinado conjunto de chamadas, podendo lançar uma exceção se tais
+        chamadas não forem feitas a ele, ou se receber outra chamada diferente
+        das pré-programadas.
+\end{itemize}
+
+De modo geral, a utilização de Dublês de Teste é extremamente benéfica para o
+projeto. Contudo, existem controvérsias, principalmente em relação a utilização
+do \textit{Mock} \cite{MocksArentStubs}.
