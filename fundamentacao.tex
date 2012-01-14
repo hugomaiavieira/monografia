@@ -27,17 +27,40 @@ O TDD vem sendo utilizado esporadicamente há anos, contudo, não existia um nom
 Com base no trabalho de \citeonline{TDDbyExample}, o ciclo de desenvolvimento TDD é composto pelas seguintes etapas:
 
 \begin{enumerate}
-\item Adicionar um teste
-\item Rodar todos os testes e ver se algum falha
-\item Escrever código
-\item Rodar os testes e ter sucesso
-\item Refatorar
+\item \textbf{Adicionar um teste}
+
+Cada ciclo se inicia com a criação de um teste. Este teste inevitavelmente irá falhar, pois é escrito antes do código ser implementado de fato. Para escrever um teste, o desenvolvedor precisa entender claramente as especificações e requisitos da funcionalidade. Isso faz com que o desenvolvedor tenha como foco os requisitos antes do código e o direcionando a escrever código apenas para o que é realmente necessário.
+
+\item \textbf{Executar todos os testes e ver se algum falha}
+
+Todos os testes devem ser executados e o novo teste deve falhar pela razão esperada: a funcionalidade não foi desenvolvida. Isto aumenta a confiança que se está testando a coisa certa.
+
+\item \textbf{Escrever código}
+
+O próximo passo é escrever código \textbf{somente para que o teste passe}. O código poderá não ser perfeito, pois posteriormente ele será melhorado. O importante é que o código faça o mínimo para passar no teste.
+
+\item \textbf{Executar os testes e ter sucesso}
+
+Ao Executar os testes e todos passam, o código possui todos os requisitos testados e o programador pode ficar confiante para melhorá-lo.
+
+\item \textbf{Refatorar}
+
+Esta é uma etapa muito importante, onde o código escrito anteriormente é melhorado.
+
+Segundo \citeonline{FowlerRefatoracao}, refatorar é reestruturar o software aplicando uma série de alterações em sua estrutura interna para torná-lo mais fácil de ser entendido e menos custoso de ser modificado, sem alterar seu comportamento observável.
+
+Refatorar melhora o projeto do software, o torna mais fácil de entender e modificar, ajuda a encontrar falhas e ajuda o desenvolvedor a programar mais rapidamente.
+
+Como na refatoração o comportamento do código não deve ser alterado, após refatorar e executar novamente os testes, todos devem passar.
+
 \end{enumerate}
 
 \subsubsection{TDD na prática}
 \label{ssub:tdd_na_pratica}
 
-Vejamos agora como isso se dá na prática. Eu preciso de saber todos os contribuidores de um projeto, incluindo o dono do projeto e demais contribuidores adicionais. Então, a primeira coisa a ser feita é a esta especificação para o caso mais simples. Um projeto sempre tem um dono, mas pode não ter nenhum contribuidor adicional. Assim, a especificação do caso mais simples pode ser como mostrada no código \ref{code:spec_all_contributors1}.
+Vejamos agora como isso se dá na prática através de um exemplo retirado do código do kanban-roots.
+
+Eu preciso de saber todos os contribuidores de um projeto, incluindo o dono do projeto e demais contribuidores adicionais. Então, a primeira coisa a ser feita é o teste para o caso mais simples. Um projeto sempre tem um dono, mas pode não ter nenhum contribuidor adicional. Assim, o teste para o caso mais simples pode ser como mostrado no código \ref{code:spec_all_contributors1}.
 
 \begin{lstlisting}[caption=Expectativa para todos contribuidores de um projeto,label=code:spec_all_contributors1]
 # spec/models/project.rb
