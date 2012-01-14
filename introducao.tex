@@ -63,21 +63,29 @@ melhor aplicadas, comparando as diferentes abordagens para cada técnica, bem
 como as vantagens e desvantagens em seu uso.
 
 Como base para a discussão, será utilizado o
-kaban-roots\footnote{\href{http://github.com/hugomaiavieira/kanban-roots}
-{http://github.com/hugomaiavieira/kanban-roots}}, que está sendo desenvolvido em
-conjunto com o presente trabalho.
+kaban-roots\footnote{\url{http://github.com/hugomaiavieira/kanban-roots}}, que
+está sendo desenvolvido em conjunto com o presente trabalho.
 
 O kanban-roots é um kanban\footnote{O termo tem origem no sistema Toyota de
 produção, onde kanban é a maneira como é coordenado o fluxo de peças na cadeia
 de suprimentos  \cite{AMaquinaQueMudouOMundo}. No contexto do presente trabalho,
 kanban é um quadro para visualização do fluxo de trabalho (tarefas) em um
-projeto.} online para auxiliar a organização de tarefas de um projeto. O kanban-
-roots já está em produção e vem sendo utilizado com sucesso por algumas
-empresas.
+projeto.} online para auxiliar a organização de tarefas de um projeto. O
+kanban-roots já está em produção e vem sendo utilizado com sucesso por algumas
+empresas. Na figura \ref{img:tela_kaban_roots} pode ser visto um \textit{print}
+da tela do kanban de um projeto no kanban-roots.
 
 \begin{figure}[h]
     \center
-    \caption{Tela do quadro de um projeto no kanban-roots}
+    \caption{Tela do kanban de um projeto no kanban-roots}
     \includegraphics[scale=0.45]{images/kanban-roots}
-    \label{tela_kaban_roots}
+    \label{img:tela_kaban_roots}
 \end{figure}
+
+Para o desenvolvimento do kanban-roots foi utilizado o \textit{framework}
+\textit{RubyOnRails}\footnote{\url{http://rubyonrails.org}}, além de algumas
+ferramentas de teste como o \textit{Rspec}\footnote{\url{http://rspec.info/}}
+para testes unitários, testes funcionais e dublês de teste, o
+\textit{Cucumber}\footnote{\url{http://cukes.info/}} para testes funcionais e o
+\textit{FactoryGirl}\footnote{\url{https://github.com/thoughtbot/factory_girl}}
+para \textit{fixtures replacment}.

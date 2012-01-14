@@ -6,7 +6,7 @@
 	           normaltoc,
 	           pnumplain,
 	           notimes
-%	           capchap,
+	           % capchap,
 ]{abnt}
 
 \usepackage[utf8]{inputenc}
@@ -14,40 +14,60 @@
 \usepackage{graphicx}
 \usepackage[pdfborder={0 0 0}]{hyperref} % http://www.tug.org/applications/hyperref/manual.html
 \usepackage[alf]{abntcite}
-\usepackage{listings2} % http://www.atscire.de/index.php?nav=products/listings2
+\usepackage{listings} % http://www.atscire.de/index.php?nav=products/listings2 http://linorg.usp.br/CTAN/macros/latex/contrib/listings/listings.pdf
 \usepackage{textcomp}
-\usepackage[usenames,dvipsnames]{color} % http://en.wikibooks.org/wiki/LaTeX/Colors
+\usepackage[usenames,dvipsnames]{xcolor} % http://en.wikibooks.org/wiki/LaTeX/Colors
+
+\urlstyle{same} % http://en.wikibooks.org/wiki/LaTeX/Hyperlinks#Customization
 
 %-------------------------------- Highligthing ---------------------------------
 
 \lstset{
-    basicstyle=\ttfamily,
+    language=ruby,
+    basicstyle=\footnotesize\ttfamily,
     columns=flexible,
     numberbychapter=false,
     showstringspaces=false,
-    stringstyle=\color{red}\textit,
-    keywordstyle=\color{blue}\textbf,
-    emphstyle=\color{magenta}\textbf,
-%    numbers=left,
-%    numberstyle=\ttfamily\footnotesize,
-%    stepnumber=1,
-%    numbersep=10pt,
-%    keywords={class, pass, in, for, while, if, is, elif, else, not, and, or, def, print, exec, break, continue, return, assert, from, import, with, as, require, end, do},
-%    emph={self, True, False, None, object, new},
-%    emph={[2]Funcionalidade, Como, Eu, E, quero, Para, Cenario, Dado, Quando, Entao, should, should_not, @matcher, context, it, describe, expect, to, world, @step, step, assert_equal, fail, expect, to_not, raise_error},
-%    emphstyle=[2]\color{MidnightBlue}\textbf,
-%    frame=single,
-}
+    frame=bottomline,
+    tabsize=2,
+    xleftmargin=17pt,
+    framexleftmargin=17pt,
+    framexrightmargin=5pt,
+    framexbottommargin=4pt,
+    numbers=left,
+    numberstyle=\scriptsize\ttfamily\color{Gray},
+    emphstyle=\color{OrangeRed},
+    commentstyle=\color{Gray}\textit,
+    stringstyle=\color{PineGreen},
+    keywordstyle=\color{Blue},
+    morekeywords={it, include},
+    morestring=**[s]{:}{\ }, % cheat para fazer o symbol parecer string
+    emph={Factory},
+    % emph={[2]Funcionalidade, Como},
+    % emphstyle=[2]\color{MidnightBlue},
+ }
 
-\begin{document}
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}\footnotesize\bfseries}
+\DeclareCaptionFormat{listing}{\colorbox{BrickRed}{\parbox{\textwidth}{#1#2#3}}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+
+% Renomear listing e listings -> código e códigos
+\renewcommand*\lstlistingname{Código}
+\renewcommand*\lstlistlistingname{Lista de Códigos}
 
 %--------------------------------- Informações ---------------------------------
+
+\begin{document}
 
 \titulo{Técnicas emergentes de desenvolvimento de software}
 \autor{Hugo Henriques Maia Vieira}
 \instituicao{Universidade Estadual do Norte Fluminense Darcy Ribeiro}
 \orientador[Tutor: ]{Rodrigo Soares Manhães, M.Sc.}
-\comentario{Monografia apresentada ao Curso de Graduação em Ciência da Computação da Universidade Estadual do Norte Fluminense Darcy Ribeiro como requisito para obtenção do título de Bacharel em Ciência da Computação, sob orientação da Prof. Rodrigo Soares Manhães, M.Sc.}
+\comentario{Monografia apresentada ao Curso de Graduação em Ciência da
+Computação da Universidade Estadual do Norte Fluminense Darcy Ribeiro como
+requisito para obtenção do título de Bacharel em Ciência da Computação, sob
+orientação da Prof. Rodrigo Soares Manhães, M.Sc.}
 \local{Campos dos Goytacazes/RJ}
 \data{2011}
 
@@ -58,6 +78,9 @@
 \include{epigrafe}
 \include{agradecimentos}
 
+\listoffigures
+\lstlistoflistings
+
 \begin{resumo}
 Aqui entra o resumo do meu trabalho que será a última coisa a ser feita.
 \end{resumo}
@@ -66,9 +89,6 @@ Aqui entra o resumo do meu trabalho que será a última coisa a ser feita.
 
 \include{introducao}
 \include{fundamentacao}
-\include{kanban}
-\include{desenvolvimento}
-\include{referencias}
 
 %--------------------------------- Bibliografia --------------------------------
 
