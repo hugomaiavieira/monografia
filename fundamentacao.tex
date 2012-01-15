@@ -60,59 +60,95 @@ Como na refatoração o comportamento do código não deve ser alterado, após r
 
 Vejamos agora como isso se dá na prática através de um exemplo retirado do código do kanban-roots.
 
-Eu preciso de saber todos os contribuidores de um projeto, incluindo o dono do projeto e demais contribuidores adicionais. Então, a primeira coisa a ser feita é o teste para o caso mais simples. Um projeto sempre tem um dono, mas pode não ter nenhum contribuidor adicional. Assim, o teste para o caso mais simples pode ser como mostrado no código \ref{code:spec_all_contributors1}.
+Precisa-se saber todas as tarefas em uma determinada posição do \textit{kanban} de um projeto. Então, a primeira coisa a ser feita é o teste para o caso mais simples: quando o projeto não tem tarefa alguma naquela determinada posição.
 
-\begin{lstlisting}[caption=Expectativa para todos contribuidores de um projeto,label=code:spec_all_contributors1]
+O teste para o caso mais simples pode ser como mostrado no código \ref{code:tdd_spec1}.
+
+\begin{lstlisting}[caption=Teste para o método Project\#tasks\_by\_position (versão 1),label=code:tdd_spec1]
 # spec/models/project.rb
-context "should return all contributors when" do
-  it "has only the owner" do
-    hugo = Factory.create :contributor
-    project = Factory.create :project, :owner => hugo
-    project.all_contributors.should include(hugo)
-  end
+it "returns all related tasks matching a given position" do
+  project = Factory.create :project
+  project.tasks_by_position(4).should be_empty
 end
 \end{lstlisting}
 
-Ao rodar este teste, ele irá falhar, informando que o método \textit{all\_contributors} sequer existe. Escrevemos então o código mais simples que atenda a essa especificação:
+Ao rodar este teste, ele irá falhar, informando que o método \textit{tasks\_by\_position} sequer existe. Como esta era a falha esperada, escrevemos então o código mais simples para passar neste teste.
 
-\begin{lstlisting}[caption=Implementação para todos contribuidores de um projeto,label=code:implement_all_contributors1]
-# models/project.rb
-def all_contributors
-  [owner]
+\begin{lstlisting}[caption=Código do método Project\#tasks\_by\_position (versão 1),label=code:tdd_code1]
+# app/models/project.rb
+def tasks_by_position position
+  []
 end
 \end{lstlisting}
 
-Os testes irão passar. Mas minha especificação ainda não está completa. Tenho que adicionar o caso onde o projeto, além de ter seu dono, o projeto tem outro contribuidor.
+Os testes irão passar. Mas a funcionalidade ainda não está completa e, consequentemente, o teste também não.
 
-\begin{lstlisting}[caption=Expectativa para todos contribuidores de um projeto,label=code:spec_all_contributors2]
+\begin{lstlisting}[caption=Teste do método Project\#tasks\_by\_position (versão 2),label=code:tdd_spec2]
 # spec/models/project.rb
-context "should return all contributors when" do
-  it "has only the owner" do
-    hugo = Factory.create :contributor
-    project = Factory.create :project, :owner => hugo
-    project.all_contributors.should include(hugo)
-  end
+it "returns all related tasks matching a given position" do
+  project = Factory.create :project
+  tasks = [Factory.create(:task, :project => project, :position => 1),
+           Factory.create(:task, :project => project, :position => 1)]
 
-  it "has the owner and other contributor" do
-    hugo = Factory.create :contributor
-    rodrigo = Factory.create :contributor
-    project = Factory.create :project, :owner => hugo, :contributors => [rodrigo]
-    project.all_contributors.should include(hugo, rodrigo)
-    project.all_contributors.should have(2).contributors
-  end
+  project.tasks_by_position(4).should be_empty
+
+  project.should have(2).tasks_by_position(1)
+  project.tasks_by_position(1).should include(*tasks)
 end
 \end{lstlisting}
 
-Ao rodar este teste, ele irá falhar, informando que o método \textit{all\_contributors} retorna apenas uma lista que inclui apenas seu dono. Escrevemos então o código mais simples que atenda a essa especificação:
+O teste irá falhar, informando que na \hyperref[code:tdd_spec1]{linha 9 do teste} eram esperadas 2 tarefas, mas foram obtidas 0. O código então deve ser modificado para passar no novo teste.
 
-\begin{lstlisting}[caption=Implementação para todos contribuidores de um projeto,label=code:implement_all_contributors2]
-# models/project.rb
-def all_contributors
-  [owner] + contributors
+\begin{lstlisting}[caption=Código do método Project\#tasks\_by\_position (versão 2),label=code:tdd_code2]
+# app/models/project.rb
+def tasks_by_position position
+  task_list = []
+  tasks.each do |task|
+    task_list << task if task.position.to_s == position.to_s
+  end
+  task_list
 end
 \end{lstlisting}
 
-% \lstinputlisting[caption=Exemplo de teste de unidade em Ruby,label=teste-de-unidade,language=Ruby]{code/teste.rb}
+Desta vez os irão passar, porém a cobertura de testes da funcionalidade ainda está fraca. Adicionando mais algumas tarefas em posições diferentes, isso é resolvido.
+
+\begin{lstlisting}[caption=Teste do método Project\#tasks\_by\_position (versão 3),label=code:tdd_spec3]
+# spec/models/project.rb
+it 'returns all related tasks matching a given position' do
+  project = Factory.create :project
+  tasks = [Factory.create(:task, :project => project, :position => 1),
+           Factory.create(:task, :project => project, :position => 1),
+           Factory.create(:task, :project => project, :position => 2),
+           Factory.create(:task, :project => project, :position => 3),
+           Factory.create(:task, :project => project, :position => 3)]
+
+  project.should have(2).tasks_by_position(1)
+  project.tasks_by_position(1).should include(*tasks[0..1])
+
+  project.tasks_by_position(2).should == [tasks[2]]
+
+  project.should have(2).tasks_by_position(3)
+  project.tasks_by_position(3).should include(*tasks[3..4])
+
+  project.tasks_by_position(4).should be_empty
+end
+\end{lstlisting}
+
+Executando os testes novamente, todos eles passam, o que indica que já é hora de ir para o item 5 do ciclo TDD e refatorar o código.
+
+\begin{lstlisting}[caption=Código do método Project\#tasks\_by\_position (versão 3),label=code:tdd_code3]
+# app/models/project.rb
+def tasks_by_position position
+  tasks.select { |item| item.position.to_s == position.to_s }
+end
+\end{lstlisting}
+
+\subsubsection{Questões em aberto}
+\label{ssub:tdd_em_averto}
+
+Existe uma discussão ainda em aberto sobre a forma como os testes são escritos. Diferente do que foi apresentado em \ref{code:tdd_spec_ultimo}, há quem defenda que os testes deveriam ser escritos como em \ref{code:tdd_spec_exemplo}.
+
+O autor considera estar forma ruim por isso, aquilo e aquilo outro.
 
 
 \subsection{Behaviour-Driven Development}
