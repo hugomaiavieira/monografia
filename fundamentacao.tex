@@ -13,7 +13,7 @@ Pode-se dizer então, que o Desenvolvendo Ágil, ou Agilismo, é um rótulo gen�
 \label{sub:tdd}
 ``Apenas escrever código para corrigir um teste falhando". Segundo \citeonline{TestDrivenKoskela}, isto é \textit{Test-Driven Development} (TDD) \cite{TDDbyExample} em apenas uma sentença.
 
-O TDD é uma técnica onde o desenvolvimento do software é guiado por testes automatizados, que são escritos antes de qualquer linha de código. Primeiro escreve-se um teste, depois escreve-se o código para passar neste teste. Em seguida, o código é refatorado para encontrar um design melhor, contanto sempre com os testes existentes para que não sejam introduzidas falhas em outras partes do sistema.
+O TDD é uma técnica onde o desenvolvimento do software é guiado por \textbf{testes automatizados}, que são escritos antes de qualquer linha de código. Primeiro escreve-se um teste, depois escreve-se o código para passar neste teste. Em seguida, o código é refatorado para encontrar um design melhor, contanto sempre com os testes existentes para que não sejam introduzidas falhas em outras partes do sistema.
 
 Esta abordagem encoraja bom design \cite{GrowingOOByTests}, produz código testável e mantém longe a sobre-engenharia por conta de falsas suposições, pois, nos testes, é especificado o que é desejado e escreve-se o código para fazer apenas aquilo que realmente é necessário. \cite{TestDrivenKoskela, TDDbyExample, EmpiricalTDD}
 
@@ -54,6 +54,15 @@ Refatorar melhora o projeto do software, o torna mais fácil de entender e modif
 Como na refatoração o comportamento do código não deve ser alterado, após refatorar e executar novamente os testes, todos devem passar.
 
 \end{enumerate}
+
+A figura \ref{img:ciclo-tdd} resume o clico TDD de forma bem clara.
+
+\begin{figure}[h]
+  \center
+  \caption{O ciclo TDD}
+  \includegraphics[scale=0.45]{images/ciclo-tdd}
+  \label{img:ciclo-tdd}
+\end{figure}
 
 \subsubsection{TDD na prática}
 \label{ssub:tdd_na_pratica}
@@ -97,7 +106,7 @@ it "returns all related tasks matching a given position" do
 end
 \end{lstlisting}
 
-O teste irá falhar, informando que na \hyperref[code:tdd_spec1]{linha 9 do teste} eram esperadas 2 tarefas, mas foram obtidas 0. O código então deve ser modificado para passar no novo teste.
+O teste irá falhar, informando que na \hyperref[code:tdd_spec1]{linha 9 do teste} eram esperadas duas tarefas, mas foram obtidas zero. O código então deve ser modificado para passar no novo teste.
 
 \begin{lstlisting}[caption=Código do método Project\#tasks\_by\_position (versão 2),label=code:tdd_code2]
 # app/models/project.rb
@@ -146,7 +155,9 @@ end
 \subsubsection{Questões em aberto}
 \label{ssub:tdd_em_averto}
 
-Existe uma discussão ainda em aberto sobre a forma como os testes são escritos. Diferente do que foi apresentado em \ref{code:tdd_spec_ultimo}, há quem defenda que os testes deveriam ser escritos como em \ref{code:tdd_spec_exemplo}.
+A forma como os testes são escritos ainda não é um consenso. Na forma como são apresentadas neste trabalho, os testes são organizados por contexto, que envolvem chamadas a um único método, algumas vezes incluindo mais de uma chamada e exemplos por teste.
+
+\citeonline{ContinuousTesting} dizem que os testes deveriam ser escritos como em \ref{code:tdd_spec_exemplo}.
 
 O autor considera estar forma ruim por isso, aquilo e aquilo outro.
 
