@@ -24,5 +24,5 @@ Para compilar, depois ter instalado as dependências, basta rodar o comando
 
 # Autor e orientador
 
-Autor: Hugo Henriques Maia Vieira <hugomaiavieira@gmail.com>
-Orientador: Rodrigo Soares Manhães <rmanhaes@gmail.com>
+- Autor: Hugo Henriques Maia Vieira <hugomaiavieira@gmail.com>
+- Orientador: Rodrigo Soares Manhães <rmanhaes@gmail.com>

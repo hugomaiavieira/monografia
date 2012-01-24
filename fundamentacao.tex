@@ -69,19 +69,29 @@ A figura \ref{img:ciclo-tdd} resume o clico TDD de forma bem clara.
 \subsubsection{TDD na prática}
 \label{ssub:tdd_na_pratica}
 
-\textbf{O IDEAL AQUI É UTILIZAR O TESTUNIT EM VEZ DO RSPEC, POIS QUANDO FALAR EM BDD, UTILIZO O MESMO EXEMPLO MUDANDO PARA O RSPEC PARA MOSTRAR A DIFERENÇA ENTRE TDD E BDD CLARAMENTE EM UM EXEMPLO.}
-
 Vejamos agora como isso se dá na prática através de um exemplo retirado do código do kanban-roots.
 
 Precisa-se saber todas as tarefas em uma determinada posição do \textit{kanban} de um projeto. Então, a primeira coisa a ser feita é o teste para o caso mais simples: quando o projeto não tem tarefa alguma naquela determinada posição.
 
 O teste para o caso mais simples pode ser como mostrado no código \ref{code:tdd_spec1}.
 
+% \begin{lstlisting}[caption=Teste para o método Project\#tasks\_by\_position (versão 1),label=code:tdd_spec1]
+% # spec/models/project.rb
+% describe Project do
+%   it "returns all related tasks matching a given position" do
+%     project = Factory.create :project
+%     project.tasks_by_position(4).should be_empty
+%   end
+% end
+% \end{lstlisting}
+
 \begin{lstlisting}[caption=Teste para o método Project\#tasks\_by\_position (versão 1),label=code:tdd_spec1]
-# spec/models/project.rb
-it "returns all related tasks matching a given position" do
-  project = Factory.create :project
-  project.tasks_by_position(4).should be_empty
+# test/unit/project_test.rb
+class ProjectTest < ActiveSupport::TestCase
+  def test_tasks_by_position
+    project = Factory.create :project
+    assert_equal(project.tasks_by_position(4), [])
+  end
 end
 \end{lstlisting}
 
@@ -96,17 +106,35 @@ end
 
 Os testes irão passar. Mas a funcionalidade ainda não está completa e, consequentemente, o teste também não.
 
+% \begin{lstlisting}[caption=Teste do método Project\#tasks\_by\_position (versão 2),label=code:tdd_spec2]
+% # spec/models/project.rb
+% describe Project do
+%   it "returns all related tasks matching a given position" do
+%     project = Factory.create :project
+%     tasks = [Factory.create(:task, :project => project, :position => 1),
+%              Factory.create(:task, :project => project, :position => 1)]
+
+%     project.tasks_by_position(4).should be_empty
+
+%     project.should have(2).tasks_by_position(1)
+%     project.tasks_by_position(1).should include(*tasks)
+%   end
+% end
+% \end{lstlisting}
+
 \begin{lstlisting}[caption=Teste do método Project\#tasks\_by\_position (versão 2),label=code:tdd_spec2]
-# spec/models/project.rb
-it "returns all related tasks matching a given position" do
-  project = Factory.create :project
-  tasks = [Factory.create(:task, :project => project, :position => 1),
-           Factory.create(:task, :project => project, :position => 1)]
+# test/unit/project_test.rb
+class ProjectTest < ActiveSupport::TestCase
+  def test_tasks_by_position
+    project = Factory.create :project
+    tasks = [Factory.create(:task, :project => project, :position => 1),
+             Factory.create(:task, :project => project, :position => 1)]
 
-  project.tasks_by_position(4).should be_empty
+    assert_equal(project.tasks_by_position(4), [])
 
-  project.should have(2).tasks_by_position(1)
-  project.tasks_by_position(1).should include(*tasks)
+    assert_equal(project.tasks_by_position(1).count, 2)
+    tasks.each { |task| assert(project.tasks_by_position(1).include?(task)) }
+  end
 end
 \end{lstlisting}
 
@@ -125,25 +153,51 @@ end
 
 Desta vez os irão passar, porém a cobertura de testes da funcionalidade ainda está fraca. Adicionando mais algumas tarefas em posições diferentes, isso é resolvido.
 
+% \begin{lstlisting}[caption=Teste do método Project\#tasks\_by\_position (versão 3),label=code:tdd_spec3]
+% # spec/models/project.rb
+% describe Project do
+%   it "returns all related tasks matching a given position" do
+%     project = Factory.create :project
+%     tasks = [Factory.create(:task, :project => project, :position => 1),
+%              Factory.create(:task, :project => project, :position => 1),
+%              Factory.create(:task, :project => project, :position => 2),
+%              Factory.create(:task, :project => project, :position => 3),
+%              Factory.create(:task, :project => project, :position => 3)]
+
+%     project.tasks_by_position(4).should be_empty
+
+%     project.should have(2).tasks_by_position(1)
+%     project.tasks_by_position(1).should include(*tasks[0..1])
+
+%     project.tasks_by_position(2).should == [tasks[2]]
+
+%     project.should have(2).tasks_by_position(3)
+%     project.tasks_by_position(3).should include(*tasks[3..4])
+%   end
+% end
+% \end{lstlisting}
+
 \begin{lstlisting}[caption=Teste do método Project\#tasks\_by\_position (versão 3),label=code:tdd_spec3]
-# spec/models/project.rb
-it "returns all related tasks matching a given position" do
-  project = Factory.create :project
-  tasks = [Factory.create(:task, :project => project, :position => 1),
-           Factory.create(:task, :project => project, :position => 1),
-           Factory.create(:task, :project => project, :position => 2),
-           Factory.create(:task, :project => project, :position => 3),
-           Factory.create(:task, :project => project, :position => 3)]
+# test/unit/project_test.rb
+class ProjectTest < ActiveSupport::TestCase
+  def test_tasks_by_position
+    project = Factory.create :project
+    tasks = [Factory.create(:task, :project => project, :position => 1),
+             Factory.create(:task, :project => project, :position => 1),
+             Factory.create(:task, :project => project, :position => 2),
+             Factory.create(:task, :project => project, :position => 3),
+             Factory.create(:task, :project => project, :position => 3)]
 
-  project.should have(2).tasks_by_position(1)
-  project.tasks_by_position(1).should include(*tasks[0..1])
+    assert_equal(project.tasks_by_position(4), [])
 
-  project.tasks_by_position(2).should == [tasks[2]]
+    assert_equal(project.tasks_by_position(1).count, 2)
+    tasks[0..1].each { |task| assert(project.tasks_by_position(1).include?(task)) }
 
-  project.should have(2).tasks_by_position(3)
-  project.tasks_by_position(3).should include(*tasks[3..4])
+    assert_equal(project.tasks_by_position(2), [tasks[2]])
 
-  project.tasks_by_position(4).should be_empty
+    assert_equal(project.tasks_by_position(3).count, 2)
+    tasks[3..4].each { |task| assert(project.tasks_by_position(3).include?(task)) }
+  end
 end
 \end{lstlisting}
 
@@ -159,7 +213,7 @@ end
 \subsubsection{Questões em aberto}
 \label{ssub:tdd_em_averto}
 
-\textbf{JÁ NÃO ESTOU VENDO MT SENTIDO NESSE ITEM. ACHO QUE VOU ELIMNA-LO DA VIDA.}
+\textbf{JÁ NÃO ESTOU VENDO MT SENTIDO NESSE ITEM. ACHO QUE VOU ELIMNA-LO DA VIDA, POIS ISSO DE CERTA FORMA SERÁ EXPLICADO NO ITEM BDD}
 
 A forma como os testes são escritos ainda não é um consenso. Na forma como são apresentadas neste trabalho, os testes são organizados por contexto, que envolvem chamadas a um único método, algumas vezes incluindo mais de uma chamada e exemplos por teste.
 
@@ -209,6 +263,8 @@ Como o nome já diz, Behaviour-Driven Development (Desenvolvimento guiado por co
 Em TDD, o nome dos testes é baseado na estrutura do código, e isso pode ter um efeito colateral: cria duplicações. Ao escrever testes como o do Código \ref{code:x} nome\_do\_metodo\_de\_teste e o método nome\_do\_metodo é renomeado, o nome do teste também terá que ser renomeado, o que provavelmente é esquecido. Isso torna os testes confusos e desinformativos \cite{ContinuousTesting}.
 
 Por definição, refatorar é melhorar a estrutura e o design do código sem alterar seu comportamento. Nomeando os testes com base no comportamento desejado ao invés da estrutura do código, não apenas torna os testes mais informativos como também torna a refatoração menos custosa.
+
+\textbf{MOSTRAR AQUI O EXEMPLO DO TDD UTILIZANDO BDD}
 
 O BDD é uma evolução do TDD. A grande diferença entre os dois, é que TDD não abrange a validação do software, ou seja, se o software atende os requisitos. Isso muda tudo, pois em BDD, o pensamento não é voltado à verificação, mas sim no comportamento, em \textbf{validar} que o software faz o que deveria fazer, sem deixar também de \textbf{verificar} se está funcionando como deveria.
 
