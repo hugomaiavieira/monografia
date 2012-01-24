@@ -1,5 +1,7 @@
 \chapter{Fundamentação teórica}
 
+\textbf{FALAR O QUE É TESTES DE UNIDADE E ACEITAÇÃO???}
+
 \section{Agilismo}
 
 Em 2001 um grupo de dezessete especialistas, reconhecidos pela comunidade como grandes nomes do desenvolvimento software, se reuniram para discutir sobre um crescente conjunto de métodos que vinham surgindo e decidiram usar o termo Agilismo para descrever essa nova geração de métodos ágeis \cite{AgileStory}. Na mesma reunião, eles também escreveram o Manifesto Ágil \cite{AgileManifesto}, delineando um conjunto de valores e princípios que, em resumo, trilham um caminho para a eliminação de documentação e processos desnecessários, buscando a simplicidade, com foco na geração de valor e proximidade com o cliente, além de possibilitar respostas rápidas e eficazes às mudanças.
@@ -67,6 +69,8 @@ A figura \ref{img:ciclo-tdd} resume o clico TDD de forma bem clara.
 \subsubsection{TDD na prática}
 \label{ssub:tdd_na_pratica}
 
+\textbf{O IDEAL AQUI É UTILIZAR O TESTUNIT EM VEZ DO RSPEC, POIS QUANDO FALAR EM BDD, UTILIZO O MESMO EXEMPLO MUDANDO PARA O RSPEC PARA MOSTRAR A DIFERENÇA ENTRE TDD E BDD CLARAMENTE EM UM EXEMPLO.}
+
 Vejamos agora como isso se dá na prática através de um exemplo retirado do código do kanban-roots.
 
 Precisa-se saber todas as tarefas em uma determinada posição do \textit{kanban} de um projeto. Então, a primeira coisa a ser feita é o teste para o caso mais simples: quando o projeto não tem tarefa alguma naquela determinada posição.
@@ -123,7 +127,7 @@ Desta vez os irão passar, porém a cobertura de testes da funcionalidade ainda 
 
 \begin{lstlisting}[caption=Teste do método Project\#tasks\_by\_position (versão 3),label=code:tdd_spec3]
 # spec/models/project.rb
-it 'returns all related tasks matching a given position' do
+it "returns all related tasks matching a given position" do
   project = Factory.create :project
   tasks = [Factory.create(:task, :project => project, :position => 1),
            Factory.create(:task, :project => project, :position => 1),
@@ -155,21 +159,101 @@ end
 \subsubsection{Questões em aberto}
 \label{ssub:tdd_em_averto}
 
+\textbf{JÁ NÃO ESTOU VENDO MT SENTIDO NESSE ITEM. ACHO QUE VOU ELIMNA-LO DA VIDA.}
+
 A forma como os testes são escritos ainda não é um consenso. Na forma como são apresentadas neste trabalho, os testes são organizados por contexto, que envolvem chamadas a um único método, algumas vezes incluindo mais de uma chamada e exemplos por teste.
 
-\citeonline{ContinuousTesting} dizem que os testes deveriam ser escritos como em \ref{code:tdd_spec_exemplo}.
+\citeonline{ContinuousTesting} dizem que os testes deveriam ser escritos como em \ref{code:tdd_spec_outra_forma}.
 
-O autor considera estar forma ruim por isso, aquilo e aquilo outro.
+Esse exemplo está ruim. Tenho que mudá-lo.
+
+\begin{lstlisting}[caption=Teste do método Project\#tasks\_by\_position escrito de uma outra forma,label=code:tdd_spec_outra_forma]
+# spec/models/project.rb
+context "returns all related tasks matching a given position" do
+
+  before(:all) do
+    @project = Factory.create :project
+  end
+
+  it "has no tasks at the position"
+    @project.tasks_by_position(4).should be_empty
+  end
+
+  it "has tasks at diferent positions"
+    tasks = [Factory.create(:task, :project => @project, :position => 1),
+             Factory.create(:task, :project => @project, :position => 1),
+             Factory.create(:task, :project => @project, :position => 2),
+             Factory.create(:task, :project => @project, :position => 3),
+             Factory.create(:task, :project => @project, :position => 3)]
+
+    @project.should have(2).tasks_by_position(1)
+    @project.tasks_by_position(1).should include(*tasks[0..1])
+
+    @project.tasks_by_position(2).should == [tasks[2]]
+
+    @project.should have(2).tasks_by_position(3)
+    @project.tasks_by_position(3).should include(*tasks[3..4])
+  end
+end
+\end{lstlisting}
+
+O autor considera esta forma ruim por isso, aquilo e aquilo outro.
 
 
 \subsection{Behaviour-Driven Development}
 
 Criado em 2006 \cite{IntroducingBDD}, Behaviour-Driven Development (BDD) é uma técnica de desenvolvimento de software cuja amplitude se estende às atividades de design, documentação, validação e verificação, tratando-as de modo unificado \cite{BDDRodrigo}.
 
+Como o nome já diz, Behaviour-Driven Development (Desenvolvimento guiado por comportamento) dá enfase no comportamento ao infez da estrutura. Ao invés de focar em classes e métodos ao escrever os testes, o foco é no comportamento que gera valor para o sistema.
+
+Em TDD, o nome dos testes é baseado na estrutura do código, e isso pode ter um efeito colateral: cria duplicações. Ao escrever testes como o do Código \ref{code:x} nome\_do\_metodo\_de\_teste e o método nome\_do\_metodo é renomeado, o nome do teste também terá que ser renomeado, o que provavelmente é esquecido. Isso torna os testes confusos e desinformativos \cite{ContinuousTesting}.
+
+Por definição, refatorar é melhorar a estrutura e o design do código sem alterar seu comportamento. Nomeando os testes com base no comportamento desejado ao invés da estrutura do código, não apenas torna os testes mais informativos como também torna a refatoração menos custosa.
+
 O BDD é uma evolução do TDD. A grande diferença entre os dois, é que TDD não abrange a validação do software, ou seja, se o software atende os requisitos. Isso muda tudo, pois em BDD, o pensamento não é voltado à verificação, mas sim no comportamento, em \textbf{validar} que o software faz o que deveria fazer, sem deixar também de \textbf{verificar} se está funcionando como deveria.
+
+O Ciclo BDD é engloba o clico TDD visto anteriormente.
 
 BDD vem se tornando um consenso em automação de testes. Contudo, existe controvérsia sobre seu modo de utilização.
 
+Uma das maneiras de escrever testes de aceitação é como texto em língua humana,
+ou seja, inglês, português e etc. Nestas ferramentas, os testes são escritos baseados em \textit{steps} (passos), onde os cada step é mapeado para um código real.
+
+No código \ref{code:bdd_cucumber_spec}, é utilizado o cucumber para fazer a especificação de que os comentários devem ser renderizados utilizando a linguagem de marcação Markdown na página de tarefas. Como pode-se ver, o teste é escrito em linguagem que qualquer pessoa, mesmo sem nenhum conhecimento em programação, pode ler e validar. Este é um dos argumentos dos defensores da utilização dessa forma de escrita de testes, que o cliente pode validar os testes, inclusive ele mesmo escrevendo. Existem relatos de que na Globo.com esta abordagem é utilizada (procurar referências) e os clientes escrevem os testes.
+
+\begin{lstlisting}[caption=Especificação ,label=code:bdd_cucumber_spec]
+# features/comments.feature
+Scenario: Comments should be rendered on tasks page with Markdown syntax
+  Given I am a contributor of "sgtran" project
+  And I am authenticated
+  And I have a task of "sgtran" project
+  When I am on the task page
+  And I fill in "comment_content" with "# Some content [link](http://exemplo.com)"
+  And I press "Comment"
+  Then I should see "Some content" in a "h1" tag
+  And I should see "link" in an "a" tag
+\end{lstlisting}
+
+
+\begin{lstlisting}[caption=Especificação ,label=code:bdd_spec_1]
+# spec/acceptance/comments_spec.rb
+feature "Render comments with Markdown syntax" do
+  background do
+    @owner = Factory.create :contributor
+    @project = Factory.create :project
+    @task = Factory.create :task, :project => @project, :author => @owner
+  end
+
+  scenario "on tasks page" do
+    login(@owner.email, @owner.password)
+    visit project_task_path(@project, @task)
+    fill_in "comment_content", :with => "# Some content [link](http://exemplo.com)"
+    click_button "Comment"
+    page.should have_xpath("//h1", :text => "Some content")
+    page.should have_xpath("//a", :text => "link", :href => "http://exemplo.com")
+  end
+end
+\end{lstlisting}
 
 \subsection{Integração contínua}
 
@@ -185,6 +269,10 @@ A IC é um dos pilares da agilidade, pois garante que todo o sistema funcione de
 
 Existe um debate sobre a periodicidade da integração, que tem relação direta com o tempo de execução da \textit{build}. Para assegurar o rápido feedback, esse tempo de execução deve ser o menor possível, tentando manter sempre menor do que dez minutos \cite{FowlerCI}.
 
+\subsection{Teste contínuo}
+\label{sub:teste_continuo}
+
+Falar aqui de continuous testing.
 
 \subsection{Dublês de Teste}
 
