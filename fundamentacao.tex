@@ -151,7 +151,7 @@ def tasks_by_position position
 end
 \end{lstlisting}
 
-Desta vez os irão passar, porém a cobertura de testes da funcionalidade ainda está fraca. Adicionando mais algumas tarefas em posições diferentes, isso é resolvido.
+Desta vez todos os testes os irão passar. Contudo, a cobertura de testes para este método ainda está fraca, o que pode ser resolvido com a adição de mais algumas tarefas em posições diferentes.
 
 % \begin{lstlisting}[caption=Teste do método Project\#tasks\_by\_position (versão 3),label=code:tdd_spec3]
 % # spec/models/project.rb
@@ -201,7 +201,7 @@ class ProjectTest < ActiveSupport::TestCase
 end
 \end{lstlisting}
 
-Executando os testes novamente, todos eles passam, o que indica que já é hora de ir para o item 5 do ciclo TDD e refatorar o código.
+Executando os testes novamente, todos eles passam. Isto indica que já é hora de ir para o item 5 do ciclo TDD e refatorar. Ao comparar o Código \ref{code:tdd_code2} com o Código \ref{code:tdd_code3}, pode-se perceber como o Código \ref{code:tdd_code3} está mais simples e claro e que ao rodar os testes, estes passam mostrando que o comportamento do método não mudou.
 
 \begin{lstlisting}[caption=Código do método Project\#tasks\_by\_position (versão 3),label=code:tdd_code3]
 # app/models/project.rb
@@ -210,16 +210,14 @@ def tasks_by_position position
 end
 \end{lstlisting}
 
+\citeonline{TDDAntiPatterns} descreve vários anti-padrões do TDD e sua leitura é fortemente recomendada.
+
 \subsubsection{Questões em aberto}
 \label{ssub:tdd_em_averto}
 
 \textbf{JÁ NÃO ESTOU VENDO MT SENTIDO NESSE ITEM. ACHO QUE VOU ELIMNA-LO DA VIDA, POIS ISSO DE CERTA FORMA SERÁ EXPLICADO NO ITEM BDD}
 
 A forma como os testes são escritos ainda não é um consenso. Na forma como são apresentadas neste trabalho, os testes são organizados por contexto, que envolvem chamadas a um único método, algumas vezes incluindo mais de uma chamada e exemplos por teste.
-
-\citeonline{ContinuousTesting} dizem que os testes deveriam ser escritos como em \ref{code:tdd_spec_outra_forma}.
-
-\textbf{FECHAR AQUI FALANDO ALGUMA COISA DO ULTIMO REFACTORING QUE FOI FEITO E QUE FOI RODADO O TESTE, PASSANDO EM TUDO.}
 
 Esse exemplo está ruim. Tenho que mudá-lo.
 
