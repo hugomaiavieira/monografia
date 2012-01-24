@@ -201,19 +201,24 @@ No código \ref{code:bdd_cucumber_spec}, é utilizado o cucumber para fazer a es
 
 \begin{lstlisting}[caption=Especificação ,label=code:bdd_cucumber_spec]
 # features/comments.feature
-Scenario: Comments should be rendered on tasks page with Markdown syntax
-  Given I am a contributor of "sgtran" project
-  And I am authenticated
-  And I have a task of "sgtran" project
-  When I am on the task page
-  And I fill in "comment_content" with "# Some content [link](http://exemplo.com)"
-  And I press "Comment"
-  Then I should see "Some content" in a "h1" tag
-  And I should see "link" in an "a" tag
+Feature: Render comments with Markdown syntax
+  As a user
+  I want use Markdown in my comments
+  In order to make my comments more expressives
+
+  Scenario: on tasks page
+    Given I am a contributor of "sgtran" project
+    And I am authenticated
+    And I have a task of "sgtran" project
+    When I am on the task page
+    And I fill in "comment_content" with "# Some content [link](http://exemplo.com)"
+    And I press "Comment"
+    Then I should see "Some content" in a "h1" tag
+    And I should see "link" in an "a" tag
 \end{lstlisting}
 
 
-\begin{lstlisting}[caption=Especificação ,label=code:bdd_spec_1]
+\begin{lstlisting}[caption=Especificação ,label=code:bdd_spec1]
 # spec/acceptance/comments_spec.rb
 feature "Render comments with Markdown syntax" do
   background do
