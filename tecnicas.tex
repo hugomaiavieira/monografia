@@ -62,19 +62,9 @@ Vejamos agora como isso se dá na prática através de um exemplo retirado do c�
 
 Precisa-se saber todas as tarefas em uma determinada posição do \textit{kanban} de um projeto. Então, a primeira coisa a ser feita é o teste para o caso mais simples: quando o projeto não tem tarefa alguma naquela determinada posição.
 
-O teste para o caso mais simples pode ser como mostrado no código \ref{code:tdd_spec1}.
+O teste para o caso mais simples pode ser como mostrado no código \ref{code:tdd_test1}.
 
-% \begin{lstlisting}[caption=Teste para o método Project\#tasks\_by\_position (versão 1),label=code:tdd_spec1]
-% # spec/models/project.rb
-% describe Project do
-%   it "returns all related tasks matching a given position" do
-%     project = Factory.create :project
-%     project.tasks_by_position(4).should be_empty
-%   end
-% end
-% \end{lstlisting}
-
-\begin{lstlisting}[caption=Teste para o método Project\#tasks\_by\_position (versão 1),label=code:tdd_spec1]
+\begin{lstlisting}[caption=Teste para o método Project\#tasks\_by\_position (versão 1),label=code:tdd_test1]
 # test/unit/project_test.rb
 class ProjectTest < ActiveSupport::TestCase
   def test_tasks_by_position
@@ -95,23 +85,7 @@ end
 
 Os testes irão passar. Mas a funcionalidade ainda não está completa e, consequentemente, o teste também não.
 
-% \begin{lstlisting}[caption=Teste do método Project\#tasks\_by\_position (versão 2),label=code:tdd_spec2]
-% # spec/models/project.rb
-% describe Project do
-%   it "returns all related tasks matching a given position" do
-%     project = Factory.create :project
-%     tasks = [Factory.create(:task, :project => project, :position => 1),
-%              Factory.create(:task, :project => project, :position => 1)]
-
-%     project.tasks_by_position(4).should be_empty
-
-%     project.should have(2).tasks_by_position(1)
-%     project.tasks_by_position(1).should include(*tasks)
-%   end
-% end
-% \end{lstlisting}
-
-\begin{lstlisting}[caption=Teste do método Project\#tasks\_by\_position (versão 2),label=code:tdd_spec2]
+\begin{lstlisting}[caption=Teste do método Project\#tasks\_by\_position (versão 2),label=code:tdd_test2]
 # test/unit/project_test.rb
 class ProjectTest < ActiveSupport::TestCase
   def test_tasks_by_position
@@ -127,7 +101,7 @@ class ProjectTest < ActiveSupport::TestCase
 end
 \end{lstlisting}
 
-O teste irá falhar, informando que na \hyperref[code:tdd_spec1]{linha 9 do teste} eram esperadas duas tarefas, mas foram obtidas zero. O código então deve ser modificado para passar no novo teste.
+O teste irá falhar, informando que na \hyperref[code:tdd_test1]{linha 9 do teste} eram esperadas duas tarefas, mas foram obtidas zero. O código então deve ser modificado para passar no novo teste.
 
 \begin{lstlisting}[caption=Código do método Project\#tasks\_by\_position (versão 2),label=code:tdd_code2]
 # app/models/project.rb
@@ -142,31 +116,9 @@ end
 
 Desta vez todos os testes os irão passar. Contudo, a cobertura de testes para este método ainda está fraca, o que pode ser resolvido com a adição de mais algumas tarefas em posições diferentes.
 
-% \begin{lstlisting}[caption=Teste do método Project\#tasks\_by\_position (versão 3),label=code:tdd_spec3]
-% # spec/models/project.rb
-% describe Project do
-%   it "returns all related tasks matching a given position" do
-%     project = Factory.create :project
-%     tasks = [Factory.create(:task, :project => project, :position => 1),
-%              Factory.create(:task, :project => project, :position => 1),
-%              Factory.create(:task, :project => project, :position => 2),
-%              Factory.create(:task, :project => project, :position => 3),
-%              Factory.create(:task, :project => project, :position => 3)]
 
-%     project.tasks_by_position(4).should be_empty
 
-%     project.should have(2).tasks_by_position(1)
-%     project.tasks_by_position(1).should include(*tasks[0..1])
-
-%     project.tasks_by_position(2).should == [tasks[2]]
-
-%     project.should have(2).tasks_by_position(3)
-%     project.tasks_by_position(3).should include(*tasks[3..4])
-%   end
-% end
-% \end{lstlisting}
-
-\begin{lstlisting}[caption=Teste do método Project\#tasks\_by\_position (versão 3),label=code:tdd_spec3]
+\begin{lstlisting}[caption=Teste do método Project\#tasks\_by\_position (versão 3),label=code:tdd_test3]
 # test/unit/project_test.rb
 class ProjectTest < ActiveSupport::TestCase
   def test_tasks_by_position
@@ -208,11 +160,33 @@ Criado em 2006 \cite{IntroducingBDD}, Behaviour-Driven Development (BDD) é uma 
 
 Como o nome já diz, Behaviour-Driven Development (Desenvolvimento guiado por comportamento) dá enfase no comportamento ao infez da estrutura. Ao invés de focar em classes e métodos ao escrever os testes, o foco é no comportamento que gera valor para o sistema.
 
-Em TDD, o nome dos testes é baseado na estrutura do código, e isso pode ter um efeito colateral: cria duplicações. Ao escrever testes como o do Código \ref{code:x} nome\_do\_metodo\_de\_teste e o método nome\_do\_metodo é renomeado, o nome do teste também terá que ser renomeado, o que provavelmente é esquecido. Isso torna os testes confusos e desinformativos \cite{ContinuousTesting}.
+Em TDD, o nome dos testes é baseado na estrutura do código, e isso pode ter um efeito colateral: cria duplicações. Ao escrever testes como o do Código \ref{code:tdd_test3} test\_tesks\_by\_position e o método tasks\_by\_position é renomeado, o nome do teste também terá que ser renomeado, o que provavelmente é esquecido. Isso torna os testes confusos e desinformativos \cite{ContinuousTesting}.
 
-Por definição, refatorar é melhorar a estrutura e o design do código sem alterar seu comportamento. Nomeando os testes com base no comportamento desejado ao invés da estrutura do código, não apenas torna os testes mais informativos como também torna a refatoração menos custosa.
+Por definição, refatorar é melhorar a estrutura e o design do código sem alterar seu comportamento. Nomeando os testes com base no comportamento desejado ao invés da estrutura do código, não apenas torna os testes mais informativos como também torna a refatoração menos custosa \cite{ContinuousTesting}. Pode-se ter a clara diferença comparando o Código \ref{code:tdd_test3} com o Código \ref{code:bdd_spec}.
 
-\textbf{MOSTRAR AQUI O EXEMPLO DO TDD UTILIZANDO BDD}
+\begin{lstlisting}[caption=\textit{Spec} ,label=code:bdd_spec]
+# spec/models/project.rb
+describe Project do
+  it "returns all related tasks matching a given position" do
+    project = Factory.create :project
+    tasks = [Factory.create(:task, :project => project, :position => 1),
+             Factory.create(:task, :project => project, :position => 1),
+             Factory.create(:task, :project => project, :position => 2),
+             Factory.create(:task, :project => project, :position => 3),
+             Factory.create(:task, :project => project, :position => 3)]
+
+    project.tasks_by_position(4).should be_empty
+
+    project.should have(2).tasks_by_position(1)
+    project.tasks_by_position(1).should include(*tasks[0..1])
+
+    project.tasks_by_position(2).should == [tasks[2]]
+
+    project.should have(2).tasks_by_position(3)
+    project.tasks_by_position(3).should include(*tasks[3..4])
+  end
+end
+\end{lstlisting}
 
 O BDD é uma evolução do TDD. A grande diferença entre os dois, é que TDD não abrange a validação do software, ou seja, se o software atende os requisitos. Isso muda tudo, pois em BDD, o pensamento não é voltado à verificação, mas sim no comportamento, em \textbf{validar} que o software faz o que deveria fazer, sem deixar também de \textbf{verificar} se está funcionando como deveria.
 
