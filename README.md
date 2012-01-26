@@ -16,6 +16,11 @@ As dependências são baseadas na distribuição Linux Ubuntu.
     sudo apt-get install texlive-latex-base abntex texlive-fonts-recommended texlive-lang-portuguese
 
 
+## Minted
+
+Tive que adicionar a linha `\floatstyle{ruled}` no minted.sty para conseguir
+fazer o estilo do caption.
+
 # Compilando
 
 Para compilar, depois ter instalado as dependências, basta rodar o comando

@@ -9,55 +9,52 @@
 	           % capchap,
 ]{abnt}
 
+% Links border color
+\newcommand{\bc}{NavyBlue}
+
 \usepackage[utf8]{inputenc}
 \usepackage[brazil]{babel}
 \usepackage{graphicx}
-\usepackage[pdfborder={0 0 0}]{hyperref} % http://www.tug.org/applications/hyperref/manual.html
-\usepackage[alf]{abntcite}
-\usepackage{listings} % http://www.atscire.de/index.php?nav=products/listings2 http://linorg.usp.br/CTAN/macros/latex/contrib/listings/listings.pdf
-\usepackage{textcomp}
 \usepackage[usenames,dvipsnames]{xcolor} % http://en.wikibooks.org/wiki/LaTeX/Colors
+\usepackage[pdfborder={0 0 0},pdfborderstyle={/S/U/W 0.5},citebordercolor=\bc,filebordercolor=\bc,urlbordercolor=\bc,linkbordercolor=\bc]{hyperref} % http://www.tug.org/applications/hyperref/manual.html e http://migre.me/7FH3e
+\usepackage[alf]{abntcite}
+\usepackage{listings} % http://www.atscire.de/index.php?nav=products/listings2 e http://linorg.usp.br/CTAN/macros/latex/contrib/listings/listings.pdf
+\usepackage{textcomp}
+\usepackage{minted}
 
-\urlstyle{same} % http://en.wikibooks.org/wiki/LaTeX/Hyperlinks#Customization
+%--------------------------- Minted Highligthing -------------------------------
 
-%-------------------------------- Highligthing ---------------------------------
+% http://github.com/hugomaiavieira/pygments-style-github
+\usemintedstyle{github}
 
-\lstset{
-    language=ruby,
-    basicstyle=\footnotesize\ttfamily,
-    columns=flexible,
-    numberbychapter=false,
-    showstringspaces=false,
-    frame=bottomline,
-    tabsize=2,
-    xleftmargin=17pt,
-    framexleftmargin=17pt,
-    framexrightmargin=5pt,
-    framexbottommargin=4pt,
-    numbers=left,
-    numberstyle=\scriptsize\ttfamily\color{Gray},
-    emphstyle=\color{OrangeRed},
-    commentstyle=\color{Gray}\textit,
-    stringstyle=\color{PineGreen},
-    keywordstyle=\color{Blue},
-    morekeywords={it, include},
-    morestring=**[s]{:}{\ }, % cheat para fazer o symbol parecer string
-    morestring=**[s]{|}{|}, % cheat para fazer o |x| parecer string
-    emph={Factory},
-    emph={[2]Feature, As a, I want, In order to, Given, When, Then, And, Scenario},
-    emphstyle=[2]\color{MidnightBlue},
- }
+% Ajustar o estilo do número. http://linorg.usp.br/CTAN/macros/latex/contrib/fancyvrb/fancyvrb.pdf
+\renewcommand{\theFancyVerbLine}{\textcolor{Gray}{\scriptsize\arabic{FancyVerbLine}}}
 
+% Ajusta estilo do caption. http://linorg.usp.br/CTAN/macros/latex/contrib/caption/caption-eng.pdf
 \usepackage{caption}
-\DeclareCaptionFont{white}{\color{white}\footnotesize\bfseries}
-\DeclareCaptionFormat{listing}{\colorbox{BrickRed}{\parbox{\textwidth}{#1#2#3}}}
-\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+\DeclareCaptionStyle{code_style}{margin={0mm,2mm}}
+\DeclareCaptionFont{code_font}{\footnotesize\bfseries}
+\captionsetup[listing]{style=code_style,labelfont=code_font,textfont=code_font,labelsep=colon,skip=50pt}
+% Ver depois se este estilo fica melhor
+% \DeclareCaptionFont{white}{\color{white}\footnotesize\bfseries}
+% \DeclareCaptionFormat{code_format}{\colorbox{BrickRed}{\parbox{\linewidth}{#1#2#3}}}
+% \captionsetup[listing]{style=code_style,format=code_format,labelfont=white,textfont=white,labelsep=colon,skip=50pt}
 
-% Renomear listing e listings -> código e códigos
-\renewcommand*\lstlistingname{Código}
-\renewcommand*\lstlistlistingname{Lista de Códigos}
+\renewcommand\listingscaption{Código}
+
+\newminted{ruby}{linenos, fontfamily=courier, fontsize=\scriptsize, xleftmargin=21pt}
+\newminted{rspec}{linenos, fontfamily=courier, fontsize=\scriptsize, xleftmargin=21pt}
+\newminted{cucumber}{linenos, fontfamily=courier, fontsize=\scriptsize, xleftmargin=21pt}
+
 
 %--------------------------------- Informações ---------------------------------
+
+% http://www.tug.org/applications/hyperref/manual.html
+\hypersetup{
+  pdftitle=Técnicas emergentes de desenvolvimento de software,
+  pdfauthor=Hugo Henriques Maia Vieira
+  % pdfsubject={},
+}
 
 \begin{document}
 
@@ -80,7 +77,7 @@ orientação da Prof. Rodrigo Soares Manhães, M.Sc.}
 \include{agradecimentos}
 
 \listoffigures
-\lstlistoflistings
+% \lstlistoflistings
 
 \begin{resumo}
 Aqui entra o resumo do meu trabalho que será a última coisa a ser feita.
