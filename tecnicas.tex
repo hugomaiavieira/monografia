@@ -64,10 +64,8 @@ Precisa-se saber todas as tarefas em uma determinada posição do \textit{kanban
 
 O teste para o caso mais simples pode ser como mostrado no código \ref{code:tdd_test1}.
 
-\begin{listing}
-  \caption{Teste para o método Project\#tasks\_by\_position (versão 1)}
-  \label{code:tdd_test1}
-  \begin{minted}{ruby}
+\begin{mycode}{ruby}%
+{Teste para o método Project\#tasks\_by\_position (versão 1)}{code:tdd_test1}
 # test/unit/project_test.rb
 class ProjectTest < ActiveSupport::TestCase
   def test_tasks_by_position
@@ -75,28 +73,22 @@ class ProjectTest < ActiveSupport::TestCase
     assert_equal(project.tasks_by_position(4), [])
   end
 end
-  \end{minted}
-\end{listing}
+\end{mycode}
 
 Ao rodar este teste, ele irá falhar, informando que o método \textit{tasks\_by\_position} sequer existe. Como esta era a falha esperada, escrevemos então o código mais simples para passar neste teste.
 
-\begin{listing}
-  \caption{Código do método Project\#tasks\_by\_position (versão 1)}
-  \label{code:tdd_code1}
-  \begin{minted}{ruby}
+\begin{mycode}{ruby}%
+{Código do método Project\#tasks\_by\_position (versão 1)}{code:tdd_code1}
 # app/models/project.rb
 def tasks_by_position position
   []
 end
-  \end{minted}
-\end{listing}
+\end{mycode}
 
 Os testes irão passar. Mas a funcionalidade ainda não está completa e, consequentemente, o teste também não.
 
-\begin{listing}
-  \caption{Teste do método Project\#tasks\_by\_position (versão 2)}
-  \label{code:tdd_test2}
-  \begin{minted}{ruby}
+\begin{mycode}{ruby}%
+{Teste do método Project\#tasks\_by\_position (versão 2)}{code:tdd_test2}
 # test/unit/project_test.rb
 class ProjectTest < ActiveSupport::TestCase
   def test_tasks_by_position
@@ -110,15 +102,12 @@ class ProjectTest < ActiveSupport::TestCase
     tasks.each { |task| assert(project.tasks_by_position(1).include?(task)) }
   end
 end
-  \end{minted}
-\end{listing}
+\end{mycode}
 
 O teste irá falhar, informando que na \hyperref[code:tdd_test1]{linha 9 do teste} eram esperadas duas tarefas, mas foram obtidas zero. O código então deve ser modificado para passar no novo teste.
 
-\begin{listing}
-  \caption{Código do método Project\#tasks\_by\_position (versão 2)}
-  \label{code:tdd_code2}
-  \begin{minted}{ruby}
+\begin{mycode}{ruby}%
+{Código do método Project\#tasks\_by\_position (versão 2)}{code:tdd_code2}
 # app/models/project.rb
 def tasks_by_position position
   task_list = []
@@ -127,15 +116,12 @@ def tasks_by_position position
   end
   task_list
 end
-  \end{minted}
-\end{listing}
+\end{mycode}
 
 Desta vez todos os testes os irão passar. Contudo, a cobertura de testes para este método ainda está fraca, o que pode ser resolvido com a adição de mais algumas tarefas em posições diferentes.
 
-\begin{listing}
-  \caption{Teste do método Project\#tasks\_by\_position (versão 3)}
-  \label{code:tdd_test3}
-  \begin{minted}{ruby}
+\begin{mycode}{ruby}%
+{Teste do método Project\#tasks\_by\_position (versão 3)}{code:tdd_test3}
 # test/unit/project_test.rb
 class ProjectTest < ActiveSupport::TestCase
   def test_tasks_by_position
@@ -157,21 +143,17 @@ class ProjectTest < ActiveSupport::TestCase
     tasks[3..4].each { |task| assert(project.tasks_by_position(3).include?(task)) }
   end
 end
-  \end{minted}
-\end{listing}
+\end{mycode}
 
 Executando os testes novamente, todos eles passam. Isto indica que já é hora de ir para o item 5 do ciclo TDD e refatorar. Ao comparar o Código \ref{code:tdd_code2} com o Código \ref{code:tdd_code3}, pode-se perceber como o Código \ref{code:tdd_code3} está mais simples e claro e que ao rodar os testes, estes passam mostrando que o comportamento do método não mudou.
 
-\begin{listing}[H]
-  \caption{Código do método Project\#tasks\_by\_position (versão 3)}
-  \label{code:tdd_code3}
-  \begin{minted}{ruby}
+\begin{mycode}{ruby}%
+{Código do método Project\#tasks\_by\_position (versão 3)}{code:tdd_code3}
 # app/models/project.rb
 def tasks_by_position position
   tasks.select { |item| item.position.to_s == position.to_s }
 end
-  \end{minted}
-\end{listing}
+\end{mycode}
 
 \citeonline{TDDAntiPatterns} descreve vários anti-padrões do TDD e sua leitura é fortemente recomendada.
 
@@ -186,10 +168,8 @@ Em TDD, o nome dos testes é baseado na estrutura do código, e isso pode ter um
 
 Por definição, refatorar é melhorar a estrutura e o design do código sem alterar seu comportamento. Nomeando os testes com base no comportamento desejado ao invés da estrutura do código, não apenas torna os testes mais informativos como também torna a refatoração menos custosa \cite{ContinuousTesting}. Pode-se ter a clara diferença comparando o Código \ref{code:tdd_test3} com o Código \ref{code:bdd_spec}.
 
-\begin{listing}[H]
-  \caption{Spec}
-  \label{code:bdd_spec}
-  \begin{minted}{rspec}
+\begin{mycode}{rspec}%
+{Spec}{code:bdd_spec}
 # spec/models/project.rb
 describe Project do
   it "returns all related tasks matching a given position" do
@@ -211,8 +191,7 @@ describe Project do
     project.tasks_by_position(3).should include(*tasks[3..4])
   end
 end
-  \end{minted}
-\end{listing}
+\end{mycode}
 
 O BDD é uma evolução do TDD. A grande diferença entre os dois, é que TDD não abrange a validação do software, ou seja, se o software atende os requisitos. Isso muda tudo, pois em BDD, o pensamento não é voltado à verificação, mas sim no comportamento, em \textbf{validar} que o software faz o que deveria fazer, sem deixar também de \textbf{verificar} se está funcionando como deveria.
 
@@ -225,10 +204,8 @@ ou seja, inglês, português e etc. Nestas ferramentas, os testes são escritos 
 
 No código \ref{code:bdd_cucumber_spec}, é utilizado o cucumber para fazer a especificação de que os comentários devem ser renderizados utilizando a linguagem de marcação Markdown na página de tarefas. Como pode-se ver, o teste é escrito em linguagem que qualquer pessoa, mesmo sem nenhum conhecimento em programação, pode ler e validar. Este é um dos argumentos dos defensores da utilização dessa forma de escrita de testes, que o cliente pode validar os testes, inclusive ele mesmo escrevendo. Existem relatos de que na Globo.com esta abordagem é utilizada (procurar referências) e os clientes escrevem os testes.
 
-\begin{listing}[H]
-  \caption{Especificação}
-  \label{code:bdd_cucumber_spec}
-  \begin{minted}{cucumber}
+\begin{mycode}{cucumber}%
+{Especificação}{code:bdd_cucumber_spec}
 # features/comments.feature
 Feature: Render comments with Markdown syntax
   As a user
@@ -244,13 +221,10 @@ Feature: Render comments with Markdown syntax
     And I press "Comment"
     Then I should see "Some content" in a "h1" tag
     And I should see "link" in an "a" tag
-  \end{minted}
-\end{listing}
+\end{mycode}
 
-\begin{listing}[H]
-  \caption{Especificação}
-  \label{code:bdd_spec1}
-  \begin{minted}{rspec}
+\begin{mycode}{rspec}%
+{Especificação}{code:bdd_spec1}
 # spec/acceptance/comments_spec.rb
 feature "Render comments with Markdown syntax" do
   background do
@@ -268,8 +242,7 @@ feature "Render comments with Markdown syntax" do
     page.should have_xpath("//a", :text => "link", :href => "http://exemplo.com")
   end
 end
-  \end{minted}
-\end{listing}
+\end{mycode}
 
 \section{Integração contínua}
 
