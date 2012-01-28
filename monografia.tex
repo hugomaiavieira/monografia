@@ -18,14 +18,12 @@
 \usepackage[usenames,dvipsnames]{xcolor} % http://en.wikibooks.org/wiki/LaTeX/Colors
 \usepackage[pdfborder={0 0 0},pdfborderstyle={/S/U/W 0.5},citebordercolor=\bc,filebordercolor=\bc,urlbordercolor=\bc,linkbordercolor=\bc]{hyperref} % http://www.tug.org/applications/hyperref/manual.html e http://migre.me/7FH3e
 \usepackage[alf]{abntcite}
-\usepackage{listings} % http://www.atscire.de/index.php?nav=products/listings2 e http://linorg.usp.br/CTAN/macros/latex/contrib/listings/listings.pdf
+\usepackage{listings} % http://linorg.usp.br/CTAN/macros/latex/contrib/listings/listings.pdf
 \usepackage{textcomp}
+\usepackage{floatrow} % tem que ser incluido antes do minted
 \usepackage{minted}
 
 %--------------------------- Minted Highligthing -------------------------------
-
-% Eu adicionei \floatstyle{ruled}` diretamente no arquivo minted.sty, acima da
-% linha \@ifundefined{minted@float@within}
 
 \renewcommand\listingscaption{Código}
 
@@ -41,9 +39,12 @@
 
 % Ajusta estilo do caption. http://linorg.usp.br/CTAN/macros/latex/contrib/caption/caption-eng.pdf
 \usepackage{caption}
-\DeclareCaptionStyle{code_style}{margin={0mm,2mm}}
-\DeclareCaptionFont{code_font}{\footnotesize\bfseries}
-\captionsetup[listing]{style=code_style,labelfont=code_font,textfont=code_font,labelsep=colon,skip=50pt}
+\DeclareCaptionStyle{code_style}{margin=-1mm}
+\DeclareCaptionFont{code_font}{\color{white}\footnotesize\bfseries}
+\DeclareCaptionFormat{code_format}{\colorbox{MidnightBlue}{\parbox{\textwidth}{#1#2#3}}}
+\captionsetup[listing]{style=code_style,format=code_format,labelfont=code_font,textfont=code_font}
+% http://mirror.ctan.org/macros/latex/contrib/floatrow/floatrow.pdf
+\floatsetup[listing]{capposition=top,rowpostcode=rule}
 
 % Criando um novo comando para facilitar a adição de códigos
 % http://tex.stackexchange.com/questions/42393/new-environment-with-minted

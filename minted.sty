@@ -210,7 +210,6 @@
    {\def\minted@shortname{#1}}
   \expandafter\newcommand\csname\minted@shortname\endcsname[2][]{
     \inputminted[#3,##1]{#2}{##2}}}
-\floatstyle{ruled}
 \@ifundefined{minted@float@within}
  {\newfloat{listing}{h}{lol}}
  {\newfloat{listing}{h}{lol}[\minted@float@within]}
