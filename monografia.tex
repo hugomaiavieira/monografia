@@ -12,7 +12,7 @@
 % Links border color
 \newcommand{\bc}{NavyBlue}
 
-\usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc} % para pode escrever caracteres acentuados normalmente
 \usepackage[brazil]{babel}
 \usepackage{graphicx}
 \usepackage[usenames,dvipsnames]{xcolor} % http://en.wikibooks.org/wiki/LaTeX/Colors
@@ -20,7 +20,7 @@
 \usepackage[alf]{abntcite}
 \usepackage{listings} % http://linorg.usp.br/CTAN/macros/latex/contrib/listings/listings.pdf
 \usepackage{textcomp}
-\usepackage{floatrow} % tem que ser incluido antes do minted
+% \usepackage{floatrow} % tem que ser incluido antes do minted
 \usepackage{minted}
 
 %--------------------------- Minted Highligthing -------------------------------
@@ -44,7 +44,7 @@
 \DeclareCaptionFormat{code_format}{\colorbox{MidnightBlue}{\parbox{\textwidth}{#1#2#3}}}
 \captionsetup[listing]{style=code_style,format=code_format,labelfont=code_font,textfont=code_font}
 % http://mirror.ctan.org/macros/latex/contrib/floatrow/floatrow.pdf
-\floatsetup[listing]{capposition=top,rowpostcode=rule}
+% \floatsetup[listing]{capposition=top,rowpostcode=rule}
 
 % Criando um novo comando para facilitar a adição de códigos
 % http://tex.stackexchange.com/questions/42393/new-environment-with-minted
@@ -54,7 +54,7 @@
   \minted@resetoptions
   \setkeys{minted@opt}{linenos,fontfamily=courier, fontsize=\scriptsize, xleftmargin=21pt}
   \renewcommand{\minted@proglang}[1]{#1}
-  \begin{listing}
+  \begin{listing}[H]
     \caption{#2}\label{#3}
       \begin{VerbatimOut}{\jobname.pyg}}
  {\end{VerbatimOut}
