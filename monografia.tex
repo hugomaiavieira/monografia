@@ -20,7 +20,6 @@
 \usepackage[alf]{abntcite}
 \usepackage{listings} % http://linorg.usp.br/CTAN/macros/latex/contrib/listings/listings.pdf
 \usepackage{textcomp}
-% \usepackage{floatrow} % tem que ser incluido antes do minted
 \usepackage{minted}
 
 %--------------------------- Minted Highligthing -------------------------------
@@ -39,12 +38,9 @@
 
 % Ajusta estilo do caption. http://linorg.usp.br/CTAN/macros/latex/contrib/caption/caption-eng.pdf
 \usepackage{caption}
-\DeclareCaptionStyle{code_style}{margin=-1mm}
-\DeclareCaptionFont{code_font}{\color{white}\footnotesize\bfseries}
-\DeclareCaptionFormat{code_format}{\colorbox{MidnightBlue}{\parbox{\textwidth}{#1#2#3}}}
-\captionsetup[listing]{style=code_style,format=code_format,labelfont=code_font,textfont=code_font}
-% http://mirror.ctan.org/macros/latex/contrib/floatrow/floatrow.pdf
-% \floatsetup[listing]{capposition=top,rowpostcode=rule}
+\DeclareCaptionStyle{code_style}{margin=2mm}
+\DeclareCaptionFont{code_font}{\footnotesize\bfseries}
+\captionsetup[listing]{style=code_style,labelfont=code_font,textfont=code_font}
 
 % Criando um novo comando para facilitar a adição de códigos
 % http://tex.stackexchange.com/questions/42393/new-environment-with-minted
