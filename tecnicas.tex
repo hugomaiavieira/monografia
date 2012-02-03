@@ -10,7 +10,7 @@ Esta abordagem encoraja bom design \cite{GrowingOOByTests}, produz código test�
 
 Mas TDD é uma técnica emergente? Não e sim.
 
-O TDD vem sendo utilizado esporadicamente há anos, contudo, não existia um nome para identificar essa forma de desenvolver software. No entanto, em termos de adoção, TDD continua sendo novo \cite{TestDrivenKoskela, TDDbyExample, EmpiricalTDD}. Hoje, esta técnica tem um nome e começa a ganhar força, sendo utilizada em times de grandes empresas como Google, Yahoo, Microsoft e IBM \cite{EmpiricalTDD}.
+O TDD vem sendo utilizado esporadicamente há anos, contudo, não existia um nome para identificar essa forma de desenvolver software. Além disso, em termos de adoção, TDD continua sendo novo \cite{TestDrivenKoskela, TDDbyExample, EmpiricalTDD}. Hoje, esta técnica tem um nome e começa a ganhar força, sendo utilizada em times de grandes empresas como Google, Yahoo, Microsoft e IBM \cite{EmpiricalTDD}.
 
 \subsection{Ciclo TDD}
 \label{ssub:ciclo_tdd}
@@ -20,7 +20,7 @@ Com base no trabalho de \citeonline{TDDbyExample}, o ciclo de desenvolvimento TD
 \begin{enumerate}
 \item \textbf{Adicionar um teste}
 
-Cada ciclo se inicia com a criação de um teste. Este teste inevitavelmente irá falhar, pois é escrito antes do código ser implementado de fato. Para escrever um teste, o desenvolvedor precisa entender claramente as especificações e requisitos da funcionalidade. Isso faz com que o desenvolvedor tenha como foco os requisitos antes do código e o direcionando a escrever código apenas para o que é realmente necessário.
+Cada ciclo se inicia com a criação de um teste de unidade. Este teste inevitavelmente irá falhar, pois é escrito antes do código ser implementado de fato. Para escrever um teste, o desenvolvedor precisa entender claramente as especificações e requisitos da unidade. Isso faz com que o desenvolvedor tenha como foco os requisitos antes do código, o direcionando a escrever código apenas para o que é realmente necessário.
 
 \item \textbf{Executar todos os testes e ver se algum falha}
 
@@ -32,7 +32,7 @@ O próximo passo é escrever código \textbf{somente para que o teste passe}. O 
 
 \item \textbf{Executar os testes e ter sucesso}
 
-Ao Executar os testes e todos passam, o código possui todos os requisitos testados e o programador pode ficar confiante para melhorá-lo.
+Ao Executar os testes e todos eles passarem, o código possuirá todos os requisitos testados e o programador pode ficar confiante para melhorá-lo.
 
 \item \textbf{Refatorar}
 
@@ -42,7 +42,7 @@ Segundo \citeonline{FowlerRefatoracao}, refatorar é reestruturar o software apl
 
 Refatorar melhora o projeto do software, o torna mais fácil de entender e modificar, ajuda a encontrar falhas e ajuda o desenvolvedor a programar mais rapidamente.
 
-Como na refatoração o comportamento do código não deve ser alterado, após refatorar e executar novamente os testes, todos devem passar.
+Como na refatoração o comportamento do código não deve ser alterado, após refatorar e executar novamente os testes, todos eles devem passar.
 
 \end{enumerate}
 
