@@ -1,8 +1,8 @@
 \chapter{Técnicas}
 
-\section{Test-Driven Development}
+\section{Test-Driven Development (TDD)}
 \label{sub:tdd}
-``Apenas escrever código para corrigir um teste falhando". Segundo \citeonline{TestDrivenKoskela}, isto é \textit{Test-Driven Development} (TDD) \cite{TDDbyExample} em apenas uma sentença.
+``Apenas escrever código para corrigir um teste falhando". Segundo \citeonline{TestDrivenKoskela}, isto é \textit{Test-Driven Development} (Desenvolvimento guiado por testes) \cite{TDDbyExample} em apenas uma sentença.
 
 O TDD é uma técnica onde o desenvolvimento do software é guiado por \textbf{testes automatizados}, que são escritos antes de qualquer linha de código. Primeiro escreve-se um teste, depois escreve-se o código para passar neste teste. Em seguida, o código é refatorado para encontrar um design melhor, contanto sempre com os testes existentes para que não sejam introduzidas falhas em outras partes do sistema.
 
@@ -158,15 +158,16 @@ end
 \citeonline{TDDAntiPatterns} descreve vários anti-padrões do TDD e sua leitura é fortemente recomendada.
 
 
-\section{Behaviour-Driven Development}
+\section{Behaviour-Driven Development (BDD)}
 
-Criado em 2006 \cite{IntroducingBDD}, Behaviour-Driven Development (BDD) é uma técnica de desenvolvimento de software cuja amplitude se estende às atividades de design, documentação, validação e verificação, tratando-as de modo unificado \cite{BDDRodrigo}.
+Criado em 2006 \cite{IntroducingBDD}, \textit{Behaviour-Driven Development} (Desenvolvimento guiado por comportamento) é uma técnica de desenvolvimento de software cuja amplitude se estende às atividades de design, documentação, validação e verificação, tratando-as de modo unificado \cite{BDDRodrigo}.
 
-Como o nome já diz, Behaviour-Driven Development (Desenvolvimento guiado por comportamento) dá enfase no comportamento ao infez da estrutura. Ao invés de focar em classes e métodos ao escrever os testes, o foco é no comportamento que gera valor para o sistema.
+\subsection{A herança de TDD}
+\label{sub:a_heranca_de_tdd}
 
-Em TDD, o nome dos testes é baseado na estrutura do código, e isso pode ter um efeito colateral: cria duplicações. Ao escrever testes como o do Código \ref{code:tdd_test3} test\_tesks\_by\_position e o método tasks\_by\_position é renomeado, o nome do teste também terá que ser renomeado, o que provavelmente é esquecido. Isso torna os testes confusos e desinformativos \cite{ContinuousTesting}.
+O BDD é uma evolução do TDD. A grande diferença entre os dois, é que TDD não abrange a validação do software, ou seja, se o software atende os requisitos. Isso muda tudo, pois em BDD, a enfase está no comportamento ao infez da estrutura. Ao invés de focar em classes e métodos ao escrever os testes, o foco é no comportamento que gera valor para o sistema. Além disso, o pensamento não é voltado à verificação, mas sim no comportamento, em validar que o software faz sem deixar também de verificar se está funcionando como deveria.
 
-Por definição, refatorar é melhorar a estrutura e o design do código sem alterar seu comportamento. Nomeando os testes com base no comportamento desejado ao invés da estrutura do código, não apenas torna os testes mais informativos como também torna a refatoração menos custosa \cite{ContinuousTesting}. Pode-se ter a clara diferença comparando o Código \ref{code:tdd_test3} com o Código \ref{code:bdd_spec}.
+Em BDD não são escritos testes, mas sim expectativas, chamadas de \textit{specs}. Pode-se ter a clara diferença comparando o Código \ref{code:tdd_test3} com o Código \ref{code:bdd_spec}, onde é nítido o foco no comportamento, inclusive nas asserções.
 
 \begin{mycode}{rspec}%
 {Spec}{code:bdd_spec}
@@ -193,9 +194,26 @@ describe Project do
 end
 \end{mycode}
 
-O BDD é uma evolução do TDD. A grande diferença entre os dois, é que TDD não abrange a validação do software, ou seja, se o software atende os requisitos. Isso muda tudo, pois em BDD, o pensamento não é voltado à verificação, mas sim no comportamento, em \textbf{validar} que o software faz sem deixar também de \textbf{verificar} se está funcionando como deveria.
+Em TDD, o nome dos testes é baseado na estrutura do código, e isso pode ter um efeito colateral: criar duplicações. Ao escrever testes como o do Código \ref{code:tdd_test3} \textit{test\_tesks\_by\_position} e o método \textit{tasks\_by\_position} é renomeado, o nome do teste também terá que ser renomeado, o que provavelmente é esquecido. Isso torna os testes confusos e desinformativos \cite{ContinuousTesting}. Como por definição, refatorar é melhorar a estrutura e o design do código sem alterar seu comportamento, nomeando os testes com base no comportamento desejado ao invés da estrutura do código, não apenas torna os testes mais informativos como também torna a refatoração menos custosa \cite{ContinuousTesting}.
 
-O Ciclo BDD é engloba o clico TDD visto anteriormente.
+% subsection a_heranca_de_tdd (end)
+
+\subsection{O clico BDD}
+\label{sub:o_clico_bdd}
+
+O Ciclo BDD é engloba o clico TDD visto anteriormente e é apresentado na Figura \ref{img:ciclo-bdd}
+
+\begin{figure}[h]
+  \center
+  \caption{O ciclo BDD}
+  \includegraphics[scale=0.45]{images/ciclo-tdd}
+  \label{img:ciclo-bdd}
+\end{figure}
+
+% subsection o_clico_bdd (end)
+
+\subsection{Modelo de escrita dos testes}
+\label{sub:modelo_de_escrita_dos_testes}
 
 BDD vem se tornando um consenso em automação de testes. Contudo, existe controvérsia sobre seu modo de utilização.
 
@@ -243,6 +261,9 @@ feature "Render comments with Markdown syntax" do
   end
 end
 \end{mycode}
+
+% subsection modelo_de_escrita_dos_testes (end)
+
 
 \section{Integração contínua}
 
