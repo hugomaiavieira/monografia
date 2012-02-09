@@ -201,12 +201,16 @@ Em TDD, o nome dos testes é baseado na estrutura do código, e isso pode ter um
 \subsection{O clico BDD}
 \label{sub:o_clico_bdd}
 
-O Ciclo BDD é engloba o clico TDD visto anteriormente e é apresentado na Figura \ref{img:ciclo-bdd}
+O Ciclo BDD, apresentado na Figura \ref{img:ciclo-bdd}, tem dois níveis: unidade e aceitação. O nível aceitação é o nível mais alto, onde são escritos os testes de aceitação. Já o nível unidade é o mesmíssimo clico TDD visto anteriormente.
+
+Cada ciclo se inicia com a criação de um teste de aceitação, um cenário, que descreve um determinado comportamento de uma funcionalidade do sistema.
+
+Este teste inevitavelmente irá falhar, pois é escrito antes do código ser implementado de fato. Para escrever um teste, o desenvolvedor precisa entender claramente as especificações e requisitos da unidade. Isso faz com que o desenvolvedor tenha como foco os requisitos antes do código, o direcionando a escrever código apenas para o que é realmente necessário.
 
 \begin{figure}[h]
   \center
   \caption{O ciclo BDD}
-  \includegraphics[scale=0.45]{images/ciclo-tdd}
+  \includegraphics[scale=0.45]{images/ciclo-bdd}
   \label{img:ciclo-bdd}
 \end{figure}
 
