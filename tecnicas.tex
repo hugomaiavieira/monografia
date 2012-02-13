@@ -203,9 +203,32 @@ Em TDD, o nome dos testes é baseado na estrutura do código, e isso pode ter um
 
 O Ciclo BDD, apresentado na Figura \ref{img:ciclo-bdd}, tem dois níveis: unidade e aceitação. O nível aceitação é o nível mais alto, onde são escritos os testes de aceitação. Já o nível unidade é o mesmíssimo clico TDD visto anteriormente.
 
+\begin{enumerate}
+\item \textbf{Adicionar um testes de aceitação}
+
 Cada ciclo se inicia com a criação de um teste de aceitação, um cenário, que descreve um determinado comportamento de uma funcionalidade do sistema.
 
-Este teste inevitavelmente irá falhar, pois é escrito antes do código ser implementado de fato. Para escrever um teste, o desenvolvedor precisa entender claramente as especificações e requisitos da unidade. Isso faz com que o desenvolvedor tenha como foco os requisitos antes do código, o direcionando a escrever código apenas para o que é realmente necessário.
+\item \textbf{Executar todos os testes e ver se algum falha}
+
+Todos os testes devem ser executados e o novo teste deve falhar pela razão esperada: a funcionalidade não foi desenvolvida. Isto aumenta a confiança que se está testando a coisa certa.
+
+\item \textbf{Descer de nível}
+
+Neste momento, deve-se descer de nível, saindo do nível de aceitação e indo para  nível de unidade.
+
+\item \textbf{Entra no ciclo TDD}
+
+No nível de unidade, entra-se o ciclo TDD até que todos os testes de unidade estejam passando.
+
+\item \textbf{Retornar para o nível de aceitação}
+
+Com todos os testes de unidade passando, retorna-se para o nível de aceitação e faz-se todos os testes passarem.
+
+\item \textbf{Refatorar}
+
+Refatora-se o código.
+
+\end{enumerate}
 
 \begin{figure}[h]
   \center
