@@ -159,6 +159,7 @@ end
 
 
 \section{Behaviour-Driven Development (BDD)}
+\label{sec:bdd}
 
 Criado em 2006 \cite{IntroducingBDD}, \textit{Behaviour-Driven Development} (Desenvolvimento guiado por comportamento) é uma técnica de desenvolvimento de software cuja amplitude se estende às atividades de design, documentação, validação e verificação, tratando-as de modo unificado \cite{BDDRodrigo}.
 
@@ -239,18 +240,24 @@ Refatora-se o código.
 
 % subsection o_clico_bdd (end)
 
-\subsection{Modelo de escrita dos testes}
-\label{sub:modelo_de_escrita_dos_testes}
+\subsection{Modelos de escrita dos testes de aceitação}
+\label{sub:modelos_de_escrita_dos_testes_de_aceitacao}
 
-BDD vem se tornando um consenso em automação de testes. Contudo, existe controvérsia sobre seu modo de utilização.
+Existem duas maneira de se escrever os teses de aceitação: em texto plano e em código puro. Para exemplificar cada um das abordagens, será especificada a seguinte funcionalidade:
 
-Uma das maneiras de escrever testes de aceitação é como texto em língua humana,
-ou seja, inglês, português e etc. Nestas ferramentas, os testes são escritos baseados em \textit{steps} (passos), onde os cada step é mapeado para um código real.
+\begin{quote}
+\textit{Os comentários mostrados na página de tarefas devem ser renderizados utilizando a linguagem de marcação Markdown.}
+\end{quote}
 
-No código \ref{code:bdd_cucumber_spec}, é utilizado o cucumber para fazer a especificação de que os comentários devem ser renderizados utilizando a linguagem de marcação Markdown na página de tarefas. Como pode-se ver, o teste é escrito em linguagem que qualquer pessoa, mesmo sem nenhum conhecimento em programação, pode ler e validar. Este é um dos argumentos dos defensores da utilização dessa forma de escrita de testes, que o cliente pode validar os testes, inclusive ele mesmo escrevendo. Existem relatos de que na Globo.com esta abordagem é utilizada (procurar referências) e os clientes escrevem os testes.
+\subsubsection{Escrita em texto plano} % (fold)
+\label{subsub:escrita_em_texto_plano}
+
+Uma das maneiras de escrever testes de aceitação é como texto plano, ou seja, inglês, português e etc. Nas ferramentas que implementam esta abordagem, os testes são escritos baseados em \textit{steps} (passos), onde os cada step é mapeado para um código real.
+
+No código \ref{code:bdd_cucumber_spec}, é utilizado o \textit{cucumber} para fazer a especificação. Como pode-se ver, o teste é escrito em linguagem que qualquer pessoa, mesmo sem nenhum conhecimento em programação, pode ler e validar.
 
 \begin{mycode}{cucumber}%
-{Especificação}{code:bdd_cucumber_spec}
+{Especificação em texto plano}{code:bdd_cucumber_spec}
 # features/comments.feature
 Feature: Render comments with Markdown syntax
   As a user
@@ -268,6 +275,67 @@ Feature: Render comments with Markdown syntax
     And I should see "link" in an "a" tag
 \end{mycode}
 
+Para cada \textit{step} existe uma implementação, ou seja, sua definição, chamada de \textit{step definition}. Pose-se pensar nos \textit{steps} como chamada à métodos, e assim, os \textit{step definitions} serão as definição desse métodos. Os \textit{step definitions} para os \textit{steps} do código \ref{code:bdd_cucumber_spec} são apresentado no código \ref{code:step_definition}.
+
+Muitos desses \textit{step definitions} são escritos para serem reutilizados em outras especificações, porém, alguns deles são utilizados apenas um vez.
+
+\begin{mycode}{ruby}%
+{Step definitions}{code:step_definition}
+# features/step_definitions/contributor_steps.rb
+Given /^I am a contributor of "([^"]*)" project$/ do |name|
+  @project = Factory.create :project, :name => name
+  @contributor = Factory.create :contributor, :contributions => [@project]
+  @project.update_attribute(:contributors, [@contributor])
+end
+
+Given /^I am(?:| an) authenticated(?:| contributor)$/ do
+  @contributor ||= Factory.create :contributor
+
+  Given %{I am on the sign in page}
+  And %{I fill in "contributor_login" with "#{@contributor.email}"}
+  And %{I fill in "contributor_password" with "#{@contributor.password}"}
+  And %{I press "Sign in"}
+end
+
+# features/step_definitions/task_steps.rb
+Given /^I have a task of "([^"]*)" project$/ do |project_name|
+  @project = Factory.create :project, :name => 'project_name'
+  @task = Factory.create :task, :project => @project, :author => @contributor
+end
+
+# features/step_definitions/web_steps.rb
+Given /^(?:|I )am on (.+)$/ do |page_name|
+  visit path_to(page_name)
+end
+
+When /^(?:|I )fill in "([^"]*)" with "([^"]*)"$/ do |field, value|
+  fill_in(field, :with => value)
+end
+
+When /^(?:|I )press "([^"]*)"$/ do |button|
+  click_button(button)
+end
+
+# features/step_definitions/my_web_steps.rb
+When /^I should see "([^"]*)" in a(?:|n) "([^"]*)" tag$/ do |text, tag|
+  if page.respond_to? :should
+    page.should have_xpath("//#{tag}", :text => text)
+  else
+    assert page.has_xpath?("//#{tag}", :text => text)
+  end
+end
+\end{mycode}
+
+% subsubsection escrita_em_texto_plano (end)
+
+
+\subsubsection{Escrita em código puro} % (fold)
+\label{subsub:Escrita em codigo puro}
+
+A outra maneira de escrever os testes de aceitação é com código puro. Todo o código escondido nos \textit{step definitions} são escritos diretamente no cenário. Dessa forma, é possível ver junto todo o código de teste de cada cenário.
+
+Abaixo, o
+
 \begin{mycode}{rspec}%
 {Especificação}{code:bdd_spec1}
 # spec/acceptance/comments_spec.rb
@@ -276,10 +344,10 @@ feature "Render comments with Markdown syntax" do
     @owner = Factory.create :contributor
     @project = Factory.create :project
     @task = Factory.create :task, :project => @project, :author => @owner
+    login(@owner.email, @owner.password)
   end
 
   scenario "on tasks page" do
-    login(@owner.email, @owner.password)
     visit project_task_path(@project, @task)
     fill_in "comment_content", :with => "# Some content [link](http://exemplo.com)"
     click_button "Comment"
@@ -288,9 +356,25 @@ feature "Render comments with Markdown syntax" do
   end
 end
 \end{mycode}
+% subsubsection Escrita em codigo puro (end)
 
-% subsection modelo_de_escrita_dos_testes (end)
+% subsection modelos_de_escrita_dos_testes_de_aceitacao (end)
 
+\subsection{Questões em aberto} % (fold)
+\label{sub:questoes_es_em_aberto}
+
+BDD vem se tornando um consenso em automação de testes. Contudo, existem uma divergência grande sobre a forma de escrita dos testes de aceitação. Muitos defendem que os testes devem ser escritos em texto plano, por conta do teste teste ser escrito em linguagem que qualquer pessoa, mesmo sem nenhum conhecimento em programação, pode ler, validar e inclusive escrever. Existem relatos de que na Globo.com esta abordagem é utilizada (procurar referências) e os clientes escrevem os testes de aceitação.
+
+
+No entanto, muitos veem essa abordagem como utópica, e que nenhum cliente vai ler, muito menos escrever testes.
+
+Outra critica aos testes em texto plano é que a camada adicional dos \textit{steps}, é desnecessária e tonam a \textit{suite} de testes mais complexa de manter e estender.
+
+Na opinião do autor, os testes escritos em texto plano são muito bonitos, porém, pouco produtivos.
+
+% subsection questoes_es_em_aberto (end)
+
+% section bdd (end)
 
 \section{Integração contínua}
 
