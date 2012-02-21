@@ -18,6 +18,7 @@
 \usepackage[usenames,dvipsnames]{xcolor} % http://en.wikibooks.org/wiki/LaTeX/Colors
 \usepackage[pdfborder={0 0 0},pdfborderstyle={/S/U/W 0.5},citebordercolor=\bc,filebordercolor=\bc,urlbordercolor=\bc,linkbordercolor=\bc]{hyperref} % http://www.tug.org/applications/hyperref/manual.html e http://migre.me/7FH3e
 \usepackage[alf]{abntcite}
+\usepackage{booktabs} % para utilização das linhas separadoras na tabela
 \usepackage{listings} % http://linorg.usp.br/CTAN/macros/latex/contrib/listings/listings.pdf
 \usepackage{textcomp}
 \usepackage{minted} % foi adicionado o seguinte hack no minted: http://migre.me/7M8wI
@@ -50,7 +51,7 @@
   \minted@resetoptions
   \setkeys{minted@opt}{linenos,fontfamily=courier, fontsize=\scriptsize, xleftmargin=21pt}
   \renewcommand{\minted@proglang}[1]{#1}
-  \begin{listing}[H]
+  \begin{listing}[h]
     \caption{#2}\label{#3}
       \begin{VerbatimOut}{\jobname.pyg}}
  {\end{VerbatimOut}

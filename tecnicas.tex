@@ -60,9 +60,15 @@ A figura \ref{img:ciclo-tdd} resume o clico TDD de forma bem clara.
 
 Vejamos agora como isso se dá na prática através de um exemplo retirado do código do kanban-roots.
 
-Precisa-se saber todas as tarefas em uma determinada posição do \textit{kanban} de um projeto. Então, a primeira coisa a ser feita é o teste para o caso mais simples: quando o projeto não tem tarefa alguma naquela determinada posição.
+A seguinte funcionalidade precisa ser implementada:
 
-O teste para o caso mais simples pode ser como mostrado no código \ref{code:tdd_test1}.
+\begin{quote}
+\textit{Precisa-se saber todas as tarefas em uma determinada posição do kanban de um projeto.}
+\end{quote}
+
+A primeira coisa a ser feita é o teste para o caso mais simples: quando o projeto não tem tarefa alguma naquela determinada posição.
+
+Desta forma, o teste para o caso mais simples pode ser como mostrado no código \ref{code:tdd_test1}.
 
 \begin{mycode}{ruby}%
 {Teste para o método Project\#tasks\_by\_position (versão 1)}{code:tdd_test1}
@@ -75,7 +81,7 @@ class ProjectTest < ActiveSupport::TestCase
 end
 \end{mycode}
 
-Ao rodar este teste, ele irá falhar, informando que o método \textit{tasks\_by\_position} sequer existe. Como esta era a falha esperada, escrevemos então o código mais simples para passar neste teste.
+Ao rodar este teste, ele irá falhar, informando que o método \textit{tasks\_by\_position} sequer existe. Como esta era a falha esperada, escrevemos então o código mais simples para passar neste teste, apresentado no código \ref{code:tdd_code1}.
 
 \begin{mycode}{ruby}%
 {Código do método Project\#tasks\_by\_position (versão 1)}{code:tdd_code1}
@@ -85,7 +91,7 @@ def tasks_by_position position
 end
 \end{mycode}
 
-Os testes irão passar. Mas a funcionalidade ainda não está completa e, consequentemente, o teste também não.
+Os testes irão passar. Mas a funcionalidade ainda não está completa e, consequentemente, o teste também não. Como pode ser visto no código \ref{code:tdd_test2}, é adicionado ao teste uma verificação de que para a posição 1 devem existir duas tarefas e que estas tarefas devem ser exatamente as criadas anteriormente.
 
 \begin{mycode}{ruby}%
 {Teste do método Project\#tasks\_by\_position (versão 2)}{code:tdd_test2}
@@ -104,7 +110,7 @@ class ProjectTest < ActiveSupport::TestCase
 end
 \end{mycode}
 
-O teste irá falhar, informando que na \hyperref[code:tdd_test1]{linha 9 do teste} eram esperadas duas tarefas, mas foram obtidas zero. O código então deve ser modificado para passar no novo teste.
+Como o teste foi alterado, este é executado e irá falhar, informando que na \hyperref[code:tdd_test1]{linha 10} eram esperadas duas tarefas, mas foram obtidas zero. O código então deve ser modificado para passar no novo teste e é apresentado no código \ref{code:tdd_code2}.
 
 \begin{mycode}{ruby}%
 {Código do método Project\#tasks\_by\_position (versão 2)}{code:tdd_code2}
@@ -118,7 +124,7 @@ def tasks_by_position position
 end
 \end{mycode}
 
-Desta vez todos os testes os irão passar. Contudo, a cobertura de testes para este método ainda está fraca, o que pode ser resolvido com a adição de mais algumas tarefas em posições diferentes.
+Desta vez, após a modificação no código e a execução dos testes, todos os testes os irão passar. Contudo, a cobertura de testes para este método ainda está fraca, o que pode ser resolvido com a adição de mais algumas tarefas em posições diferentes, como mostrado no código \ref{code:tdd_test3}.
 
 \begin{mycode}{ruby}%
 {Teste do método Project\#tasks\_by\_position (versão 3)}{code:tdd_test3}
@@ -139,8 +145,8 @@ class ProjectTest < ActiveSupport::TestCase
 
     assert_equal(project.tasks_by_position(2), [tasks[2]])
 
-    assert_equal(project.tasks_by_position(3).count, 2)
-    tasks[3..4].each { |task| assert(project.tasks_by_position(3).include?(task)) }
+    assert_equal(project.tasks_by_position("3").count, 2)
+    tasks[3..4].each { |task| assert(project.tasks_by_position("3").include?(task)) }
   end
 end
 \end{mycode}
@@ -157,6 +163,15 @@ end
 
 \citeonline{TDDAntiPatterns} descreve vários anti-padrões do TDD e sua leitura é fortemente recomendada.
 
+\subsection{Design emergente} % (fold)
+\label{sub:design_emergente}
+
+No contexto em que TDD costuma ser aplicado - em processos ágeis, com um ciclo de vida iterativo-incremental - não é realizado um amplo \textit{design} prévio. Sendo assim, o \textit{design} evolui incrementalmente. Sabendo disso, uma característica extremamente importante do TDD é a facilitação ao \textit{design} emergente, que muitos consideram ser sua a principal característica.
+
+\textbf{TODO: dar um exemplo do kanban e PROCURAR REFERÊNCIAS SOBRE ISSO}
+
+% subsection design_emergente (end)
+
 
 \section{Behaviour-Driven Development (BDD)}
 \label{sec:bdd}
@@ -168,7 +183,7 @@ Criado em 2006 \cite{IntroducingBDD}, \textit{Behaviour-Driven Development} (Des
 
 O BDD é uma evolução do TDD. A grande diferença entre os dois, é que TDD não abrange a validação do software, ou seja, se o software atende os requisitos. Isso muda tudo, pois em BDD, a enfase está no comportamento ao infez da estrutura. Ao invés de focar em classes e métodos ao escrever os testes, o foco é no comportamento que gera valor para o sistema. Além disso, o pensamento não é voltado à verificação, mas sim no comportamento, em validar que o software faz sem deixar também de verificar se está funcionando como deveria.
 
-Em BDD não são escritos testes, mas sim expectativas, chamadas de \textit{specs}. Pode-se ter a clara diferença comparando o Código \ref{code:tdd_test3} com o Código \ref{code:bdd_spec}, onde é nítido o foco no comportamento, inclusive nas asserções.
+Em BDD não são escritos testes, mas sim expectativas, chamadas de \textit{specs}. Pode-se ter a clara diferença comparando o Código \ref{code:tdd_test3} com o Código \ref{code:bdd_spec}, onde palavras chave como \textit{class}, \textit{test} e \textit{assert} dão lugar a \textit{describe}, \textit{it} e \textit{should}, e fica nítido o foco no comportamento, inclusive nas asserções.
 
 \begin{mycode}{rspec}%
 {Spec}{code:bdd_spec}
@@ -252,7 +267,7 @@ Existem duas maneira de se escrever os teses de aceitação: em texto plano e em
 \subsubsection{Escrita em texto plano} % (fold)
 \label{subsub:escrita_em_texto_plano}
 
-Uma das maneiras de escrever testes de aceitação é como texto plano, ou seja, inglês, português e etc. Nas ferramentas que implementam esta abordagem, os testes são escritos baseados em \textit{steps} (passos), onde os cada step é mapeado para um código real.
+Uma das maneiras de escrever testes de aceitação é como texto plano, ou seja, inglês, português e etc. Nas ferramentas que implementam esta abordagem, os testes são escritos baseados em \textit{steps} (passos), onde cada step é mapeado para um código real.
 
 No código \ref{code:bdd_cucumber_spec}, é utilizado o \textit{cucumber} para fazer a especificação. Como pode-se ver, o teste é escrito em linguagem que qualquer pessoa, mesmo sem nenhum conhecimento em programação, pode ler e validar.
 
@@ -275,9 +290,9 @@ Feature: Render comments with Markdown syntax
     And I should see "link" in an "a" tag
 \end{mycode}
 
-Para cada \textit{step} existe uma implementação, ou seja, sua definição, chamada de \textit{step definition}. Pose-se pensar nos \textit{steps} como chamada à métodos, e assim, os \textit{step definitions} serão as definição desse métodos. Os \textit{step definitions} para os \textit{steps} do código \ref{code:bdd_cucumber_spec} são apresentado no código \ref{code:step_definition}.
+Para cada \textit{step} existe uma implementação, ou seja, sua definição, chamada de \textit{step definition}. Pode-se pensar nos \textit{steps} como chamadas à métodos, e assim, os \textit{step definitions} serão as definição desse métodos.Os \textit{step definitions} para os \textit{steps} do código \ref{code:bdd_cucumber_spec} são apresentado no código \ref{code:step_definition}.
 
-Muitos desses \textit{step definitions} são escritos para serem reutilizados em outras especificações, porém, alguns deles são utilizados apenas um vez.
+Como durante o desenvolvimento são escritos muitos \textit{step definitions}, com o intuito de organizá-los, eles são separados por contexto em arquivos diferentes.
 
 \begin{mycode}{ruby}%
 {Step definitions}{code:step_definition}
@@ -288,6 +303,7 @@ Given /^I am a contributor of "([^"]*)" project$/ do |name|
   @project.update_attribute(:contributors, [@contributor])
 end
 
+# features/step_definitions/contributor_steps.rb
 Given /^I am(?:| an) authenticated(?:| contributor)$/ do
   @contributor ||= Factory.create :contributor
 
@@ -308,10 +324,12 @@ Given /^(?:|I )am on (.+)$/ do |page_name|
   visit path_to(page_name)
 end
 
+# features/step_definitions/web_steps.rb
 When /^(?:|I )fill in "([^"]*)" with "([^"]*)"$/ do |field, value|
   fill_in(field, :with => value)
 end
 
+# features/step_definitions/web_steps.rb
 When /^(?:|I )press "([^"]*)"$/ do |button|
   click_button(button)
 end
@@ -332,9 +350,9 @@ end
 \subsubsection{Escrita em código puro} % (fold)
 \label{subsub:Escrita em codigo puro}
 
-A outra maneira de escrever os testes de aceitação é com código puro. Todo o código escondido nos \textit{step definitions} são escritos diretamente no cenário. Dessa forma, é possível ver junto todo o código de teste de cada cenário.
+A outra maneira de escrever os testes de aceitação é com código puro. Nesta forma, todo o código dos testes estão concentrados em apenas um lugar
 
-Abaixo, o
+No código \ref{code:bdd_spec1} podemos ver a especificação em código puro para a funcionalidade.
 
 \begin{mycode}{rspec}%
 {Especificação}{code:bdd_spec1}
@@ -363,14 +381,29 @@ end
 \subsection{Questões em aberto} % (fold)
 \label{sub:questoes_es_em_aberto}
 
-BDD vem se tornando um consenso em automação de testes. Contudo, existem uma divergência grande sobre a forma de escrita dos testes de aceitação. Muitos defendem que os testes devem ser escritos em texto plano, por conta do teste teste ser escrito em linguagem que qualquer pessoa, mesmo sem nenhum conhecimento em programação, pode ler, validar e inclusive escrever. Existem relatos de que na Globo.com esta abordagem é utilizada (procurar referências) e os clientes escrevem os testes de aceitação.
+BDD vem se tornando um consenso em automação de testes. Contudo, existem uma divergência grande sobre a forma de escrita dos testes de aceitação. Muitos defendem que os testes devem ser escritos em texto plano, por conta do teste teste ser escrito em linguagem que qualquer pessoa, mesmo sem nenhum conhecimento em programação, pode ler, validar e inclusive escrever. Existem relatos de que na Globo.com esta abordagem é utilizada \textbf{(procurar referências e outros casos)} e os clientes escrevem os testes de aceitação.
 
+No entanto, muitos veem essa abordagem como utópica \textbf{(procurar referências)}, e que nenhum cliente vai ler, muito menos escrever testes.
 
-No entanto, muitos veem essa abordagem como utópica, e que nenhum cliente vai ler, muito menos escrever testes.
+Outra critica aos testes em texto plano é que enquanto nos testes em código puro todo o código do teste está em concentrado em apenas um lugar, nos testes em texto plano, o código do testes está espalhado em diversos arquivos e métodos, devido a camada adicional dos \textit{steps}, tonando a \textit{suite} de testes mais complexa de manter e estender \textbf{(procurar referências)}.
 
-Outra critica aos testes em texto plano é que a camada adicional dos \textit{steps}, é desnecessária e tonam a \textit{suite} de testes mais complexa de manter e estender.
+Além disso, outro questionamento é sobre a velocidade para a execução dos testes. Como o \textit{cucumber} é uma DSL externa\footnote{\textit{Domain specific language} (linguagem específica de domínio). TODO: definição de DSL externa} o arquivo de \textit{features} é parseado para que os \textit{steps} sejam executados. O exemplo apresentado nos itens anteriores foram executados separadamente e seus tempos de execução medidos, sendo os resultados apresentados na tabela \ref{table:tempo_de_execucao}. Analisando estes resultados pode-se concluir que os testes em código puro executam, em média, 60,56\% mais rápido que os em texto plano.
 
-Na opinião do autor, os testes escritos em texto plano são muito bonitos, porém, pouco produtivos.
+\begin{table}[ht]
+\caption{Velocidade de execução dos testes de acordo com o método de escrita}
+\label{table:tempo_de_execucao}
+\centering
+\begin{tabular}{p{4.5cm} p{6.5cm}}
+\toprule
+\textbf{Método de escrita} & \textbf{Tempo médio de execução} \\
+\midrule[1pt]
+texto plano & 0m0.284s \\ \midrule
+código puro & 0m0.172s \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Na opinião do autor, os testes escritos em texto plano são muito bonitos, porém, pouco produtivos. TODO: fazer uma conclusão descente sobre esse tópico.
 
 % subsection questoes_es_em_aberto (end)
 
