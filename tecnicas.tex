@@ -412,7 +412,7 @@ Outra critica aos testes em texto plano é que enquanto nos testes em código pu
 
 Outro questionamento é sobre a velocidade para a execução dos testes. Como o \textit{Cucumber} utiliza a \textit{Gherkin}\footnote{\url{http://github.com/cucumber/cucumber/wiki/Gherkin}}, que é uma DSL externa\footnote{\textit{Domain specific language} (linguagem específica de domínio) é uma linguagem de programação de expressividade limitada, focada num domínio particular. Uma DSL externa tem sua própria sintaxe e necessita de um \textit{parser} para processá-la \cite{DSLFowler}.}, o arquivo de \textit{features} é parseado para que os \textit{steps} sejam executados, introduzindo um tempo extra na execução dos testes.
 
-O exemplo apresentado nos itens anteriores foram executados separadamente e seus tempos de execução medidos, sendo os resultados apresentados na tabela \ref{table:tempo_de_execucao}.
+Para um conjunto de funcionalidades, foram escritos testes utilizando os ambos modelos de escrita. Cada conjunto de vinte e dois exemplos foi executado separadamente e seus tempos de execução medidos, sendo os resultados apresentados na tabela \ref{table:tempo_de_execucao}.
 
 \begin{table}[ht]
 \caption{Velocidade de execução dos testes de acordo com o método de escrita}
@@ -422,13 +422,13 @@ O exemplo apresentado nos itens anteriores foram executados separadamente e seus
 \toprule
 \textbf{Método de escrita} & \textbf{Tempo médio de execução} \\
 \midrule[1pt]
-texto plano & 0m0.284s \\ \midrule
-código puro & 0m0.172s \\
+texto plano & 0m11.667s \\ \midrule
+código puro & 0m8.8385s \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Analisando estes resultados pode-se concluir que os testes em código puro executam, em média, 60,56\% mais rápido que os em texto plano.
+Analisando estes resultados pode-se concluir que os testes em código puro executam, em média, em um tempo 11,31\% menor que os em texto plano.
 
 % subsubsection tempo_de_execucao (end)
 
@@ -457,6 +457,8 @@ A IC é um dos pilares da agilidade, pois garante que todo o sistema funcione de
 
 Existe um debate sobre a periodicidade da integração, que tem relação direta com o tempo de execução da \textit{build}. Para assegurar o rápido feedback, esse tempo de execução deve ser o menor possível, tentando manter sempre menor do que dez minutos \cite{FowlerCI}.
 
+TODO: Falar de integração contínua síncrona e assíncrona (e discutir depois no contexto do kanban-roots).
+
 \section{Teste contínuo}
 \label{sub:teste_continuo}
 
@@ -476,8 +478,10 @@ Os Dublês de Teste não precisam se comportar exatamente como o componente real
 \item
 Objetos \textbf{\textit{Dummy}} geralmente são utilizados apenas para preencher uma lista de parâmetros e nunca são realmente usados.
 
+TODO: Sobre dummies nunca serem realmente usados, dá uma olhada na abordagem do Ludibrio https://github.com/nsigustavo/ludibrio.
+
 \item
-Objetos \textbf{\textit{Fake}} são utilizados para substituir funcionalidades reais de um componente por razões diferentes de verificações indiretas de entradas e saídas do componente a ser   testado.
+Objetos \textbf{\textit{Fake}} são utilizados para substituir funcionalidades reais de um componente por razões diferentes de verificações indiretas de entradas e saídas do componente a ser testado. TODO: Explique as razões.
 
 \item
 Os \textbf{\textit{Stubs}} provêm respostas prontas para chamadas feitas durante os testes, geralmente não respondendo a qualquer   chamada diferente
@@ -492,4 +496,4 @@ Os \textbf{\textit{Spies}} são \textit{Stubs} que também tem gravam algumas in
 referência: the art of agile development, página 298.
 \end{itemize}
 
-De modo geral, a utilização de Dublês de Teste é extremamente benéfica para o projeto. Contudo, existem controvérsias, principalmente em relação a utilização do \textit{Mock} \cite{MocksArentStubs}.
+De modo geral, a utilização de Dublês de Teste é extremamente benéfica para o projeto. Contudo, existem controvérsias, principalmente em relação a utilização do \textit{Mock} \cite{MocksArentStubs}. TODO: Entrar na controvérsia.
