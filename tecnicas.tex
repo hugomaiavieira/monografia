@@ -374,22 +374,41 @@ feature "Render comments with Markdown syntax" do
   end
 end
 \end{mycode}
+
+TODO: Elaborar mais esse sub tópico
+
 % subsubsection Escrita em codigo puro (end)
 
 % subsection modelos_de_escrita_dos_testes_de_aceitacao (end)
 
 \subsection{Questões em aberto} % (fold)
-\label{sub:questoes_es_em_aberto}
+\label{sub:questoes_es_em_aberto_bdd}
 
-BDD vem se tornando um consenso em automação de testes. Contudo, existem uma divergência grande sobre a forma de escrita dos testes de aceitação. Muitos defendem que os testes devem ser escritos em texto plano, por conta do teste teste ser escrito em linguagem que qualquer pessoa, mesmo sem nenhum conhecimento em programação, pode ler, validar e inclusive escrever. Existem relatos de que na Globo.com esta abordagem é utilizada \textbf{(TODO: procurar referências e outros casos)} e os clientes escrevem os testes de aceitação.
+BDD vem se tornando um consenso em automação de testes. Contudo, existem uma divergência grande sobre a forma de escrita dos testes de aceitação: código puro x texto plano.
+
+\subsubsection{Leiturabilidade} % (fold)
+\label{subsub:leiturabilidade}
+
+Muitos defendem que os testes devem ser escritos em texto plano, por conta do teste teste ser escrito em linguagem que qualquer pessoa, mesmo sem nenhum conhecimento em programação, pode ler, validar e inclusive escrever. Existem relatos de que na Globo.com esta abordagem é utilizada \textbf{(TODO: procurar referências e outros casos)} e os clientes escrevem os testes de aceitação.
 
 No entanto, muitos veem essa abordagem como utópica \textbf{(TODO: procurar referências)}, e que nenhum cliente vai ler, muito menos escrever testes.
 
+% subsubsection leiturabilidade (end)
+
+
+\subsubsection{Camada adicional} % (fold)
+\label{subsub:camada_adicional}
+
 Outra critica aos testes em texto plano é que enquanto nos testes em código puro todo o código do teste está em concentrado em apenas um lugar, nos testes em texto plano, o código do testes está espalhado em diversos arquivos e métodos, devido a camada adicional dos \textit{steps}, tonando a \textit{suite} de testes mais complexa de manter e estender \textbf{(TODO: procurar referências)}.
 
-Além disso, outro questionamento é sobre a velocidade para a execução dos testes. Como o \textit{Cucumber} utiliza a \textit{Gherkin}\footnote{\url{http://github.com/cucumber/cucumber/wiki/Gherkin}}, que é uma DSL externa\footnote{\textit{Domain specific language} (linguagem específica de domínio) é uma linguagem de programação de expressividade limitada, focada num domínio particular. Uma DSL externa tem sua própria sintaxe e necessita de um \textit{parser} para processá-la \cite{DSLFowler}.}, o arquivo de \textit{features} é parseado para que os \textit{steps} sejam executados, introduzindo um tempo extra na execução dos testes.
+% subsubsection camada_adicional (end)
 
-O exemplo apresentado nos itens anteriores foram executados separadamente e seus tempos de execução medidos, sendo os resultados apresentados na tabela \ref{table:tempo_de_execucao}. Analisando estes resultados pode-se concluir que os testes em código puro executam, em média, 60,56\% mais rápido que os em texto plano.
+\subsubsection{Tempo de execução} % (fold)
+\label{subsub:tempo_de_execucao}
+
+Outro questionamento é sobre a velocidade para a execução dos testes. Como o \textit{Cucumber} utiliza a \textit{Gherkin}\footnote{\url{http://github.com/cucumber/cucumber/wiki/Gherkin}}, que é uma DSL externa\footnote{\textit{Domain specific language} (linguagem específica de domínio) é uma linguagem de programação de expressividade limitada, focada num domínio particular. Uma DSL externa tem sua própria sintaxe e necessita de um \textit{parser} para processá-la \cite{DSLFowler}.}, o arquivo de \textit{features} é parseado para que os \textit{steps} sejam executados, introduzindo um tempo extra na execução dos testes.
+
+O exemplo apresentado nos itens anteriores foram executados separadamente e seus tempos de execução medidos, sendo os resultados apresentados na tabela \ref{table:tempo_de_execucao}.
 
 \begin{table}[ht]
 \caption{Velocidade de execução dos testes de acordo com o método de escrita}
@@ -405,9 +424,18 @@ código puro & 0m0.172s \\
 \end{tabular}
 \end{table}
 
-Na opinião do autor, os testes escritos em texto plano são muito bonitos, porém, pouco produtivos. TODO: fazer uma conclusão descente sobre esse tópico.
+Analisando estes resultados pode-se concluir que os testes em código puro executam, em média, 60,56\% mais rápido que os em texto plano.
 
-% subsection questoes_es_em_aberto (end)
+% subsubsection tempo_de_execucao (end)
+
+\subsubsection{Conclusões} % (fold)
+\label{subsub:conclusoes_bdd}
+
+Na opinião do autor, os testes escritos em texto plano são muito bonitos, porém, pouco produtivos. TODO: fazer uma conclusão descente sobre esse tópico. TODO: Isso fica aqui como um subsubsection ou vai para as conclusões finais?
+
+% subsubsection conclusoes_bdd (end)
+
+% subsection questoes_es_em_aberto_bdd (end)
 
 % section bdd (end)
 
