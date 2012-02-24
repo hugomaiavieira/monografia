@@ -4,7 +4,7 @@
 \label{sub:tdd}
 ``Apenas escrever código para corrigir um teste falhando". Segundo \citeonline{TestDrivenKoskela}, isto é \textit{Test-Driven Development} (Desenvolvimento guiado por testes) \cite{TDDbyExample} em apenas uma sentença.
 
-O TDD é uma técnica onde o desenvolvimento do software é guiado por \textbf{testes automatizados}, que são escritos antes de qualquer linha de código  relativo a funcionalidades. Primeiro escreve-se um teste, depois escreve-se o código para passar neste teste. Em seguida, o código é refatorado para encontrar um design melhor, contanto sempre com os testes existentes para que não sejam introduzidas falhas em outras partes do sistema.
+O TDD é uma técnica onde o desenvolvimento do software é guiado por \textbf{testes automatizados}, que são escritos antes de qualquer linha de código relativo a funcionalidades. Primeiro escreve-se um teste, depois escreve-se o código para passar neste teste. Em seguida, o código é refatorado para encontrar um design melhor, contando sempre com os testes existentes para que não sejam introduzidas falhas em outras partes do sistema.
 
 Esta abordagem encoraja bom design \cite{GrowingOOByTests}, produz código testável e mantém longe a sobre-engenharia por conta de falsas suposições, pois, nos testes, é especificado o que é desejado e escreve-se o código para fazer apenas aquilo que realmente é necessário. \cite{TestDrivenKoskela, TDDbyExample, EmpiricalTDD}
 
@@ -46,7 +46,7 @@ Como na refatoração o comportamento do código não deve ser alterado, após r
 
 \end{enumerate}
 
-A figura \ref{img:ciclo-tdd} resume o clico TDD de forma bem clara.
+A figura \ref{img:ciclo-tdd} resume o ciclo TDD de forma bem clara.
 
 \begin{figure}[h]
   \center
@@ -181,9 +181,9 @@ Criado em 2006 \cite{IntroducingBDD}, \textit{Behaviour-Driven Development} (Des
 \subsection{A herança de TDD}
 \label{sub:a_heranca_de_tdd}
 
-O BDD é uma evolução do TDD. A grande diferença entre os dois, é que TDD não abrange a validação do software, ou seja, se o software atende os requisitos. Isso muda tudo, pois em BDD, a enfase está no comportamento ao infez da estrutura. Ao invés de focar em classes e métodos ao escrever os testes, o foco é no comportamento que gera valor para o sistema. Além disso, o pensamento não é voltado à verificação, mas sim no comportamento, em validar que o software faz sem deixar também de verificar se está funcionando como deveria.
+O BDD é uma evolução do TDD. A grande diferença entre os dois é que TDD não abrange a validação do software, ou seja, se o software atende os requisitos. Isso muda tudo, pois em BDD, a ênfase está no comportamento, e não na estrutura. Ao invés de focar em classes e métodos ao escrever os testes, o foco é no comportamento que gera valor para o sistema. Além disso, o pensamento não é voltado à verificação, mas sim no comportamento, em validar que o software faz sem deixar também de verificar se está funcionando como deveria.
 
-Em BDD não são escritos testes, mas sim expectativas, chamadas de \textit{specs}. Pode-se ter a clara diferença comparando o Código \ref{code:tdd_test3} com o Código \ref{code:bdd_spec}, onde palavras chave como \textit{class}, \textit{test} e \textit{assert} dão lugar a \textit{describe}, \textit{it} e \textit{should}, e fica nítido o foco no comportamento, inclusive nas asserções.
+Em BDD não são escritos testes, mas sim especificações, chamadas de \textit{specs} (de \textit{specifications}). Pode-se ter a clara diferença comparando o Código \ref{code:tdd_test3} com o Código \ref{code:bdd_spec}, onde palavras chave como \textit{class}, \textit{test} e \textit{assert} dão lugar a \textit{describe}, \textit{it} e \textit{should}, e fica nítido o foco no comportamento, inclusive nas asserções.
 
 \begin{mycode}{rspec}%
 {Spec}{code:bdd_spec}
@@ -214,13 +214,13 @@ Em TDD, o nome dos testes é baseado na estrutura do código, e isso pode ter um
 
 % subsection a_heranca_de_tdd (end)
 
-\subsection{O clico BDD}
-\label{sub:o_clico_bdd}
+\subsection{O ciclo BDD}
+\label{sub:o_ciclo_bdd}
 
-O Ciclo BDD, apresentado na Figura \ref{img:ciclo-bdd}, tem dois níveis: unidade e aceitação. O nível aceitação é o nível mais alto, onde são escritos os testes de aceitação. Já o nível unidade é o mesmíssimo clico TDD visto anteriormente.
+O Ciclo BDD, apresentado na Figura \ref{img:ciclo-bdd}, tem dois níveis: unidade e aceitação. O nível aceitação é o nível mais alto, onde são escritos os testes de aceitação. Já o nível unidade é o mesmíssimo ciclo TDD visto anteriormente.
 
 \begin{enumerate}
-\item \textbf{Adicionar um testes de aceitação}
+\item \textbf{Adicionar um teste de aceitação}
 
 Cada ciclo se inicia com a criação de um teste de aceitação, um cenário, que descreve um determinado comportamento de uma funcionalidade do sistema.
 
@@ -253,12 +253,12 @@ Refatora-se o código.
   \label{img:ciclo-bdd}
 \end{figure}
 
-% subsection o_clico_bdd (end)
+% subsection o_ciclo_bdd (end)
 
 \subsection{Modelos de escrita dos testes de aceitação}
 \label{sub:modelos_de_escrita_dos_testes_de_aceitacao}
 
-Existem duas maneira de se escrever os teses de aceitação: em texto plano e em código puro. Para exemplificar cada um das abordagens, será especificada a seguinte funcionalidade:
+Existem duas maneiras de se escrever os testes de aceitação: em texto plano e em código puro. Para exemplificar cada um das abordagens, será especificada a seguinte funcionalidade:
 
 \begin{quote}
 \textit{Os comentários mostrados na página de tarefas devem ser renderizados utilizando a linguagem de marcação Markdown.}
@@ -350,9 +350,9 @@ end
 \subsubsection{Escrita em código puro} % (fold)
 \label{subsub:Escrita em codigo puro}
 
-A outra maneira de escrever os testes de aceitação é com código puro. Nesta forma, todo o código dos testes estão concentrados em apenas um lugar
+A outra maneira de escrever os testes de aceitação é com código puro. Nesta forma, todo o código dos testes está concentrado em apenas um lugar
 
-No código \ref{code:bdd_spec1} podemos ver a especificação em código puro para a funcionalidade.
+No código \ref{code:bdd_spec1} pode-se ver a especificação em código puro para a funcionalidade.
 
 \begin{mycode}{rspec}%
 {Especificação}{code:bdd_spec1}
@@ -389,7 +389,7 @@ BDD vem se tornando um consenso em automação de testes. Contudo, existem uma d
 \subsubsection{Leiturabilidade} % (fold)
 \label{subsub:leiturabilidade}
 
-Muitos defendem que os testes devem ser escritos em texto plano, por conta do teste teste ser escrito em linguagem que qualquer pessoa, mesmo sem nenhum conhecimento em programação, pode ler, validar e inclusive escrever. Existem relatos de que na Globo.com esta abordagem é utilizada \textbf{(TODO: procurar referências e outros casos)} e os clientes escrevem os testes de aceitação.
+Muitos defendem que os testes devem ser escritos em texto plano, por conta do teste ser escrito em linguagem que qualquer pessoa, mesmo sem nenhum conhecimento em programação, pode ler, validar e inclusive escrever. Existem relatos de que na Globo.com esta abordagem é utilizada \textbf{(TODO: procurar referências e outros casos)} e os clientes escrevem os testes de aceitação.
 
 No entanto, muitos veem essa abordagem como utópica \textbf{(TODO: procurar referências)}, e que nenhum cliente vai ler, muito menos escrever testes.
 
@@ -460,13 +460,13 @@ Falar aqui de continuous testing.
 
 \section{Dublês de Teste}
 
-Em algumas ocasiões é difícil testar alguns componentes porque eles dependem de outros componentes que não podem ser utilizados em ambiente de teste. Estas situações podem acontecer por esses componentes não estarem disponíveis, por eles não retornam os resultados necessários ou porque executá-los iria trazer efeitos colaterais indesejados. Em outros casos, nossa estratégia de testes requer que nós tenhamos mais controle do comportamento interno do componente.
+Em algumas ocasiões é difícil testar alguns componentes porque eles dependem de outros componentes que não podem ser utilizados em ambiente de teste. Estas situações podem acontecer por esses componentes não estarem disponíveis, por eles não retornarem os resultados necessários ou porque executá-los iria trazer efeitos colaterais indesejados. Em outros casos, a estratégia de testes utilizada requer que se tenha mais controle do comportamento interno do componente.
 
-Quando estamos escrevendo um teste onde não podemos/escolhemos usar componentes reais, podemos substitui-los pelos Dublês de Teste que oferecem uma maneira de isolar as dependências ao criar seus testes, permitindo a utilização de componentes falsos para cumprir os papéis de componentes reais. Com isso, eliminamos complexidade do código dos testes, pois mantemos o código de implementação dos objetos pequeno e com baixo acoplamento.
+Quando se escreve um teste onde não se pode/escolhe usar componentes reais, pode-se substitui-los pelos Dublês de Teste que oferecem uma maneira de isolar as dependências ao criar os testes, permitindo a utilização de componentes falsos para cumprir os papéis de componentes reais. Com isso, elimina-se complexidade do código dos testes, pois o código de implementação dos objetos é mantido pequeno e com baixo acoplamento.
 
-Os Dublês de Teste não precisam se comportar exatamente como o componente real, eles devem apenas prover a mesma API que o componente real.
+Os Dublês de Teste não precisam se comportar exatamente como o componente real, devendo apenas prover a mesma API que o componente real.
 
-\citeonline{XUnit} Define cinco categorias de Dublês de Teste:
+\citeonline{XUnit} define cinco categorias de Dublês de Teste:
 
 \begin{itemize}
 \item
