@@ -393,9 +393,15 @@ BDD vem se tornando um consenso em automação de testes. Contudo, existem uma d
 \subsubsection{Leiturabilidade} % (fold)
 \label{subsub:leiturabilidade}
 
-Muitos defendem que os testes devem ser escritos em texto plano, por conta do teste ser escrito em linguagem que qualquer pessoa, mesmo sem nenhum conhecimento em programação, pode ler, validar e inclusive escrever. Existem relatos de que na Globo.com esta abordagem é utilizada \textbf{(TODO: procurar referências e outros casos)} e os clientes escrevem os testes de aceitação.
+Muitos defendem que os testes devem ser escritos em texto plano, por conta do teste ser escrito em linguagem que qualquer pessoa, mesmo sem nenhum conhecimento em programação, pode ler e validar.
 
-No entanto, muitos veem essa abordagem como utópica \textbf{(TODO: procurar referências)}, e que nenhum cliente vai ler, muito menos escrever testes.
+Em uma situação onde se está desenvolvendo uma aplicação para um cliente, é existe um mito sobre o cliente escrever as especificações, contudo está é uma abordagem utópica \cite{SteakOverCucumber}. O cliente pode até ler e validar, mas mesmo assim esta não é uma abordagem muito interessante.
+
+O cliente é especialista em problemas e os desenvolvedores em dar soluções. Se o cliente escreve a especificação, na realidade ele está escrevendo parte da solução \cite{SteakOverCucumber}. No caso da funcionalidade exemplificada anteriormente, o cliente apenas sabe que os ``comentários devem ser renderizados com markdown", ele não quer saber se para isso deve entrar em determinada página, preencher determinado campo e clicar em determinado botão. O cliente apenas sabe a funcionalidade que ele quer, e vê-la funcionando.
+
+Dessa forma, o cliente não quer ler a especificação como no código \ref{code:bdd_cucumber_spec}, nem validá-la, muito menos escrevê-la. Ele quer ler somente ``Render comments with Markdown syntax", mais do que isso é superficial \cite{WhyBotherWithCucumberTesting}; ele quer validar vendo funcionar e não quer escrever absolutamente nada.
+
+Já em um contexto, como a do desenvolvimento do \textit{kanban-roots}, no qual não existem um cliente, onde as pessoas que escrevem e leem as especificações são desenvolvedores, fica mais claro que a escrita em texto plano não tem valor. O código é uma linguagem natural para desenvolvedores, ainda mais quando é escrito em conjunto com DSLs como a do Rspec \cite{SteakOverCucumber}.
 
 % subsubsection leiturabilidade (end)
 
@@ -403,7 +409,9 @@ No entanto, muitos veem essa abordagem como utópica \textbf{(TODO: procurar ref
 \subsubsection{Camada adicional} % (fold)
 \label{subsub:camada_adicional}
 
-Outra critica aos testes em texto plano é que enquanto nos testes em código puro todo o código do teste está em concentrado em apenas um lugar, nos testes em texto plano, o código do testes está espalhado em diversos arquivos e métodos, devido a camada adicional dos \textit{steps}, tonando a \textit{suite} de testes mais complexa de manter e estender \textbf{(TODO: procurar referências)}.
+Outra crítica aos testes em texto plano é que enquanto nos testes em código puro todo o código do teste está em concentrado em apenas um lugar, nos testes em texto plano, o código do testes está espalhado em diversos arquivos e métodos, devido a camada adicional dos \textit{steps}, tonando a \textit{suite} de testes mais complexa de manter e estender \cite{SteakOverCucumber}.
+
+Além disso, é necessário manter um segundo ambiente de testes, já que para escrever os testes de aceitação em texto plano é necessária uma ferramenta de testes específica para isso. Isso não acontece com a escrita em código puro, já que é utilizada a mesma ferramenta utilizada nos testes unitários \cite{WhyBotherWithCucumberTesting}.
 
 % subsubsection camada_adicional (end)
 
