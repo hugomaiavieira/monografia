@@ -401,7 +401,7 @@ O cliente é especialista em problemas e os desenvolvedores em dar soluções. S
 
 Dessa forma, o cliente não quer ler a especificação como no código \ref{code:bdd_cucumber_spec}, nem validá-la, muito menos escrevê-la. Ele quer ler somente ``Render comments with Markdown syntax", mais do que isso é superficial \cite{WhyBotherWithCucumberTesting}; ele quer validar vendo funcionar e não quer escrever absolutamente nada.
 
-Já em um contexto, como a do desenvolvimento do \textit{kanban-roots}, no qual não existem um cliente, onde as pessoas que escrevem e leem as especificações são desenvolvedores, fica mais claro que a escrita em texto plano não tem valor. O código é uma linguagem natural para desenvolvedores, ainda mais quando é escrito em conjunto com DSLs como a do Rspec \cite{SteakOverCucumber}.
+Já em um contexto, como a do desenvolvimento do \textit{kanban-roots}, no qual não existem um cliente, onde as pessoas que escrevem e leem as especificações são desenvolvedores, fica mais claro que a escrita em texto plano não tem valor. O código é uma linguagem natural para desenvolvedores, ainda mais quando é escrito em conjunto com DSLs\footnote{\textit{Domain specific language} (linguagem específica de domínio) é uma linguagem de programação de expressividade limitada, focada num domínio particular.} como a do Rspec \cite{SteakOverCucumber}.
 
 % subsubsection leiturabilidade (end)
 
@@ -418,7 +418,7 @@ Além disso, é necessário manter um segundo ambiente de testes, já que para e
 \subsubsection{Tempo de execução} % (fold)
 \label{subsub:tempo_de_execucao}
 
-Outro questionamento é sobre a velocidade para a execução dos testes. Como o \textit{Cucumber} utiliza a \textit{Gherkin}\footnote{\url{http://github.com/cucumber/cucumber/wiki/Gherkin}}, que é uma DSL externa\footnote{\textit{Domain specific language} (linguagem específica de domínio) é uma linguagem de programação de expressividade limitada, focada num domínio particular. Uma DSL externa tem sua própria sintaxe e necessita de um \textit{parser} para processá-la \cite{DSLFowler}.}, o arquivo de \textit{features} é parseado para que os \textit{steps} sejam executados, introduzindo um tempo extra na execução dos testes.
+Outro questionamento é sobre a velocidade para a execução dos testes. Como o \textit{Cucumber} utiliza a \textit{Gherkin}\footnote{\url{http://github.com/cucumber/cucumber/wiki/Gherkin}}, que é uma DSL externa\footnote{Uma DSL que tem sua própria sintaxe e necessita de um \textit{parser} para processá-la \cite{DSLFowler}.}, o arquivo de \textit{features} é parseado para que os \textit{steps} sejam executados, introduzindo um tempo extra na execução dos testes.
 
 Para um conjunto de funcionalidades, foram escritos testes utilizando os ambos modelos de escrita. Cada conjunto de vinte e dois exemplos foi executado separadamente e seus tempos de execução medidos, sendo os resultados apresentados na tabela \ref{table:tempo_de_execucao}.
 
