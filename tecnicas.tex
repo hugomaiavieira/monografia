@@ -170,7 +170,7 @@ end
 \subsection{Design emergente} % (fold)
 \label{sub:design_emergente}
 
-No contexto em que TDD costuma ser aplicado - em processos ágeis, com um ciclo de vida iterativo-incremental - não é realizado um amplo \textit{design} prévio. Sendo assim, o \textit{design} evolui incrementalmente. Sabendo disso, uma característica extremamente importante do TDD é a facilitação ao \textit{design} emergente, que muitos consideram ser sua a principal característica.
+No contexto em que TDD costuma ser aplicado – em processos ágeis, com um ciclo de vida iterativo-incremental – não é realizado um amplo \textit{design} prévio. Sendo assim, o \textit{design} evolui incrementalmente. Sabendo disso, uma característica extremamente importante do TDD é a facilitação ao \textit{design} emergente, que muitos consideram ser sua a principal característica.
 
 \textbf{TODO: dar um exemplo do kanban e PROCURAR REFERÊNCIAS SOBRE ISSO}
 
@@ -451,21 +451,84 @@ Na opinião do autor, os testes escritos em texto plano são muito bonitos, por�
 
 % section bdd (end)
 
-\section{Integração contínua}
+\section{Integração contínua} % (fold)
+\label{sec:integracao_continua}
 
-Em uma equipe com vários desenvolvedores, todos trabalhando na elaboração de um mesmo sistema, existe o problema de unificar as diversas alterações feitas na base de código, assegurando que a base continua consistente \cite{ImproveitCI}. Para resolver esse problema, entra em cena a Integração Contínua (IC), que além disso, tem como ponto chave dar um feedback rápido quando a base não está consistente.
+Em uma equipe com vários desenvolvedores, todos trabalhando na elaboração de um mesmo sistema, existe o problema de unificar as diversas alterações feitas na base de código, assegurando que a base continua consistente \cite{ImproveitCI}. Para resolver esse problema, entra em cena a Integração Contínua (IC), que além disso, tem como ponto chave dar um feedback rápido quando a base de código não está consistente.
 
 \cite{FowlerCI} definiu a IC da seguinte maneira:
 
 \begin{citacao}
-Integração Contínua é uma prática de desenvolvimento de software onde os membros de um time integram seu trabalho frequentemente, geralmente cada pessoa integra ao menos uma vez ao dia - podendo haver múltiplas integrações por dia. Cada integração é verificada por um \textit{build} automatizado (incluindo testes) para detectar erros de integração o mais rápido possível. Muitos times acham que essa abordagem leva a uma significante redução nos problemas de integração e permite que um time desenvolva software coeso mais rapidamente.
+Integração Contínua é uma prática de desenvolvimento de software onde os membros de um time integram seu trabalho frequentemente, geralmente cada pessoa integra ao menos uma vez ao dia – podendo haver múltiplas integrações por dia. Cada integração é verificada por um \textit{build} automatizado (incluindo testes) para detectar erros de integração o mais rápido possível. Muitos times acham que essa abordagem leva a uma significante redução nos problemas de integração e permite que um time desenvolva software coeso mais rapidamente.
 \end{citacao}
+
+Para assegurar o rápido feedback, o tempo de execução da \textit{build} deve ser o menor possível, tentando manter sempre menor do que dez minutos \cite{FowlerCI}.
+
+Além disso, no servidor de integração, busca-se utilizar as mesmas configurações utilizadas em produção, pois em algumas situações os testes podem estar passando em ambiente de desenvolvimento, mas o \textit{bug} estourar em produção. O intuito é eliminar a famosa frase ``Mas funciona na minha máquina!".
 
 A IC é um dos pilares da agilidade, pois garante que todo o sistema funcione de forma coesa a cada \textit{build}, mesmo que sua equipe seja grande e diversas partes do código estejam sendo alteradas ao mesmo tempo \cite{CaelumCI}.
 
-Existe um debate sobre a periodicidade da integração, que tem relação direta com o tempo de execução da \textit{build}. Para assegurar o rápido feedback, esse tempo de execução deve ser o menor possível, tentando manter sempre menor do que dez minutos \cite{FowlerCI}.
+Existem duas formas de executar a integração contínua: síncrona e assíncrona.
 
-TODO: Falar de integração contínua síncrona e assíncrona (e discutir depois no contexto do kanban-roots).
+\subsection{Integração contínua síncrona} % (fold)
+\label{sub:integracao_continua_sincrona}
+
+Para a utilização da integração contínua síncrona, todos os desenvolvedores devem trabalhar no mesmo espaço físico, pois deve existir uma máquina dedicada à integração. Assim, apenas um desenvolvedor integra seu código de cada vez e outros só são liberados para integrar ao serem informados do término da integração corrente \cite{ImproveitCI}.
+
+% subsection integracao_continua_assincrona (end)
+
+
+\subsection{Integração contínua assíncrona} % (fold)
+\label{sub:integracao_continua_assincrona}
+
+Na integração contínua assíncrona, não existe a necessidade de todos os desenvolvedores trabalharem no mesmo espaço físico. Esse modelo é ideal para a maioria dos projetos open source, onde os desenvolvedores estão espalhados em diversas partes do mundo, pois em tais casos torna-se difícil ou impossível garantir que apenas um desenvolvedor irá integrar de cada vez \cite{ImproveitCI}.
+
+Nesse modelo, o desenvolvedor deve assegurar que todos os testes estejam passando em sua máquina, e com essa condição atendida, pode integrar seu código ao repositório.
+
+Além disso, um servidor de integração contínua, como o Jenkins\footnote{\url{http://jenkins-ci.org}} ou Travis\footnote{\url{http://travis-ci.org}}, deve monitorar o repositório permanentemente. Sempre que o servidor detecta modificações ele roda a \textit{build} e se encontra algum erro, envia um email para os desenvolvedores. Dessa forma, o desenvolvedor responsável deve fazer as correções o mais brevemente possível e enviá-las para o repositório.
+
+% subsection integracao_continua_sincrona (end)
+
+\subsection{Integração contínua síncrona x assíncrona} % (fold)
+\label{sub:sincrona_x_assincrona}
+
+Sempre que possível, o melhor modelo de integração a ser utilizado é o síncrono. Pode-se fazer essa afirmação baseado no que \citeonline{ArtOfAgileDevelopment} descrevem como vantagens em utilizar a integração contínua síncrona:
+
+\begin{itemize}
+  \item Se a \textit{build} falhar, não é necessário interromper uma nova tarefa iniciada para voltar e corrigir a anterior, evitando assim a mudança de contexto mental.
+  \item Ajuda a manter a \textit{build} rápida, pois se está levando muito tempo para executar, a percepção é imediata e pode ser logo corrigida.
+  \item A frequência de \textit{builds} quebradas é muito menor, assim o tempo de permanência da falha no sistema de controle de versão, pois o responsável pela modificação que introduziu a falha pode não estar apto para corrigir-la imediatamente.
+\end{itemize}
+
+\citeonline{ImproveitCI} corrobora dizendo o seguinte:
+
+\begin{citacao}
+A integração contínua assíncrona permite o trabalho de desenvolvedores distribuídos geograficamente, porém é um pouco mais arriscada e menos eficiente que a integração síncrona. O risco aumenta porque o repositório pode ficar inconsistente durante alguns períodos de tempo – sempre que um erro ocorre e o responsável por ele ainda não fez o commit das correções.
+
+Na integração assíncrona, a eficiência diminui porque leva mais tempo para o desenvolvedor descobrir que cometeu um erro. É comum o desenvolvedor receber a notificação de um erro depois de já ter iniciado uma nova atividade. Ao ser notificado, deve parar a nova tarefa, relembrar o que havia feito na tarefa anteriormente e corrigir o erro.
+
+O processo síncrono é mais eficiente no uso do feedback exatamente porque impede o desenvolvedor de desviar sua atenção para qualquer outra atividade, enquanto a integração não tiver sido concluída com sucesso.
+\end{citacao}
+
+% subsection sincrona_x_assincrona (end)
+
+\subsection{Integração contínua no kanban-roots} % (fold)
+\label{sub:integracao_continua_no_kanban}
+
+Por ser um projeto \textit{open source}, no kanban-roots foi utilizado o método assíncrono de integração contínua, através do Travis\footnote{\url{http://travis-ci.org}}.
+
+A integração contínua se mostrou importante em algumas ocasiões durante o desenvolvimento do kanban-roots, a exemplo:
+
+\begin{itemize}
+  \item Alguns arquivos não foram incluídos no commit, fazendo com que localmente tudo funcionasse perfeitamente, mas o repositório estava quebrado.
+  \item Em ambiente de desenvolvimento é utilizado o SQLite\footnote{\url{http://www.sqlite.org}} e em ambiente de produção, é utilizado o MySQL\footnote{\url{http://www.mysql.com}}. Assim, foi feita uma query que apenas funcionava no SQLite, mas não no MySQL. Ou seja, em desenvolvimento estava perfeito, mas em produção, não.
+\end{itemize}
+
+Com o feedback rápido, todas as falhas foram corrigidas muito rapidamente, sem que problemas maiores ocorressem.
+
+% subsection integracao_continua_no_kanban (end)
+
+% section integracao_continua (end)
 
 \section{Teste contínuo}
 \label{sub:teste_continuo}
