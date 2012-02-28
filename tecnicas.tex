@@ -420,9 +420,7 @@ Além disso, é necessário manter um segundo ambiente de testes, já que para e
 
 Outro questionamento é sobre a velocidade para a execução dos testes. Como o \textit{Cucumber} utiliza a \textit{Gherkin}\footnote{\url{http://github.com/cucumber/cucumber/wiki/Gherkin}}, que é uma DSL externa\footnote{Uma DSL que tem sua própria sintaxe e necessita de um \textit{parser} para processá-la \cite{DSLFowler}.}, o arquivo de \textit{features} é parseado para que os \textit{steps} sejam executados, introduzindo um tempo extra na execução dos testes.
 
-Para um conjunto de funcionalidades, foram escritos testes utilizando os ambos modelos de escrita. Cada conjunto de vinte e dois exemplos foi executado separadamente e seus tempos de execução medidos, sendo os resultados apresentados na tabela \ref{table:tempo_de_execucao}.
-
-TODO: Colocar os códigos dos testes em um anexo ou em gist.
+Para um conjunto de funcionalidades, foram escritos testes utilizando os ambos modelos de escrita – apresentados no Anexo \ref{cha:codigo_do_comparativo}. Cada conjunto de vinte e dois exemplos foi executado separadamente e seus tempos de execução medidos, sendo os resultados apresentados na tabela \ref{table:tempo_de_execucao}.
 
 \begin{table}[ht]
 \caption{Velocidade de execução dos testes de acordo com o método de escrita}
@@ -445,7 +443,7 @@ Analisando estes resultados pode-se concluir que os testes em código puro execu
 \subsubsection{Conclusões} % (fold)
 \label{subsub:conclusoes_bdd}
 
-Na opinião do autor, os testes escritos em texto plano são muito bonitos, porém, pouco produtivos. TODO: fazer uma conclusão descente sobre esse tópico. TODO: Isso fica aqui como um subsubsection ou vai para as conclusões finais?
+Na opinião do autor, os testes escritos em texto plano são muito bonitos, porém, pouco produtivos. TODO: fazer uma conclusão descente sobre esse tópico.
 
 % subsubsection conclusoes_bdd (end)
 

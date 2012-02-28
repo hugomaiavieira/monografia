@@ -17,11 +17,6 @@ As dependências são baseadas na distribuição Linux Ubuntu.
 
     sudo easy_install pygments pygments-rspec pygments-github-style
 
-## Minted
-
-Tive que adicionar a linha `\floatstyle{ruled}` no minted.sty para conseguir
-fazer o estilo do caption.
-
 # Compilando
 
 Para compilar, depois ter instalado as dependências, basta rodar o comando
