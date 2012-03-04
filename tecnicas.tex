@@ -176,41 +176,32 @@ No contexto em que TDD costuma ser aplicado – em processos ágeis, com um cicl
 
 % subsection design_emergente (end)
 
-\subsection{A descrença e a surpresa} % (fold)
-\label{sub:a_descrenca_e_a_surpresa}
-
-Muitos são os relatos de quem começou a utilizar TDD ficou surpreso, pois antes eram céticos e descrentes em relação à técnica. O motivo disso é que os desenvolvedores, principalmente os que já desenvolvem a algum tempo, acreditam que testar não seja parte do seu trabalho, mas sim do pessoal de qualidade. TODO: Continuar a escrever. No livre ``Emergent Design"\ fala disso.
-
-% subsection a_descrenca_e_a_surpresa (end)
-
 \subsection{Usar TDD sempre?} % (fold)
 \label{sec:usar_tdd_sempre_}
 
-Existe um debate, algumas vezes fervoroso \cite{TDDGiveMeABreak}, sobre a utilização do TDD em qualquer situação.
+Existe um debate, sobre a não utilização do TDD em qualquer situação. Digo sobre a \textbf{não} utilização porque nunca ouvi/li alguém dizer quem TDD deve ser utilizado em qualquer situação. Acredito que exista um mal entendido do que alguns ``Agile Experts"\ dizem.
 
-\citeonline{TDDGiveMeABreak} diz:
+\citeonline{CleanCode}, considerado um ``Agile Expert", define As Três Leis do TDD, onde a primeira delas é: ``Você não pode escrever código de produção até que você tenha escrito um teste de unidade com falha.". O que que parece é que fecha-se os olhos para a parte ``de produção", distorcendo completamente seu sentido.
+
+\citeonline{TDDGiveMeABreak} questiona a posição do que ele chama de ``Agile Testing Experts":
 
 \begin{citacao}
-Fazer testes uma parte central do processo porque eles são úteis para os desenvolvedores? Muito bom. Ditar um fluxo de trabalho para os desenvolvedores que funciona em alguns casos como O Único Caminho Verdadeiro: ridículo.
+Exigir que você sempre deve escrever os testes primeiro? Dá um tempo. Isso é idiotice em fase de projeto, de hacking, ou de descobertas.
 
-Testar é ajudar os desenvolvedores, e reconhecendo que o teste automatizado são para benefício para os desenvolvedores, ao invés de \textit{cargo-culting}\footnote{O termo cargo-culting é utilizando quando um programador não qualificados ou iniciante (ou não experiência com o problema em mãos) copia um código de um lugar e colá-o em outro, com pouco ou nenhum entendimento de como o código funciona, ou se é realmente exigido na sua nova posição \cite{CargoCulting}.} um fluxo de trabalho e decretando que ``um tamanho de sapato serve para todos os tipos de pés".
+Fazer com que testar seja uma parte central do processo porque eles são úteis para os desenvolvedores? Muito bom. Ditar um fluxo de trabalho para os desenvolvedores que funciona em alguns casos como O Único Caminho Verdadeiro: ridículo.
+
+Testar é ajudar os desenvolvedores, e deve-se reconhecer que o teste automatizado são para benefício dos desenvolvedores, ao invés de \textit{cargo-culting}\footnote{O termo cargo-culting é utilizando quando um programador não qualificados ou iniciante (ou não experiência com o problema em mãos) copia um código de um lugar e colá-o em outro, com pouco ou nenhum entendimento de como o código funciona, ou se é realmente exigido na sua nova posição \cite{CargoCulting}.} um fluxo de trabalho e decretando que ``um tamanho de sapato serve para todos os tipos de pés".
 \end{citacao}
 
-Já \citeonline{ChromaticTDD} diz:
+Já \citeonline{ChromaticTDD} é um pouco mais moderado e diz:
 
 \begin{citacao}
 Se eu nunca usei a API antes, TDD pode não ser adequado. Se eu nunca vou usar o código novamente, TDD pode não ser adequado. Se leva mais tempo para escrever os testes (Nove linhas de código no programa final? Provavelmente não vale a pena agora.) do que para escrever e executar o código, TDD pode não ser adequado.
 \end{citacao}
 
-Acho que o tdd deva ser utilizando quando o código irá para produção. Isso acredito ser invariável. Durante o desenvolvimento do kanban-roots, muitas vezes escrevi código para testar um conceito, ou
+Nos dois únicos casos em que ocorreu um \textit{bug} no \textit{kanban-roots} em produção, ao analisar o código em busca da solução foi encontrado um comentário ``TODO: test it!"\ nos métodos onde os \textit{bugs} ocorreram. Atualmente, existem 13 comentários como esse espalhados no código do \textit{kanban-roots}. Isso, de certa forma, comprava que caso os testes não sejam escritos antes, para um código que irá entrar em produção, escrevê-lo depois acaba sendo um fardo, e isso é ignorado até que um problema ocorra.
 
-Lembro-me de dois casos em que ocorreu um bug em produção que quando fui ver era um código que tinha um comentário ``TODO: test it!". Atualmente, existem 13 comentários como esse espalhados no código do kanban-roots. Isso mostra que se os testes não forem feitos antes para um código que irá entrar em produção, escrevê-lo depois acaba sendo um fardo, ignorado até que um problema ocorra. O autor, assim como \citeonline{}, acredita que para um código que irá para produção, a utilização do TDD é essencial. No entanto, para um código é apenas prova de conceito ou experimento, que serão eliminados, a utilização da técnica não é invariavelmente necessária, até porque esse código não será incluído na base.
-
-\citeonline{LegacyCode} define código legado como código sem testes.
-
-\citeonline{CleanCode} define As Três Leis do TDD, onde a primeira delas é ``Você não pode escrever código de produção até que você tenha escrito um teste de unidade com falha.".
-
-Um exemplo é o código \ref{code:gravatar} que captura a foto do contribuidor do projeto. Esta imagem é capturada de um serviço, externo à aplicação, chamado Gravatar\footnote{Serviço que permite a associação de um avatar (imagem) à uma endereço de email. Mais informações em \url{http://gravatar.com}}. Este foi um típico caso onde um experimento foi para produção e neste caso é pior, pois envolve um serviço externo. E se o Gravatar modificar sua API? E se o Gravatar estiver indisponível? Um teste de integração, que é indispensável nesse caso, foi totalmente negligenciado.
+Um exemplo é o código \ref{code:gravatar} que captura a foto do usuário. Esta imagem é capturada de um serviço, externo à aplicação, chamado Gravatar\footnote{Serviço que permite a associação de um avatar (imagem) à uma endereço de email. Mais informações em \url{http://gravatar.com}}. Este foi um típico caso onde um experimento foi para produção, sem testes e com o agravante de envolver um serviço externo. E se o Gravatar modificar sua API? E se o Gravatar estiver indisponível? Um teste de integração, que é indispensável nesse caso, foi totalmente negligenciado.
 
 \begin{mycode}{ruby}%
 {Código do método que recupera a imagem do Gravatar}{code:gravatar}
@@ -234,13 +225,13 @@ def gravatar_image_tag(user, options={})
 end
 \end{mycode}
 
+\citeonline{LegacyCode} define que código legado é código sem testes. Deste modo, assim como \citeonline{CleanCode}, acreditamos que para um código ``que irá para produção" a utilização do TDD é essencial, pois do contrário, se está criando código legado.
 
-Existem os que dizem ser equivocado utilizar TDD neste contexto (http://www.thekua.com/atwork/2008/02/if-you-do-test-driven-development-all-the-time-youre-doing-something-wrong/), mas existem os que discordam (http://spin.atomicobject.com/2011/08/24/when-is-it-ok-to-not-tdd/).
+No entanto, para um código é apenas prova de conceito ou experimento, que serão eliminados, a utilização da técnica não é invariavelmente necessária – apesar do TDD também ser bem útil em alguns desses casos.
 
 % subsection usar_tdd_sempre_ (end)
 
 % section tdd (end)
-
 
 
 \section{Behaviour-Driven Development (BDD)}
