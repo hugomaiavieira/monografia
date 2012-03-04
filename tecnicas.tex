@@ -199,7 +199,7 @@ Já \citeonline{ChromaticTDD} é um pouco mais moderado e diz:
 Se eu nunca usei a API antes, TDD pode não ser adequado. Se eu nunca vou usar o código novamente, TDD pode não ser adequado. Se leva mais tempo para escrever os testes (Nove linhas de código no programa final? Provavelmente não vale a pena agora.) do que para escrever e executar o código, TDD pode não ser adequado.
 \end{citacao}
 
-Nos dois únicos casos em que ocorreu um \textit{bug} no \textit{kanban-roots} em produção, ao analisar o código em busca da solução foi encontrado um comentário ``TODO: test it!"\ nos métodos onde os \textit{bugs} ocorreram. Atualmente, existem 13 comentários como esse espalhados no código do \textit{kanban-roots}. Isso, de certa forma, comprava que caso os testes não sejam escritos antes, para um código que irá entrar em produção, escrevê-lo depois acaba sendo um fardo, e isso é ignorado até que um problema ocorra.
+Nos dois únicos casos em que ocorreu um \textit{bug} no kanban-roots em produção, ao analisar o código em busca da solução foi encontrado um comentário ``TODO: test it!"\ nos métodos onde os \textit{bugs} ocorreram. Atualmente, existem 13 comentários como esse espalhados no código do kanban-roots. Isso, de certa forma, comprava que caso os testes não sejam escritos antes, para um código que irá entrar em produção, escrevê-lo depois acaba sendo um fardo, e isso é ignorado até que um problema ocorra.
 
 Um exemplo é o código \ref{code:gravatar} que captura a foto do usuário. Esta imagem é capturada de um serviço, externo à aplicação, chamado Gravatar\footnote{Serviço que permite a associação de um avatar (imagem) à uma endereço de email. Mais informações em \url{http://gravatar.com}}. Este foi um típico caso onde um experimento foi para produção, sem testes e com o agravante de envolver um serviço externo. E se o Gravatar modificar sua API? E se o Gravatar estiver indisponível? Um teste de integração, que é indispensável nesse caso, foi totalmente negligenciado.
 
@@ -458,7 +458,7 @@ O cliente é especialista em problemas e os desenvolvedores em dar soluções. S
 
 Dessa forma, o cliente não quer ler a especificação como no código \ref{code:bdd_cucumber_spec}, nem validá-la, muito menos escrevê-la. Ele quer ler somente ``Render comments with Markdown syntax", mais do que isso é superficial \cite{WhyBotherWithCucumberTesting}; ele quer validar vendo funcionar e não quer escrever absolutamente nada.
 
-Já em um contexto, como a do desenvolvimento do \textit{kanban-roots}, no qual não existem um cliente, onde as pessoas que escrevem e leem as especificações são desenvolvedores, fica mais claro que a escrita em texto plano não tem valor. O código é uma linguagem natural para desenvolvedores, ainda mais quando é escrito em conjunto com DSLs\footnote{\textit{Domain specific language} (linguagem específica de domínio) é uma linguagem de programação de expressividade limitada, focada num domínio particular.} como a do Rspec \cite{SteakOverCucumber}.
+Já em um contexto, como a do desenvolvimento do kanban-roots, no qual não existem um cliente, onde as pessoas que escrevem e leem as especificações são desenvolvedores, fica mais claro que a escrita em texto plano não tem valor. O código é uma linguagem natural para desenvolvedores, ainda mais quando é escrito em conjunto com DSLs\footnote{\textit{Domain specific language} (linguagem específica de domínio) é uma linguagem de programação de expressividade limitada, focada num domínio particular.} como a do Rspec \cite{SteakOverCucumber}.
 
 % subsubsection legibilidade (end)
 
@@ -572,7 +572,7 @@ O processo síncrono é mais eficiente no uso do feedback exatamente porque impe
 \subsection{Integração contínua no kanban-roots} % (fold)
 \label{sub:integracao_continua_no_kanban}
 
-Por ser um projeto \textit{open source}, no kanban-roots foi utilizado o método assíncrono de integração contínua, através do Travis\footnote{\url{http://travis-ci.org}}.
+Com base no tópico anterior e por ser um projeto \textit{open source}, no kanban-roots foi utilizado o método assíncrono de integração contínua, através do Travis\footnote{Mais informações podem ser encontradas em \url{http://travis-ci.org}}, que foi escolhido por ser um serviço hospedado integração contínua para a comunidade open source, o que facilitou bastante pela não necessidade de manutenção de uma estrutura local de integração contínua.
 
 A integração contínua se mostrou importante em algumas ocasiões durante o desenvolvimento do kanban-roots, a exemplo:
 
