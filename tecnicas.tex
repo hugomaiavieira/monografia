@@ -10,7 +10,7 @@ Esta abordagem encoraja bom design \cite{GrowingOOByTests}, produz código test�
 
 Mas TDD é uma técnica emergente? Não e sim.
 
-O TDD vem sendo utilizado esporadicamente há anos, contudo, não existia um nome para identificar essa forma de desenvolver software. Além disso, em termos de adoção, TDD continua sendo novo \cite{TestDrivenKoskela, TDDbyExample, EmpiricalTDD}. Hoje, esta técnica tem um nome e começa a ganhar força, sendo utilizada em times de grandes empresas como Google, Yahoo, Microsoft e IBM \cite{EmpiricalTDD}.
+O TDD vem sendo utilizado esporadicamente há anos, contudo, não existia um nome para identificar essa forma de desenvolver software. Atualmente, esta técnica tem uma definição, um nome e começa a ganhar força, sendo utilizada em times de grandes empresas como Google, Yahoo, Microsoft e IBM \cite{EmpiricalTDD}.
 
 \subsection{Ciclo TDD}
 \label{ssub:ciclo_tdd}
@@ -179,7 +179,7 @@ No contexto em que TDD costuma ser aplicado – em processos ágeis, com um cicl
 \subsection{Usar TDD sempre?} % (fold)
 \label{sec:usar_tdd_sempre_}
 
-Existe um debate, sobre a não utilização do TDD em qualquer situação. Digo sobre a \textbf{não} utilização porque nunca ouvi/li alguém dizer quem TDD deve ser utilizado em qualquer situação. Acredito que exista um mal entendido do que alguns ``Agile Experts"\ dizem.
+Existe um debate sobre a não utilização do TDD em qualquer situação. Digo sobre a \textbf{não} utilização porque nunca ouvi/li alguém dizer quem TDD deve ser utilizado em qualquer situação. Acredito que exista um mal entendido do que alguns ``Agile Experts"\ dizem.
 
 \citeonline{CleanCode}, considerado um ``Agile Expert", define As Três Leis do TDD, onde a primeira delas é: ``Você não pode escrever código de produção até que você tenha escrito um teste de unidade com falha.". O que que parece é que fecha-se os olhos para a parte ``de produção", distorcendo completamente seu sentido.
 
@@ -225,9 +225,9 @@ def gravatar_image_tag(user, options={})
 end
 \end{mycode}
 
-\citeonline{LegacyCode} define que código legado é código sem testes. Deste modo, assim como \citeonline{CleanCode}, acreditamos que para um código ``que irá para produção" a utilização do TDD é essencial, pois do contrário, se está criando código legado.
+\citeonline{LegacyCode} define que \textbf{código legado é código sem testes}. Deste modo, para um código ``que irá para produção" a utilização do TDD é essencial, pois do contrário, se está criando código legado. É importante lembrar que o código legado com o tempo vai minando a manutenibilidade do sistema e assim, elevando os custos de introdução de novas funcionalidade e evolução do mesmo.
 
-No entanto, para um código é apenas prova de conceito ou experimento, que serão eliminados, a utilização da técnica não é invariavelmente necessária – apesar do TDD também ser bem útil em alguns desses casos.
+O autor considera que somente para casos em que um código é apenas prova de conceito ou experimento, e que será eliminados, a utilização da técnica não é invariavelmente necessária. Contudo, a utilização de TDD nesses cenários pode ser muito interessante, pois como dito anteriormente, para a escrita dos testes, é preciso entender bem o problema a ser resolvido, fazendo o desenvolvedor se preparar mais para o que ele ainda não conhece muito bem.
 
 % subsection usar_tdd_sempre_ (end)
 
