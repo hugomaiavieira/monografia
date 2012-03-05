@@ -225,7 +225,7 @@ def gravatar_image_tag(user, options={})
 end
 \end{mycode}
 
-\citeonline{LegacyCode} define que \textbf{código legado é código sem testes}. Deste modo, para um código ``que irá para produção" a utilização do TDD é essencial, pois do contrário, se está criando código legado. É importante lembrar que o código legado com o tempo vai minando a manutenibilidade do sistema e assim, elevando os custos de introdução de novas funcionalidade e evolução do mesmo.
+\citeonline{LegacyCode} define que \textbf{código legado é código sem testes}. Deste modo, para um código ``que irá para produção"\ a utilização do TDD é essencial, pois do contrário, se está criando código legado. É importante lembrar que o código legado com o tempo vai minando a manutenibilidade do sistema e assim, elevando os custos de introdução de novas funcionalidade e evolução do mesmo.
 
 O autor considera que somente para casos em que um código é apenas prova de conceito ou experimento, e que será eliminados, a utilização da técnica não é invariavelmente necessária. Contudo, a utilização de TDD nesses cenários pode ser muito interessante, pois como dito anteriormente, para a escrita dos testes, é preciso entender bem o problema a ser resolvido, fazendo o desenvolvedor se preparar mais para o que ele ainda não conhece muito bem.
 
@@ -436,16 +436,9 @@ feature "Render comments with Markdown syntax" do
 end
 \end{mycode}
 
-TODO: Elaborar mais esse sub tópico (não sei o que mais posso escrever sobre isso. acho que o que tem a dizer está no próximo sub-tópico)
-
 % subsubsection Escrita em codigo puro (end)
 
-% subsection modelos_de_escrita_dos_testes_de_aceitacao (end)
-
-\subsection{Questões em aberto} % (fold)
-\label{sub:questoes_es_em_aberto_bdd}
-
-BDD vem se tornando um consenso em automação de testes. Contudo, existem uma divergência grande sobre a forma de escrita dos testes de aceitação: código puro x texto plano.
+BDD vem se tornando um consenso em automação de testes. Contudo, existem uma divergência grande sobre a forma de escrita dos testes de aceitação entre escrita em código puro e escrita em texto plano.
 
 \subsubsection{Legibilidade} % (fold)
 \label{subsub:legibilidade}
@@ -461,7 +454,6 @@ Dessa forma, o cliente não quer ler a especificação como no código \ref{code
 Já em um contexto, como a do desenvolvimento do kanban-roots, no qual não existem um cliente, onde as pessoas que escrevem e leem as especificações são desenvolvedores, fica mais claro que a escrita em texto plano não tem valor. O código é uma linguagem natural para desenvolvedores, ainda mais quando é escrito em conjunto com DSLs\footnote{\textit{Domain specific language} (linguagem específica de domínio) é uma linguagem de programação de expressividade limitada, focada num domínio particular.} como a do Rspec \cite{SteakOverCucumber}.
 
 % subsubsection legibilidade (end)
-
 
 \subsubsection{Camada adicional} % (fold)
 \label{subsub:camada_adicional}
@@ -500,11 +492,11 @@ Analisando estes resultados pode-se concluir que os testes em código puro execu
 \subsubsection{Conclusões} % (fold)
 \label{subsub:conclusoes_bdd}
 
-Na opinião do autor, os testes escritos em texto plano são muito bonitos, porém, pouco produtivos. TODO: fazer uma conclusão descente sobre esse tópico.
+Na opinião do autor, os testes escritos em texto plano em um primeiro momento são muito atraentes, pois, com a facilidade de leitura, a possibilidade de validação de testes executáveis pelo cliente se tornam reais. No entanto, como apresentado anteriormente, na realidade este benefício não é atingido e a produtividade é prejudicada, pois é adicionada complexidade ao processo, devido a camada adicional, além de tornar a execução da \textit{suite} de testes mais lenta.
 
 % subsubsection conclusoes_bdd (end)
 
-% subsection questoes_es_em_aberto_bdd (end)
+% subsection modelos_de_escrita_dos_testes_de_aceitacao (end)
 
 % section bdd (end)
 
