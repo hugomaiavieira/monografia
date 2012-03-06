@@ -172,12 +172,21 @@ end
 
 No contexto em que TDD costuma ser aplicado – em processos ágeis, com um ciclo de vida iterativo-incremental – não é realizado um amplo \textit{design} prévio. Sendo assim, o \textit{design} evolui incrementalmente. Sabendo disso, uma característica extremamente importante do TDD é a facilitação ao \textit{design} emergente, que muitos consideram ser sua a principal característica.
 
+TDD é considerado uma técnica essencial para o \textit{design} emergente porque
+quando se está escrevendo um teste anteriormente ao código, o programador contempla e decide não apenas a interface do software (i.e. nomes de classes/métodos, parâmetros, tipos de retorno, lançamento de exceções), mas também o comportamento do software (i.e. resultados esperados para determinadas entradas) \cite{JanzenTDD}.
+
+Em seu estudo \cite{DammTDD} notou que (tradução do autor):
+
+\begin{citacao}
+Test-Driven Development faz com que as pessoas pensem mais no design em vez de se codificar precipitadamente sem saber o que implementa ainda.
+\end{citacao}
+
 \textbf{TODO: dar um exemplo do kanban (ver histórico de commits no github) e PROCURAR REFERÊNCIAS SOBRE ISSO}
 
 % subsection design_emergente (end)
 
 \subsection{Usar TDD sempre?} % (fold)
-\label{sec:usar_tdd_sempre_}
+\label{sec:usar_tdd_sempre}
 
 Existe um debate sobre a não utilização do TDD em qualquer situação. É dito sobre a \textbf{não} utilização pois o autor desconhece qualquer literatura dizendo que TDD deve ser utilizado em qualquer situação. Na realidade, o que existe é um mal entendido na comunidade sobre o que que alguns ``Agile Experts"\ dizem.
 
@@ -230,6 +239,52 @@ end
 O autor considera que somente para casos em que um código é apenas prova de conceito ou experimento, e que será eliminados, a utilização da técnica não é invariavelmente necessária. Contudo, a utilização de TDD nesses cenários pode ser muito interessante, pois como dito anteriormente, para a escrita dos testes, é preciso entender bem o problema a ser resolvido, fazendo o desenvolvedor se preparar mais para o que ele ainda não conhece muito bem.
 
 % subsection usar_tdd_sempre (end)
+
+\subsection{TDD realmente é efetivo?} % (fold)
+\label{sub:tdd_realmente_e_efetivo}
+
+Existem dúvidas sobre a real efetividade do TDD no que diz respeito à qualidade do código, redução de defeitos e ao aumento ou diminuição da produtividade. Geralmente esta dúvida surge em que nunca realmente praticou TDD. Contudo, por ser um processo complexo, é muito difícil avaliar e chegar a uma conclusão exata sobre os ganhos e benefícios de toda e qualquer prática em engenharia de software.
+
+Nos últimos anos, vem sendo feitos alguns experimentos para tentar mostrar de maneira empírica que TDD realmente é efetivo no processo de desenvolvimento de software.
+
+\subsubsection{Estudos na indústria} % (fold)
+\label{sub:estudos_na_industria}
+
+Um estudo feito por \citeonline{MaximilienTDD}, fazendo um comparativo de entre o desenvolvimento pré e pós a utilização do TDD, mostrou uma redução de 50\% na taxa de defeitos encontrados no sistema, tendo um mínimo impacto negativo na produtividade da equipe. Além disso, foi percebido que a utilização do TDD os fez produzir um produto que incorporaria mais facilmente alterações posteriores.
+
+Outro estudo feito por \citeonline{ChinaTDD} dividiu dois grupos, um utilizando TDD e outro utilizando Test-last\footnote{Nesta abordagem os testes escritos após o código.}. O estudo mostrou que o time que utilizou TDD produziu menos defeitos e quando estes ocorriam, eram capazes de solucioná-los muito mais rapidamente. No estudo realizado por \cite{DammTDD} também mostra uma redução nas taxas de defeito.
+
+Já o estudo feito por \cite{GeorgeTDD} mostrou que, apesar de TDD poder reduzir inicialmente a produtividade dos desenvolvedores em 16\%, o código produzido apresentou uma cobertura entre 92\% a 98\%. Além disso, uma análise qualitativa mostrou que 87.5\% dos programadores acreditam que TDD facilitou o entendimento dos requisitos e 95.8\% acreditam que TDD reduziu o tempo gasto com debug. 78\% também acreditam que TDD aumentou a produtividade da equipe. No entanto, apenas metade dos desenvolvedores acreditam que TDD leva a uma diminuição do tempo de desenvolvimento. Sobre qualidade, 92\% acreditam que TDD ajuda a manter um código de maior qualidade e 79\% acreditam que ele promove um design mais simples e 71\% acreditam que esta abordagem é notavelmente efetiva. Portanto, agregando todos esses dados, o estudo mostra que 80\% dos desenvolvedores acreditam que o uso do TDD é realmente efetivo.
+
+\citeonline{EmpiricalTDD} realizou um estudo de caso conduzidos em três times na Microsoft e um na IBM. Os resultados indicaram que o número de defeitos diminuiu entre 40\% e 90\% em relação à projetos similares que não usaram TDD. Contudo, o estudo mostrou também que, subjetivamente, a utilização do TDD aumentou o tempo inicial de desenvolvimento entre 15\% e 35\%.
+
+% subsubsection estudos_na_industria (end)
+
+\subsubsection{Estudos na academia} % (fold)
+\label{sub:estudos_na_academia}
+
+Um estudo feito por \citeonline{JanzenTDD} dividiu um conjunto de alunos em três grupos, onde cada um deles utilizaria uma abordagem distinta. Um grupo utilizou TDD, o outro Test-last e o último não fazia testes. O grupo que utilizou TDD produziu e por volta de duas vezes  mais funcionalidades que os outros dois grupos e com um número similar de defeitos. Além disso, o grupo que utilizou TDD foi o único a completar a interface gráfica. Apezar de ter desenvolvido mais funcionalidades, o grupo que utilizou TDD investiu a mesma quantidade de tempo dos demais grupos para o desenvolvimento.
+
+O Grupo TDD dispendeu menos esforço por linha de código e dispendeu 88\% menos esforço por funcionalidade do que o grupo que não fez testes, e 57\% menos esforço por funcionalidade do que o grupo Test-last. Além disso, o grupo TDD teve uma cobertura de testes 86\% maior do que o grupo Test-last.
+
+Também foi feita uma micro-avaliação somente do grupo TDD, sendo aferido que nas partes do código para os quais foram feitos testes, a complexidade foi 43\% menor do que as partes sem testes. Além disso, as classes testadas tiveram um acoplamento 104\% menor do que as não testadas.
+
+Já o estudo feito por \citeonline{ErdogmusTDD} mostra que TODO:
+
+% subsubsection estudos_na_academia (end)
+
+\subsubsection{Conclusão} % (fold)
+\label{sub:conclusao}
+
+A maioria dos experimentos feitos tanto na indústria quanto na academia mostram que TDD melhora o processo de desenvolvimento de software, aumentando a qualidade do código, reduzindo o número de defeitos, diminuindo o tempo gasto com depuração.
+
+Contudo existe uma divergência em relação à produtividade dos desenvolvedores. Os estudos na TODO:
+
+Durante o desenvolvimento do kanban-roots não foi realizado nenhum experimento semelhante aos apresentados nos tópicos anteriores. Contudo, fazendo um comparativo com projetos desenvolvidos anteriormente, o autor teve a mesma sensação de melhoria apresentadas nos estudos.
+
+% subsubsection conclusao (end)
+
+% subsection tdd_realmente_e_efetivo (end)
 
 % section tdd (end)
 
