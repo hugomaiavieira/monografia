@@ -72,7 +72,7 @@ A seguinte funcionalidade precisa ser implementada:
 
 A primeira coisa a ser feita é o teste para o caso mais simples: quando o projeto não tem tarefa alguma naquela determinada posição do kanban.
 
-Desta forma, o teste para o caso mais simples pode ser como mostrado no código \ref{code:tdd_test1}.
+Desta forma, o teste para o caso mais simples pode ser como mostrado no Código \ref{code:tdd_test1}.
 
 \begin{mycode}{ruby}%
 {Teste para o método Project\#tasks\_by\_position (versão 1)}{code:tdd_test1}
@@ -85,7 +85,7 @@ class ProjectTest < ActiveSupport::TestCase
 end
 \end{mycode}
 
-Ao rodar este teste, ele irá falhar, informando que o método \textit{tasks\_by\_position} sequer existe. Como esta era a falha esperada, escrevemos então o código mais simples para passar neste teste, apresentado no código \ref{code:tdd_code1}.
+Ao rodar este teste, ele irá falhar, informando que o método \texttt{tasks\_by\_position} sequer existe. Como esta era a falha esperada, é escrito então o código mais simples para passar neste teste, apresentado no Código \ref{code:tdd_code1}.
 
 \begin{mycode}{ruby}%
 {Código do método Project\#tasks\_by\_position (versão 1)}{code:tdd_code1}
@@ -95,7 +95,7 @@ def tasks_by_position position
 end
 \end{mycode}
 
-Os testes irão passar. Mas a funcionalidade ainda não está completa e, consequentemente, o teste também não. Como pode ser visto no código \ref{code:tdd_test2}, é adicionado ao teste uma verificação de que para a posição 1 devem existir duas tarefas e que estas tarefas devem ser exatamente as criadas anteriormente.
+Os testes irão passar. Mas a funcionalidade ainda não está completa e, consequentemente, o teste também não. Como pode ser visto no Código \ref{code:tdd_test2}, é adicionado ao teste uma verificação de que para a posição 1 devem existir duas tarefas e que estas tarefas devem ser exatamente as criadas anteriormente.
 
 \begin{mycode}{ruby}%
 {Teste do método Project\#tasks\_by\_position (versão 2)}{code:tdd_test2}
@@ -114,7 +114,7 @@ class ProjectTest < ActiveSupport::TestCase
 end
 \end{mycode}
 
-Como o teste foi alterado, este é executado e irá falhar, informando que na \hyperref[code:tdd_test1]{linha 10} eram esperadas duas tarefas, mas foram obtidas zero. O código então deve ser modificado para passar no novo teste e é apresentado no código \ref{code:tdd_code2}.
+Como o teste foi alterado, este é executado e irá falhar, informando que na \hyperref[code:tdd_test2]{linha 10} eram esperadas duas tarefas, mas foram obtidas zero. O código então deve ser modificado para passar no novo teste e é apresentado no código \ref{code:tdd_code2}.
 
 \begin{mycode}{ruby}%
 {Código do método Project\#tasks\_by\_position (versão 2)}{code:tdd_code2}
@@ -128,7 +128,7 @@ def tasks_by_position position
 end
 \end{mycode}
 
-Desta vez, após a modificação no código e a execução dos testes, todos os testes os irão passar. Contudo, a cobertura de testes para este método ainda está fraca, o que pode ser resolvido com a adição de mais algumas tarefas em posições diferentes, como mostrado no código \ref{code:tdd_test3}.
+Desta vez, após a modificação no código e a execução dos testes, todos os testes os irão passar. Contudo, a cobertura de testes para este método ainda está fraca, o que pode ser resolvido com a adição de mais algumas tarefas em posições diferentes, como mostrado no Código \ref{code:tdd_test3}.
 
 \begin{mycode}{ruby}%
 {Teste do método Project\#tasks\_by\_position (versão 3)}{code:tdd_test3}
@@ -155,7 +155,7 @@ class ProjectTest < ActiveSupport::TestCase
 end
 \end{mycode}
 
-Executando os testes novamente, todos eles passam. Isto indica que já é hora de ir para o item 5 do ciclo TDD e refatorar. Ao comparar o Código \ref{code:tdd_code2} com o Código \ref{code:tdd_code3}, pode-se perceber como o Código \ref{code:tdd_code3} está mais simples e claro e que ao rodar os testes, estes passam mostrando que o comportamento do método não mudou.
+Executando os testes novamente, todos eles passam. Isto indica que já é hora de ir para o item 5 do ciclo TDD e refatorar. Ao comparar o Código \ref{code:tdd_code2} com sua versão refatorada, apresentada no Código \ref{code:tdd_code3}, pode-se perceber como a segunda está mais simples e clara e que ao rodar os testes, estes passam mostrando que o comportamento do método não mudou.
 
 \begin{mycode}{ruby}%
 {Código do método Project\#tasks\_by\_position (versão 3)}{code:tdd_code3}
@@ -165,7 +165,7 @@ def tasks_by_position position
 end
 \end{mycode}
 
-\citeonline{TDDAntiPatterns} descreve vários anti-padrões do TDD e sua leitura é fortemente recomendada.
+Com isso, o ciclo TDD o desenvolvimento da funcionalidade é terminado, produzindo um código legível, limpo e bem coberto por testes.
 
 \subsection{Design emergente} % (fold)
 \label{sub:design_emergente}
@@ -175,10 +175,10 @@ No contexto em que TDD costuma ser aplicado – em processos ágeis, com um cicl
 TDD é considerado uma técnica essencial para o \textit{design} emergente porque
 quando se está escrevendo um teste anteriormente ao código, o programador contempla e decide não apenas a interface do software (i.e. nomes de classes/métodos, parâmetros, tipos de retorno, lançamento de exceções), mas também o comportamento do software (i.e. resultados esperados para determinadas entradas) \cite{JanzenTDD}.
 
-Em seu estudo \cite{DammTDD} notou que (tradução do autor):
+Em seu estudo \cite{DammTDD} notou que:
 
 \begin{citacao}
-Test-Driven Development faz com que as pessoas pensem mais no design em vez de se codificar precipitadamente sem saber o que implementa ainda.
+Test-Driven Development faz com que as pessoas pensem mais no design em vez de se codificar precipitadamente sem saber o que implementa ainda. (tradução do autor)
 \end{citacao}
 
 \textbf{TODO: dar um exemplo do kanban (ver histórico de commits no github) e PROCURAR REFERÊNCIAS SOBRE ISSO}
@@ -188,29 +188,29 @@ Test-Driven Development faz com que as pessoas pensem mais no design em vez de s
 \subsection{Usar TDD sempre?} % (fold)
 \label{sec:usar_tdd_sempre}
 
-Existe um debate sobre a não utilização do TDD em qualquer situação. É dito sobre a \textbf{não} utilização pois o autor desconhece qualquer literatura dizendo que TDD deve ser utilizado em qualquer situação. Na realidade, o que existe é um mal entendido na comunidade sobre o que que alguns ``Agile Experts"\ dizem.
+Existe um debate sobre a não utilização do TDD em qualquer situação. É dito ``sobre a \textbf{não} utilização"\ pois o autor desconhece qualquer literatura dizendo que TDD deve ser utilizado sempre e em qualquer situação. Na realidade, o que existe é um mal entendido na comunidade sobre o que que alguns ``Agile Experts"\ dizem.
 
-\citeonline{CleanCode}, considerado um ``Agile Expert", define As Três Leis do TDD, onde a primeira delas é: ``Você não pode escrever código de produção até que você tenha escrito um teste de unidade com falha.". O que que parece é que fecha-se os olhos para a parte ``de produção", distorcendo completamente seu sentido.
+\citeonline{CleanCode}, considerado um ``Agile Expert", define As Três Leis do TDD, onde a primeira delas é: ``Você não pode escrever código de produção até que você tenha escrito um teste de unidade com falha.". O que parece é que fecha-se os olhos para o trecho ``de produção", distorcendo completamente seu sentido.
 
-\citeonline{TDDGiveMeABreak} questiona a posição do que ele chama de ``Agile Testing Experts" (tradução do autor):
+\citeonline{TDDGiveMeABreak} questiona a posição do que ele chama de ``Agile Testing Experts":
 
 \begin{citacao}
 Exigir que você sempre deve escrever os testes primeiro? Dá um tempo. Isso é idiotice em fase de projeto, de hacking, ou de descobertas.
 
 Fazer com que testar seja uma parte central do processo porque eles são úteis para os desenvolvedores? Muito bom. Ditar um fluxo de trabalho para os desenvolvedores que funciona em alguns casos como O Único Caminho Verdadeiro: ridículo.
 
-Testar é ajudar os desenvolvedores, e deve-se reconhecer que o teste automatizado são para benefício dos desenvolvedores, ao invés de \textit{cargo-culting}\footnote{O termo cargo-culting é utilizando quando um programador não qualificados ou iniciante (ou não experiência com o problema em mãos) copia um código de um lugar e colá-o em outro, com pouco ou nenhum entendimento de como o código funciona, ou se é realmente exigido na sua nova posição \cite{CargoCulting}.} um fluxo de trabalho e decretando que ``um tamanho de sapato serve para todos os tipos de pés".
+Testar é ajudar os desenvolvedores, e deve-se reconhecer que o teste automatizado são para benefício dos desenvolvedores, ao invés de \textit{cargo-culting}\footnote{O termo cargo-culting é utilizando quando um programador não qualificados ou iniciante (ou não experiência com o problema em mãos) copia um código de um lugar e colá-o em outro, com pouco ou nenhum entendimento de como o código funciona, ou se é realmente exigido na sua nova posição \cite{CargoCulting}.} um fluxo de trabalho e decretando que ``um tamanho de sapato serve para todos os tipos de pés". (tradução do autor)
 \end{citacao}
 
-Já \citeonline{ChromaticTDD} é um pouco mais moderado e diz (tradução do autor):
+Já \citeonline{ChromaticTDD} é um pouco mais moderado e diz:
 
 \begin{citacao}
-Se eu nunca usei a API antes, TDD pode não ser adequado. Se eu nunca vou usar o código novamente, TDD pode não ser adequado. Se leva mais tempo para escrever os testes (Nove linhas de código no programa final? Provavelmente não vale a pena agora.) do que para escrever e executar o código, TDD pode não ser adequado.
+Se eu nunca usei a API antes, TDD pode não ser adequado. Se eu nunca vou usar o código novamente, TDD pode não ser adequado. Se leva mais tempo para escrever os testes (Nove linhas de código no programa final? Provavelmente não vale a pena agora.) do que para escrever e executar o código, TDD pode não ser adequado. (tradução do autor)
 \end{citacao}
 
-Nos dois únicos casos em que ocorreu um \textit{bug} no kanban-roots em produção, ao analisar o código em busca da solução foi encontrado um comentário ``TODO: test it!"\ nos métodos onde os \textit{bugs} ocorreram. Atualmente, existem 13 comentários como esse espalhados no código do kanban-roots. Isso, de certa forma, comprava que caso os testes não sejam escritos antes, para um código que irá entrar em produção, escrevê-lo depois acaba sendo um fardo, e isso é ignorado até que um problema ocorra.
+Introduzindo o kanban-roots na discussão, nos dois únicos casos em que ocorreu um \textit{bug} em produção, ao ser feita uma analise no código em busca da solução, foi encontrado um comentário ``TODO: test it!"\ nos métodos onde os \textit{bugs} ocorreram. Atualmente, existem 13 comentários como esse espalhados no código do kanban-roots. Isso, de certa forma, comprava que caso os testes não sejam escritos antes, para um código que irá entrar em produção, escrevê-lo depois acaba sendo um fardo, e isso é ignorado até que um problema ocorra.
 
-Um exemplo para esta situação é apresentado no código \ref{code:gravatar} que implementa a captura da foto do usuário no kanban-roots. Esta imagem é capturada de um serviço, externo à aplicação, chamado Gravatar\footnote{Serviço que permite a associação de um avatar (imagem) à uma endereço de email. Mais informações em \url{http://gravatar.com}}. Este foi um típico caso onde um experimento foi para produção, sem testes e com o agravante de envolver um serviço externo. Isso porque, apesar de não ser uma boa prática, o Gravatar modificar sua API. Além disso o Gravatar pode estar indisponível. Não existe nenhum teste para esse método e, principalmente, um teste de integração, que é indispensável nesse caso, foi totalmente negligenciado.
+Um exemplo para esta situação é apresentado no código \ref{code:gravatar} que implementa a captura da foto do usuário no kanban-roots. Esta imagem é capturada de um serviço, externo à aplicação, chamado Gravatar\footnote{Serviço que permite a associação de um avatar (imagem) à uma endereço de email. Mais informações em \url{http://gravatar.com}}. Este foi um típico caso onde um experimento foi para produção, sem testes e com o agravante de envolver um serviço externo. Isso porque, apesar de não ser uma boa prática, o Gravatar modificar sua API. Além disso, o Gravatar pode estar indisponível. Não existe nenhum teste para esse método e, principalmente, um teste de integração, que é indispensável nesse caso, foi totalmente negligenciado.
 
 \begin{mycode}{ruby}%
 {Código do método que recupera a imagem do Gravatar}{code:gravatar}
@@ -234,7 +234,7 @@ def gravatar_image_tag(user, options={})
 end
 \end{mycode}
 
-\citeonline{LegacyCode} define que \textbf{código legado é código sem testes}. Esta afirmação, que pode parecer extremada, é simplesmente a constatação de que, sem uma ampla cobertura de testes automatizados, e uma vez que é economicamente inviável a aplicação manual de todos os casos de teste - ou mesmo de parte deles - de um software a cada modificação, é muito difícil ter uma margem razoável de segurança de que uma modificação não irá introduzir \textit{bugs} no software. Deste modo, para um código ``que irá para produção"\ a utilização do TDD é essencial, pois do contrário, se está criando código legado. É importante lembrar que o código legado com o tempo vai minando a manutenibilidade do sistema e assim, elevando os custos de introdução de novas funcionalidade e evolução do mesmo.
+\citeonline{LegacyCode} define que \textbf{código legado é código sem testes}. Esta afirmação, que pode parecer extremada, é simplesmente a constatação de que, sem uma ampla cobertura de testes automatizados, e uma vez que é economicamente inviável a aplicação manual de todos os casos de teste – ou mesmo de parte deles – de um software a cada modificação, é muito difícil ter uma margem razoável de segurança de que uma modificação não irá introduzir \textit{bugs} no software. Deste modo, para um código ``que irá para produção"\ a utilização do TDD é essencial, pois do contrário, se está criando código legado. É importante lembrar que o código legado com o tempo vai minando a manutenibilidade do sistema e assim, elevando os custos de introdução de novas funcionalidade e evolução do mesmo.
 
 O autor considera que somente para casos em que um código é apenas prova de conceito ou experimento, e que será eliminado, a utilização da técnica não é invariavelmente necessária. Contudo, a utilização de TDD nesses cenários pode ser muito interessante, pois como dito anteriormente, para a escrita dos testes, é preciso entender bem o problema a ser resolvido, fazendo o desenvolvedor se preparar mais para o que ele ainda não conhece muito bem.
 
@@ -564,10 +564,10 @@ Já para projetos grandes, nos quais a \textit{suite} de testes é extensa, 25\%
 
 Em uma equipe com vários desenvolvedores, todos trabalhando na elaboração de um mesmo sistema, existe o problema de unificar as diversas alterações feitas na base de código, assegurando que a base continua consistente \cite{ImproveitCI}. Para resolver esse problema, entra em cena a Integração Contínua (IC), que além disso, tem como ponto chave dar um feedback rápido quando a base de código não está consistente.
 
-\cite{FowlerCI} definiu a IC da seguinte maneira (tradução do autor):
+\cite{FowlerCI} definiu a IC da seguinte maneira:
 
 \begin{citacao}
-Integração Contínua é uma prática de desenvolvimento de software onde os membros de um time integram seu trabalho frequentemente, geralmente cada pessoa integra ao menos uma vez ao dia – podendo haver múltiplas integrações por dia. Cada integração é verificada por um \textit{build} automatizado (incluindo testes) para detectar erros de integração o mais rápido possível. Muitos times acham que essa abordagem leva a uma significante redução nos problemas de integração e permite que um time desenvolva software coeso mais rapidamente.
+Integração Contínua é uma prática de desenvolvimento de software onde os membros de um time integram seu trabalho frequentemente, geralmente cada pessoa integra ao menos uma vez ao dia – podendo haver múltiplas integrações por dia. Cada integração é verificada por um \textit{build} automatizado (incluindo testes) para detectar erros de integração o mais rápido possível. Muitos times acham que essa abordagem leva a uma significante redução nos problemas de integração e permite que um time desenvolva software coeso mais rapidamente. (tradução do autor)
 \end{citacao}
 
 Para assegurar o rápido feedback, o tempo de execução da \textit{build} deve ser o menor possível, tentando manter sempre menor do que dez minutos \cite{FowlerCI}.
