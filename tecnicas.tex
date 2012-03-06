@@ -301,10 +301,10 @@ Criado em 2006 \cite{IntroducingBDD}, \textit{Behaviour-Driven Development} (Des
 
 O BDD é uma evolução do TDD. A grande diferença entre os dois é que TDD não abrange a validação do software, ou seja, se o software atende os requisitos. Isso muda tudo, pois em BDD, a ênfase está no comportamento, e não na estrutura. Ao invés de focar em classes e métodos ao escrever os testes, o foco é no comportamento que gera valor para o sistema. Além disso, o pensamento não é voltado à verificação, mas sim no comportamento, em validar que o software faz sem deixar também de verificar se está funcionando como deveria.
 
-Em BDD não são escritos testes, mas sim especificações, chamadas de \textit{specs} (de \textit{specifications}). Pode-se ter a clara diferença comparando o Código \ref{code:tdd_test3} com o Código \ref{code:bdd_spec}, onde palavras chave como \textit{class}, \textit{test} e \textit{assert} dão lugar a \textit{describe}, \textit{it} e \textit{should}, e fica nítido o foco no comportamento, inclusive nas asserções.
+Em BDD não são escritos testes, mas sim especificações, chamadas de \textit{specs} (de \textit{specifications}). Pode-se ter a clara diferença entre testes (TDD) e specs (BDD) comparando o Código \ref{code:tdd_test3} com o Código \ref{code:bdd_spec}, onde palavras chave como \textit{class}, \textit{test} e \textit{assert} dão lugar a \textit{describe}, \textit{it} e \textit{should}, ficando nítido o foco no comportamento. Além disso, a substituição do Test::Unit (TDD) pelo Rspec (BDD) também revela grande mudança nas asserções onde os \textit{asserts} dão lugar aos \textit{matchers}, fazendo com que as asserções possam ser lidas quase como uma linguagem natural.
 
 \begin{mycode}{rspec}%
-{Spec}{code:bdd_spec}
+{Exemplo de uma spec}{code:bdd_spec}
 # spec/models/project.rb
 describe Project do
   it "returns all related tasks matching a given position" do
@@ -328,39 +328,45 @@ describe Project do
 end
 \end{mycode}
 
-Em TDD, o nome dos testes é baseado na estrutura do código, e isso pode ter um efeito colateral: criar duplicações. Ao escrever testes como o do Código \ref{code:tdd_test3} \textit{test\_tesks\_by\_position} e o método \textit{tasks\_by\_position} é renomeado, o nome do teste também terá que ser renomeado, o que provavelmente é esquecido. Isso torna os testes confusos e desinformativos \cite{ContinuousTesting}. Como por definição, refatorar é melhorar a estrutura e o design do código sem alterar seu comportamento, nomeando os testes com base no comportamento desejado ao invés da estrutura do código, não apenas torna os testes mais informativos como também torna a refatoração menos custosa \cite{ContinuousTesting}.
+Em TDD, o nome dos testes é baseado na estrutura do código, e isso pode ter um efeito colateral: criar duplicações. Ao escrever testes como o \texttt{test\_tesks\_by\_position} do Código \ref{code:tdd_test3} e o método \texttt{tasks\_by\_position} é renomeado, o nome do teste também terá que ser renomeado, o que provavelmente é esquecido. Isso torna os testes confusos e desinformativos \cite{ContinuousTesting}. Como por definição, refatorar é melhorar a estrutura e o design do código sem alterar seu comportamento, nomeando os testes com base no comportamento desejado ao invés da estrutura do código, não apenas torna os testes mais informativos como também torna a refatoração menos custosa \cite{ContinuousTesting}.
 
 % subsection a_heranca_de_tdd (end)
 
 \subsection{O ciclo BDD}
 \label{sub:o_ciclo_bdd}
 
-O Ciclo BDD, apresentado na Figura \ref{img:ciclo-bdd}, tem dois níveis: unidade e aceitação. O nível aceitação é o nível mais alto, onde são escritos os testes de aceitação. Já o nível unidade é o mesmíssimo ciclo TDD visto anteriormente.
+O Ciclo BDD (também chamado de ciclo \textit{outside-in}\footnote{O ciclo recebe este nome devido à sequência que deve ser percorrida, que se inicia dos requisitos e da visão do cliente (\textit{outside}) até as entranhas dos artefatos de software (\textit{in}) \cite{BDDRodrigo}.}), apresentado na Figura \ref{img:ciclo-bdd}, tem dois níveis: unidade e aceitação. O nível aceitação é o nível mais alto, onde são escritos os testes de aceitação. Já o nível unidade é o mesmíssimo \hyperref[ssub:ciclo_tdd]{ciclo TDD} visto anteriormente. Este ciclo pode ser explicado na seguinte série de passos:
 
 \begin{enumerate}
-\item \textbf{Adicionar um teste de aceitação}
+\item \textbf{Adicionar um teste de aceitação com foco em um cenário}
 
-Cada ciclo se inicia com a criação de um teste de aceitação, um cenário, que descreve um determinado comportamento de uma funcionalidade do sistema.
+Cada ciclo se inicia com a criação de um teste de aceitação, tendo como foco um cenário que descreve um determinado comportamento de uma funcionalidade do sistema. Para fazer um paralelo com os métodos tradicionais de desenvolvimento de software, pode-se ver os cenários como casos de uso.
+
+\citeonline{BDDRodrigo} faz uma definição bem precisa sobre como, em BDD, o foco do desenvolvedor deve estar em um único cenário por vez, e os benefícios dessa abordagem:
+
+\begin{citacao}
+Na terminologia de BDD, um cenário é um exemplo de utilização de uma dada funcionalidade. Uma funcionalidade é algo que o software deve oferecer e que possui um valor bem definido para o cliente. Em BDD, o foco dos desenvolvedores deve estar sempre direcionado à um único cenário de uma única funcionalidade por vez. Isto elimina dispersões e mantém o desenvolvedor concentrado na tarefa a ser realizada. Um desenvolvedor utilizando BDD deve encarar um novo cenário como se todos os requisitos do software fossem apenas os cenários já implementados e o atual, ou seja, não se preocupará, no momento, com as próximas funcionalidades ou cenários. Isto é importante para evitar generalizações baseadas em especulações a respeito do que o software possa eventualmente necessitar no futuro, o que aumenta a complexidade do \textit{design} sem qualquer garantia de que será realmente útil.
+\end{citacao}
 
 \item \textbf{Executar todos os testes e ver se algum falha}
 
-Todos os testes devem ser executados e o novo teste deve falhar pela razão esperada: a funcionalidade não foi desenvolvida. Isto aumenta a confiança que se está testando a coisa certa.
+Assim como no \hyperref[ssub:ciclo_tdd]{ciclo TDD}, todos os testes devem ser executados e o novo teste deve falhar pela razão pois a funcionalidade ainda não foi desenvolvida.
 
 \item \textbf{Descer de nível}
 
-Neste momento, deve-se descer de nível, saindo do nível de aceitação e indo para  nível de unidade.
+Neste momento, deve-se descer de nível, saindo do nível de aceitação e indo para nível de unidade.
 
 \item \textbf{Entra no ciclo TDD}
 
-No nível de unidade, entra-se o ciclo TDD até que todos os testes de unidade estejam passando.
+No nível de unidade, entra-se o \hyperref[ssub:ciclo_tdd]{ciclo TDD} até que todos os testes de unidade estejam passando.
 
 \item \textbf{Retornar para o nível de aceitação}
 
-Com todos os testes de unidade passando, retorna-se para o nível de aceitação e faz-se todos os testes passarem.
+Com todos os testes de unidade passando, retorna-se para o nível de aceitação e faz-se todos os testes deste nível passarem.
 
 \item \textbf{Refatorar}
 
-Refatora-se o código.
+Neste passo, é feita a refatoração do código, da mesma maneira como é feita no \hyperref[ssub:ciclo_tdd]{ciclo TDD}.
 
 \end{enumerate}
 
@@ -376,7 +382,7 @@ Refatora-se o código.
 \subsection{Modelos de escrita dos testes de aceitação}
 \label{sub:modelos_de_escrita_dos_testes_de_aceitacao}
 
-Existem duas maneiras de se escrever os testes de aceitação: em texto plano e em código puro. Para exemplificar cada um das abordagens, será especificada a seguinte funcionalidade:
+Existem duas maneiras de se escrever os testes de aceitação: em texto plano e em código puro. Para exemplificar cada uma das abordagens, será especificada a seguinte funcionalidade:
 
 \begin{quote}
 \textit{Os comentários mostrados na página de tarefas devem ser renderizados utilizando a linguagem de marcação Markdown.}
@@ -385,9 +391,9 @@ Existem duas maneiras de se escrever os testes de aceitação: em texto plano e 
 \subsubsection{Escrita em texto plano} % (fold)
 \label{subsub:escrita_em_texto_plano}
 
-Uma das maneiras de escrever testes de aceitação é como texto plano, ou seja, inglês, português e etc. Nas ferramentas que implementam esta abordagem, os testes são escritos baseados em \textit{steps} (passos), onde cada step é mapeado para um código real.
+Uma das maneiras de escrever testes de aceitação é como texto plano, em uma linguagem natural, ou seja, inglês, português e etc. Nas ferramentas que implementam esta abordagem, os testes são escritos baseados em \textit{steps} (passos), onde cada step é mapeado para um código real.
 
-No código \ref{code:bdd_cucumber_spec}, é utilizado o \textit{cucumber} para fazer a especificação. Como pode-se ver, o teste é escrito em linguagem que qualquer pessoa, mesmo sem nenhum conhecimento em programação, pode ler e validar.
+No Código \ref{code:bdd_cucumber_spec}, é utilizado o \textit{Cucumber} para fazer a especificação. Como pode-se ver, o teste é escrito em linguagem que qualquer pessoa, mesmo sem nenhum conhecimento em programação, pode ler e validar.
 
 \begin{mycode}{cucumber}%
 {Especificação em texto plano}{code:bdd_cucumber_spec}
@@ -408,9 +414,9 @@ Feature: Render comments with Markdown syntax
     And I should see "link" in an "a" tag
 \end{mycode}
 
-Para cada \textit{step} existe uma implementação, ou seja, sua definição, chamada de \textit{step definition}. Pode-se pensar nos \textit{steps} como chamadas à métodos, e assim, os \textit{step definitions} serão as definição desse métodos. Os \textit{step definitions} para os \textit{steps} do código \ref{code:bdd_cucumber_spec} são apresentado no código \ref{code:step_definition}.
+Para cada \textit{step} existe uma implementação, ou seja, sua definição, chamada de \textit{step definition}. Pode-se pensar nos \textit{steps} como chamadas à métodos, e assim, os \textit{step definitions} serão as definição desse métodos. Deste modo, ao rodar os testes, o arquivo de teste é parseado e os \textit{steps} são executados.
 
-Como durante o desenvolvimento são escritos muitos \textit{step definitions}, com o intuito de organizá-los, eles são separados por contexto em arquivos diferentes.
+Os \textit{step definitions} para os \textit{steps} do Código \ref{code:bdd_cucumber_spec} são apresentado no Código \ref{code:step_definition}. Como durante o desenvolvimento são escritos muitos \textit{step definitions}, com o intuito de organizá-los, eles são separados por contexto em diferentes arquivos.
 
 \begin{mycode}{ruby}%
 {Step definitions}{code:step_definition}
@@ -470,10 +476,10 @@ end
 
 A outra maneira de escrever os testes de aceitação é com código puro. Nesta forma, todo o código dos testes está concentrado em apenas um lugar, utilizando somente código para escrever os testes.
 
-No código \ref{code:bdd_spec1} pode-se ver a especificação em código puro para a funcionalidade.
+No Código \ref{code:bdd_spec1} pode-se ver a especificação em código puro para a funcionalidade.
 
 \begin{mycode}{rspec}%
-{Especificação}{code:bdd_spec1}
+{Especificação em código puro}{code:bdd_spec1}
 # spec/acceptance/comments_spec.rb
 feature "Render comments with Markdown syntax" do
   background do
@@ -495,7 +501,7 @@ end
 
 % subsubsection Escrita em codigo puro (end)
 
-BDD vem se tornando um consenso em automação de testes. Contudo, existem uma divergência grande sobre a forma de escrita dos testes de aceitação entre escrita em código puro e escrita em texto plano.
+BDD vem se tornando um consenso em automação de testes. Contudo, existem uma divergência grande sobre a forma de escrita dos testes de aceitação entre escrita em código puro e escrita em texto plano, tendo alguns pontos a serem considerados.
 
 \subsubsection{Legibilidade} % (fold)
 \label{subsub:legibilidade}
@@ -506,9 +512,9 @@ Em uma situação onde se está desenvolvendo uma aplicação para um cliente, e
 
 O cliente é especialista em problemas e os desenvolvedores em dar soluções. Se o cliente escreve a especificação, na realidade ele está escrevendo parte da solução \cite{SteakOverCucumber}. No caso da funcionalidade exemplificada anteriormente, o cliente apenas sabe que os ``comentários devem ser renderizados com markdown", ele não quer saber se para isso deve entrar em determinada página, preencher determinado campo e clicar em determinado botão. O cliente apenas sabe a funcionalidade que ele quer, e vê-la funcionando.
 
-Dessa forma, o cliente não quer ler a especificação como no código \ref{code:bdd_cucumber_spec}, nem validá-la, muito menos escrevê-la. Ele quer ler somente ``Render comments with Markdown syntax", mais do que isso é superficial \cite{WhyBotherWithCucumberTesting}; ele quer validar vendo funcionar e não quer escrever absolutamente nada.
+Dessa forma, o cliente não quer ler a especificação como no Código \ref{code:bdd_cucumber_spec}, nem validá-la, muito menos escrevê-la. Ele quer ler somente ``Render comments with Markdown syntax", mais do que isso é superficial \cite{WhyBotherWithCucumberTesting}; ele quer validar vendo funcionar e não quer escrever absolutamente nada.
 
-Já em um contexto, como a do desenvolvimento do kanban-roots, no qual não existem um cliente, onde as pessoas que escrevem e leem as especificações são desenvolvedores, fica mais claro que a escrita em texto plano não tem valor. O código é uma linguagem natural para desenvolvedores, ainda mais quando é escrito em conjunto com DSLs\footnote{\textit{Domain specific language} (linguagem específica de domínio) é uma linguagem de programação de expressividade limitada, focada num domínio particular.} como a do Rspec \cite{SteakOverCucumber}.
+Já em um contexto, como o do desenvolvimento do kanban-roots, no qual não existe um cliente, onde as pessoas que escrevem e leem as especificações são desenvolvedores, a escrita em texto plano tem um valor ainda menor. O código é uma linguagem natural para desenvolvedores, ainda mais quando é escrito em conjunto com DSLs\footnote{\textit{Domain specific language} (linguagem específica de domínio) é uma linguagem de programação de expressividade limitada, focada num domínio particular.} como a do Rspec \cite{SteakOverCucumber}.
 
 % subsubsection legibilidade (end)
 
@@ -549,9 +555,11 @@ Analisando estes resultados pode-se concluir que os testes em código puro execu
 \subsubsection{Conclusões} % (fold)
 \label{subsub:conclusoes_bdd}
 
-Na opinião do autor, os testes escritos em texto plano em um primeiro momento são muito atraentes, pois, com a facilidade de leitura, a possibilidade de validação de testes executáveis pelo cliente se tornam reais. No entanto, como apresentado anteriormente, na realidade este benefício não é obtido em situações onde existe a relação com o cliente. Isto é ainda mais acentuado em projetos como o kanban-roots onde não existe cliente em si, tornando totalmente irrelevante os possíveis benefícios da escrita de testes em texto plano.
+Na opinião do autor, os testes escritos em texto plano em um primeiro momento são muito atraentes, pois, com a facilidade de leitura, a possibilidade de validação de testes executáveis pelo cliente se tornam reais. No entanto, como apresentado anteriormente, na realidade é pouquíssimo provável que o cliente irá validar estes testes. Isto é ainda mais acentuado em projetos como o kanban-roots onde não existe cliente em si, tornando totalmente irrelevante os possíveis benefícios da escrita de testes em texto plano.
 
-Já para projetos grandes, nos quais a \textit{suite} de testes é extensa, 25\% a mais no tempo de execução dos testes é um preço alto a ser pago, pois os testes devem ser executados diversas vezes ao dia. Se o tempo necessário para executar a \textit{suite} de testes se tornar demasiadamente longo, o desenvolvedor tende a rodar os testes menos vezes, diminuindo, assim, a eficácia da aplicação de BDD. Além disso, a escrita de testes em texto plano prejudica a produtividade, pois é adicionada complexidade ao processo, devido à camada adicional, fazendo com que a produtividade seja reduzida.
+Já para projetos grandes, nos quais a \textit{suite} de testes é extensa, 25\% a mais no tempo de execução dos testes é um preço alto a ser pago, pois os testes devem ser executados diversas vezes ao dia. Se o tempo necessário para executar a \textit{suite} de testes se tornar demasiadamente longo, o desenvolvedor tende a rodar os testes menos vezes, diminuindo, assim, a eficácia da aplicação do BDD. Além disso, a escrita de testes em texto plano prejudica a produtividade, pois é adicionada complexidade ao processo, devido à camada adicional, fazendo com que a produtividade seja reduzida.
+
+Apesar dos pontos negativos, os testes em texto plano podem ter valia em situações onde o desenvolvedor tem grandes dificuldades em entender o que o cliente quer ou entender o um determinado processo realizado pelo cliente. Desta forma, o teste em texto plano pode servir como um facilitador na comunicação. Assim, sentados lado a lado, o cliente vai dizendo ao desenvolvedor qual é o fluxo, e o desenvolvedor por sua vez, vai mapeando para o teste. Como ambos conseguem ler e entender o que está sendo escrito, a discussão e entendimento do problema é facilitada.
 
 % subsubsection conclusoes_bdd (end)
 
