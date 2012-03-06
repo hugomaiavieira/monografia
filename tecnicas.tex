@@ -1,7 +1,7 @@
 \chapter{Técnicas}
 
 \section{Test-Driven Development (TDD)}
-\label{sub:tdd}
+\label{sec:tdd}
 ``Apenas escrever código para corrigir um teste falhando". Segundo \citeonline{TestDrivenKoskela}, isto é \textit{Test-Driven Development} (Desenvolvimento guiado por testes) \cite{TDDbyExample} em apenas uma sentença.
 
 O TDD é uma técnica onde o desenvolvimento do software é guiado por \textbf{testes automatizados}, que são escritos antes de qualquer linha de código relativo a funcionalidades. Primeiro escreve-se um teste, depois escreve-se o código para passar neste teste. Em seguida, o código é refatorado para encontrar um design melhor, contando sempre com os testes existentes para que não sejam introduzidas falhas em outras partes do sistema.
@@ -62,15 +62,15 @@ A figura \ref{img:ciclo-tdd} resume o ciclo TDD de forma bem clara.
 \subsection{TDD na prática}
 \label{ssub:tdd_na_pratica}
 
-Vejamos agora como isso se dá na prática através de um exemplo retirado do código do kanban-roots.
+Neste subtópico será apresentada como a utilização do TDD se dá na prática, utilizando exemplos reais implementados durante do desenvolvimento do kanban-roots.
 
 A seguinte funcionalidade precisa ser implementada:
 
 \begin{quote}
-\textit{Precisa-se saber todas as tarefas em uma determinada posição do kanban de um projeto.}
+\textit{Precisa-se saber todas as tarefas em uma determinada posição do kanban (quadro) de um projeto.}
 \end{quote}
 
-A primeira coisa a ser feita é o teste para o caso mais simples: quando o projeto não tem tarefa alguma naquela determinada posição.
+A primeira coisa a ser feita é o teste para o caso mais simples: quando o projeto não tem tarefa alguma naquela determinada posição do kanban.
 
 Desta forma, o teste para o caso mais simples pode ser como mostrado no código \ref{code:tdd_test1}.
 
