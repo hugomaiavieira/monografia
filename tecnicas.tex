@@ -8,6 +8,12 @@ O TDD é uma técnica onde o desenvolvimento do software é guiado por \textbf{t
 
 Esta abordagem encoraja bom design \cite{GrowingOOByTests}, produz código testável e mantém longe a sobre-engenharia por conta de falsas suposições, pois, nos testes, é especificado o que é desejado e escreve-se o código para fazer apenas aquilo que realmente é necessário. \cite{TestDrivenKoskela, TDDbyExample, EmpiricalTDD}
 
+\citeonline{EmergentDesign} coloca de maneira interessante a relação entre o entendimento do problema e o fluxo natural do TDD:
+
+\begin{citacao}
+Tentar escrever um teste é uma boa maneira de testar a si mesmo sobre seu conhecimento sobre como a classe deverá funcionar antes de você escrevê-la. Esta é uma boa sequência: tenha certeza de que você entende o que você irá tentar fazer antes de você realmente tentar fazer. De fato, colocando dessa maneira parece muito mais natural considerar os testes como Primeira Tarefa e criar o código como Segunda Tarefa. (tradução do autor)
+\end{citacao}
+
 Mas TDD é uma técnica emergente? Não e sim.
 
 O TDD vem sendo utilizado esporadicamente há anos, contudo, não existia um nome para identificar essa forma de desenvolver software. Atualmente, esta técnica tem uma definição, um nome e começa a ganhar força, sendo utilizada em times de grandes empresas como Google, Yahoo, Microsoft e IBM \cite{EmpiricalTDD}.
@@ -172,14 +178,12 @@ Com isso, o ciclo TDD o desenvolvimento da funcionalidade é terminado, produzin
 
 No contexto em que TDD costuma ser aplicado – em processos ágeis, com um ciclo de vida iterativo-incremental – não é realizado um amplo \textit{design} prévio. Sendo assim, o \textit{design} evolui incrementalmente. Sabendo disso, uma característica extremamente importante do TDD é a facilitação ao \textit{design} emergente, que muitos consideram ser sua a principal característica.
 
-TDD é considerado uma técnica essencial para o \textit{design} emergente porque
+TDD é considerada uma técnica essencial para o \textit{design} emergente porque
 quando se está escrevendo um teste anteriormente ao código, o programador contempla e decide não apenas a interface do software (i.e. nomes de classes/métodos, parâmetros, tipos de retorno, lançamento de exceções), mas também o comportamento do software (i.e. resultados esperados para determinadas entradas) \cite{JanzenTDD}.
 
-Em seu estudo \cite{DammTDD} notou que:
+Além disso, \citeonline{EmergentDesign} constata que o ponto de vista do teste pode passar informações sobre o design, porque o teste de uma classe funciona como o primeiro cliente da classe. Com isso, a interface que o teste sugere é uma interface dirigida ao cliente, sendo assim, geralmente é mais estável.
 
-\begin{citacao}
-Test-Driven Development faz com que as pessoas pensem mais no design em vez de se codificar precipitadamente sem saber o que implementa ainda. (tradução do autor)
-\end{citacao}
+\citeonline{DammTDD} também afirmam que o TDD faz com que as pessoas pensem mais no design em vez de se codificar precipitadamente sem saber o que implementa ainda.
 
 \textbf{TODO: dar um exemplo do kanban (ver histórico de commits no github) e PROCURAR REFERÊNCIAS SOBRE ISSO}
 
