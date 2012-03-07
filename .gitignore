@@ -8,3 +8,8 @@
 *.lol
 *.lof
 *.pyg
+
+# sublime files
+*.lot
+*.sublime-project
+*.sublime-workspace
