@@ -300,10 +300,12 @@ Durante o desenvolvimento do kanban-roots não foi realizado nenhum experimento 
 
 Criado em 2006 \cite{IntroducingBDD}, \textit{Behaviour-Driven Development} (Desenvolvimento guiado por comportamento) é uma técnica de desenvolvimento de software cuja amplitude se estende às atividades de design, documentação, validação e verificação, tratando-as de modo unificado \cite{BDDRodrigo}.
 
+O Principal objetivo do BDD é ter especificações (também consideradas documentações) executáveis do sistema. Tudo que foi dito anteriormente sobre TDD vale também para BDD, mas em BDD os testes são escritos de forma mais clara e são mais facilmente lidos, pois BDD provê uma \textit{ubiquitous language} baseada no domínio do problema. Com isso, o vocabulário do problema (negócios) permeia diretamente para o código \cite{IntroducingBDD}.
+
 \subsection{A herança de TDD}
 \label{sub:a_heranca_de_tdd}
 
-O BDD é uma evolução do TDD. A grande diferença entre os dois é que TDD não abrange a validação do software, ou seja, se o software atende os requisitos. Isso muda tudo, pois em BDD, a ênfase está no comportamento, e não na estrutura. Ao invés de focar em classes e métodos ao escrever os testes, o foco é no comportamento que gera valor para o sistema. Além disso, o pensamento não é voltado à verificação, mas sim no comportamento, em validar que o software faz sem deixar também de verificar se está funcionando como deveria.
+Como dito a pouco, BDD é uma evolução do TDD. A grande diferença entre os dois é que TDD não abrange a validação do software, ou seja, se o software atende os requisitos. Isso muda tudo, pois em BDD, a ênfase está no comportamento, e não na estrutura. Ao invés de focar em classes e métodos ao escrever os testes, o foco é no comportamento que gera valor para o sistema. Além disso, o pensamento não é voltado à verificação, mas sim no comportamento, em validar que o software faz sem deixar também de verificar se está funcionando como deveria.
 
 Em BDD não são escritos testes, mas sim especificações, chamadas de \textit{specs} (de \textit{specifications}). Pode-se ter a clara diferença entre testes (TDD) e specs (BDD) comparando o Código \ref{code:tdd_test3} com o Código \ref{code:bdd_spec}, onde palavras chave como \textit{class}, \textit{test} e \textit{assert} dão lugar a \textit{describe}, \textit{it} e \textit{should}, ficando nítido o foco no comportamento. Além disso, a substituição do Test::Unit (TDD) pelo Rspec (BDD) também revela grande mudança nas asserções onde os \textit{asserts} dão lugar aos \textit{matchers}, fazendo com que as asserções possam ser lidas quase como uma linguagem natural.
 
@@ -398,7 +400,7 @@ Neste passo, é feita a refatoração do código, da mesma maneira como é feita
 \subsection{Modelos de escrita dos testes de aceitação}
 \label{sub:modelos_de_escrita_dos_testes_de_aceitacao}
 
-Existem duas maneiras de se escrever os testes de aceitação: em texto plano e em código puro. Para exemplificar cada uma das abordagens, será especificada a seguinte funcionalidade:
+Existem duas maneiras principais de se escrever os testes de aceitação: em texto plano e em código puro. Para exemplificar cada uma das abordagens, será especificada a seguinte funcionalidade:
 
 \begin{quote}
 \textit{Os comentários mostrados na página de tarefas devem ser renderizados utilizando a linguagem de marcação Markdown.}
@@ -407,7 +409,27 @@ Existem duas maneiras de se escrever os testes de aceitação: em texto plano e 
 \subsubsection{Escrita em texto plano} % (fold)
 \label{subsub:escrita_em_texto_plano}
 
-Uma das maneiras de escrever testes de aceitação é como texto plano, em uma linguagem natural, ou seja, inglês, português e etc. Nas ferramentas que implementam esta abordagem, os testes são escritos baseados em \textit{steps} (passos), onde cada step é mapeado para um código real.
+Uma das maneiras de escrever testes de aceitação é como texto plano, em uma linguagem natural, ou seja, inglês, português e etc.
+
+\citeonline{IntroducingBDD} estabelece um \textit{template} para a escrita para este tipo de especificação, sendo este uma captura dos critérios de aceitação de uma história:
+
+\begin{quote}
+\textbf{As a} (Como um) [X]\\
+\textbf{I whant} (Eu quero) [Y]\\
+\textbf{So that} (Para que) [Z]
+\end{quote}
+
+Onde Y é uma funcionalidade, Z é o benefício ou valor da funcionalidade e X é a pessoa (ou regra) que irá se beneficiar desta funcionalidade. O mapeamento feito desta forma é interessante pois se não souber completar Z, isso quer dizer que esta funcionalidade pode não ser tão importante quanto se imaginava.
+
+Para finalizar esse \textit{template}, estes critérios de aceitação da história são quebrados em diferentes cenários que tem a seguinte forma:
+
+\begin{quote}
+\textbf{Given} (Dado) algum contexto inicial\\
+\textbf{When} (Quando) algum evento ocorre\\
+\textbf{Then} (Então) certifique-se de alguns resultados
+\end{quote}
+
+Nas ferramentas que implementam esta abordagem, os testes são escritos baseados em \textit{steps} (passos), onde cada \textit{step} (Given/When/Then) é mapeado para um código real.
 
 No Código \ref{code:bdd_cucumber_spec}, é utilizado o \textit{Cucumber} para fazer a especificação. Como pode-se ver, o teste é escrito em linguagem que qualquer pessoa, mesmo sem nenhum conhecimento em programação, pode ler e validar.
 
@@ -568,8 +590,8 @@ Analisando estes resultados pode-se concluir que os testes em código puro execu
 
 % subsubsection tempo_de_execucao (end)
 
-\subsection{Um novo modelo de escrita} % (fold)
-\label{sub:um_novo_modelo_de_escrita}
+\subsubsection{Um novo modelo de escrita} % (fold)
+\label{ssub:um_novo_modelo_de_escrita}
 
 \citeonline{YankoCapybara} propõe uma nova maneira de escrita de testes de aceitação, sendo esta uma união entre os duas maneiras apresentadas anteriormente. Os testes são escritos em código puro, porém utilizando \textit{steps} semelhantes aos do testes em texto plano. No código \ref{code:rspec_steps} é apresentado o exemplo anterior utilizando este novo modelo\footnote{Para a escrita deste exemplo, foi utilizada uma ferramenta criada por Yanko chamada \textit{Rspec example steps}. Mais em \url{https://github.com/railsware/rspec-example_steps}}.
 
@@ -610,9 +632,9 @@ Esta abordagem busca eliminar os problemas com a camada adicional e tempo de exe
   \label{img:output-novo-modelo}
 \end{figure}
 
-No entanto, esta abordagem cai no mesmo dilema da escrita em texto plano: o cliente não irá ler ou validar esta saída. Além disso, a introdução dos \texttt{When/And/Then} juntamente com o texto, piora muito a legibilidade do código de teste, prejudicando a manutenibilidade da \textit{suite} de testes. Assim, está abordagem, apesar de eliminar a camada adicional, pouco difere da escrita em texto plano, no que diz respeito às desvantagens.
+No entanto, esta abordagem cai no mesmo dilema da escrita em texto plano: o cliente não irá ler ou validar esta saída. Além disso, a introdução dos métodos \texttt{When/And/Then} juntamente com as \textit{strings} e blocos passados como parâmetros, piora muito a legibilidade do código de teste, prejudicando a manutenibilidade da \textit{suite} de testes. Assim, está abordagem, apesar de eliminar a camada adicional, pouco difere da escrita em texto plano, no que diz respeito às desvantagens.
 
-% subsection um_novo_modelo_de_escrita (end)
+% subsubsection um_novo_modelo_de_escrita (end)
 
 \subsubsection{Conclusões} % (fold)
 \label{subsub:conclusoes_bdd}
