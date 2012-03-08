@@ -490,7 +490,7 @@ end
 \subsubsection{Escrita em código puro} % (fold)
 \label{subsub:Escrita em codigo puro}
 
-A outra maneira de escrever os testes de aceitação é com código puro. Nesta forma, todo o código dos testes está concentrado em apenas um lugar, utilizando somente código para escrever os testes.
+A outra maneira de escrever os testes de aceitação é com código puro. Nesta forma, todo o código dos testes (descrição e implementação) está concentrado em apenas um lugar, utilizando somente código para escrever os testes.
 
 No Código \ref{code:bdd_spec1} pode-se ver a especificação em código puro para a funcionalidade.
 
@@ -524,7 +524,7 @@ BDD vem se tornando um consenso em automação de testes. Contudo, existem uma d
 
 Muitos defendem que os testes devem ser escritos em texto plano, por conta do teste ser escrito em linguagem que qualquer pessoa, mesmo sem nenhum conhecimento em programação, pode ler e validar.
 
-Em uma situação onde se está desenvolvendo uma aplicação para um cliente, existe um mito sobre o cliente escrever as especificações, contudo está é uma abordagem utópica \cite{SteakOverCucumber, CucumberForVegetarians, ClientsWritingCucumber}. O cliente pode até ler e validar, mas mesmo assim esta não é uma abordagem muito interessante.
+Em uma situação onde se está desenvolvendo uma aplicação para um cliente, existe um mito sobre o cliente escrever as especificações, contudo está é uma abordagem utópica \cite{SteakOverCucumber, CucumberForVegetarians, ClientsWritingCucumber}. O cliente pode até ler e validar – o que segundo \citeonline{YankoCapybara} nunca acontece – mas mesmo assim esta não é uma abordagem muito interessante.
 
 O cliente é especialista em problemas e os desenvolvedores em dar soluções. Se o cliente escreve a especificação, na realidade ele está escrevendo parte da solução \cite{SteakOverCucumber}. No caso da funcionalidade exemplificada anteriormente, o cliente apenas sabe que os ``comentários devem ser renderizados com markdown", ele não quer saber se para isso deve entrar em determinada página, preencher determinado campo e clicar em determinado botão. O cliente apenas sabe a funcionalidade que ele quer, e vê-la funcionando.
 
@@ -567,6 +567,52 @@ código puro & 0m8.8385s \\
 Analisando estes resultados pode-se concluir que os testes em código puro executam, em média, em um tempo 25\% menor que os em texto plano.
 
 % subsubsection tempo_de_execucao (end)
+
+\subsection{Um novo modelo de escrita} % (fold)
+\label{sub:um_novo_modelo_de_escrita}
+
+\citeonline{YankoCapybara} propõe uma nova maneira de escrita de testes de aceitação, sendo esta uma união entre os duas maneiras apresentadas anteriormente. Os testes são escritos em código puro, porém utilizando \textit{steps} semelhantes aos do testes em texto plano. No código \ref{code:rspec_steps} é apresentado o exemplo anterior utilizando este novo modelo\footnote{Para a escrita deste exemplo, foi utilizada uma ferramenta criada por Yanko chamada \textit{Rspec example steps}. Mais em \url{https://github.com/railsware/rspec-example_steps}}.
+
+\begin{mycode}{rspec}%
+{Especificação mesclando código puro com texto plano}{code:rspec_steps}
+feature "Render comments with Markdown syntax" do
+  background do
+    @owner = Factory.create :contributor
+    @project = Factory.create :project
+    @task = Factory.create :task, :project => @project, :author => @owner
+    login(@owner.email, @owner.password)
+  end
+
+  Steps "Render on tasks page" do
+    When "I am on the task page" do
+      visit project_task_path(@project, @task)
+    end
+    And "I fill in the comment with an text with markdown syntax" do
+      fill_in "comment_content", :with => "# Some content [link](http://exemplo.com)"
+    end
+    And "I press the Comment buttom" do
+      click_button "Comment"
+    end
+    Then "I should see the text rendered as HTML" do
+      page.should have_xpath("//h1", :text => "Some content")
+      page.should have_xpath("//a", :text => "link", :href => "http://exemplo.com")
+    end
+  end
+end
+\end{mycode}
+
+Esta abordagem busca eliminar os problemas com a camada adicional e tempo de execução que a escrita em texto plano têm. Alem disso, busca também aprimorar legibilidade da documentação da escrita em código puro, pois os testes, ao serem executados, produzem uma saída como mostrado na figura \ref{img:output-novo-modelo}
+
+\begin{figure}[h]
+  \center
+  \caption{Saída produzida pela execução dos testes utilizando modelo proposto por Yanko}
+  \includegraphics[scale=0.6]{images/output-novo-modelo}
+  \label{img:output-novo-modelo}
+\end{figure}
+
+No entanto, esta abordagem cai no mesmo dilema da escrita em texto plano: o cliente não irá ler ou validar esta saída. Além disso, a introdução dos \texttt{When/And/Then} juntamente com o texto, piora muito a legibilidade do código de teste, prejudicando a manutenibilidade da \textit{suite} de testes. Assim, está abordagem, apesar de eliminar a camada adicional, pouco difere da escrita em texto plano, no que diz respeito às desvantagens.
+
+% subsection um_novo_modelo_de_escrita (end)
 
 \subsubsection{Conclusões} % (fold)
 \label{subsub:conclusoes_bdd}
