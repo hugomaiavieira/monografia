@@ -1,0 +1,6 @@
+[1](https://github.com/hugomaiavieira/kanban-roots/commit/0097a26d99b675996f44ca32a582d1ca8fe07b6c)
+[2](https://github.com/hugomaiavieira/kanban-roots/commit/00afcaf271693aecf12e7a2732ead65ab48c694a)
+[3](https://github.com/hugomaiavieira/kanban-roots/commit/cc5bb198a81a8499da76b327d81d84ec31d75fda)
+[4](https://github.com/hugomaiavieira/kanban-roots/commit/43d5343c92f0ed3fe2013a7f3846dca4f5a58280)
+[5](https://github.com/hugomaiavieira/kanban-roots/commit/a1c2b86d2e6d706ae1ff3d39ccf5ecef3584d208)
+[6](https://github.com/hugomaiavieira/kanban-roots/commit/a60880d6696f65d0fe1bc68f84f3b71d0c9ecf61)
