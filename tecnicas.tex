@@ -176,7 +176,7 @@ Com isso, o ciclo TDD o desenvolvimento da funcionalidade é terminado, produzin
 \subsection{Design emergente} % (fold)
 \label{sub:design_emergente}
 
-No contexto em que TDD costuma ser aplicado – em processos ágeis, com um ciclo de vida iterativo-incremental – não é realizado um amplo \textit{design} prévio. Sendo assim, o \textit{design} evolui incrementalmente. Sabendo disso, uma característica extremamente importante do TDD é a facilitação ao \textit{design} emergente, que muitos consideram ser sua a principal característica.
+No contexto em que TDD costuma ser aplicado $-$ em processos ágeis, com um ciclo de vida iterativo-incremental $-$ não é realizado um amplo \textit{design} prévio. Sendo assim, o \textit{design} evolui incrementalmente. Sabendo disso, uma característica extremamente importante do TDD é a facilitação ao \textit{design} emergente, que muitos consideram ser sua a principal característica.
 
 TDD é considerada uma técnica essencial para o \textit{design} emergente porque
 quando se está escrevendo um teste anteriormente ao código, o programador contempla e decide não apenas a interface do software (i.e. nomes de classes/métodos, parâmetros, tipos de retorno, lançamento de exceções), mas também o comportamento do software (i.e. resultados esperados para determinadas entradas) \cite{JanzenTDD}.
@@ -238,7 +238,7 @@ def gravatar_image_tag(user, options={})
 end
 \end{mycode}
 
-\citeonline{LegacyCode} define que \textbf{código legado é código sem testes}. Esta afirmação, que pode parecer extremada, é simplesmente a constatação de que, sem uma ampla cobertura de testes automatizados, e uma vez que é economicamente inviável a aplicação manual de todos os casos de teste – ou mesmo de parte deles – de um software a cada modificação, é muito difícil ter uma margem razoável de segurança de que uma modificação não irá introduzir \textit{bugs} no software. Deste modo, para um código ``que irá para produção"\ a utilização do TDD é essencial, pois do contrário, se está criando código legado. É importante lembrar que o código legado com o tempo vai minando a manutenibilidade do sistema e assim, elevando os custos de introdução de novas funcionalidade e evolução do mesmo.
+\citeonline{LegacyCode} define que \textbf{código legado é código sem testes}. Esta afirmação, que pode parecer extremada, é simplesmente a constatação de que, sem uma ampla cobertura de testes automatizados, e uma vez que é economicamente inviável a aplicação manual de todos os casos de teste $-$ ou mesmo de parte deles $-$ de um software a cada modificação, é muito difícil ter uma margem razoável de segurança de que uma modificação não irá introduzir \textit{bugs} no software. Deste modo, para um código ``que irá para produção"\ a utilização do TDD é essencial, pois do contrário, se está criando código legado. É importante lembrar que o código legado com o tempo vai minando a manutenibilidade do sistema e assim, elevando os custos de introdução de novas funcionalidade e evolução do mesmo.
 
 O autor considera que somente para casos em que um código é apenas prova de conceito ou experimento, e que será eliminado, a utilização da técnica não é invariavelmente necessária. Contudo, a utilização de TDD nesses cenários pode ser muito interessante, pois como dito anteriormente, para a escrita dos testes, é preciso entender bem o problema a ser resolvido, fazendo o desenvolvedor se preparar mais para o que ele ainda não conhece muito bem.
 
@@ -546,7 +546,7 @@ BDD vem se tornando um consenso em automação de testes. Contudo, existem uma d
 
 Muitos defendem que os testes devem ser escritos em texto plano, por conta do teste ser escrito em linguagem que qualquer pessoa, mesmo sem nenhum conhecimento em programação, pode ler e validar.
 
-Em uma situação onde se está desenvolvendo uma aplicação para um cliente, existe um mito sobre o cliente escrever as especificações, contudo está é uma abordagem utópica \cite{SteakOverCucumber, CucumberForVegetarians, ClientsWritingCucumber}. O cliente pode até ler e validar – o que segundo \citeonline{YankoCapybara} nunca acontece – mas mesmo assim esta não é uma abordagem muito interessante.
+Em uma situação onde se está desenvolvendo uma aplicação para um cliente, existe um mito sobre o cliente escrever as especificações, contudo está é uma abordagem utópica \cite{SteakOverCucumber, CucumberForVegetarians, ClientsWritingCucumber}. O cliente pode até ler e validar $-$ o que segundo \citeonline{YankoCapybara} nunca acontece $-$ mas mesmo assim esta não é uma abordagem muito interessante.
 
 O cliente é especialista em problemas e os desenvolvedores em dar soluções. Se o cliente escreve a especificação, na realidade ele está escrevendo parte da solução \cite{SteakOverCucumber}. No caso da funcionalidade exemplificada anteriormente, o cliente apenas sabe que os ``comentários devem ser renderizados com markdown", ele não quer saber se para isso deve entrar em determinada página, preencher determinado campo e clicar em determinado botão. O cliente apenas sabe a funcionalidade que ele quer, e vê-la funcionando.
 
@@ -570,7 +570,7 @@ Além disso, é necessário manter um segundo ambiente de testes, já que para e
 
 Outro questionamento é sobre a velocidade para a execução dos testes. Como o \textit{Cucumber} utiliza a \textit{Gherkin}\footnote{\url{http://github.com/cucumber/cucumber/wiki/Gherkin}}, que é uma DSL externa\footnote{Uma DSL que tem sua própria sintaxe e necessita de um \textit{parser} para processá-la \cite{DSLFowler}.}, o arquivo de \textit{features} é parseado para que os \textit{steps} sejam executados, introduzindo um tempo extra na execução dos testes.
 
-Para um conjunto de funcionalidades, foram escritos testes utilizando os ambos modelos de escrita – apresentados no Anexo \ref{cha:codigo_do_comparativo}. Cada conjunto de vinte e dois exemplos foi executado separadamente e seus tempos de execução medidos, sendo os resultados apresentados na tabela \ref{table:tempo_de_execucao}.
+Para um conjunto de funcionalidades, foram escritos testes utilizando os ambos modelos de escrita $-$ apresentados no Anexo \ref{cha:codigo_do_comparativo}. Cada conjunto de vinte e dois exemplos foi executado separadamente e seus tempos de execução medidos, sendo os resultados apresentados na tabela \ref{table:tempo_de_execucao}.
 
 \begin{table}[ht]
 \caption{Velocidade de execução dos testes de acordo com o método de escrita}
@@ -659,7 +659,7 @@ Em uma equipe com vários desenvolvedores, todos trabalhando na elaboração de 
 \cite{FowlerCI} definiu a IC da seguinte maneira:
 
 \begin{citacao}
-Integração Contínua é uma prática de desenvolvimento de software onde os membros de um time integram seu trabalho frequentemente, geralmente cada pessoa integra ao menos uma vez ao dia – podendo haver múltiplas integrações por dia. Cada integração é verificada por um \textit{build} automatizado (incluindo testes) para detectar erros de integração o mais rápido possível. Muitos times acham que essa abordagem leva a uma significante redução nos problemas de integração e permite que um time desenvolva software coeso mais rapidamente. (tradução do autor)
+Integração Contínua é uma prática de desenvolvimento de software onde os membros de um time integram seu trabalho frequentemente, geralmente cada pessoa integra ao menos uma vez ao dia $-$ podendo haver múltiplas integrações por dia. Cada integração é verificada por um \textit{build} automatizado (incluindo testes) para detectar erros de integração o mais rápido possível. Muitos times acham que essa abordagem leva a uma significante redução nos problemas de integração e permite que um time desenvolva software coeso mais rapidamente. (tradução do autor)
 \end{citacao}
 
 Para assegurar o rápido feedback, o tempo de execução da \textit{build} deve ser o menor possível, tentando manter sempre menor do que dez minutos \cite{FowlerCI}.
@@ -703,7 +703,7 @@ Sempre que possível, o melhor modelo de integração a ser utilizado é o sínc
 \citeonline{ImproveitCI} corrobora dizendo o seguinte:
 
 \begin{citacao}
-A integração contínua assíncrona permite o trabalho de desenvolvedores distribuídos geograficamente, porém é um pouco mais arriscada e menos eficiente que a integração síncrona. O risco aumenta porque o repositório pode ficar inconsistente durante alguns períodos de tempo – sempre que um erro ocorre e o responsável por ele ainda não fez o commit das correções.
+A integração contínua assíncrona permite o trabalho de desenvolvedores distribuídos geograficamente, porém é um pouco mais arriscada e menos eficiente que a integração síncrona. O risco aumenta porque o repositório pode ficar inconsistente durante alguns períodos de tempo $-$ sempre que um erro ocorre e o responsável por ele ainda não fez o commit das correções.
 
 Na integração assíncrona, a eficiência diminui porque leva mais tempo para o desenvolvedor descobrir que cometeu um erro. É comum o desenvolvedor receber a notificação de um erro depois de já ter iniciado uma nova atividade. Ao ser notificado, deve parar a nova tarefa, relembrar o que havia feito na tarefa anteriormente e corrigir o erro.
 
