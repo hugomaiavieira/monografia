@@ -559,7 +559,7 @@ Já em um contexto, como o do desenvolvimento do kanban-roots, no qual não exis
 \subsubsection{Camada adicional} % (fold)
 \label{subsub:camada_adicional}
 
-Outra crítica aos testes em texto plano é que enquanto nos testes em código puro todo o código do teste está em concentrado em apenas um lugar, nos testes em texto plano, o código do testes está espalhado em diversos arquivos e métodos, devido a camada adicional dos \textit{steps}, tonando a \textit{suite} de testes mais complexa de manter e estender \cite{SteakOverCucumber}.
+Outra crítica aos testes em texto plano é que enquanto nos testes em código puro todo o código do teste está em concentrado em apenas um lugar, nos testes em texto plano, o código do testes está espalhado em diversos arquivos e métodos, devido a camada adicional dos \textit{steps}, tonando a suíte de testes mais complexa de manter e estender \cite{SteakOverCucumber}.
 
 Além disso, é necessário manter um segundo ambiente de testes, já que para escrever os testes de aceitação em texto plano é necessária uma ferramenta de testes específica para isso. Isso não acontece com a escrita em código puro, já que é utilizada a mesma ferramenta utilizada nos testes unitários \cite{WhyBotherWithCucumberTesting}.
 
@@ -632,7 +632,7 @@ Esta abordagem busca eliminar os problemas com a camada adicional e tempo de exe
   \label{img:output-novo-modelo}
 \end{figure}
 
-No entanto, esta abordagem cai no mesmo dilema da escrita em texto plano: o cliente não irá ler ou validar esta saída. Além disso, a introdução dos métodos \texttt{When/And/Then} juntamente com as \textit{strings} e blocos passados como parâmetros, piora muito a legibilidade do código de teste, prejudicando a manutenibilidade da \textit{suite} de testes. Assim, está abordagem, apesar de eliminar a camada adicional, pouco difere da escrita em texto plano, no que diz respeito às desvantagens.
+No entanto, esta abordagem cai no mesmo dilema da escrita em texto plano: o cliente não irá ler ou validar esta saída. Além disso, a introdução dos métodos \texttt{When/And/Then} juntamente com as \textit{strings} e blocos passados como parâmetros, piora muito a legibilidade do código de teste, prejudicando a manutenibilidade da suíte de testes. Assim, está abordagem, apesar de eliminar a camada adicional, pouco difere da escrita em texto plano, no que diz respeito às desvantagens.
 
 % subsubsection um_novo_modelo_de_escrita (end)
 
@@ -641,7 +641,7 @@ No entanto, esta abordagem cai no mesmo dilema da escrita em texto plano: o clie
 
 Na opinião do autor, os testes escritos em texto plano em um primeiro momento são muito atraentes, pois, com a facilidade de leitura, a possibilidade de validação de testes executáveis pelo cliente se tornam reais. No entanto, como apresentado anteriormente, na realidade é pouquíssimo provável que o cliente irá validar estes testes. Isto é ainda mais acentuado em projetos como o kanban-roots onde não existe cliente em si, tornando totalmente irrelevante os possíveis benefícios da escrita de testes em texto plano.
 
-Já para projetos grandes, nos quais a \textit{suite} de testes é extensa, 25\% a mais no tempo de execução dos testes é um preço alto a ser pago, pois os testes devem ser executados diversas vezes ao dia. Se o tempo necessário para executar a \textit{suite} de testes se tornar demasiadamente longo, o desenvolvedor tende a rodar os testes menos vezes, diminuindo, assim, a eficácia da aplicação do BDD. Além disso, a escrita de testes em texto plano prejudica a produtividade, pois é adicionada complexidade ao processo, devido à camada adicional, fazendo com que a produtividade seja reduzida.
+Já para projetos grandes, nos quais a suíte de testes é extensa, 25\% a mais no tempo de execução dos testes é um preço alto a ser pago, pois os testes devem ser executados diversas vezes ao dia. Se o tempo necessário para executar a suíte de testes se tornar demasiadamente longo, o desenvolvedor tende a rodar os testes menos vezes, diminuindo, assim, a eficácia da aplicação do BDD. Além disso, a escrita de testes em texto plano prejudica a produtividade, pois é adicionada complexidade ao processo, devido à camada adicional, fazendo com que a produtividade seja reduzida.
 
 Apesar dos pontos negativos, os testes em texto plano podem ter valia em situações onde o desenvolvedor tem grandes dificuldades em entender o que o cliente quer ou entender o um determinado processo realizado pelo cliente. Desta forma, o teste em texto plano pode servir como um facilitador na comunicação. Assim, sentados lado a lado, o cliente vai dizendo ao desenvolvedor qual é o fluxo, e o desenvolvedor por sua vez, vai mapeando para o teste. Como ambos conseguem ler e entender o que está sendo escrito, a discussão e entendimento do problema é facilitada.
 
