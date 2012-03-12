@@ -194,6 +194,8 @@ Perceba que, para isolar o \hyperref[code:integration_spec]{teste}, foi utilizad
 
 Testes de aceitação são especificações para o comportamento e funcionalidade de um sistema. Eles mostram se o sistema se comporta corretamente pela perspectiva de um usuário, sem nos dizer nada sobre como o sistema implementa esse comportamento \cite{TestDrivenKoskela}. Além disso, é verificada a integração entre as diversas unidades que interagem para prover esta funcionalidade.
 
+Relacionando com os métodos tradicionais, os testes de aceitação implementam os casos de uso levantados na análise orientada a objetos.
+
 No Código \ref{code:acceptance} é apresentado um exemplo simples de testes de aceitação onde é feito o registro de um novo contribuidor no kanban-roots, devendo-se notar que o teste é feito no contexto de uma funcionalidade.
 
 \begin{mycode}{rspec}%
@@ -210,6 +212,24 @@ feature "Manipulate contributors" do
       fill_in "Password confirmation", :with => "password"
       click_button "Sign up"
       page.should have_content "You have signed up successfully."
+    end
+
+    context "with errors" do
+      it "blank fields" do
+        visit new_contributor_registration_path
+        click_button "Sign up"
+        within("form > div[2]") { page.should have_content "can"t be blank"}
+        within("form > div[3]") { page.should have_content "can"t be blank"}
+        within("form > div[4]") { page.should have_content "can"t be blank"}
+        within("form > div[5]") { page.should have_content "can"t be blank"}
+      end
+
+      it "invalid" do
+        visit new_contributor_registration_path
+        fill_in "E-mail", :with => "someone@nothing"
+        click_button "Sign up"
+        within("form > div[4]") { page.should have_content "is invalid"}
+      end
     end
   end
 end
