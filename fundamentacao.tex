@@ -82,7 +82,7 @@ Mas para que isso seja possível, os métodos ágeis contam com um conjunto de t
 
 A maneira como o teste de software é aplicado varia de acordo com a metodologia utilizada no desenvolvimento. Tradicionalmente o teste de software é feito somente após o desenvolvimento ter sido concluído. Já no métodos ágeis um caminho oposto é seguido, sendo utilizadas técnicas como \textit{Test-Diven Development} (abordada na Seção \ref{sec:tdd}) e  \textit{Behaviour-Diven Development} (abordada na Seção \ref{sec:bdd}).
 
-Contudo, apesar de seguirem caminhos opostos, no desenvolvimento ágil é possível utilizar técnicas de teste de software oriundas e utilizadas no modelo tradicional, como classes de equivalência, análise do valor limite e análise da complexidade cliclomática.
+Contudo, apesar de seguirem caminhos opostos, no desenvolvimento ágil é possível e desejável utilizar técnicas de teste de software oriundas e utilizadas no modelo tradicional, como classes de equivalência, análise do valor limite e análise da complexidade ciclomática.
 
 Na literatura existem variadas nomenclaturas e definições para os diferentes tipos de teste. Dessa forma, os próximos tópicos definirão quais serão utilizadas durante o presente trabalho.
 
@@ -123,7 +123,7 @@ class Category < ActiveRecord::Base
 end
 \end{mycode}
 
-É interessante observar a diferença entre a utilização e não utilização do TDD, tendo em vista um aviso feito por \citeonline{Pressman}: ``Há algumas situações em que você não terá recursos para fazer teste de unidade abrangente. Selecione módulos críticos e aqueles que têm complexidade ciclomática alta e faça o teste de unidade apenas neles.". Em uma situação onde o TDD é estritamente utilizado, um aviso como esse se torna sem sentido e risível. Mais sobre TDD na Seção \ref{sec:tdd}.
+É interessante observar a diferença entre a utilização e não utilização do TDD, tendo em vista um aviso feito por \citeonline{Pressman}: ``Há algumas situações em que você não terá recursos para fazer teste de unidade abrangente. Selecione módulos críticos e aqueles que têm complexidade ciclomática alta e faça o teste de unidade apenas neles.". Em uma situação onde o TDD é estritamente utilizado, um aviso como esse se torna sem sentido e soa completamente anacrônico. Além disso, ao encontrar algum ponto onde a complexidade ciclomática esteja alta, o aconselhável é que esta seja diminuída através de refatoração, e não apenas testada. Mais sobre TDD na Seção \ref{sec:tdd}.
 
 % subsection testes_de_unidade (end)
 
