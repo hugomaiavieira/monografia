@@ -26,6 +26,8 @@ Com base no trabalho de \citeonline{TDDbyExample}, o ciclo de desenvolvimento TD
 \begin{enumerate}
 \item \textbf{Adicionar um teste}
 
+TODO: falar que ao pensar no testes e escrevê-lo, já está sendo feita a analise projeto e etc.
+
 Cada ciclo se inicia com a criação de um teste de unidade. Este teste inevitavelmente irá falhar, pois é escrito antes do código ser implementado de fato. Para escrever um teste, o desenvolvedor precisa entender claramente as especificações e requisitos da unidade. Isso faz com que o desenvolvedor tenha como foco os requisitos antes do código, o direcionando a escrever código apenas para o que é realmente necessário.
 
 \item \textbf{Executar todos os testes e ver se algum falha}
@@ -527,6 +529,8 @@ end
 \subsubsection{Escrita em código puro} % (fold)
 \label{subsub:Escrita em codigo puro}
 
+TODO:: dizer que para ser bdd não é preciso ter o GWT. citar o artigo que cita Rogério e cia.
+
 A outra maneira de escrever os testes de aceitação é com código puro. Nesta forma, todo o código dos testes (descrição e implementação) está concentrado em apenas um lugar, utilizando somente código para escrever os testes.
 
 No Código \ref{code:bdd_spec1} pode-se ver a especificação em código puro para a funcionalidade.
@@ -607,6 +611,8 @@ Analisando estes resultados pode-se concluir que os testes em código puro execu
 
 \subsubsection{Um novo modelo de escrita} % (fold)
 \label{ssub:um_novo_modelo_de_escrita}
+
+TODO: trocar novo por híbrido. Citar que as strings acabam tendo a mesma função de comentários. ao mudar o código e não mudar a string, o teste passa a ser desinformativo. Dizer que Yanko apresenta uma maneira alternativa/hibrida
 
 \citeonline{YankoCapybara} propõe uma nova maneira de escrita de testes de aceitação, sendo esta uma união entre os duas maneiras apresentadas anteriormente. Os testes são escritos em código puro, porém utilizando \textit{steps} semelhantes aos do testes em texto plano. No código \ref{code:rspec_steps} é apresentado o exemplo anterior utilizando este novo modelo\footnote{Para a escrita deste exemplo, foi utilizada uma ferramenta criada por Yanko chamada \textit{Rspec example steps}. Mais em \url{https://github.com/railsware/rspec-example_steps}}.
 
