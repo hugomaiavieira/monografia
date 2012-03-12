@@ -76,30 +76,147 @@ Mas para que isso seja possível, os métodos ágeis contam com um conjunto de t
 
 % section desenvolvimento_de_software (end)
 
-\section{Tipos de teste}
-\label{sec:tipos_de_teste}
+\section{Teste de software}
+\label{sec:teste_de_software}
 
-TODO: Rodrigo: [Explique melhor (e com exemplos) cada tipo de teste, relacionando as definiçoes na literatura ágil com as definições na literatura tradicional.]
+
+A maneira como o teste de software é aplicado varia de acordo com a metodologia utilizada no desenvolvimento. Tradicionalmente o teste de software é feito somente após o desenvolvimento ter sido concluído. Já no métodos ágeis um caminho oposto é seguido, sendo utilizadas técnicas como \textit{Test-Diven Development} (abordada na Seção \ref{sec:tdd}) e  \textit{Behaviour-Diven Development} (abordada na Seção \ref{sec:bdd}).
+
+Contudo, apesar de seguirem caminhos opostos, no desenvolvimento ágil é possível utilizar técnicas de teste de software oriundas e utilizadas no modelo tradicional, como classes de equivalência, análise do valor limite e análise da complexidade cliclomática.
+
+Na literatura existem variadas nomenclaturas e definições para os diferentes tipos de teste. Dessa forma, os próximos tópicos definirão quais serão utilizadas durante o presente trabalho.
 
 \subsection{Testes de unidade}
 \label{sub:testes_de_unidade}
 
-Testes de unidade são testes nos quais unidades individuais do sistema são testadas para determinar se estão aptas para uso. Uma unidade é a menor parte testável de uma aplicação. Em programação procedural uma unidade pode ser uma função ou \textit{procedure}. Já em programação orientada a objetos, uma unidade pode ser um método.
+Testes de unidade são testes nos quais unidades individuais do sistema são testadas para determinar se estão aptas para uso. Uma unidade é a menor parte testável de uma aplicação. Em programação procedural uma unidade pode ser uma função ou \textit{procedure}. Já em programação orientada a objetos, uma unidade pode ser um método. \citeonline{TesteSoftware} afirmam que neste contexto, espera-se que sejam identificados erros relacionados a algoritmos incorretos ou mal implementados, estruturas de dados incorretas, ou simplesmente erros de programação.
+
+Para exemplicar, no Código \ref{code:unit_test_spec} é apresentado o de teste de unidade para o método \texttt{Category\#name\_as\_css\_class}, cuja implementação é mostrada no Código \ref{code:unit_test}. Como se pode perceber, este método transforma o nome da Categoria em um nome de classe CSS\footnote{\textit{Cascading Style Sheets}. Mais em \url{http://pt.wikipedia.org/wiki/Cascading_Style_Sheets}}, deixando todos seus caracteres em minúsculo e substituindo os caracteres / (barra),  (espaço) e - (traço) por \_ (sublinhado).
+
+\begin{mycode}{rspec}%
+{Teste de unidade automatizado para o método \texttt{Category\#name\_as\_css\_class} }{code:unit_test_spec}
+# spec/models/category_spec.rb
+describe Category do
+  it "should return its name as a css class" do
+    category = Factory.build :category, :name => "Feature"
+    category.name_as_css_class.should == "feature"
+
+    category.name = "New Feature"
+    category.name_as_css_class.should == "new_feature"
+
+    category.name = "Other-New Feature"
+    category.name_as_css_class.should == "other_new_feature"
+
+    category.name = "Study/Research"
+    category.name_as_css_class.should == "study_research"
+  end
+end
+\end{mycode}
+
+\begin{mycode}{rspec}%
+{Implementação do método \texttt{Category\#name\_as\_css\_class} }{code:unit_test}
+# app/models/category.rb
+class Category < ActiveRecord::Base
+  def name_as_css_class
+    self.name.downcase.gsub(/\/| |-/, "_")
+  end
+end
+\end{mycode}
+
+É interessante observar a diferença entre a utilização e não utilização do TDD, tendo em vista um aviso feito por \citeonline{Pressman}: ``Há algumas situações em que você não terá recursos para fazer teste de unidade abrangente. Selecione módulos críticos e aqueles que têm complexidade ciclomática alta e faça o teste de unidade apenas neles.". Em uma situação onde o TDD é estritamente utilizado, um aviso como esse se torna sem sentido e risível. Mais sobre TDD na Seção \ref{sec:tdd}.
 
 % subsection testes_de_unidade (end)
 
 \subsection{Testes de integração}
 \label{sub:testes_de_integracao}
 
-Teste de integração testam as integrações do código com o mundo exterior. Podem ser um teste que se comunique através da rede, tenha contato com o sistema de arquivos ou deixe os limites de seu próprio processo \cite{ArtOfAgileDevelopment}.
+No contexto do presente trabalho, os testes de integração testam as integrações do código com o mundo exterior. Eles podem ser testes que se comunique através da rede, tenha contato com o sistema de arquivos ou deixe os limites de seu próprio processo \cite{ArtOfAgileDevelopment}.
+
+Para exemplificar, será utilizada uma extensão criada para fazer o \textit{highlighting} de código na descrição das Tarefas e no conteúdo do Comentários no kanban-roots. Para isso, é utilizado um \textit{framework} em Python chamado Pygments\footnote{ Mais em \url{http://pygments.org/}}.
+
+O Pygments deve ser instalado na máquina onde o kanban-roots está sendo executado. No entanto, o kanban-roots foi projetado rodar em um servidor próprio ou em um VPS\footnote{ \textit{Virtual Private Server}. É um servidor em ambiente compartilhado que possui acesso root e processos independentes para cada conta VPS criada.}, mas tamém no Heroku\footnote{ É um PaaS (\textit{platafom as a service}) que tem uma cota de utilização gratuita. No Heroku não é possível instalar dependências no sistema. Mais em \url{http://heroku.com}}. Sendo assim, foi utilizado um serviço gratuito e não oficial criado por Trevor Turk e hospedado no Google App Engine que permite a utilização da API do Pygments através de um POST para o serviço. Dessa forma, deve-se testar a integração com o serviço e também a integração com o Pygments instalado localmente.
+
+\begin{mycode}{rspec}%
+{Teste de integração automatizado para o \textit{highlighting} de código}{code:integration_spec}
+# spec/lib/albino_render_spec.rb
+describe HTMLwithAlbino do
+  before(:all) do
+    @render = HTMLwithAlbino.new
+    @code_text = 'puts "hello!"'
+    @highlighted_code =
+      "<div class=\"highlight\"><pre>" +
+        "<span class=\"nb\">puts</span> <span class=\"s2\">&quot;hello!&quot;</span>\n" +
+      "</pre>\n</div>\n"
+  end
+
+  it "should get the highlighted block code from pygments.appspot.com" do
+    @render.stub(:can_pygmentize?).and_return(false)
+    @render.block_code(@code_text, "ruby").should == @highlighted_code
+  end
+
+  it "should get the highlighted block code from local pygments" do
+    @render.stub(:can_pygmentize?).and_return(true)
+    @render.block_code(@code_text, "ruby").should == @highlighted_code
+  end
+end
+\end{mycode}
+
+\begin{mycode}{ruby}%
+{Implementação do \textit{highlighting} de código}{code:integration}
+# lib/albino_render.rb
+class HTMLwithAlbino < Redcarpet::Render::HTML
+  def block_code(code, lang)
+    if can_pygmentize?
+      Albino.colorize(code, lang)
+    else
+      # This is a hack for pygments work on Heroku
+      require "net/http"
+      Net::HTTP.post_form(URI.parse("http://pygments.appspot.com/"),
+                          {"code"=>code, "lang"=>lang}).body
+    end
+  end
+
+  private
+  def can_pygmentize?
+    system "pygmentize -V"
+  end
+end
+\end{mycode}
+
+Perceba que, para isolar o \hyperref[code:integration_spec]{teste}, foi utilizado um dublê de teste (neste caso um \textit{stub}) para simular a resposta do método \texttt{can\_pygmentize?}. Mais sobre dublês de teste na Seção \ref{sec:dubles_de_teste}.
+
+\citeonline{Pressman}, assim como \citeonline{TesteSoftware} e outros autores da linha tradicional, consideram os testes de integração como testes que verificam a integração entre as diversas unidades, com ênfase na construção da estrutura do sistema. Já nos métodos ágeis, estes testes que verificam a integração entre as unidades do sistema, porém com ênfase em funcionalidades, são testes de aceitação \cite{XPTeles}, que serão abordados a seguir.
 
 % subsection testes_de_integracao (end)
 
 \subsection{Testes de aceitação}
-\label{sub:testes_de_aceitacao}
+\label{ssub:testes_de_aceitacao}
 
-Testes de aceitação são especificações para o comportamento e funcionalidade de um sistema. Os testes de aceitação nos mostram se o sistema se comporta corretamente pela perspectiva de um usuário, sem nos dizer nada sobre como o sistema implementa esse comportamento \cite{TestDrivenKoskela}.
+Testes de aceitação são especificações para o comportamento e funcionalidade de um sistema. Eles mostram se o sistema se comporta corretamente pela perspectiva de um usuário, sem nos dizer nada sobre como o sistema implementa esse comportamento \cite{TestDrivenKoskela}. Além disso, é verificada a integração entre as diversas unidades que interagem para prover esta funcionalidade.
+
+No Código \ref{code:acceptance} é apresentado um exemplo simples de testes de aceitação onde é feito o registro de um novo contribuidor no kanban-roots, devendo-se notar que o teste é feito no contexto de uma funcionalidade.
+
+\begin{mycode}{rspec}%
+{Teste de aceitação para o registro de um contribuidor}{code:acceptance}
+# spec/acceptance/contributor_spec.rb
+feature "Manipulate contributors" do
+  context "register a contributor" do
+    it "successfully" do
+      visit new_contributor_registration_path
+      fill_in "Name", :with => "Someone of Nothing"
+      fill_in "Username", :with => "someone"
+      fill_in "E-mail", :with => "someone@gmail.com"
+      fill_in "Password", :with => "password"
+      fill_in "Password confirmation", :with => "password"
+      click_button "Sign up"
+      page.should have_content "You have signed up successfully."
+    end
+  end
+end
+\end{mycode}
+
+Os testes de aceitação serão vistos com mais detalhes na Seção \ref{sec:bdd}.
 
 % subsection testes_de_aceitacao (end)
 
-% section tipos_de_teste (end)
+% section teste_de_software (end)
