@@ -176,16 +176,31 @@ Com isso, o ciclo TDD o desenvolvimento da funcionalidade é terminado, produzin
 \subsection{Design emergente} % (fold)
 \label{sub:design_emergente}
 
-No contexto em que TDD costuma ser aplicado $-$ em processos ágeis, com um ciclo de vida iterativo-incremental $-$ não é realizado um amplo \textit{design} prévio. Sendo assim, o \textit{design} evolui incrementalmente. Sabendo disso, uma característica extremamente importante do TDD é a facilitação ao \textit{design} emergente, que muitos consideram ser sua a principal característica.
+No contexto em que TDD costuma ser aplicado $-$ em processos ágeis, com um ciclo de vida iterativo-incremental $-$ não é realizado um amplo \textit{design} prévio. Sendo assim, o \textit{design} evolui incrementalmente. Sabendo disso, uma característica extremamente importante do TDD é a facilitação ao \textit{design} emergente, que muitos consideram ser sua a principal característica \cite{EmergentDesign}.
 
 TDD é considerada uma técnica essencial para o \textit{design} emergente porque
 quando se está escrevendo um teste anteriormente ao código, o programador contempla e decide não apenas a interface do software (i.e. nomes de classes/métodos, parâmetros, tipos de retorno, lançamento de exceções), mas também o comportamento do software (i.e. resultados esperados para determinadas entradas) \cite{JanzenTDD}.
 
 Além disso, \citeonline{EmergentDesign} constata que o ponto de vista do teste pode passar informações sobre o design, porque o teste de uma classe funciona como o primeiro cliente da classe. Com isso, a interface que o teste sugere é uma interface dirigida ao cliente, sendo assim, geralmente é mais estável.
 
-\citeonline{DammTDD} também afirmam que o TDD faz com que as pessoas pensem mais no design em vez de se codificar precipitadamente sem saber o que implementa ainda.
+\citeonline{DammTDD} também afirmam que o TDD faz com que as pessoas pensem mais no design em vez de codificar precipitadamente sem saber o que implementar ainda e \citeonline{XPTeles} ressalta a importância da \textit{refatoração} para a evolução incremental do design:
 
-\textbf{TODO: dar um exemplo do kanban (ver histórico de commits no github) e PROCURAR REFERÊNCIAS SOBRE ISSO}
+\begin{citacao}
+Ao longo das iterações, o design precisa evoluir, mas deve manter-se simples e claro para que a equipe possa fazer alterações no software a qualquer momento, com facilidade. Por esta razão o \textit{refactoring} tem um papel fundamental no design.
+\end{citacao}
+
+\subsubsection{Design emergente no kanban-roots} % (fold)
+\label{ssub:design_emergente_no_kanban_roots}
+
+Para o desenvolvimento do kanban-roots, foi de extrema importância que o design evoluísse incrementalmente, pois não se sabia ao certo que funcionalidades seriam contempladas nem que entidades existiriam.
+
+As entidades \textit{Projects} e \textit{Contributors} tinham uma relação direta. Em um dado momento, achou-se pertinente a criação de uma nova entidade \textit{Team} que faria a ligação entre as outras duas entidades. Isto acarretou um uma série de alterações na interface das entidades, na estrutura do banco de dados e etc \cite{CommitAddTeam}. Meses depois, foi verificado que esta entidade \textit{Team} não era mais necessária, acarretando novamente em diversas modificações \cite{CommitRemoveTeam}.
+
+Em uma outra situação, percebeu-se a necessidade do usuário (\textit{Contributor}) ter um \textit{username}, que seria utilizado, entre outras coisas, para fazer o login antes feito apenas com a utilização do email. Para isso, foram feitas algumas modificações no código existente, para que esse suporte fosse adicionado \cite{CommitAddUsername}.
+
+Foram diversas as situações em que mudanças como essa ocorreram durante o desenvolvimento do kanban-roots. Sem o suporte do TDD seria extremamente complicado fazer essas alterações e deixar o design emergir, pois a insegurança de que as modificações pudesse afetar outras partes do código seria muito grande. Além disso, a criação a priore dos testes favoreceu que as modificações fossem feitas de maneira mais simples e direta.
+
+% subsubsection design_emergente_no_kanban_roots (end)
 
 % subsection design_emergente (end)
 
