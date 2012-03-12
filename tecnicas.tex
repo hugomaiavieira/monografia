@@ -1,4 +1,5 @@
 \chapter{Técnicas}
+\textbf{TODO: Mudar o nome desse capítulo}
 
 \section{Test-Driven Development (TDD)}
 \label{sec:tdd}
@@ -194,11 +195,12 @@ Ao longo das iterações, o design precisa evoluir, mas deve manter-se simples e
 \subsubsection{Design emergente no kanban-roots} % (fold)
 \label{ssub:design_emergente_no_kanban_roots}
 
-Para o desenvolvimento do kanban-roots, foi de extrema importância que o design evoluísse incrementalmente, pois não se sabia ao certo que funcionalidades seriam contempladas nem que entidades existiriam.
+Para o desenvolvimento do kanban-roots, foi de extrema importância que o design evoluísse incrementalmente, pois não se sabia ao certo que
+funcionalidades seriam contempladas nem que entidades existiriam.
+
+TODO: Utilizar imagens para descrever as relações e desenvolver e melhorar este exemplo.
 
 As entidades \textit{Projects} e \textit{Contributors} tinham uma relação direta. Em um dado momento, achou-se pertinente a criação de uma nova entidade \textit{Team} que faria a ligação entre as outras duas entidades. Isto acarretou um uma série de alterações na interface das entidades, na estrutura do banco de dados e etc \cite{CommitAddTeam}. Meses depois, foi verificado que esta entidade \textit{Team} não era mais necessária, acarretando novamente em diversas modificações \cite{CommitRemoveTeam}.
-
-Em uma outra situação, percebeu-se a necessidade do usuário (\textit{Contributor}) ter um \textit{username}, que seria utilizado, entre outras coisas, para fazer o login antes feito apenas com a utilização do email. Para isso, foram feitas algumas modificações no código existente, para que esse suporte fosse adicionado \cite{CommitAddUsername}.
 
 Foram diversas as situações em que mudanças como essa ocorreram durante o desenvolvimento do kanban-roots. Sem o suporte do TDD seria extremamente complicado fazer essas alterações e deixar o design emergir, pois a insegurança de que as modificações pudesse afetar outras partes do código seria muito grande. Além disso, a criação a priore dos testes favoreceu que as modificações fossem feitas de maneira mais simples e direta.
 
