@@ -531,8 +531,6 @@ end
 \subsubsection{Escrita em código puro} % (fold)
 \label{subsub:Escrita em codigo puro}
 
-TODO:: dizer que para ser bdd não é preciso ter o GWT. citar o artigo que cita Rogério e cia.
-
 A outra maneira de escrever os testes de aceitação é com código puro. Nesta forma, todo o código dos testes (descrição e implementação) está concentrado em apenas um lugar, utilizando somente código para escrever os testes.
 
 No Código \ref{code:bdd_spec1} pode-se ver a especificação em código puro para a funcionalidade.
@@ -558,9 +556,11 @@ feature "Render comments with Markdown syntax" do
 end
 \end{mycode}
 
-% subsubsection Escrita em codigo puro (end)
+É importante ressaltar que, mesmo sem a utilização dos \textit{templates} de história e cenário, este modelo de escrita não deixa de ser BDD \cite{BDDSolis}, pois o foco da escrita dos testes continua no comportamento.
 
 BDD vem se tornando um consenso em automação de testes. Contudo, existem uma divergência grande sobre a forma de escrita dos testes de aceitação entre escrita em código puro e escrita em texto plano, tendo alguns pontos a serem considerados.
+
+% subsubsection Escrita em codigo puro (end)
 
 \subsubsection{Legibilidade} % (fold)
 \label{subsub:legibilidade}
