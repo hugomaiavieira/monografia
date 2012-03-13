@@ -1,6 +1,6 @@
 \chapter{Discussão das técnicas em um contexto aplicado}
 
-Neste Capítulo serão apresentadas as técnicas emergentes de teste de software, bem como suas características e discussões sobre os pontos ainda em aberto acerca de tais técnicas.
+Neste Capítulo serão apresentadas as técnicas emergentes de teste de software, bem como suas características e discussões sobre os pontos em aberto acerca de tais técnicas.
 
 \section{Test-Driven Development (TDD)}
 \label{sec:tdd}
@@ -251,7 +251,7 @@ Um exemplo para esta situação é apresentado no código \ref{code:gravatar} qu
 # app/helpers/application_helper.rb
 # TODO: Test it!
 def gravatar_image_tag(user, options={})
-  options.reverse_merge!(:size => 24, :class => '')
+  options.reverse_merge!(:size => 24, :class => "")
   if Rails.env.production?
     gravatar_id = Digest::MD5.hexdigest(user.email.downcase)
     url = "http://gravatar.com/avatar/#{gravatar_id}?d=mm&s=#{options[:size]}"
@@ -260,7 +260,7 @@ def gravatar_image_tag(user, options={})
               :height => options[:size],
               :width => options[:size]).html_safe
   else
-    image_tag('gravatar.png',
+    image_tag("gravatar.png",
               :class => "avatar #{options[:class]}",
               :height => options[:size],
               :width => options[:size]).html_safe
@@ -482,7 +482,7 @@ Feature: Render comments with Markdown syntax
     And I should see "link" in an "a" tag
 \end{mycode}
 
-Para cada \textit{step} existe uma implementação, ou seja, sua definição, chamada de \textit{step definition}. Pode-se pensar nos \textit{steps} como chamadas à métodos, e assim, os \textit{step definitions} serão as definição desse métodos. Deste modo, ao rodar os testes, o arquivo de teste é parseado e os \textit{steps} são executados.
+Para cada \textit{step} existe uma implementação, ou seja, sua definição, chamada de \textit{step definition}. Pode-se pensar nos \textit{steps} como chamadas à métodos, e assim, os \textit{step definitions} serão as definição desses métodos. Deste modo, ao rodar os testes, o arquivo de teste é parseado e os \textit{steps} são executados.
 
 Os \textit{step definitions} para os \textit{steps} do Código \ref{code:bdd_cucumber_spec} são apresentado no Código \ref{code:step_definition}. Como durante o desenvolvimento são escritos muitos \textit{step definitions}, com o intuito de organizá-los, eles são separados por contexto em diferentes arquivos.
 
@@ -786,11 +786,11 @@ TODO: Sobre dummies nunca serem realmente usados, dá uma olhada na abordagem do
 Objetos \textbf{\textit{Fake}} são utilizados para substituir funcionalidades reais de um componente por razões diferentes de verificações indiretas de entradas e saídas do componente a ser testado. TODO: Explique as razões.
 
 \item
-Os \textbf{\textit{Stubs}} provêm respostas prontas para chamadas feitas durante os testes, geralmente não respondendo a qualquer   chamada diferente
+Os \textbf{\textit{Stubs}} provêm respostas prontas para chamadas feitas durante os testes, geralmente não respondendo a qualquer chamada diferente
 das pré-definidas.
 
 \item
-Os \textbf{\textit{Spies}} são \textit{Stubs} que também tem gravam algumas informações baseadas em como eles são chamados. Um exemplo   pode ser um serviço de email que grava quantas mensagens foram enviadas.
+Os \textbf{\textit{Spies}} são \textit{Stubs} que também tem gravam algumas informações baseadas em como eles são chamados. Um exemplo pode ser um serviço de email que grava quantas mensagens foram enviadas.
 
 \item
 \textbf{\textit{Mocks}} são objetos pré-programados para receber determinado conjunto de chamadas, podendo lançar uma exceção se tais chamadas não forem feitas a ele, ou se receber outra chamada diferente das pré-programadas.
@@ -798,8 +798,56 @@ Os \textbf{\textit{Spies}} são \textit{Stubs} que também tem gravam algumas in
 referência: the art of agile development, página 298.
 \end{itemize}
 
-De modo geral, a utilização de Dublês de Teste é benéfica para o projeto. Contudo, existem controvérsias, principalmente em relação a utilização do \textit{mock} e \textit{stubs} \cite{MocksArentStubs}.
+Destes cinco tipos de dublês, apenas dois serão abordados, sendo eles \textit{mock} e \textit{stub}, por serem mais amplamente utilizados.
 
-Quando se utiliza \textit{mock} e/ou \textit{stubs} em demasia, acaba se testando \textbf{como} está sendo feito e não \textbf{o que} \cite{UnitForAReason}. Dessa forma, o acoplamento entre o teste e a implementação em si acaba sendo um grade problema. Para exemplificar,
+\subsection{Quando o mock é demais, o desenvolvedor desconfia} % (fold)
+\label{sub:quando_o_mock_demais_o_desenvolvedor_desconfia}
+
+De modo geral, a utilização de dublês de teste é benéfica para o projeto e extremamente útil. Um exemplo da utilização do \textit{stub} foi mostrado na Seção \ref{sub:testes_de_integracao} sobre testes de integração.
+
+Um outro exemplo é mostrado no Código \ref{code:stub_spec}, onde está sendo testada uma ação da classe \textit{Project}. Contudo, para que esta ação seja realizada, é necessário um conjunto de objetos da classe \textit{Task}. Assim, com o objetivo de criar um teste isolado e concentrado na classe \textit{Project}, é utilizado o método \texttt{stub\_model} que cria um \textit{stub} da classe \textit{Task} que irá reponder apenas aos atributos definidos no \textit{hash} passado como segundo parâmetro. No caso, a ação em questão é contar a soma dos pontos das tarefas alocadas em uma determinada posição do quadro (kanban). Esta ação é exercida através do método \texttt{count\_points}, cuja implementação é apresentada no Código \ref{code:stub}.
+
+\begin{mycode}{rspec}%
+{Exemplo do \textit{stub} da classe \textit{Task}}{code:stub_spec}
+# spec/models/project_spec.rb
+describe Project do
+  it "returns the tasks points sum for a given position of the board" do
+    tasks = [stub_model(Task, :points => 1, :position => Board::POSITIONS["doing"]),
+             stub_model(Task, :points => 2, :position => Board::POSITIONS["doing"]),
+             stub_model(Task, :points => 8, :position => Board::POSITIONS["todo"]),
+             stub_model(Task, :points => nil, :position => Board::POSITIONS["todo"]),
+             stub_model(Task, :points => 3, :position => Board::POSITIONS["doing"]),
+             stub_model(Task, :points => 5, :position => Board::POSITIONS["todo"])]
+    project = Project.new
+    project.tasks.<<(*tasks)
+
+    project.count_points(Board::POSITIONS["todo"]).should == 13
+    project.count_points(Board::POSITIONS["doing"]).should == 6
+    project.count_points(Board::POSITIONS["done"]).should == 0
+  end
+end
+\end{mycode}
+
+\begin{mycode}{ruby}%
+{Implementação do método \texttt{Project\#count\_points}}{code:stub}
+# app/models/project.rb
+class Project
+  def count_points position
+    points = 0
+    self.tasks_by_position(position).each do |task|
+      points += task.points if task.points
+    end
+    points
+  end
+end
+\end{mycode}
+
+Contudo, a utilização desta técnica deve ser feita com cautela. Quando se utiliza \textit{mock} e/ou \textit{stubs} em demasia, acaba se testando \textbf{como} está sendo feito e não \textbf{o que} \cite{UnitForAReason}. Dessa forma, o acoplamento entre o teste e a implementação em si acaba sendo um grade problema.
+
+Este problema ficou conhecido na comunidade como estilo \textit{mockist} (``mockista", em português) de fazer TDD.
+
+Um exemplo deste problema é apresentado no Código \ref{}
+
+% subsection quando_o_mock_demais_o_desenvolvedor_desconfia (end)
 
 % section dubles_de_teste (end)
