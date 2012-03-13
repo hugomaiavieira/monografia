@@ -183,7 +183,7 @@ class HTMLwithAlbino < Redcarpet::Render::HTML
 end
 \end{mycode}
 
-Perceba que, para isolar o \hyperref[code:integration_spec]{teste}, foi utilizado um dublê de teste (neste caso um \textit{stub}) para simular a resposta do método \texttt{can\_pygmentize?}. Mais sobre dublês de teste na Seção \ref{sec:dubles_de_teste}.
+Perceba que, para isolar o \hyperref[code:integration_spec]{teste}, foi utilizado um dublê de teste (neste caso um \textit{stub}) para simular a resposta do método \texttt{can\_pygmentize?} que faz uma verificação no sistema operacional para verificar se o Pygments está instalado ou não. Dublês de teste serão abordados mais detalhadamente na Seção \ref{sec:dubles_de_teste}.
 
 \citeonline{Pressman}, assim como \citeonline{TesteSoftware} e outros autores da linha tradicional, consideram os testes de integração como testes que verificam a integração entre as diversas unidades, com ênfase na construção da estrutura do sistema. Já nos métodos ágeis, estes testes que verificam a integração entre as unidades do sistema, porém com ênfase em funcionalidades, são testes de aceitação \cite{XPTeles}, que serão abordados a seguir.
 
