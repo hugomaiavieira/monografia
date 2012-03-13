@@ -71,7 +71,7 @@ A figura \ref{img:ciclo-tdd} resume o ciclo TDD de forma bem clara.
 \subsection{TDD na prática}
 \label{ssub:tdd_na_pratica}
 
-Neste subtópico será apresentada como a utilização do TDD se dá na prática, utilizando exemplos reais implementados durante do desenvolvimento do kanban-roots.
+Neste tópico será apresentada como a utilização do TDD se dá na prática, utilizando exemplos reais implementados durante do desenvolvimento do kanban-roots.
 
 A seguinte funcionalidade precisa ser implementada:
 
@@ -611,12 +611,10 @@ Analisando estes resultados pode-se concluir que os testes em código puro execu
 
 % subsubsection tempo_de_execucao (end)
 
-\subsubsection{Um novo modelo de escrita} % (fold)
-\label{ssub:um_novo_modelo_de_escrita}
+\subsubsection{Um modelo híbrido de escrita} % (fold)
+\label{ssub:um_modelo_hibrido_de_escrita}
 
-TODO: trocar novo por híbrido. Citar que as strings acabam tendo a mesma função de comentários. ao mudar o código e não mudar a string, o teste passa a ser desinformativo. Dizer que Yanko apresenta uma maneira alternativa/hibrida
-
-\citeonline{YankoCapybara} propõe uma nova maneira de escrita de testes de aceitação, sendo esta uma união entre os duas maneiras apresentadas anteriormente. Os testes são escritos em código puro, porém utilizando \textit{steps} semelhantes aos do testes em texto plano. No código \ref{code:rspec_steps} é apresentado o exemplo anterior utilizando este novo modelo\footnote{Para a escrita deste exemplo, foi utilizada uma ferramenta criada por Yanko chamada \textit{Rspec example steps}. Mais em \url{https://github.com/railsware/rspec-example_steps}}.
+\citeonline{YankoCapybara} apresenta um modelo alternativo de escrita de testes de aceitação, sendo esta uma união entre os duas maneiras apresentadas anteriormente\footnote{Esta abordagem também é utilizada pelo \textit{framework} easyb para Java. Mais em \url{http://www.easyb.org}}. Os testes são escritos em código puro, porém utilizando \textit{steps} semelhantes aos do testes em texto plano. No código \ref{code:rspec_steps} é apresentado o exemplo anterior utilizando este novo modelo\footnote{Para a escrita deste exemplo, foi utilizada uma ferramenta criada por Yanko chamada \textit{Rspec example steps}. Mais em \url{https://github.com/railsware/rspec-example_steps}}.
 
 \begin{mycode}{rspec}%
 {Especificação mesclando código puro com texto plano}{code:rspec_steps}
@@ -657,7 +655,7 @@ Esta abordagem busca eliminar os problemas com a camada adicional e tempo de exe
 
 No entanto, esta abordagem cai no mesmo dilema da escrita em texto plano: o cliente não irá ler ou validar esta saída. Além disso, a introdução dos métodos \texttt{When/And/Then} juntamente com as \textit{strings} e blocos passados como parâmetros, piora muito a legibilidade do código de teste, prejudicando a manutenibilidade da suíte de testes. Assim, está abordagem, apesar de eliminar a camada adicional, pouco difere da escrita em texto plano, no que diz respeito às desvantagens.
 
-% subsubsection um_novo_modelo_de_escrita (end)
+% subsubsection um_modelo_hibrido_de_escrita (end)
 
 \subsubsection{Conclusões} % (fold)
 \label{subsub:conclusoes_bdd}
