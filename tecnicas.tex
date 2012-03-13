@@ -198,7 +198,7 @@ Ao longo das iterações, o design precisa evoluir, mas deve manter-se simples e
 Para o desenvolvimento do kanban-roots, foi de extrema importância que o design evoluísse incrementalmente, pois não se sabia ao certo que
 funcionalidades seriam contempladas nem que entidades existiriam.
 
-As entidades \textit{Project} e \textit{Contributor} tinham uma relação direta, n para n, como apresentado na Figura \ref{img:contributor_projetc}. Contudo, em um determinado momento achou-se pertinente a criação de uma nova entidade \textit{Team} que faria a ligação entre as outras duas entidades, como apresentado na Figura \ref{img:contributor_team_projetc}. Isto acarretou um uma série de alterações na interface das entidades, na estrutura do banco de dados, dentre outros \cite{CommitAddTeam}.
+As entidades \textit{Project} e \textit{Contributor} tinham uma relação direta, n para n, como apresentado na Figura \ref{img:contributor_projetc}. Contudo, em um determinado momento achou-se pertinente a criação de uma nova entidade \textit{Team} que faria a ligação entre as outras duas entidades, como apresentado na Figura \ref{img:contributor_team_projetc}. Isto acarretou um uma série de alterações \cite{CommitAddTeam}, dentre outras, na interface das entidades e na estrutura do banco de dados $-$ considerada uma alteração crítica, mas que com ferramentas como \textit{migrations},\footnote{\textit{Migrations} são uma forma conveniente de bases de dados de maneira estruturada e organizada. Mais em \url{http://guides.rubyonrails.org/migrations.html}} torna-se possível que o \textit{design} evolua de modo incremental e emergente.
 
 \begin{figure}[h]
   \center
