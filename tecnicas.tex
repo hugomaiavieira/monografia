@@ -219,28 +219,16 @@ Meses depois, foi verificado que esta entidade \textit{Team} não era mais neces
 
 Foram diversas as situações em que mudanças como essa ocorreram durante o desenvolvimento do kanban-roots. Sem o suporte do TDD seria extremamente complicado fazer essas alterações e deixar o design emergir, pois a insegurança de que as modificações pudesse afetar outras partes do código seria muito grande. Além disso, a criação a priori dos testes favoreceu que as modificações fossem feitas de maneira mais simples e direta.
 
-\subsection{A ubiquidade de TDD} % (fold)
-\label{sec:a_ubiquidade_de_tdd}
+\subsection{A ubiquidade do TDD} % (fold)
+\label{sec:a_ubiquidade_do_tdd}
 
 Existe um debate sobre a não utilização do TDD em qualquer situação. É dito ``sobre a \textbf{não} utilização"\ pois o autor desconhece qualquer literatura dizendo que TDD deve ser utilizado sempre e em qualquer situação. Na realidade, o que existe é um mal entendido na comunidade sobre o que que alguns ``Agile Experts"\ dizem.
 
 \citeonline{CleanCode}, considerado um ``Agile Expert", define As Três Leis do TDD, onde a primeira delas é: ``Você não pode escrever código de produção até que você tenha escrito um teste de unidade com falha.". O que parece é que fecha-se os olhos para o trecho ``de produção", distorcendo completamente seu sentido.
 
-\citeonline{TDDGiveMeABreak} questiona a posição do que ele chama de ``Agile Testing Experts":
+\citeonline{TDDGiveMeABreak} questiona a posição do que ele chama de ``Agile Testing Experts" dizendo que exigir que sempre deve-se escrever os testes primeiro é idiotice em fase de projeto, de \textit{hacking}, ou de descobertas. Ele continua, dizendo que fazer com que testar seja uma parte central do processo porque eles são úteis para os desenvolvedores é muito bom, porém ditar um fluxo de trabalho para os desenvolvedores que funciona em alguns casos como O Único Caminho Verdadeiro é ridículo. Para finalizar, ele diz que testar é ajudar os desenvolvedores, e deve-se reconhecer que o teste automatizado são para benefício dos desenvolvedores, ao invés de \textit{cargo-culting}\footnote{O termo cargo-culting é utilizando quando um programador não qualificados ou iniciante (ou não experiência com o problema em mãos) copia um código de um lugar e colá-o em outro, com pouco ou nenhum entendimento de como o código funciona, ou se é realmente exigido na sua nova posição \cite{CargoCulting}.} um fluxo de trabalho e decretando que ``um tamanho de sapato serve para todos os tipos de pés".
 
-\begin{citacao}
-Exigir que você sempre deve escrever os testes primeiro? Dá um tempo. Isso é idiotice em fase de projeto, de \textit{hacking}, ou de descobertas.
-
-Fazer com que testar seja uma parte central do processo porque eles são úteis para os desenvolvedores? Muito bom. Ditar um fluxo de trabalho para os desenvolvedores que funciona em alguns casos como O Único Caminho Verdadeiro: ridículo.
-
-Testar é ajudar os desenvolvedores, e deve-se reconhecer que o teste automatizado são para benefício dos desenvolvedores, ao invés de \textit{cargo-culting}\footnote{O termo cargo-culting é utilizando quando um programador não qualificados ou iniciante (ou não experiência com o problema em mãos) copia um código de um lugar e colá-o em outro, com pouco ou nenhum entendimento de como o código funciona, ou se é realmente exigido na sua nova posição \cite{CargoCulting}.} um fluxo de trabalho e decretando que ``um tamanho de sapato serve para todos os tipos de pés". (tradução do autor)
-\end{citacao}
-
-Já \citeonline{ChromaticTDD} é um pouco mais moderado e diz:
-
-\begin{citacao}
-Se eu nunca usei a API antes, TDD pode não ser adequado. Se eu nunca vou usar o código novamente, TDD pode não ser adequado. Se leva mais tempo para escrever os testes (Nove linhas de código no programa final? Provavelmente não vale a pena agora.) do que para escrever e executar o código, TDD pode não ser adequado. (tradução do autor)
-\end{citacao}
+Já \citeonline{ChromaticTDD} é um pouco mais moderado e diz que TDD pode não ser adequado se o desenvolvedor nunca utilizou a API, se ele nunca irá utilizar o código novamente ou se levar mais tempo para escrever os testes do que para escrever e executar o código.
 
 Introduzindo o kanban-roots na discussão, nos dois únicos casos em que ocorreu um \textit{bug} em produção, ao ser feita uma analise no código em busca da solução, foi encontrado um comentário ``TODO: test it!"\ nos métodos onde os \textit{bugs} ocorreram. Atualmente, existem 13 comentários como esse espalhados no código do kanban-roots. Isso, de certa forma, comprava que caso os testes não sejam escritos antes, para um código que irá entrar em produção, escrevê-lo depois acaba sendo um fardo, e isso é ignorado até que um problema ocorra.
 
@@ -272,7 +260,7 @@ end
 
 O autor considera que somente para casos em que um código é apenas prova de conceito ou experimento, e que será eliminado, a utilização da técnica não é invariavelmente necessária. Contudo, a utilização de TDD nesses cenários pode ser muito interessante, pois como dito anteriormente, para a escrita dos testes, é preciso entender bem o problema a ser resolvido, fazendo o desenvolvedor se preparar mais para o que ele ainda não conhece muito bem.
 
-% subsection a_ubiquidade_de_tdd (end)
+% subsection a_ubiquidade_do_tdd (end)
 
 \subsection{A efetividade do TDD} % (fold)
 \label{sub:a_efetividade_do_tdd}
