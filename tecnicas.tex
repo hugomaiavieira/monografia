@@ -780,6 +780,8 @@ Em algumas ocasiões é difícil testar alguns componentes porque eles dependem 
 
 Quando se escreve um teste onde não se pode/escolhe usar componentes reais, pode-se substitui-los pelos Dublês de Teste que oferecem uma maneira de isolar as dependências ao criar os testes, permitindo a utilização de componentes falsos para cumprir os papéis de componentes reais. Com isso, elimina-se complexidade do código dos testes, pois o código de implementação dos objetos é mantido pequeno e com baixo acoplamento.
 
+Uma outra característica da utilização de dublês é que muitas fezes fazem com que os testes sejam executados mais rapidamente, pois criam o objeto apenas em memória, reduzindo assim o acesso a disco.
+
 Os Dublês de Teste não precisam se comportar exatamente como o componente real, devendo apenas prover a mesma API que o componente real.
 
 \citeonline{XUnit} define cinco categorias de Dublês de Teste:
@@ -805,8 +807,8 @@ Os \textbf{\textit{Spies}} são \textit{Stubs} que também tem gravam algumas in
 
 Destes cinco tipos de dublês, apenas dois serão abordados, sendo eles \textit{mock} e \textit{stub}, por serem mais amplamente utilizados.
 
-\subsection{Quando o mock é demais, o desenvolvedor desconfia} % (fold)
-\label{sub:quando_o_mock_demais_o_desenvolvedor_desconfia}
+\subsection{Problemas com o uso excessivo de \textit{mock} e \textit{stub}} % (fold)
+\label{sub:problemas_do_mock_e_stub}
 
 De modo geral, a utilização de dublês de teste é benéfica para o projeto e extremamente útil. Um exemplo da utilização do \textit{stub} foi mostrado na Seção \ref{sub:testes_de_integracao} sobre testes de integração.
 
@@ -847,9 +849,14 @@ class Project
 end
 \end{mycode}
 
-Contudo, a utilização desta técnica deve ser feita com cautela. Quando se utiliza \textit{mock} e/ou \textit{stubs} em demasia, acaba se testando \textbf{como} está sendo feito e não \textbf{o que} \cite{UnitForAReason}. Dessa forma, o acoplamento entre o teste e a implementação em si acaba sendo um grade problema.
+Contudo, a utilização desta técnica deve ser feita com cautela. Quando se utiliza \textit{stubs} em demasia, cria-se um acoplamento muito grande entre teste e implementação. Por exemplo, se na implementação do método \texttt{count\_points} for preciso fazer uso de mais algum atributo de \textit{Task} (para uma refatoração, por exemplo), o \textit{stub} deverá possuir esse atributo também, fazendo com que o teste tenha que ser alterado. Isso vai contra uma das premissas da refatoração de que se o comportamento do método não é modificado, seu teste deve permanecer o mesmo e continuar passando após ser feita a alteração na implementação.
 
-Este problema ficou conhecido na comunidade como estilo \textit{mockist} (``mockista", em português) de fazer TDD.
+É importante notar a diferença entre um \textit{stub} e as estratégias de \textit{fixture replacement}\footnote{\textit{Fixture replacement} é uma técnica que tem como objetivo separar a inicialização do teste de sua codificação em si, dando a possibilidade de se criar objetos com estados pré-definidos que possam ser reutilizados em mais de um teste.} baseadas em instâncias. Nestas estratégias o \textit{fixture} é um objeto real da classe. Assim, um objeto criado via \textit{fixture replacement} de instância fica sujeito a detalhes de sua implementação da classe real e, dessa forma, não faz o isolamento que um \textit{stub} em seu lugar faria, pois o stub simplesmente simula uma instância, portanto, não fica sujeito comportamentos inesperados.
+
+
+Já ao utilizar \textit{mocks} abundantemente, acaba se testando \textbf{como} está sendo feito e não \textbf{o que} \cite{UnitForAReason}. Dessa forma, o acoplamento entre o teste e a implementação em si acaba sendo um grande problema.
+
+O estilo de desenvolvimento onde o desenvolvedor faz uso intenso de \textit{mocks} ficou conhecido na comunidade como estilo \textit{mockist} (``mockista", em português) de fazer TDD e seu oposto ficou conhecido como estilo tradicional \cite{MocksArentStubs}.
 
 Um exemplo deste problema é apresentado no Código \ref{}
 
@@ -861,6 +868,6 @@ Beware of mock objects. They add complexity and tie your test to the implementat
 Mock objects are a useful technique, and sometimes they’re the best way to test your code. Before you assume that a mock object is appropriate for your situation, however, take a second look at your design. You might have an opportunity for improvement.
 \end{citacao}
 
-% subsection quando_o_mock_demais_o_desenvolvedor_desconfia (end)
+% subsection problemas_do_mock_e_stub (end)
 
 % section dubles_de_teste (end)
