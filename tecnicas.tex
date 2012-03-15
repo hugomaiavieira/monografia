@@ -226,7 +226,7 @@ Existe um debate sobre a não utilização do TDD em qualquer situação. É dit
 
 \citeonline{CleanCode}, considerado um ``Agile Expert", define As Três Leis do TDD, onde a primeira delas é: ``Você não pode escrever código de produção até que você tenha escrito um teste de unidade com falha.". O que parece é que fecha-se os olhos para o trecho ``de produção", distorcendo completamente seu sentido.
 
-\citeonline{TDDGiveMeABreak} questiona a posição do que ele chama de ``Agile Testing Experts" dizendo que exigir que sempre deve-se escrever os testes primeiro é idiotice em fase de projeto, de \textit{hacking}, ou de descobertas. Ele continua, dizendo que fazer com que testar seja uma parte central do processo porque eles são úteis para os desenvolvedores é muito bom, porém ditar um fluxo de trabalho para os desenvolvedores que funciona em alguns casos como O Único Caminho Verdadeiro é ridículo. Para finalizar, ele diz que testar é ajudar os desenvolvedores, e deve-se reconhecer que o teste automatizado são para benefício dos desenvolvedores, ao invés de \textit{cargo-culting}\footnote{O termo cargo-culting é utilizando quando um programador não qualificados ou iniciante (ou não experiência com o problema em mãos) copia um código de um lugar e colá-o em outro, com pouco ou nenhum entendimento de como o código funciona, ou se é realmente exigido na sua nova posição \cite{CargoCulting}.} um fluxo de trabalho e decretando que ``um tamanho de sapato serve para todos os tipos de pés".
+\citeonline{TDDGiveMeABreak} questiona a posição do que ele chama de ``Agile Testing Experts" dizendo que exigir que sempre deve-se escrever os testes primeiro é idiotice em fase de projeto, de \textit{hacking}, ou de descobertas. Ele continua, dizendo que fazer com que testar seja uma parte central do processo porque eles são úteis para os desenvolvedores é muito bom, porém ditar um fluxo de trabalho para os desenvolvedores que funciona em alguns casos como O Único Caminho Verdadeiro é ridículo. Para finalizar, ele afirma que testar é ajudar os desenvolvedores, e deve-se reconhecer que o teste automatizado são para benefício dos desenvolvedores, ao invés de \textit{cargo-culting}\footnote{O termo cargo-culting é utilizando quando um programador não qualificados ou iniciante (ou não experiência com o problema em mãos) copia um código de um lugar e colá-o em outro, com pouco ou nenhum entendimento de como o código funciona, ou se é realmente exigido na sua nova posição \cite{CargoCulting}.} um fluxo de trabalho e decretando que ``um tamanho de sapato serve para todos os tipos de pés".
 
 Já \citeonline{ChromaticTDD} é um pouco mais moderado e diz que TDD pode não ser adequado se o desenvolvedor nunca utilizou a API, se ele nunca irá utilizar o código novamente ou se levar mais tempo para escrever os testes do que para escrever e executar o código.
 
@@ -717,7 +717,7 @@ Existem duas formas de executar a integração contínua: síncrona e assíncron
 
 Para a utilização da integração contínua síncrona, todos os desenvolvedores devem trabalhar no mesmo espaço físico, pois deve existir uma máquina dedicada à integração. Assim, apenas um desenvolvedor integra seu código de cada vez e outros só são liberados para integrar ao serem informados do término da integração corrente \cite{ImproveitCI}.
 
-% subsection integracao_continua_assincrona (end)
+%subsection integracao_continua_assincrona (end)
 
 
 \subsection{Integração contínua assíncrona} % (fold)
@@ -731,7 +731,7 @@ Além disso, um servidor de integração contínua, como o Jenkins\footnote{\url
 
 % subsection integracao_continua_sincrona (end)
 
-\subsection{Integração contínua síncrona x assíncrona} % (fold)
+\subsection{Integração contínua síncrona versus assíncrona} % (fold)
 \label{sub:sincrona_x_assincrona}
 
 Sempre que possível, o melhor modelo de integração a ser utilizado é o síncrono. Pode-se fazer essa afirmação baseado no que \citeonline{ArtOfAgileDevelopment} descrevem como vantagens em utilizar a integração contínua síncrona:
@@ -742,15 +742,7 @@ Sempre que possível, o melhor modelo de integração a ser utilizado é o sínc
   \item A frequência de \textit{builds} quebradas é muito menor, assim o tempo de permanência da falha no sistema de controle de versão, pois o responsável pela modificação que introduziu a falha pode não estar apto para corrigir-la imediatamente.
 \end{itemize}
 
-\citeonline{ImproveitCI} corrobora dizendo o seguinte:
-
-\begin{citacao}
-A integração contínua assíncrona permite o trabalho de desenvolvedores distribuídos geograficamente, porém é um pouco mais arriscada e menos eficiente que a integração síncrona. O risco aumenta porque o repositório pode ficar inconsistente durante alguns períodos de tempo $-$ sempre que um erro ocorre e o responsável por ele ainda não fez o \textit{commit} das correções.
-
-Na integração assíncrona, a eficiência diminui porque leva mais tempo para o desenvolvedor descobrir que cometeu um erro. É comum o desenvolvedor receber a notificação de um erro depois de já ter iniciado uma nova atividade. Ao ser notificado, deve parar a nova tarefa, relembrar o que havia feito na tarefa anteriormente e corrigir o erro.
-
-O processo síncrono é mais eficiente no uso do \textit{feedback} exatamente porque impede o desenvolvedor de desviar sua atenção para qualquer outra atividade, enquanto a integração não tiver sido concluída com sucesso.
-\end{citacao}
+\citeonline{ImproveitCI} corrobora dizendo que a integração contínua assíncrona permite o trabalho de desenvolvedores distribuídos geograficamente, porém é um pouco mais arriscada e menos eficiente que a integração síncrona. O risco aumenta porque o repositório pode ficar inconsistente durante alguns períodos de tempo $-$ sempre que um erro ocorre e o responsável por ele ainda não fez o \textit{commit} das correções. Na integração assíncrona, a eficiência diminui porque leva mais tempo para o desenvolvedor descobrir que cometeu um erro. É comum o desenvolvedor receber a notificação de um erro depois de já ter iniciado uma nova atividade. Ao ser notificado, deve parar a nova tarefa, relembrar o que havia feito na tarefa anteriormente e corrigir o erro. O processo síncrono é mais eficiente no uso do \textit{feedback} exatamente porque impede o desenvolvedor de desviar sua atenção para qualquer outra atividade, enquanto a integração não tiver sido concluída com sucesso.
 
 % subsection sincrona_x_assincrona (end)
 
@@ -758,6 +750,8 @@ O processo síncrono é mais eficiente no uso do \textit{feedback} exatamente po
 \label{sub:integracao_continua_no_kanban}
 
 Com base no tópico anterior e por ser um projeto \textit{open source}, no kanban-roots foi utilizado o método assíncrono de integração contínua, através do Travis\footnote{Mais informações podem ser encontradas em \url{http://travis-ci.org}}, que foi escolhido por ser um serviço hospedado integração contínua para a comunidade \textit{open source}, o que facilitou bastante pela não necessidade de manutenção de uma estrutura local de integração contínua.
+
+Contudo, na Seção \ref{sub:testes_de_integracao} sobre testes de integração, foi apresentado o Código \ref{code:integration_spec} com os testes de integração para o \textit{highlighting} de código. Para que a integração contínua pudesse continuar sendo executada no Travis, o teste que verifica a integração do kaban-roots com o Pygments local foi comentado, uma vez que não é possível fazer instalações de dependências de sistema no Travis. Neste caso, o ideal seria ter um servidor próprio para rodar a integração contínua, pois esta tem que simular um ambiente de produção da forma mais perfeita possível.
 
 A integração contínua se mostrou importante em algumas ocasiões durante o desenvolvimento do kanban-roots, a exemplo:
 
@@ -788,29 +782,48 @@ Os Dublês de Teste não precisam se comportar exatamente como o componente real
 
 \begin{itemize}
 \item
-Objetos \textbf{\textit{Dummy}} geralmente são utilizados apenas para preencher uma lista de parâmetros e nunca são realmente usados.
+Objetos \textbf{\textit{Dummy}} geralmente é utilizado apenas para preencher uma lista de parâmetros e nunca é realmente usado.
 
 \item
-Objetos \textbf{\textit{Fake}} são utilizados para substituir funcionalidades reais de um componente por razões diferentes de verificações indiretas de entradas e saídas do componente a ser testado.
+Objetos \textbf{\textit{Fake}} é utilizado para substituir uma funcionalidade real. Geralmente, o \textit{fake} implementa a mesma funcionalidade, porém de uma maneira muito mais simples. Um exemplo típico é uma base de dados em memória.
 
 \item
-Os \textbf{\textit{Stubs}} provêm respostas prontas para chamadas feitas durante os testes, geralmente não respondendo a qualquer chamada diferente
+Os \textbf{\textit{Stub}} provê respostas prontas para chamadas feitas durante os testes, geralmente não respondendo a qualquer chamada diferente
 das pré-definidas.
 
 \item
-Os \textbf{\textit{Spies}} são \textit{Stubs} que também tem gravam algumas informações baseadas em como eles são chamados. Um exemplo pode ser um serviço de email que grava quantas mensagens foram enviadas.
+Os \textbf{\textit{Spy}} é um \textit{stub} que também grava algumas informações baseadas em como ele é chamado. Um exemplo pode ser um serviço de email que grava quantas mensagens foram enviadas.
 
 \item
-\textbf{\textit{Mocks}} são objetos pré-programados para receber determinado conjunto de chamadas, podendo lançar uma exceção se tais chamadas não forem feitas a ele, ou se receber outra chamada diferente das pré-programadas.
+\textbf{\textit{Mock}} é um objeto pré-programado para receber determinado conjunto de chamadas, podendo lançar uma exceção se tais chamadas não forem feitas a ele, ou se receber outra chamada diferente das pré-programadas.
 
 \end{itemize}
 
-Destes cinco tipos de dublês, apenas dois serão abordados, sendo eles \textit{mock} e \textit{stub}, por serem mais amplamente utilizados.
+Destes cinco tipos de dublês, apenas dois serão abordados, sendo eles \textit{mock} e \textit{stub}, por serem os mais amplamente utilizados.
 
-\subsection{Problemas com o uso excessivo de \textit{mock} e \textit{stub}} % (fold)
+
+\subsection{A dicotomia entre o TDD clássico e o mockista} % (fold)
+\label{sub:tdd_classico_e_mockista}
+
+\citeonline{MocksArentStubs} define duas faces da utilização de TDD com dublês, onde o divisor é \textbf{quando} utilizar um dublê:
+
+\begin{itemize}
+  \item O estilo \textbf{TDD clássico} é o qual se utiliza objetos reais sempre que possível e dublês quando é complicado utilizar o real.
+
+  \item O estilo \textbf{TDD mockista} (\textit{mockist}, em inglês) é o qual se utiliza dublês sempre.
+\end{itemize}
+
+% subsection tdd_classico_e_mockista (end)
+
+\subsection{Problemas com o uso excessivo de \textit{mocks} e \textit{stubs}} % (fold)
 \label{sub:problemas_do_mock_e_stub}
 
-De modo geral, a utilização de dublês de teste é benéfica para o projeto e extremamente útil. Um exemplo da utilização do \textit{stub} foi mostrado na Seção \ref{sub:testes_de_integracao} sobre testes de integração.
+De modo geral, a utilização de dublês de teste é benéfica para o projeto e extremamente útil. Porém, seu uso excessivo pode causar um problema de acoplamento entre o teste e a implementação.
+
+\subsubsection{Contextualizando o \textit{stub}} % (fold)
+\label{ssub:contextualizando_o_stub}
+
+Um exemplo da utilização simples e eficiente do \textit{stub} foi mostrado na Seção \ref{sub:testes_de_integracao} sobre testes de integração. Naquele exemplo, foi feito um \textit{stub} do método \texttt{can\_pygmentize?} que faz uma consulta ao sistema operacional para verificar se uma determinada dependência de sistema está instalada. Desta forma, o teste ficou isolado, não importando se a máquina em que o teste for executado tem ou não a dependência instalada, sendo possível simular as duas situações $-$ logicamente, uma maquina não pode, ao mesmo tempo, ter e não ter uma dependência instalada.
 
 Um outro exemplo é mostrado no Código \ref{code:stub_spec}, onde está sendo testada uma ação da classe \textit{Project}. Contudo, para que esta ação seja realizada, é necessário um conjunto de objetos da classe \textit{Task}. Assim, com o objetivo de criar um teste isolado e concentrado na classe \textit{Project}, é utilizado o método \texttt{stub\_model} que cria um \textit{stub} da classe \textit{Task} que irá reponder apenas aos atributos definidos no \textit{hash} passado como segundo parâmetro. No caso, a ação em questão é contar a soma dos pontos das tarefas alocadas em uma determinada posição do quadro (kanban). Esta ação é exercida através do método \texttt{count\_points}, cuja implementação é apresentada no Código \ref{code:stub}.
 
@@ -849,16 +862,91 @@ class Project
 end
 \end{mycode}
 
-Contudo, a utilização desta técnica deve ser feita com cautela. Quando se utiliza \textit{stubs} em demasia, cria-se um acoplamento muito grande entre teste e implementação. Por exemplo, se na implementação do método \texttt{count\_points} for preciso fazer uso de mais algum atributo de \textit{Task} (para uma refatoração, por exemplo), o \textit{stub} deverá possuir esse atributo também, fazendo com que o teste tenha que ser alterado. Isso vai contra uma das premissas da refatoração de que se o comportamento do método não é modificado, seu teste deve permanecer o mesmo e continuar passando após ser feita a alteração na implementação.
+Contudo, a utilização desta técnica deve ser feita com cautela. Quando se utiliza \textit{stubs} em demasia, cria-se um acoplamento muito grande entre teste e implementação. Por exemplo, se na implementação do método \texttt{count\_points} for preciso fazer uso de mais algum atributo de \textit{Task} (em uma refatoração, por exemplo), o \textit{stub} também deverá possuir esse atributo, fazendo com que o teste tenha que ser alterado. Isso vai contra uma das premissas da refatoração de que se o comportamento do método não é modificado, seu teste deve permanecer o mesmo e continuar passando após ser feita a alteração na implementação.
 
-É importante notar a diferença entre um \textit{stub} e as estratégias de \textit{fixture replacement}\footnote{\textit{Fixture replacement} é uma técnica que tem como objetivo separar a inicialização do teste de sua codificação em si, dando a possibilidade de se criar objetos com estados pré-definidos que possam ser reutilizados em mais de um teste.} baseadas em instâncias. Nestas estratégias o \textit{fixture} é um objeto real da classe. Assim, um objeto criado via \textit{fixture replacement} de instância fica sujeito a detalhes de sua implementação da classe real e, dessa forma, não faz o isolamento que um \textit{stub} em seu lugar faria, pois o stub simplesmente simula uma instância, portanto, não fica sujeito comportamentos inesperados.
+É importante notar a diferença entre os \textit{stubs} e as estratégias de \textit{fixture replacement}\footnote{\textit{Fixture replacement} é uma técnica que tem como objetivo separar a inicialização do teste de sua codificação em si, dando a possibilidade de se criar objetos com estados pré-definidos que possam ser reutilizados em mais de um teste.} baseadas em instâncias. Nestas estratégias, o \textit{fixture} é um objeto real da classe. Assim, um objeto criado via \textit{fixture replacement} de instância, fica sujeito a detalhes de sua implementação da classe real. Dessa forma, o {fixture} não cria o isolamento que um \textit{stub} em seu lugar criaria, pois o stub simplesmente simula uma instância e, portanto, não fica sujeito comportamentos inesperados.
 
+% subsubsection contextualizando_o_stub (end)
 
-Já ao utilizar \textit{mocks} abundantemente, acaba se testando \textbf{como} está sendo feito e não \textbf{o que} \cite{UnitForAReason}. Dessa forma, o acoplamento entre o teste e a implementação em si acaba sendo um grande problema.
+\subsubsection{Contextualizando o \textit{mock}} % (fold)
+\label{ssub:contextualizando_o_mock}
 
-O estilo de desenvolvimento onde o desenvolvedor faz uso intenso de \textit{mocks} ficou conhecido na comunidade como estilo \textit{mockist} (``mockista", em português) de fazer TDD e seu oposto ficou conhecido como estilo tradicional \cite{MocksArentStubs}.
+Um exemplo da utilização do \textit{mock} é apresentado no Código \ref{code:mock_spec}, onde é mostrado um método de \textit{controller}\footnote{O \textit{controller} é um componente do padrão MVC (do inglês \textit{Model View Controller}) de desenvolvimento de software. Neste padrão, a lógica da aplicação (\textit{Model}) é isolada da interface do usuário (\textit{View}) através de um controlador (\textit{Controller}).} que é chamado via Ajax e implementa a atualização dos pontos de uma tarefa diretamente do kanban do projeto. Além atualizar os pontos da tarefa na base de dados, este método captura, trata e envia informações para que a interface do kanban seja atualizada. Este foi um típico caso onde um experimento foi para produção, sem testes e com um código \textbf{extremamente ruim}.
 
-Um exemplo deste problema é apresentado no Código \ref{}
+Um outro exemplo é mostrado no Código \ref{code:stub_spec}, onde está sendo testada uma ação da classe \textit{Project}. Contudo, para que esta ação seja realizada, é necessário um conjunto de objetos da classe \textit{Task}. Assim, com o objetivo de criar um teste isolado e concentrado na classe \textit{Project}, é utilizado o método \texttt{stub\_model} que cria um \textit{stub} da classe \textit{Task} que irá reponder apenas aos atributos definidos no \textit{hash} passado como segundo parâmetro. No caso, a ação em questão é contar a soma dos pontos das tarefas alocadas em uma determinada posição do quadro (kanban). Esta ação é exercida através do método \texttt{count\_points}, cuja implementação é apresentada no Código \ref{code:stub}.
+
+\begin{mycode}{ruby}%
+{Código do método que atualiza os responsáveis por uma tarefa assincronamente}{code:mock}
+# app/controllers/boards_controller.rb
+class BoardsController < InheritedResources::Base
+  # TODO: Make test and refactor
+  def update_assignees
+    task = Task.find(params[:task_id])
+    params[:assignees].delete "-"
+    params[:assignees] = nil if params[:assignees].empty?
+    task.update_attribute(:contributor_ids, params[:assignees])
+
+    if params[:assignees].nil?
+      assignees_sentence = "-"
+    else
+      assignees_sentence = task.contributors.collect(&:username).to_sentence
+    end
+
+    if assignees_sentence.length > 25
+      long_sentence = true
+      assignees_long_sentence = assignees_sentence
+      assignees_sentence = assignees_sentence.truncate(25)
+    end
+
+    data = { :assignees_sentence => assignees_sentence,
+             :long_sentence => long_sentence,
+             :assignees_long_sentence => assignees_long_sentence }
+    render :text => data.to_json
+  end
+end
+\end{mycode}
+
+\begin{mycode}{rspec}%
+{Código do método que atualiza os responsáveis por uma tarefa assincronamente}{code:mock_spec}
+# spec/controllers/boards_controller_spec.rb
+describe BoardsController do
+  context "should update task assignees" do
+    it "with more than one assignee" do
+      task = mock_model(Task)
+      hugo = mock_model(Contributor, :id => "5", :username => "hugomaiavieira")
+      rodrigo = mock_model(Contributor, :id => "9", :username => "rodrigomanhaes")
+
+      Task.should_receive(:find).with("1").and_return(task)
+      task.should_receive(:update_attribute).
+        with(:contributor_ids, ["5", "9"]).and_return(true)
+      task.should_receive(:contributors).and_return([hugo, rodrigo])
+
+      get :update_assignees, :task_id => "1", :assignees => ["5", "9"]
+
+      response.body.should ==
+        { :assignees_sentence => "hugomaiavieira and rod...",
+          :long_sentence => true,
+          :assignees_long_sentence => "hugomaiavieira and rodrigomanhaes" }.to_json
+    end
+
+    it "with more than one assignee" do
+      project = Factory.create :project
+      task = Factory.create :task, :project => project
+      hugo = Factory.create :contributor, :username => "hugomaiavieira"
+      rodrigo = Factory.create :contributor, :username => "rodrigomanhaes"
+
+      get :update_assignees, :task_id => task.id, :assignees => [hugo.id, rodrigo.id]
+
+      response.body.should ==
+        { :assignees_sentence => "hugomaiavieira and rod...",
+          :long_sentence => true,
+          :assignees_long_sentence => "hugomaiavieira and rodrigomanhaes" }.to_json
+    end
+  end
+end
+\end{mycode}
+
+Já ao utilizar \textit{mocks} abundantemente, acaba se testando \textbf{como} está sendo feito e não \textbf{o que} \cite{UnitForAReason}. Dessa forma, o acoplamento entre o teste e a implementação em si, assim como no uso de excessivo de \textit{stubs}, acaba sendo um grande problema.
 
 \citeonline{ArtOfAgileDevelopment} alerta sobre o perigo de utilizar o mock:
 
@@ -867,6 +955,8 @@ Beware of mock objects. They add complexity and tie your test to the implementat
 
 Mock objects are a useful technique, and sometimes they’re the best way to test your code. Before you assume that a mock object is appropriate for your situation, however, take a second look at your design. You might have an opportunity for improvement.
 \end{citacao}
+
+% subsubsection contextualizando_o_mock (end)
 
 % subsection problemas_do_mock_e_stub (end)
 
