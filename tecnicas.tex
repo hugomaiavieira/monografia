@@ -769,7 +769,7 @@ Com o \textit{feedback} rápido, todas as falhas foram corrigidas muito rapidame
 % section integracao_continua (end)
 
 
-\section{Dublês de Teste (EM CONSTRUÇÃO)} % (fold)
+\section{Dublês de Teste} % (fold)
 \label{sec:dubles_de_teste}
 
 Em algumas ocasiões é difícil testar alguns componentes porque eles dependem de outros componentes que não podem ser utilizados em ambiente de teste. Estas situações podem acontecer por esses componentes não estarem disponíveis, por eles não retornarem os resultados necessários ou porque executá-los iria trazer efeitos colaterais indesejados. Em outros casos, a estratégia de testes utilizada requer que se tenha mais controle do comportamento interno do componente.
@@ -784,17 +784,17 @@ Os Dublês de Teste não precisam se comportar exatamente como o componente real
 
 \begin{itemize}
 \item
-Objetos \textbf{\textit{Dummy}} geralmente é utilizado apenas para preencher uma lista de parâmetros e nunca é realmente usado.
+\textbf{\textit{Dummy}} geralmente é utilizado apenas para preencher uma lista de parâmetros e nunca é realmente usado.
 
 \item
-Objetos \textbf{\textit{Fake}} é utilizado para substituir uma funcionalidade real. Geralmente, o \textit{fake} implementa a mesma funcionalidade, porém de uma maneira muito mais simples. Um exemplo típico é uma base de dados em memória.
+\textbf{\textit{Fake}} é utilizado para substituir uma funcionalidade real. Geralmente, o \textit{fake} implementa a mesma funcionalidade, porém de uma maneira muito mais simples. Um exemplo típico é uma base de dados em memória.
 
 \item
-Os \textbf{\textit{Stub}} provê respostas prontas para chamadas feitas durante os testes, geralmente não respondendo a qualquer chamada diferente
+\textbf{\textit{Stub}} provê respostas prontas para chamadas feitas durante os testes, geralmente não respondendo a qualquer chamada diferente
 das pré-definidas.
 
 \item
-Os \textbf{\textit{Spy}} é um \textit{stub} que também grava algumas informações baseadas em como ele é chamado. Um exemplo pode ser um serviço de email que grava quantas mensagens foram enviadas.
+\textbf{\textit{Spy}} é um \textit{stub} que também grava algumas informações baseadas em como ele é chamado. Um exemplo pode ser um serviço de email que grava quantas mensagens foram enviadas.
 
 \item
 \textbf{\textit{Mock}} é um objeto pré-programado para receber determinado conjunto de chamadas, podendo lançar uma exceção se tais chamadas não forem feitas a ele, ou se receber outra chamada diferente das pré-programadas.
@@ -803,29 +803,10 @@ Os \textbf{\textit{Spy}} é um \textit{stub} que também grava algumas informaç
 
 Destes cinco tipos de dublês, apenas dois serão abordados, sendo eles \textit{mock} e \textit{stub}, por serem os mais amplamente utilizados.
 
+\subsection{Contextualizando o \textit{stub}} % (fold)
+\label{sub:contextualizando_o_stub}
 
-\subsection{A dicotomia entre o TDD clássico e o mockista} % (fold)
-\label{sub:tdd_classico_e_mockista}
-
-\citeonline{MocksArentStubs} define duas faces da utilização de TDD com dublês, onde o divisor é \textbf{quando} utilizar um dublê:
-
-\begin{itemize}
-  \item O estilo \textbf{TDD clássico} é o qual se utiliza objetos reais sempre que possível e dublês quando é complicado utilizar o real.
-
-  \item O estilo \textbf{TDD mockista} (\textit{mockist}, em inglês) é o qual se utiliza dublês sempre.
-\end{itemize}
-
-% subsection tdd_classico_e_mockista (end)
-
-\subsection{Problemas com o uso excessivo de \textit{mocks} e \textit{stubs}} % (fold)
-\label{sub:problemas_do_mock_e_stub}
-
-De modo geral, a utilização de dublês de teste é benéfica para o projeto e extremamente útil. Porém, seu uso excessivo pode causar um problema de acoplamento entre o teste e a implementação.
-
-\subsubsection{Contextualizando o \textit{stub}} % (fold)
-\label{ssub:contextualizando_o_stub}
-
-Um exemplo da utilização simples e eficiente do \textit{stub} foi mostrado na Seção \ref{sub:testes_de_integracao} sobre testes de integração. Naquele exemplo, foi feito um \textit{stub} do método \texttt{can\_pygmentize?} que faz uma consulta ao sistema operacional para verificar se uma determinada dependência de sistema está instalada. Desta forma, o teste ficou isolado, não importando se a máquina em que o teste for executado tem ou não a dependência instalada, sendo possível simular as duas situações $-$ logicamente, uma maquina não pode, ao mesmo tempo, ter e não ter uma dependência instalada.
+Um exemplo da utilização simples e eficiente do \textit{stub} foi mostrado na Seção \ref{sub:testes_de_integracao} sobre testes de integração. Naquele exemplo, foi feito um \textit{stub} do método \texttt{can\_pygmentize?} que faz uma consulta ao sistema operacional para verificar se uma determinada dependência de sistema está instalada. Desta forma, o teste ficou isolado, não importando se a máquina em que o teste for executado tem ou não a dependência instalada, sendo assim possível simular as duas situações $-$ logicamente, uma maquina não pode, ao mesmo tempo, ter e não ter uma dependência instalada.
 
 Um outro exemplo é mostrado no Código \ref{code:stub_spec}, onde está sendo testada uma ação da classe \textit{Project}. Contudo, para que esta ação seja realizada, é necessário um conjunto de objetos da classe \textit{Task}. Assim, com o objetivo de criar um teste isolado e concentrado na classe \textit{Project}, é utilizado o método \texttt{stub\_model} que cria um \textit{stub} da classe \textit{Task} que irá reponder apenas aos atributos definidos no \textit{hash} passado como segundo parâmetro. No caso, a ação em questão é contar a soma dos pontos das tarefas alocadas em uma determinada posição do quadro (kanban). Esta ação é exercida através do método \texttt{count\_points}, cuja implementação é apresentada no Código \ref{code:stub}.
 
@@ -868,12 +849,13 @@ Contudo, a utilização desta técnica deve ser feita com cautela. Quando se uti
 
 É importante notar a diferença entre os \textit{stubs} e as estratégias de \textit{fixture replacement}\footnote{\textit{Fixture replacement} é uma técnica que tem como objetivo separar a inicialização do teste de sua codificação em si, dando a possibilidade de se criar objetos com estados pré-definidos que possam ser reutilizados em mais de um teste.} baseadas em instâncias. Nestas estratégias, o \textit{fixture} é um objeto real da classe. Assim, um objeto criado via \textit{fixture replacement} de instância, fica sujeito a detalhes de sua implementação da classe real. Dessa forma, o {fixture} não cria o isolamento que um \textit{stub} em seu lugar criaria, pois o stub simplesmente simula uma instância e, portanto, não fica sujeito comportamentos inesperados.
 
-% subsubsection contextualizando_o_stub (end)
+% subsection contextualizando_o_stub (end)
 
-\subsubsection{Contextualizando o \textit{mock}} % (fold)
-\label{ssub:contextualizando_o_mock}
 
-Um exemplo da utilização do \textit{mock} é apresentado no Código \ref{code:mock_spec}, onde é mostrado um método de \textit{controller} que, semelhante ao Código \ref{code:todo} apresentado na Seção \ref{sub:a_ubiquidade_do_tdd}, é chamado via Ajax e implementa a atualização dos responsáveis por uma tarefa diretamente do kanban do projeto. Além atualizar os responsáveis pela tarefa tarefa na base de dados, este método captura, trata e envia informações para que a interface do kanban seja atualizada. Este é outro caso onde um experimento foi para produção, sem testes e com um código \textbf{extremamente ruim}. Sendo assim, para este caso não foi utilizado TDD para criar os testes, os testes foram escritos após a implementação.
+\subsection{Contextualizando o \textit{mock}} % (fold)
+\label{sub:contextualizando_o_mock}
+
+De modo semelhante ao Código \ref{code:todo} apresentado na Seção \ref{sub:a_ubiquidade_do_tdd}, o Código \ref{code:mock} apresenta a implementação de um método de \textit{controller} que é chamado via Ajax e implementa a atualização dos responsáveis por uma tarefa diretamente do kanban do projeto. Além atualizar os responsáveis pela tarefa tarefa na base de dados, este método captura, trata e envia informações para que a interface do kanban seja atualizada. Este é outro caso onde um experimento foi para produção, sem testes e com um código \textbf{extremamente ruim}. Sendo assim, neste caso não foi utilizado TDD para criar os testes, sendo estes escritos após a implementação.
 
 \begin{mycode}{ruby}%
 {Código do método que atualiza os responsáveis por uma tarefa assincronamente}{code:mock}
@@ -906,10 +888,14 @@ class BoardsController < InheritedResources::Base
 end
 \end{mycode}
 
-O Código \ref{code:mock_spec_mockista} apresenta o teste para o método \texttt{update\_assignees} com a utilização de \textit{mock}. Como o teste quer validar a funcionalidade para mais de um responsável (\textit{assignees}), são criados dos objetos mockados da classe \textit{Contributor}. Também é necessário fazer um \textit{mock} de uma tarefa. Com esses 3 objetos mockados, está feita a \textit{setup} para o teste. Em seguida são feias as verificações das chamadas de métodos sobre os objetos mockados. Por fim, é feita a chamada ao método do \textit{controller} e é verificado se a resposta do método está de acordo com as expectativas.
+O teste para o método \texttt{update\_assignees}, com a utilização de \textit{mock}, é apresentado no Código \ref{code:mock_spec_mockista}. Como o teste quer validar a funcionalidade para mais de um responsável (\textit{assignees}), são criados dois objetos mockados da classe \textit{Contributor}, além de também ser necessário cria um objeto mockado da classe \textit{Task}. Com esses 3 objetos mockados, está feito a \textit{setup} para o teste.
+
+Em seguida verificadas as chamadas à métodos sobre os objetos mockados. Isto é feito através do método \texttt{should\_receive} que recebe como parâmetro o método chamado. Em seguida, pode ser aninhado o método \texttt{with} que recebera os parâmetros que devem ser passados para o método chamado no \texttt{should\_receive}. Para finalizar a cadeia, pode ser ainda aninhado o método \texttt{and\_return} que indica o retorno do método chamado no \texttt{should\_receive}.
+
+Por fim, através de um \texttt{get}, é feita a chamada ao método do \textit{controller} testado (\texttt{update\_assignees}), e é verificado se a resposta obtida está de acordo com as expectativas.
 
 \begin{mycode}{rspec}%
-{Código do método que atualiza os responsáveis por uma tarefa assincronamente}{code:mock_spec_mockista}
+{Teste utilizando \textit{mock} para o método \texttt{update\_assignees}}{code:mock_spec_mockista}
 # spec/controllers/boards_controller_spec.rb
 describe BoardsController do
   context "should update task assignees" do
@@ -934,16 +920,12 @@ describe BoardsController do
 end
 \end{mycode}
 
-O problema do mock está mas verificações de chamada à métodos dos objetos mockados. Pose-se perceber que está se testando \textbf{como} a funcionalidade está sendo implementada e não \textbf{o que} a funcionalidade faz \cite{UnitForAReason}. Com isso, o acoplamento entre o teste e a implementação torna-se extremamente grande, ainda maior que os \textit{stubs}. Qualquer refatoração mínima feita na implementação, mesmo que não interfira no seu comportamento, pode fazer com que os testes quebrem.
+O grande problema do mock está nas verificações de chamada à métodos dos objetos mockados. Pose-se perceber que está se verificando a ordem em que os métodos são chamados, bem como os parâmetros passados. Desta forma, na realidade, está se testando \textbf{como} a funcionalidade está sendo implementada e não \textbf{o que} ela faz \cite{UnitForAReason}. Com isso, o acoplamento entre o teste e a implementação torna-se extremamente grande, ainda maior do que com a utilização de \textit{stubs}. Qualquer refatoração mínima feita na implementação, mesmo que não interfira em seu comportamento, pode fazer com que os testes quebrem.
 
-Para fazer uma comparação, no Código \ref{code:mock_spec_tradicional} é apresentado o teste para o mesmo exemplo, porém utilizando objetos reais. Note que desta vez foi preciso criar um objeto \textit{Project} para ligar ao objeto \textit{task}, pois quando são utilizados objetos reais, todas as validações são executadas, e uma tarefa obrigatoriamente deve estar ligada a um projeto.
-
-Percebe-se que o teste sem o uso do \textit{mock} fica mais simples e menos acoplado à implementação. Contudo, o teste usando \textit{mock} ganhou um isolamento maior, e os rodarem com uma velocidade 58\% maior do que o teste sem \textit{mock}.
-
-Uma outra questão é sobre a integração. Quando não se utiliza dublês, está se testando a integração entre as classes.
+Para fazer uma comparação, no Código \ref{code:mock_spec_tradicional} é apresentado um outro teste para o mesmo exemplo, porém, utilizando objetos reais criados através de \textit{fixture replacement}. Note que desta vez foi preciso criar um objeto \textit{Project} para ligar ao objeto \textit{task}, pois quando são utilizados objetos reais, todas as validações são executadas e, neste caso, uma tarefa obrigatoriamente deve estar ligada a um projeto.
 
 \begin{mycode}{rspec}%
-{Código do método que atualiza os responsáveis por uma tarefa assincronamente}{code:mock_spec_tradicional}
+{Teste utilizando \textit{fixture replacement} para o método \texttt{update\_assignees}}{code:mock_spec_tradicional}
 # spec/controllers/boards_controller_spec.rb
 describe BoardsController do
   context "should update task assignees" do
@@ -964,16 +946,30 @@ describe BoardsController do
 end
 \end{mycode}
 
-\citeonline{ArtOfAgileDevelopment} alerta sobre o perigo de utilizar o mock:
+Percebe-se que o teste sem o uso do \textit{mock} fica mais simples e menos acoplado à implementação. Contudo, o teste usando \textit{mock} ganhou um isolamento maior por não ficar sujeito a detalhes da implementação das classes, irrelevantes para o teste. Além disso, os testes rodaram com uma velocidade 58\% maior do que o teste sem \textit{mock}.
 
-\begin{citacao}
-Beware of mock objects. They add complexity and tie your test to the implementation of your code. When you’re tempted to use a mock object, ask yourself if there’s a way you could improve the design of your code so that a mock object isn’t necessary. Can you decouple your code from the external dependency more cleanly? Can you provide the data it needs $-$ in the constructor, perhaps $-$ rather than having it get the data itself?
+% subsection contextualizando_o_mock (end)
 
-Mock objects are a useful technique, and sometimes they’re the best way to test your code. Before you assume that a mock object is appropriate for your situation, however, take a second look at your design. You might have an opportunity for improvement.
-\end{citacao}
 
-% subsubsection contextualizando_o_mock (end)
+\subsection{A dicotomia entre o TDD clássico e o mockista} % (fold)
+\label{sub:tdd_classico_e_mockista}
 
-% subsection problemas_do_mock_e_stub (end)
+\citeonline{MocksArentStubs} generaliza os dublês de teste como \textit{mocks} e define duas faces da sua utilização com TDD, onde o divisor é \textbf{quando} utilizar um dublê:
+
+\begin{itemize}
+  \item O estilo \textbf{TDD clássico} é o qual se utiliza objetos reais sempre que possível e dublês quando é complicado utilizar o real.
+
+  \item O estilo \textbf{TDD mockista} (\textit{mockist}, em inglês) é o qual se utiliza dublês sempre.
+\end{itemize}
+
+Como visto anteriormente, a utilização de dublês de teste, em alguns casos, é claramente benéfica para o projeto. Porém, seu uso excessivo pode causar um problema de acoplamento entre o teste e a implementação.
+
+\citeonline{ArtOfAgileDevelopment} afirma o \textit{mock} é uma técnica útil, e as vezes é a melhor maneira de testar o código. No entanto, ele diz que antes de assumir que o \textit{mock} é apropriado para a situação, deve-se olhar novamente para o design do código, pois pode ser uma oportunidade de aprimoramento.
+
+Uma outra questão a ser levada em consideração é que quando não se utiliza dublês, está se testando a integração entre as classes, e isso pode ter um efeito colateral positivo, capturando teses que muitas vezes passam despercebidos ao se utilizar \textit{dublês}.
+
+Dessa forma, assim como \citeonline{MocksArentStubs} conclui, não existe razão para adotar um estilo TDD mockista, sendo o TDD clássico a melhor opção.
+
+% subsection tdd_classico_e_mockista (end)
 
 % section dubles_de_teste (end)
