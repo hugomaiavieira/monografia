@@ -220,7 +220,7 @@ Meses depois, foi verificado que esta entidade \textit{Team} não era mais neces
 Foram diversas as situações em que mudanças como essa ocorreram durante o desenvolvimento do kanban-roots. Sem o suporte do TDD seria extremamente complicado fazer essas alterações e deixar o design emergir, pois a insegurança de que as modificações pudesse afetar outras partes do código seria muito grande. Além disso, a criação a priori dos testes favoreceu que as modificações fossem feitas de maneira mais simples e direta.
 
 \subsection{A ubiquidade do TDD} % (fold)
-\label{sec:a_ubiquidade_do_tdd}
+\label{sub:a_ubiquidade_do_tdd}
 
 Existe um debate sobre a não utilização do TDD em qualquer situação. É dito ``sobre a \textbf{não} utilização"\ pois o autor desconhece qualquer literatura dizendo que TDD deve ser utilizado sempre e em qualquer situação. Na realidade, o que existe é um mal entendido na comunidade sobre o que que alguns ``Agile Experts"\ dizem.
 
@@ -270,7 +270,9 @@ class BoardsController < InheritedResources::Base
     division_name = Board::POSITIONS[params[:division_id]]
     division_points = project.count_points(division_name)
     contributors = task.contributor_ids
-    data = { :division_points => division_points, :contributors => contributors, :score => score}
+    data = { :division_points => division_points,
+             :contributors => contributors,
+             :score => score }
     render :text => data.to_json
   end
 end
@@ -871,9 +873,7 @@ Contudo, a utilização desta técnica deve ser feita com cautela. Quando se uti
 \subsubsection{Contextualizando o \textit{mock}} % (fold)
 \label{ssub:contextualizando_o_mock}
 
-Um exemplo da utilização do \textit{mock} é apresentado no Código \ref{code:mock_spec}, onde é mostrado um método de \textit{controller}\footnote{O \textit{controller} é um componente do padrão MVC (do inglês \textit{Model View Controller}) de desenvolvimento de software. Neste padrão, a lógica da aplicação (\textit{Model}) é isolada da interface do usuário (\textit{View}) através de um controlador (\textit{Controller}).} que é chamado via Ajax e implementa a atualização dos pontos de uma tarefa diretamente do kanban do projeto. Além atualizar os pontos da tarefa na base de dados, este método captura, trata e envia informações para que a interface do kanban seja atualizada. Este foi um típico caso onde um experimento foi para produção, sem testes e com um código \textbf{extremamente ruim}.
-
-Um outro exemplo é mostrado no Código \ref{code:stub_spec}, onde está sendo testada uma ação da classe \textit{Project}. Contudo, para que esta ação seja realizada, é necessário um conjunto de objetos da classe \textit{Task}. Assim, com o objetivo de criar um teste isolado e concentrado na classe \textit{Project}, é utilizado o método \texttt{stub\_model} que cria um \textit{stub} da classe \textit{Task} que irá reponder apenas aos atributos definidos no \textit{hash} passado como segundo parâmetro. No caso, a ação em questão é contar a soma dos pontos das tarefas alocadas em uma determinada posição do quadro (kanban). Esta ação é exercida através do método \texttt{count\_points}, cuja implementação é apresentada no Código \ref{code:stub}.
+Um exemplo da utilização do \textit{mock} é apresentado no Código \ref{code:mock_spec}, onde é mostrado um método de \textit{controller} que, semelhante ao Código \ref{code:todo} apresentado na Seção \ref{sub:a_ubiquidade_do_tdd}, é chamado via Ajax e implementa a atualização dos responsáveis por uma tarefa diretamente do kanban do projeto. Além atualizar os responsáveis pela tarefa tarefa na base de dados, este método captura, trata e envia informações para que a interface do kanban seja atualizada. Este é outro caso onde um experimento foi para produção, sem testes e com um código \textbf{extremamente ruim}. Sendo assim, para este caso não foi utilizado TDD para criar os testes, os testes foram escritos após a implementação.
 
 \begin{mycode}{ruby}%
 {Código do método que atualiza os responsáveis por uma tarefa assincronamente}{code:mock}
@@ -906,8 +906,10 @@ class BoardsController < InheritedResources::Base
 end
 \end{mycode}
 
+O Código \ref{code:mock_spec_mockista} apresenta o teste para o método \texttt{update\_assignees} com a utilização de \textit{mock}. Como o teste quer validar a funcionalidade para mais de um responsável (\textit{assignees}), são criados dos objetos mockados da classe \textit{Contributor}. Também é necessário fazer um \textit{mock} de uma tarefa. Com esses 3 objetos mockados, está feita a \textit{setup} para o teste. Em seguida são feias as verificações das chamadas de métodos sobre os objetos mockados. Por fim, é feita a chamada ao método do \textit{controller} e é verificado se a resposta do método está de acordo com as expectativas.
+
 \begin{mycode}{rspec}%
-{Código do método que atualiza os responsáveis por uma tarefa assincronamente}{code:mock_spec}
+{Código do método que atualiza os responsáveis por uma tarefa assincronamente}{code:mock_spec_mockista}
 # spec/controllers/boards_controller_spec.rb
 describe BoardsController do
   context "should update task assignees" do
@@ -928,7 +930,23 @@ describe BoardsController do
           :long_sentence => true,
           :assignees_long_sentence => "hugomaiavieira and rodrigomanhaes" }.to_json
     end
+  end
+end
+\end{mycode}
 
+O problema do mock está mas verificações de chamada à métodos dos objetos mockados. Pose-se perceber que está se testando \textbf{como} a funcionalidade está sendo implementada e não \textbf{o que} a funcionalidade faz \cite{UnitForAReason}. Com isso, o acoplamento entre o teste e a implementação torna-se extremamente grande, ainda maior que os \textit{stubs}. Qualquer refatoração mínima feita na implementação, mesmo que não interfira no seu comportamento, pode fazer com que os testes quebrem.
+
+Para fazer uma comparação, no Código \ref{code:mock_spec_tradicional} é apresentado o teste para o mesmo exemplo, porém utilizando objetos reais. Note que desta vez foi preciso criar um objeto \textit{Project} para ligar ao objeto \textit{task}, pois quando são utilizados objetos reais, todas as validações são executadas, e uma tarefa obrigatoriamente deve estar ligada a um projeto.
+
+Percebe-se que o teste sem o uso do \textit{mock} fica mais simples e menos acoplado à implementação. Contudo, o teste usando \textit{mock} ganhou um isolamento maior, e os rodarem com uma velocidade 58\% maior do que o teste sem \textit{mock}.
+
+Uma outra questão é sobre a integração. Quando não se utiliza dublês, está se testando a integração entre as classes.
+
+\begin{mycode}{rspec}%
+{Código do método que atualiza os responsáveis por uma tarefa assincronamente}{code:mock_spec_tradicional}
+# spec/controllers/boards_controller_spec.rb
+describe BoardsController do
+  context "should update task assignees" do
     it "with more than one assignee" do
       project = Factory.create :project
       task = Factory.create :task, :project => project
@@ -945,8 +963,6 @@ describe BoardsController do
   end
 end
 \end{mycode}
-
-Já ao utilizar \textit{mocks} abundantemente, acaba se testando \textbf{como} está sendo feito e não \textbf{o que} \cite{UnitForAReason}. Dessa forma, o acoplamento entre o teste e a implementação em si, assim como no uso de excessivo de \textit{stubs}, acaba sendo um grande problema.
 
 \citeonline{ArtOfAgileDevelopment} alerta sobre o perigo de utilizar o mock:
 
