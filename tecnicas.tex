@@ -60,7 +60,7 @@ Como na refatoração o comportamento do código não deve ser alterado, após r
 
 \end{enumerate}
 
-A figura \ref{img:ciclo-tdd} resume o ciclo TDD de forma bem clara.
+A figura \ref{img:ciclo-tdd} resume o ciclo TDD, onde as etapas 1 e 2 são representadas pelo item \textbf{teste}, as etapas 3 e 4 pelo item \textbf{codifique} e a etapa 5 pelo item \textbf{refatore}.
 
 \begin{figure}[h]
   \center
@@ -199,7 +199,7 @@ Ao longo das iterações, o design precisa evoluir, mas deve manter-se simples e
 Para o desenvolvimento do kanban-roots, foi de extrema importância que o design evoluísse incrementalmente, pois não se sabia ao certo que
 funcionalidades seriam contempladas nem que entidades existiriam.
 
-As entidades \textit{Project} e \textit{Contributor} tinham uma relação direta, n para n, como apresentado na Figura \ref{img:contributor_projetc}. Contudo, em um determinado momento achou-se pertinente a criação de uma nova entidade \textit{Team} que faria a ligação entre as outras duas entidades, como apresentado na Figura \ref{img:contributor_team_projetc}. Isto acarretou um uma série de alterações \cite{CommitAddTeam}, dentre outras, na interface das entidades e na estrutura do banco de dados $-$ considerada uma alteração crítica, mas que com ferramentas como \textit{migrations},\footnote{\textit{Migrations} são uma forma conveniente de gerenciar bases de dados de maneira estruturada e organizada. Mais em \url{http://guides.rubyonrails.org/migrations.html}} torna-se possível que o \textit{design} evolua de modo incremental e emergente.
+As entidades \textit{Project} e \textit{Contributor} tinham uma relação direta, n para n, como apresentado na Figura \ref{img:contributor_projetc}. Contudo, em um determinado momento achou-se pertinente a criação de uma nova entidade \textit{Team} que faria a ligação entre as outras duas entidades, como apresentado na Figura \ref{img:contributor_team_projetc}. Isto acarretou uma série de alterações \cite{CommitAddTeam}, dentre outras, na interface das entidades e na estrutura do banco de dados $-$ considerada uma alteração crítica, mas que com ferramentas como \textit{migrations},\footnote{\textit{Migrations} são uma forma conveniente de gerenciar bases de dados de maneira estruturada e organizada. Mais em \url{http://guides.rubyonrails.org/migrations.html}} torna-se possível que o \textit{design} evolua de modo incremental e emergente.
 
 \begin{figure}[h]
   \center
@@ -232,7 +232,7 @@ Já \citeonline{ChromaticTDD} é um pouco mais moderado e diz que TDD pode não 
 
 Introduzindo o kanban-roots na discussão, nos dois únicos casos em que ocorreu um \textit{bug} em produção, ao ser feita uma analise no código em busca da solução, foi encontrado um comentário ``TODO: Make test and refactor"\ nos métodos onde os \textit{bugs} ocorreram. Atualmente, existem 13 comentários semelhantes a esse espalhados no código do kanban-roots. Isso, de certa forma, comprava que caso os testes não sejam escritos antes, para um código que irá entrar em produção, escrevê-lo depois acaba sendo um fardo, e isso é ignorado até que um problema ocorra.
 
-Um exemplo para esta situação é apresentado no Código \ref{code:todo}, onde é mostrado um método de \textit{controller}\footnote{O \textit{controller} é um componente do padrão MVC (do inglês \textit{Model View Controller}) de desenvolvimento de software. Neste padrão, a lógica da aplicação (\textit{Model}) é isolada da interface do usuário (\textit{View}) através de um controlador (\textit{Controller}).} que é chamado via Ajax e implementa a atualização dos pontos de uma tarefa diretamente do kanban do projeto. Além atualizar os pontos da tarefa na base de dados, este método captura, trata e envia informações para que a interface do kanban seja atualizada. Este foi um típico caso onde um experimento foi para produção, sem testes e com um código \textbf{extremamente ruim}.
+Um exemplo para esta situação é apresentado no Código \ref{code:todo}, onde é mostrado um método de \textit{controller}\footnote{O \textit{controller} é um componente do padrão MVC (do inglês \textit{Model View Controller}) de desenvolvimento de software. Neste padrão, a lógica da aplicação (\textit{Model}) é isolada da interface do usuário (\textit{View}) através de um controlador (\textit{Controller}).} que é chamado via Ajax e implementa a atualização dos pontos de uma tarefa diretamente do kanban do projeto. Além de atualizar os pontos da tarefa na base de dados, este método captura, trata e envia informações para que a interface do kanban seja atualizada. Este foi um típico caso onde um experimento foi para produção, sem testes e com um código \textbf{extremamente ruim}.
 
 \begin{mycode}{ruby}%
 {Código do método que atualiza os pontos de uma tarefa diretamente do kanban do projeto}{code:todo}
