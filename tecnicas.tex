@@ -278,9 +278,11 @@ class BoardsController < InheritedResources::Base
 end
 \end{mycode}
 
+Códigos como o apresentado acima são extremamente difíceis de serem testados, pois desempenham tarefas de responsabilidade de outras unidades do software, o que aumenta em muito o seu acoplamento e dificulta a escrita dos testes. Se este código fosse escrito utilizando TDD, certamente estaria melhor escrito e com mais qualidade, pois para escrever o teste, o código teria que ser refatorado de modo a distribuir as diferentes responsabilidades incorporadas no mesmo. Assim, fica clara a íntima relação entre teste e implementação no que tange ao design e à qualidade.
+
 \citeonline{LegacyCode} define que \textbf{código legado é código sem testes}. Esta afirmação, que pode parecer extremada, é simplesmente a constatação de que, sem uma ampla cobertura de testes automatizados, e uma vez que é economicamente inviável a aplicação manual de todos os casos de teste $-$ ou mesmo de parte deles $-$ de um software a cada modificação, é muito difícil ter uma margem razoável de segurança de que uma modificação não irá introduzir \textit{bugs} no software. Deste modo, para um código ``que irá para produção"\ a utilização do TDD é essencial, pois do contrário, se está criando código legado. É importante lembrar que o código legado com o tempo vai minando a manutenibilidade do sistema e assim, elevando os custos de introdução de novas funcionalidade e evolução do mesmo.
 
-O autor considera que somente para casos em que um código é apenas prova de conceito ou experimento, e que será eliminado, a utilização da técnica não é invariavelmente necessária. Contudo, a utilização de TDD nesses cenários pode ser muito interessante, pois como dito anteriormente, para a escrita dos testes, é preciso entender bem o problema a ser resolvido, fazendo o desenvolvedor se preparar mais para o que ele ainda não conhece muito bem.
+Conclui-se que somente para casos em que um código é apenas prova de conceito ou experimento, e que será eliminado, a utilização da técnica não é invariavelmente necessária. Contudo, a utilização de TDD nesses cenários pode ser muito interessante, pois como dito anteriormente, para a escrita dos testes, é preciso entender bem o problema a ser resolvido, fazendo o desenvolvedor se preparar mais para o que ele ainda não conhece muito bem.
 
 % subsection a_ubiquidade_do_tdd (end)
 
@@ -384,7 +386,7 @@ Em TDD, o nome dos testes é baseado na estrutura do código, e isso pode ter um
 Uma \textit{ubiquitous language} é uma linguagem baseada no domínio do negócio, permitindo que clientes e desenvolvedores falem a mesma língua sem ambiguidade. Segundo \citeonline{BDDSolis}, o conceito de \textit{ubiquitous language} é o núcleo do BDD.
 
 
-\citeonline{BDDRodrigo} diz que uma \textit{ubiquitous language} é uma linguagem comum a todo o projeto, cobrindo toda acadeia de comunicação, desde conversas entre o cliente e o analista de negócios até conversas internas da equipe de desenvolvimento, chegando aos termos utilizados no código e mesmo nas estruturas de banco de dados.
+\citeonline{DDD} diz que uma \textit{ubiquitous language} é uma linguagem comum a todo o projeto, cobrindo toda acadeia de comunicação, desde conversas entre o cliente e o analista de negócios até conversas internas da equipe de desenvolvimento, chegando aos termos utilizados no código e mesmo nas estruturas de banco de dados.
 
 Dessa forma, uma \textit{ubiquitous language} estreita a colaboração entre clientes e desenvolvedores, ao facilitar a comunicação e o \textit{feedback} \cite{DDD}.
 
@@ -455,7 +457,7 @@ Uma das maneiras de escrever testes de aceitação é como texto plano, em uma l
 
 \begin{quote}
 \textbf{As a} (Como um) [X]\\
-\textbf{I whant} (Eu quero) [Y]\\
+\textbf{I want} (Eu quero) [Y]\\
 \textbf{So that} (Para que) [Z]
 \end{quote}
 
@@ -966,7 +968,7 @@ Como visto anteriormente, a utilização de dublês de teste, em alguns casos, �
 
 \citeonline{ArtOfAgileDevelopment} afirma o \textit{mock} é uma técnica útil, e as vezes é a melhor maneira de testar o código. No entanto, ele diz que antes de assumir que o \textit{mock} é apropriado para a situação, deve-se olhar novamente para o design do código, pois pode ser uma oportunidade de aprimoramento.
 
-Uma outra questão a ser levada em consideração é que quando não se utiliza dublês, está se testando a integração entre as classes, e isso pode ter um efeito colateral positivo, capturando teses que muitas vezes passam despercebidos ao se utilizar \textit{dublês}.
+Uma outra questão a ser levada em consideração é que quando não se utiliza dublês, está se testando a integração entre as classes, e isso pode ter um efeito colateral positivo, capturando testes que muitas vezes passam despercebidos ao se utilizar \textit{dublês}. Contudo, quando não se utiliza dublês, para testar uma unidade pode ser necessário desenvolver outras unidades colaboradoras, cada qual com seus correspondentes testes de unidade, assim tirando o foco da tarefa corrente.
 
 Dessa forma, assim como \citeonline{MocksArentStubs} conclui, não existe razão para adotar um estilo TDD mockista, sendo o TDD clássico a melhor opção.
 
