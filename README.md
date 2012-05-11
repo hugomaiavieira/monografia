@@ -21,9 +21,3 @@ As dependências são baseadas na distribuição Linux Ubuntu.
 
 Para compilar, depois ter instalado as dependências, basta rodar o comando
 `make` ou `make pdf`. O evince será aberto com o documento pdf gerado.
-
-
-# Autor e orientador
-
-- Autor: Hugo Henriques Maia Vieira <hugomaiavieira@gmail.com>
-- Orientador: Rodrigo Soares Manhães <rmanhaes@gmail.com>

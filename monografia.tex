@@ -1,12 +1,12 @@
 %-------------------------------- Configurações --------------------------------
 
 \documentclass[a4paper,         % Tamanho do papel: A4
-	           abntfigtabnum,
-	           noindentfirst,
-	           normaltoc,
-	           pnumplain,
-	           notimes
-	           % capchap,
+	             abntfigtabnum,
+	             noindentfirst,
+	             normaltoc,
+	             pnumplain,
+	             notimes
+	             % capchap,
 ]{abnt}
 
 % Links border color
@@ -21,10 +21,12 @@
 \usepackage{booktabs} % para utilização das linhas separadoras na tabela
 \usepackage{textcomp}
 \usepackage{minted} % foi adicionado o seguinte hack no minted: http://migre.me/7M8wI
+\usepackage{nomencl} % para criar a lista de siglas
 
 %--------------------------- Minted Highligthing -------------------------------
 
 \renewcommand\listingscaption{Código}
+\renewcommand{\nomname}{Lista de Siglas}
 
 % http://github.com/hugomaiavieira/pygments-style-github
 \usemintedstyle{github}
@@ -63,78 +65,51 @@
 
 %--------------------------------- Informações ---------------------------------
 
+\newcommand{\meutitulo}{Técnicas emergentes de teste de software: Discussão e Contextualização}
+
 % http://www.tug.org/applications/hyperref/manual.html
 \hypersetup{
-  pdftitle=Técnicas emergentes de teste de software: Discussão e Contextualização,
+  pdftitle=\meutitulo,
   pdfauthor=Hugo Henriques Maia Vieira
-  % pdfsubject={},
 }
+
+\makenomenclature
 
 \begin{document}
 
-\titulo{Técnicas Emergentes de Teste de Software: Discussão e Contextualização}
-\autor{Hugo Henriques Maia Vieira}
-\instituicao{Universidade Estadual do Norte Fluminense Darcy Ribeiro\par Laboratório de Ciências Matemáticas}
-\orientador{Rodrigo Soares Manhães, M.Sc.}
-\comentario{Monografia apresentada ao Curso de Graduação em Ciência da
-Computação da Universidade Estadual do Norte Fluminense Darcy Ribeiro como
-requisito para obtenção do título de Bacharel em Ciência da Computação, sob
-orientação do Prof. Rodrigo Soares Manhães, M.Sc.}
-\local{Campos dos Goytacazes/RJ}
-\data{2012}
+  \titulo{\meutitulo}
+  \autor{Hugo Henriques Maia Vieira}
+  \instituicao{Universidade Estadual do Norte Fluminense Darcy Ribeiro\par Laboratório de Ciências Matemáticas}
+  \orientador[Orientadora:\par]{Profª. Drª. Annabell del Real Tamariz}
+  \comentario{Monografia apresentada ao curso de graduação em Ciência da Computação da Universidade Estadual do Norte Fluminense Darcy Ribeiro como requisito para obtenção do título de Bacharel em Ciência da Computação.}
+  \local{Campos dos Goytacazes - RJ}
+  \data{2012}
 
+  \capa
+  \folhaderosto
 
-\capa
-\folhaderosto
+  \input{tex/folha_de_aprovacao}
+  \input{tex/epigrafe}
+  \input{tex/agradecimentos}
+  \input{tex/resumo}
+  \input{tex/abstract}
 
+  \sumario
+  \listoffigures
+  \listoftables
+  \printnomenclature
 
-% Adiciona linha acima dos nomes para a assinatura na folha de aprovação
-\setlength{\ABNTsignthickness}{0.4pt}
-% Adiciona um espaçamento maior entre os nomes na folha de aprovação
-\setlength{\ABNTsignskip}{3cm}
+  \input{tex/introducao}
+  \input{tex/fundamentacao}
+  \input{tex/tecnicas}
+  \input{tex/conclusoes}
 
-% \begin{folhadeaprovacao}
-%   Monografia apresentada ao Curso de Graduação em Ciência da
-% Computação da Universidade Estadual do Norte Fluminense Darcy Ribeiro como
-% requisito para obtenção do título de Bacharel em Ciência da Computação, sob
-% orientação do Prof. Rodrigo Soares Manhães, M.Sc.
+  \anexo
+  \input{tex/codigos_do_comparativo}
 
-%   \assinatura{Prof. M.Sc. Rodrigo Soares Manhães \\ Orientador}
+  %--------------------------------- Bibliografia ------------------------------
 
-%   \assinatura{Profª. Drª. Annabell del Real Tamariz \\ Universidade Estadual do Norte Fluminense Darcy Ribeiro}
-
-%   \assinatura{Prof. Dr. Rogério Atem de Carvalho \\ Instituto Federal Fluminense}
-% \end{folhadeaprovacao}
-
-
-\include{epigrafe}
-% \include{agradecimentos}
-
-\listoffigures
-\listoftables
-
-\begin{resumo}
-Com a ascensão dos métodos ágeis de desenvolvimento nos últimos anos, diferentes técnicas de teste de software estão emergindo para dar suporte à principal característica de tais métodos: \textit{feedback} rápido. Por serem técnicas emergentes do meio empresarial e com sua utilização tendo início e crescimento nos últimos anos, ainda não existem muitas referências acadêmicas tratando do assunto. Este trabalho enfocará as técnicas Desenvolvimento Guiado por Testes (do inglês, \textit{Test-Driven Development}), Desenvolvimento Guiado por Comportamento (do inglês, \textit{Behaviour-Driven Development}), Integração Contínua e Dublês de Teste, abordando-as em um estudo de caso, agregando conhecimentos, ainda dispersos e difusos, sobre as diferentes abordagens, possibilidades e pontos em aberto no emprego de tais técnicas, utilizando para isso o projeto kanban-roots.
-\end{resumo}
-
-\begin{abstract}
-With the rise of agile development methods in recent years, different software testing techniques are emerging to support the main feature of such methods: rapid feedback. Because they are emerging techniques of the business environment and its use with beginning and growth in recent years, yet there are many academic references on the topic. This review will focus on techniques Test-Driven Development, Behavior-Driven Development, Continuous Integration and Test Doubles, addressing them in a case study, adding knowledge, still scattered and diffuse, on different approaches, possibilities and open points use of such techniques, using for this project kanban-roots.
-\end{abstract}
-
-\sumario
-
-\include{introducao}
-\include{fundamentacao}
-\include{tecnicas}
-\include{conclusoes}
-
-\anexo
-\include{codigos_do_comparativo}
-
-%--------------------------------- Bibliografia --------------------------------
-
-\citeoption{abnt-repeated-author-omit=yes}
-\bibliographystyle{abnt-alf}
-\bibliography{bibliografia}
-
+  \citeoption{abnt-repeated-author-omit=yes}
+  \bibliographystyle{abnt-alf}
+  \bibliography{bibliografia}
 \end{document}

@@ -8,6 +8,9 @@
 *.lol
 *.lof
 *.pyg
+*.ilg
+*.nlo
+*.nls
 
 # sublime files
 *.lot

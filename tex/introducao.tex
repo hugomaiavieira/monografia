@@ -4,7 +4,7 @@ Com o passar dos anos, o mercado demanda e espera software inovadores e de alta 
 
 O desenvolvimento ágil de software, que neste ano de 2012 completa 11 anos, foi elaborado \cite{AgileManifesto} visando atender à estas expectativas do mercado, focando o processo de desenvolvimento nas pessoas e abraçando as mudanças que  naturalmente surgem durante a construção do software. De acordo com \citeonline{PMNetworkFailureDrop}, o \textit{Chaos Manifesto 2011}\footnote{O \textit{Chaos Manifesto} é uma pesquisa bienal realizada pelo \textit{The Standish Group} e teve início em 1994. As pesquisas publicadas em um ano representam os dados do ano anterior.} mostra que os resultados de 2010 representam, desde sua primeira edição, a maior taxa de sucesso nos projetos de desenvolvimento de software, que aumentou de 32\% em 2008 para 37\% em 2010. Segundo \citeonline{ResumoChaosReport}, o \textit{The Standish Group} conclui que uma das razões para o aumento da taxa de sucesso foi a utilização das metodologias ágeis, que cresce a uma taxa de 22\% CAGR\footnote{\href{http://en.wikipedia.org/wiki/Compound_annual_growth_rate} {Compound annual growth rate}} e hoje são adotados em 9\% de todos os projetos de Tecnologia da Informação em andamento e em 29\% dos novos projetos.
 
-Como a adoção do desenvolvimento ágil é crescente nos últimos anos, diversos métodos e técnicas vem sendo desenvolvidos tendo como base os princípios e valores ágeis \cite{BDDRodrigo}, principalmente relacionadas ao teste de software e que serão abordadas no presente trabalho, sendo elas o Desenvolvimento Guiado por Testes (do inglês, \textit{Test-Driven Development} - TDD), Desenvolvimento Guiado por Comportamento (do inglês, \textit{Behaviour-Driven Development - BDD}), Integração Contínua e Dublês de Teste. Sendo técnicas emergentes, ainda são pouco discutidas no meio acadêmico, este trabalho pretende contribuir com esta discussão e, de certa forma, introduzir estas técnicas emergentes na academia.
+Como a adoção do desenvolvimento ágil é crescente nos últimos anos, diversos métodos e técnicas vem sendo desenvolvidos tendo como base os princípios e valores ágeis \cite{BDDRodrigo}, principalmente relacionadas ao teste de software e que serão abordadas no presente trabalho, sendo elas o Desenvolvimento Guiado por Testes (do inglês, \textit{Test-Driven Development} - TDD) \nomenclature{TDD}{Test-Driven Development}, Desenvolvimento Guiado por Comportamento (do inglês, \textit{Behaviour-Driven Development - BDD}) \nomenclature{BDD}{Behaviour-Driven Development}, Integração Contínua e Dublês de Teste. Sendo técnicas emergentes, ainda são pouco discutidas no meio acadêmico, este trabalho pretende contribuir com esta discussão e, de certa forma, introduzir estas técnicas emergentes na academia.
 
 
 \section{Justificativas e objetivos}
@@ -28,11 +28,11 @@ Além disso, como o presente trabalho está no contexto dos métodos ágeis, e n
 
 Será feita uma explanação sobre cada técnica e uma discussão comparando as diferentes abordagens, possibilidades e pontos em aberto no emprego de cada técnica.
 
-Como base para a discussão, será utilizado o kanban-roots\footnote{\url{http://github.com/hugomaiavieira/kanban-roots}}, que está foi desenvolvido pelo autor.
+Como base para a discussão, será utilizado o kanban-roots\footnote{\url{http://github.com/hugomaiavieira/kanban-roots}}, que foi desenvolvido pelo autor do presente trabalho, utilizando as técnicas abordadas no mesmo.
 
 O kanban-roots é um kanban\footnote{O termo tem origem no sistema Toyota de produção, onde kanban é a maneira como é coordenado o fluxo de peças na cadeia de suprimentos  \cite{AMaquinaQueMudouOMundo}. No contexto do presente trabalho, kanban é um quadro para visualização do fluxo de trabalho (tarefas) em um projeto.} online para auxiliar a organização e acompanhamento das tarefas em um projeto, sendo especialmente interessante para projetos \textit{opensouce} ou, de modo geral, para projetos com equipes geograficamente distribuídas. O kanban-roots já está em produção e vem sendo testado e utilizado com sucesso por algumas pessoas em empresas do Brasil como a Algorich, Voxline, Mandic, Quatix, mas também estrangeiras como a infoPiiaf e Free.fr (França), Ginzametrics (Estados Unidos), Osube (China), Centah (Canadá), Podmoskovie.info (Rússia), EvoEnergy (Inglaterra), Forgotten Labs (Lituânia), entre outros.
 
-Na figura \ref{img:tela_kaban_roots} pode ser visto um \textit{print} da tela do kanban de um projeto no kanban-roots.
+Na figura \ref{img:tela_kaban_roots} pode ser visto um \textit{screen shot} da tela do kanban de um projeto no kanban-roots.
 
 \begin{figure}[h]
   \center
@@ -59,4 +59,3 @@ Não existem muitos trabalhos acadêmicos relacionados às técnicas abordadas n
 Sobre \textit{Test-Driven Development} (TDD), praticamente são apenas encontrados estudos empíricos, com estudos de caso na academia e na indústria, que discutem a efetividade do uso do TDD. Na Seção \ref{sub:a_efetividade_do_tdd} será feita uma análise destes estudos.
 
 % section trabalhos_relacionados (end)
-

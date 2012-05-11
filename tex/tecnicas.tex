@@ -4,21 +4,18 @@ Neste Capítulo serão apresentadas as técnicas emergentes de teste de software
 
 \section{Test-Driven Development (TDD)}
 \label{sec:tdd}
-``Apenas escrever código para corrigir um teste falhando". Segundo \citeonline{TestDrivenKoskela}, isto é \textit{Test-Driven Development} (Desenvolvimento guiado por testes) \cite{TDDbyExample} em apenas uma sentença.
 
-O TDD é uma técnica onde o desenvolvimento do software é guiado por \textbf{testes automatizados}, que são escritos antes de qualquer linha de código relativo a funcionalidades. Primeiro escreve-se um teste, depois escreve-se o código para passar neste teste. Em seguida, o código é refatorado para encontrar um design melhor, contando sempre com os testes existentes para que não sejam introduzidas falhas em outras partes do sistema.
+O \textit{Test-Driven Development} (Desenvolvimento guiado por testes) é uma técnica onde o desenvolvimento do software é guiado por \textbf{testes automatizados}, que são escritos antes de qualquer linha de código relativo a funcionalidades. Primeiro escreve-se um teste, depois escreve-se o código para passar neste teste. Em seguida, o código é refatorado para encontrar um design melhor, contando sempre com os testes existentes para que não sejam introduzidas falhas em outras partes do sistema.
 
 Esta abordagem encoraja bom design \cite{GrowingOOByTests}, produz código testável e mantém longe a sobre-engenharia por conta de falsas suposições, pois, nos testes, é especificado o que é desejado e escreve-se o código para fazer apenas aquilo que realmente é necessário. \cite{TestDrivenKoskela, TDDbyExample, EmpiricalTDD}
 
-\citeonline{EmergentDesign} coloca de maneira interessante a relação entre o entendimento do problema e o fluxo natural do TDD:
+\citeonline{EmergentDesign} relaciona o entendimento do problema e o fluxo natural do TDD:
 
 \begin{citacao}
 Tentar escrever um teste é uma boa maneira de testar a si mesmo sobre seu conhecimento sobre como a classe deverá funcionar antes de você escrevê-la. Esta é uma boa sequência: tenha certeza de que você entende o que você irá tentar fazer antes de você realmente tentar fazer. De fato, colocando dessa maneira parece muito mais natural considerar os testes como Primeira Tarefa e criar o código como Segunda Tarefa. (tradução do autor)
 \end{citacao}
 
-Mas TDD é uma técnica emergente? Não e sim.
-
-O TDD vem sendo utilizado esporadicamente há anos, contudo, não existia um nome para identificar essa forma de desenvolver software. Atualmente, esta técnica tem uma definição, um nome e começa a ganhar força, sendo utilizada em times de grandes empresas como Google, Yahoo, Microsoft e IBM \cite{EmpiricalTDD}.
+O TDD vem sendo utilizado esporadicamente há anos, contudo, não existia um nome para identificar essa forma de desenvolver software, que no fim dos anos noventa, ganhou além do nome, uma definição. Atualmente, TDD começa a ganhar força e ser utilizada em times de grandes empresas como Google, Yahoo, Microsoft e IBM \cite{EmpiricalTDD}.
 
 \subsection{Ciclo TDD}
 \label{ssub:ciclo_tdd}
@@ -222,13 +219,9 @@ Foram diversas as situações em que mudanças como essa ocorreram durante o des
 \subsection{A ubiquidade do TDD} % (fold)
 \label{sub:a_ubiquidade_do_tdd}
 
-Existe um debate sobre a não utilização do TDD em qualquer situação. É dito ``sobre a \textbf{não} utilização"\ pois o autor desconhece qualquer literatura dizendo que TDD deve ser utilizado sempre e em qualquer situação. Na realidade, o que existe é um mal entendido na comunidade sobre o que que alguns ``Agile Experts"\ dizem.
+Existe uma controvérsia sobre a não utilização do TDD em qualquer situação. É dito ``sobre a \textbf{não} utilização"\ pois o autor desconhece qualquer literatura dizendo que TDD deve ser utilizado sempre e em qualquer situação. Porém, muitos defendem a sua não utilização em algumas situações como em fase de descobertas, em fase de experimentos, se o desenvolvedor nunca utilizou a API, se o código não será utilizado novamente ou se levar mais tempo para escrever os testes do que para escrever e executar o código.
 
-\citeonline{CleanCode}, considerado um ``Agile Expert", define As Três Leis do TDD, onde a primeira delas é: ``Você não pode escrever código de produção até que você tenha escrito um teste de unidade com falha.". O que parece é que fecha-se os olhos para o trecho ``de produção", distorcendo completamente seu sentido.
-
-\citeonline{TDDGiveMeABreak} questiona a posição do que ele chama de ``Agile Testing Experts" dizendo que exigir que sempre deve-se escrever os testes primeiro é idiotice em fase de projeto, de \textit{hacking}, ou de descobertas. Ele continua, dizendo que fazer com que testar seja uma parte central do processo porque eles são úteis para os desenvolvedores é muito bom, porém ditar um fluxo de trabalho para os desenvolvedores que funciona em alguns casos como O Único Caminho Verdadeiro é ridículo. Para finalizar, ele afirma que testar é ajudar os desenvolvedores, e deve-se reconhecer que o teste automatizado são para benefício dos desenvolvedores, ao invés de \textit{cargo-culting}\footnote{O termo cargo-culting é utilizando quando um programador não qualificados ou iniciante (ou não experiência com o problema em mãos) copia um código de um lugar e colá-o em outro, com pouco ou nenhum entendimento de como o código funciona, ou se é realmente exigido na sua nova posição.} um fluxo de trabalho e decretando que ``um tamanho de sapato serve para todos os tipos de pés".
-
-Já \citeonline{ChromaticTDD} é um pouco mais moderado e diz que TDD pode não ser adequado se o desenvolvedor nunca utilizou a API, se ele nunca irá utilizar o código novamente ou se levar mais tempo para escrever os testes do que para escrever e executar o código.
+\citeonline{CleanCode} define As Três Leis do TDD, onde a primeira delas é: ``Você não pode escrever código de produção até que você tenha escrito um teste de unidade com falha.". Deve-se ter bastante atenção para o trecho ``de produção", pois sem ele, o sentido da frase é completamente distorcido, dando a impressão de que deve-se utilizar em todas as situações.
 
 Introduzindo o kanban-roots na discussão, nos dois únicos casos em que ocorreu um \textit{bug} em produção, ao ser feita uma analise no código em busca da solução, foi encontrado um comentário ``TODO: Make test and refactor"\ nos métodos onde os \textit{bugs} ocorreram. Atualmente, existem 13 comentários semelhantes a esse espalhados no código do kanban-roots. Isso, de certa forma, comprova que caso os testes não sejam escritos antes, para um código que irá entrar em produção, escrevê-lo depois acaba sendo um fardo, e isso é ignorado até que um problema ocorra.
 
@@ -596,9 +589,9 @@ O cliente é especialista em problemas e os desenvolvedores em dar soluções. S
 
 Dessa forma, o cliente não tem interesse em ler a especificação como no Código \ref{code:bdd_cucumber_spec}, nem validá-la, muito menos escrevê-la. Ler somente ``Render comments with Markdown syntax" é o suficiente, mais do que isso é superficial \cite{WhyBotherWithCucumberTesting}. Os testes em texto plano se atem a detalhes de interface que são irrelevantes para os objetivos do cliente.
 
-Uma exceção a isto ocorre em áreas que fazem uso pesado de modelagem de processo de negócio (BPM, do inglês \textit{Business Process Modeling}) como Enterprise Information Systems, na qual descrições executáveis em texto plano podem servir como ligação entre os artefatos de BPM e o código executável \cite{IntroducingBLDD}.
+Uma exceção a isto ocorre em áreas que fazem uso pesado de modelagem de processo de negócio (BPM, do inglês \textit{Business Process Modeling}) \nomenclature{BPM}{Business Process Modeling} como Enterprise Information Systems, na qual descrições executáveis em texto plano podem servir como ligação entre os artefatos de BPM e o código executável \cite{IntroducingBLDD}.
 
-Já em um contexto como o do desenvolvimento do kanban-roots, no qual não existe um cliente, onde as pessoas que escrevem e leem as especificações são desenvolvedores, a escrita em texto plano tem um valor ainda menor. O código é uma linguagem natural para desenvolvedores, ainda mais quando é escrito em conjunto com DSLs\footnote{\textit{Domain specific language} (linguagem específica de domínio) é uma linguagem de programação de expressividade limitada, focada num domínio particular.} como a do Rspec \cite{SteakOverCucumber}.
+Já em um contexto como o do desenvolvimento do kanban-roots, no qual não existe um cliente, onde as pessoas que escrevem e leem as especificações são desenvolvedores, a escrita em texto plano tem um valor ainda menor. O código é uma linguagem natural para desenvolvedores, ainda mais quando é escrito em conjunto com DSLs\footnote{\textit{Domain specific language} (linguagem específica de domínio) é uma linguagem de programação de expressividade limitada, focada num domínio particular.} \nomenclature{DSL}{Domain specific language} como a do Rspec \cite{SteakOverCucumber}.
 
 % subsubsection legibilidade (end)
 
@@ -700,7 +693,7 @@ Apesar dos pontos negativos, os testes em texto plano podem ter valia em situaç
 \section{Integração contínua} % (fold)
 \label{sec:integracao_continua}
 
-Em uma equipe com vários desenvolvedores, todos trabalhando na elaboração de um mesmo sistema, existe o problema de unificar as diversas alterações feitas na base de código, assegurando que a base continua consistente \cite{ImproveitCI}. Para resolver esse problema, entra em cena a Integração Contínua (IC), que além disso, tem como ponto chave dar um feedback rápido quando a base de código não está consistente.
+Em uma equipe com vários desenvolvedores, todos trabalhando na elaboração de um mesmo sistema, existe o problema de unificar as diversas alterações feitas na base de código, assegurando que a base continua consistente \cite{ImproveitCI}. Para resolver esse problema, entra em cena a Integração Contínua (IC) \nomenclature{IC}{Integração Contínua}, que além disso, tem como ponto chave dar um feedback rápido quando a base de código não está consistente.
 
 \cite{FowlerCI} definiu a IC da seguinte maneira:
 
