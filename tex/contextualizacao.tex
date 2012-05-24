@@ -1,73 +1,10 @@
 \chapter{Discussão das técnicas em um contexto aplicado}
 
+TODO: Refazer esse texto
 Neste Capítulo serão apresentadas as técnicas emergentes de teste de software, bem como suas características e discussões sobre os pontos em aberto acerca de tais técnicas.
 
-\section{Test-Driven Development (TDD)}
-\label{sec:tdd}
-
-O \textit{Test-Driven Development} (Desenvolvimento guiado por testes) é uma técnica onde o desenvolvimento do software é guiado por \textbf{testes automatizados}, que são escritos antes de qualquer linha de código relativo a funcionalidades. Primeiro escreve-se um teste, depois escreve-se o código para passar neste teste. Em seguida, o código é refatorado para encontrar um design melhor, contando sempre com os testes existentes para que não sejam introduzidas falhas em outras partes do sistema.
-
-Esta abordagem encoraja bom design \cite{GrowingOOByTests}, produz código testável e mantém longe a sobre-engenharia por conta de falsas suposições, pois, nos testes, é especificado o que é desejado e escreve-se o código para fazer apenas aquilo que realmente é necessário. \cite{TestDrivenKoskela, TDDbyExample, EmpiricalTDD}
-
-\citeonline{EmergentDesign} relaciona o entendimento do problema e o fluxo natural do TDD:
-
-\begin{citacao}
-Tentar escrever um teste é uma boa maneira de testar a si mesmo sobre seu conhecimento sobre como a classe deverá funcionar antes de você escrevê-la. Esta é uma boa sequência: tenha certeza de que você entende o que você irá tentar fazer antes de você realmente tentar fazer. De fato, colocando dessa maneira parece muito mais natural considerar os testes como Primeira Tarefa e criar o código como Segunda Tarefa. (tradução do autor)
-\end{citacao}
-
-O TDD vem sendo utilizado esporadicamente há anos, contudo, não existia um nome para identificar essa forma de desenvolver software, que no fim dos anos noventa, ganhou além do nome, uma definição. Atualmente, TDD começa a ganhar força e ser utilizada em times de grandes empresas como Google, Yahoo, Microsoft e IBM \cite{EmpiricalTDD}.
-
-\subsection{Ciclo TDD}
-\label{ssub:ciclo_tdd}
-
-Com base no trabalho de \citeonline{TDDbyExample}, o ciclo de desenvolvimento TDD é composto pelas seguintes etapas:
-
-\begin{enumerate}
-\item \textbf{Adicionar um teste}
-
-Cada ciclo se inicia com a criação de um teste de unidade. Este teste inevitavelmente irá falhar, pois é escrito antes do código ser implementado de fato. Para escrever um teste, o desenvolvedor precisa entender claramente as especificações e requisitos da unidade. Isso faz com que o desenvolvedor tenha como foco os requisitos antes do código, o direcionando a escrever código apenas para o que é realmente necessário.
-
-Além disso, segundo \citeonline{XPTeles}, ao se pensar e escrever o teste, está sendo feita também a análise e \textit{design} das classes do sistema.
-
-\item \textbf{Executar todos os testes e ver se algum falha}
-
-Todos os testes devem ser executados e o novo teste deve falhar pela razão esperada: a funcionalidade não foi desenvolvida. Isto aumenta a confiança que se está testando a coisa certa.
-
-\item \textbf{Escrever código}
-
-O próximo passo é escrever código \textbf{somente para que o teste passe}. O código poderá não ser perfeito, pois posteriormente ele será melhorado. O importante é que o código faça o mínimo para passar no teste. Segundo \citeonline{BDDRodrigo}:
-
-\begin{citacao}
-Enquanto código útil é um patrimônio que gera valor, qualquer código criado inutilmente é tempo desperdiçado e, no fim das contas, um fardo, que sem gerar valor algum, aumentará a complexidade geral do software.
-\end{citacao}
-
-\item \textbf{Executar os testes e ter sucesso}
-
-Ao Executar os testes e todos eles passarem, o código possuirá todos os requisitos testados e o programador pode ficar confiante para melhorá-lo.
-
-\item \textbf{Refatorar}
-
-Esta é uma etapa muito importante, onde o código escrito anteriormente é melhorado.
-
-Segundo \citeonline{FowlerRefatoracao}, refatorar é reestruturar o software aplicando uma série de alterações em sua estrutura interna para torná-lo mais fácil de ser entendido e menos custoso de ser modificado, sem alterar seu comportamento observável.
-
-Refatorar melhora o projeto do software, o torna mais fácil de entender e modificar, ajuda a encontrar falhas e ajuda o desenvolvedor a programar mais rapidamente.
-
-Como na refatoração o comportamento do código não deve ser alterado, após refatorar e executar novamente os testes, todos eles devem passar.
-
-\end{enumerate}
-
-A figura \ref{img:ciclo-tdd} resume o ciclo TDD, onde as etapas 1 e 2 são representadas pelo item \textbf{teste}, as etapas 3 e 4 pelo item \textbf{codifique} e a etapa 5 pelo item \textbf{refatore}.
-
-\begin{figure}[h]
-  \center
-  \caption{O ciclo TDD}
-  \includegraphics[scale=0.45]{images/ciclo-tdd}
-  \label{img:ciclo-tdd}
-\end{figure}
-
-\subsection{Contextualizando TDD}
-\label{ssub:contextualizando_tdd}
+\section{Contextualizando TDD}
+\label{sec:contextualizando_tdd}
 
 Neste tópico será apresentada como a utilização do TDD se dá na prática, utilizando exemplos reais implementados durante do desenvolvimento do kanban-roots.
 
@@ -174,24 +111,8 @@ end
 
 Com isso, o ciclo TDD o desenvolvimento da funcionalidade é terminado, produzindo um código legível, limpo e bem coberto por testes.
 
-\subsection{Design emergente} % (fold)
-\label{sub:design_emergente}
-
-No contexto em que TDD costuma ser aplicado $-$ em processos ágeis, com um ciclo de vida iterativo-incremental $-$ não é realizado um amplo \textit{design} prévio. Sendo assim, o \textit{design} evolui incrementalmente. Sabendo disso, uma característica extremamente importante do TDD é a facilitação ao \textit{design} emergente, que muitos consideram ser sua a principal característica \cite{EmergentDesign}.
-
-TDD é considerada uma técnica essencial para o \textit{design} emergente porque
-quando se está escrevendo um teste anteriormente ao código, o programador contempla e decide não apenas a interface do software (i.e. nomes de classes/métodos, parâmetros, tipos de retorno, lançamento de exceções), mas também o comportamento do software (i.e. resultados esperados para determinadas entradas) \cite{JanzenTDD}.
-
-Além disso, \citeonline{EmergentDesign} constata que o ponto de vista do teste pode passar informações sobre o design, porque o teste de uma classe funciona como o primeiro cliente da classe. Com isso, a interface que o teste sugere é uma interface dirigida ao cliente, sendo assim, geralmente é mais estável.
-
-\citeonline{DammTDD} também afirmam que o TDD faz com que as pessoas pensem mais no design em vez de codificar precipitadamente sem saber o que implementar ainda e \citeonline{XPTeles} ressalta a importância da refatoração para a evolução incremental do design:
-
-\begin{citacao}
-Ao longo das iterações, o design precisa evoluir, mas deve manter-se simples e claro para que a equipe possa fazer alterações no software a qualquer momento, com facilidade. Por esta razão o \textit{refactoring} tem um papel fundamental no design.
-\end{citacao}
-
-\subsubsection{Design emergente no kanban-roots} % (fold)
-\label{ssub:design_emergente_no_kanban_roots}
+\subsection{Design emergente no kanban-roots}
+\label{sub:design_emergente_no_kanban_roots}
 
 Para o desenvolvimento do kanban-roots, foi de extrema importância que o design evoluísse incrementalmente, pois não se sabia ao certo que
 funcionalidades seriam contempladas nem que entidades existiriam.
@@ -216,7 +137,7 @@ Meses depois, foi verificado que esta entidade \textit{Team} não era mais neces
 
 Foram diversas as situações em que mudanças como essa ocorreram durante o desenvolvimento do kanban-roots. Sem o suporte do TDD seria extremamente complicado fazer essas alterações e deixar o design emergir, pois a insegurança de que as modificações pudesse afetar outras partes do código seria muito grande. Além disso, a criação a priori dos testes favoreceu que as modificações fossem feitas de maneira mais simples e direta.
 
-\subsection{A ubiquidade do TDD} % (fold)
+\subsection{A ubiquidade do TDD}
 \label{sub:a_ubiquidade_do_tdd}
 
 Existe uma controvérsia sobre a não utilização do TDD em qualquer situação. É dito ``sobre a \textbf{não} utilização"\ pois o autor desconhece qualquer literatura dizendo que TDD deve ser utilizado sempre e em qualquer situação. Porém, muitos defendem a sua não utilização em algumas situações como em fase de descobertas, em fase de experimentos, se o desenvolvedor nunca utilizou a API, se o código não será utilizado novamente ou se levar mais tempo para escrever os testes do que para escrever e executar o código.
@@ -277,16 +198,15 @@ Códigos como o apresentado acima são extremamente difíceis de serem testados,
 
 Conclui-se que, para quem adota TDD, somente nos casos em que um código será posteriormente eliminado, como em provas de conceito temporárias ou experimentos, a utilização da técnica não é invariavelmente necessária. Contudo, a utilização de TDD nesses cenários pode ser muito interessante, pois como dito anteriormente, para a escrita dos testes, é preciso entender bem o problema a ser resolvido, fazendo o desenvolvedor se preparar mais para o que ele ainda não conhece muito bem.
 
-% subsection a_ubiquidade_do_tdd (end)
 
-\subsection{A efetividade do TDD} % (fold)
+\subsection{A efetividade do TDD}
 \label{sub:a_efetividade_do_tdd}
 
 Existem dúvidas sobre a real efetividade do TDD no que diz respeito à qualidade do código, redução de defeitos e ao aumento ou diminuição da produtividade. Empiricamente, é comum observar a sensação subjetiva,  Contudo, por ser um processo complexo, é muito difícil avaliar e chegar a uma conclusão exata sobre os ganhos e benefícios de toda e qualquer prática em engenharia de software.
 
 Nos últimos anos, vem sendo feitos alguns experimentos para tentar mostrar de maneira empírica que TDD realmente é efetivo no processo de desenvolvimento de software.
 
-\subsubsection{Estudos na indústria} % (fold)
+\subsubsection{Estudos na indústria}
 \label{sub:estudos_na_industria}
 
 Um estudo feito por \citeonline{MaximilienTDD}, fazendo um comparativo de entre o desenvolvimento pré e pós a utilização do TDD, mostrou uma redução de 50\% na taxa de defeitos encontrados no sistema, tendo um mínimo impacto negativo na produtividade da equipe. Além disso, foi percebido que a utilização do TDD os fez produzir um produto que incorporaria mais facilmente alterações posteriores.
@@ -297,9 +217,8 @@ Já o estudo feito por \citeonline{GeorgeTDD} mostrou que, apesar de TDD poder r
 
 \citeonline{EmpiricalTDD} realizaram um estudo de caso conduzidos em três times na Microsoft e um na IBM. Os resultados indicaram que o número de defeitos diminuiu entre 40\% e 90\% em relação à projetos similares que não usaram TDD. Contudo, o estudo mostrou também que a utilização do TDD aumentou o tempo inicial de desenvolvimento entre 15\% e 35\%.
 
-% subsubsection estudos_na_industria (end)
 
-\subsubsection{Estudos na academia} % (fold)
+\subsubsection{Estudos na academia}
 \label{sub:estudos_na_academia}
 
 Um estudo feito por \citeonline{JanzenTDD} dividiu um conjunto de alunos em três grupos, onde cada um deles utilizaria uma abordagem distinta. Um grupo utilizou TDD, o outro Test-last e o último não fazia testes. O grupo que utilizou TDD produziu e por volta de duas vezes  mais funcionalidades que os outros dois grupos e com um número similar de defeitos. Além disso, o grupo que utilizou TDD foi o único a completar a interface gráfica. Apesar de ter desenvolvido mais funcionalidades, o grupo que utilizou TDD investiu a mesma quantidade de tempo dos demais grupos para o desenvolvimento.
@@ -310,9 +229,10 @@ Também foi feita uma micro-avaliação somente do grupo TDD, sendo aferido que 
 
 Já o estudo feito por \citeonline{ErdogmusTDD} com vinte e quatro alunos de graduação mostrou que a utilização do TDD fez com que houvesse um aumento na produtividade, além de reduzir a necessidade de \textit{debug} e retrabalho. Entretanto nenhuma diferença na qualidade no código foi encontrada.
 
-% subsubsection estudos_na_academia (end)
 
-\subsubsection{Conclusões} % (fold)
+TODO: mudar Conclusões para outra coisa
+
+\subsection{Conclusões}
 \label{sub:conclusoes}
 
 A maioria dos experimentos feitos tanto na indústria quanto na academia mostra que TDD melhora o processo de desenvolvimento de software, aumentando a qualidade do código, reduzindo o número de defeitos e diminuindo o tempo gasto com depuração.
@@ -323,19 +243,10 @@ Uma outra questão sobre a diminuição da produtividade apresentada nos estudos
 
 Durante o desenvolvimento do kanban-roots não foi realizado nenhum experimento semelhante aos apresentados nos tópicos anteriores. Uma vez que este trabalho se direciona à exposição e à discussão de técnicas emergentes de desenvolvimento de software, aplicadas à construção de software real, tais experimentos, trazidos aqui a título de informação e enriquecimento, fugiriam ao escopo do presente trabalho. Cabe ressaltar, entretanto, que a melhoria na qualidade do código e na diminuição de defeitos, citada pelos estudos, foi percebida subjetivamente pelo autor no decorrer do processo de desenvolvimento do software. Além disto, conforme citado na Seção \ref{sub:a_ubiquidade_do_tdd}, apenas dois defeitos foram encontrados no kanban-roots em produção, ambos em trechos de código não cobertos por testes. Ou seja, onde a aplicação de TDD não foi realizada de modo estrito.
 
-% subsubsection conclusoes (end)
 
-% subsection a_efetividade_do_tdd(end)
+\section{Contextualizando BDD}
 
-% section tdd (end)
-
-
-\section{Behaviour-Driven Development (BDD)}
-\label{sec:bdd}
-
-Criado em 2006 \cite{IntroducingBDD}, \textit{Behaviour-Driven Development} (Desenvolvimento guiado por comportamento) é uma técnica de desenvolvimento de software cuja amplitude se estende às atividades de design, documentação, validação e verificação, tratando-as de modo unificado \cite{BDDRodrigo}.
-
-O Principal objetivo do BDD é ter especificações (também consideradas documentações) executáveis do sistema. Tudo que foi dito anteriormente sobre TDD vale também para BDD, mas em BDD os testes são escritos de forma mais clara e são mais facilmente lidos, pois BDD provê uma \textit{ubiquitous language} baseada no domínio do problema. Com isso, o vocabulário do problema (negócios) permeia diretamente para o código \cite{IntroducingBDD}.
+TODO: fazer introdução da seção
 
 \subsection{A relação entre BDD e TDD}
 \label{sub:a_relacao_entre_bdd_e_tdd}
@@ -373,64 +284,7 @@ Em TDD, o nome dos testes é baseado na estrutura do código, e isso pode ter um
 
 % subsection a_relacao_entre_bdd_e_tdd (end)
 
-\subsection{Ubiquitous Language} % (fold)
-\label{sub:ubiquitous_language}
-
-Uma \textit{ubiquitous language} é uma linguagem baseada no domínio do negócio, permitindo que clientes e desenvolvedores falem a mesma língua sem ambiguidade. Segundo \citeonline{BDDSolis}, o conceito de \textit{ubiquitous language} é o núcleo do BDD.
-
-
-\citeonline{DDD} diz que uma \textit{ubiquitous language} é uma linguagem comum a todo o projeto, cobrindo toda acadeia de comunicação, desde conversas entre o cliente e o analista de negócios até conversas internas da equipe de desenvolvimento, chegando aos termos utilizados no código e mesmo nas estruturas de banco de dados.
-
-Dessa forma, uma \textit{ubiquitous language} estreita a colaboração entre clientes e desenvolvedores, ao facilitar a comunicação e o \textit{feedback} \cite{DDD}.
-
-% subsection ubiquitous_language (end)
-
-\subsection{O ciclo BDD}
-\label{sub:o_ciclo_bdd}
-
-O Ciclo BDD (também chamado de ciclo \textit{outside-in}\footnote{O ciclo recebe este nome devido à sequência que deve ser percorrida, que se inicia dos requisitos e da visão do cliente (\textit{outside}) até as entranhas dos artefatos de software (\textit{in}) \cite{BDDRodrigo}.}), apresentado na Figura \ref{img:ciclo-bdd}, tem dois níveis: unidade e aceitação. O nível aceitação é o nível mais alto, onde são escritos os testes de aceitação. Já o nível unidade é o mesmíssimo \hyperref[ssub:ciclo_tdd]{ciclo TDD} visto anteriormente. Este ciclo pode ser explicado na seguinte série de passos:
-
-\begin{enumerate}
-\item \textbf{Adicionar um teste de aceitação com foco em um cenário}
-
-Cada ciclo se inicia com a criação de um teste de aceitação, tendo como foco um cenário que descreve um determinado comportamento de uma funcionalidade do sistema. Para fazer um paralelo com os métodos tradicionais de desenvolvimento de software, pode-se ver os cenários como casos de uso.
-
-\citeonline{BDDRodrigo} define como que, em BDD, o foco do desenvolvedor deve estar em um único cenário por vez, e os benefícios dessa abordagem:
-
-\begin{citacao}
-Na terminologia de BDD, um cenário é um exemplo de utilização de uma dada funcionalidade. Uma funcionalidade é algo que o software deve oferecer e que possui um valor bem definido para o cliente. Em BDD, o foco dos desenvolvedores deve estar sempre direcionado à um único cenário de uma única funcionalidade por vez. Isto elimina dispersões e mantém o desenvolvedor concentrado na tarefa a ser realizada. Um desenvolvedor utilizando BDD deve encarar um novo cenário como se todos os requisitos do software fossem apenas os cenários já implementados e o atual, ou seja, não se preocupará, no momento, com as próximas funcionalidades ou cenários. Isto é importante para evitar generalizações baseadas em especulações a respeito do que o software possa eventualmente necessitar no futuro, o que aumenta a complexidade do \textit{design} sem qualquer garantia de que será realmente útil.
-\end{citacao}
-
-\item \textbf{Executar todos os testes e ver se algum falha}
-
-Assim como no \hyperref[ssub:ciclo_tdd]{ciclo TDD}, todos os testes devem ser executados e o novo teste deve falhar pela razão pois a funcionalidade ainda não foi desenvolvida.
-
-\item \textbf{Descer de nível}
-
-Neste momento, deve-se descer de nível, saindo do nível de aceitação e indo para nível de unidade.
-
-\item \textbf{Entra no ciclo TDD}
-
-No nível de unidade, entra-se o \hyperref[ssub:ciclo_tdd]{ciclo TDD} até que todos os testes de unidade estejam passando.
-
-\item \textbf{Retornar para o nível de aceitação}
-
-Com todos os testes de unidade passando, retorna-se para o nível de aceitação e faz-se todos os testes deste nível passarem.
-
-\item \textbf{Refatorar}
-
-Neste passo, é feita a refatoração do código, da mesma maneira como é feita no \hyperref[ssub:ciclo_tdd]{ciclo TDD}.
-
-\end{enumerate}
-
-\begin{figure}[h]
-  \center
-  \caption{O ciclo BDD}
-  \includegraphics[scale=0.45]{images/ciclo-bdd}
-  \label{img:ciclo-bdd}
-\end{figure}
-
-% subsection o_ciclo_bdd (end)
+TODO: Como eu mudo isso para a fundamentação se está intimamente ligado à parte prática?
 
 \subsection{Modelos de escrita dos testes de aceitação}
 \label{sub:modelos_de_escrita_dos_testes_de_aceitacao}
@@ -441,8 +295,8 @@ Existem duas maneiras principais de se escrever os testes de aceitação: em tex
 \textit{Os comentários mostrados na página de tarefas devem ser renderizados utilizando a linguagem de marcação Markdown.}
 \end{quote}
 
-\subsubsection{Escrita em texto plano} % (fold)
-\label{subsub:escrita_em_texto_plano}
+\subsubsection{Escrita em texto plano}
+\label{ssub:escrita_em_texto_plano}
 
 Uma das maneiras de escrever testes de aceitação é como texto plano, em uma linguagem natural, ou seja, inglês, português e etc.
 
@@ -541,11 +395,9 @@ When /^I should see "([^"]*)" in a(?:|n) "([^"]*)" tag$/ do |text, tag|
 end
 \end{mycode}
 
-% subsubsection escrita_em_texto_plano (end)
 
-
-\subsubsection{Escrita em código puro} % (fold)
-\label{subsub:Escrita em codigo puro}
+\subsubsection{Escrita em código puro}
+\label{ssub:Escrita em codigo puro}
 
 A outra maneira de escrever os testes de aceitação é com código puro. Nesta forma, todo o código dos testes (descrição e implementação) está concentrado em apenas um lugar, utilizando somente código para escrever os testes.
 
@@ -576,10 +428,9 @@ end
 
 BDD vem se tornando um consenso em automação de testes. Contudo, existem uma divergência grande sobre a forma de escrita dos testes de aceitação entre escrita em código puro e escrita em texto plano, tendo alguns pontos a serem considerados.
 
-% subsubsection Escrita em codigo puro (end)
 
-\subsubsection{Legibilidade} % (fold)
-\label{subsub:legibilidade}
+\subsubsection{Legibilidade}
+\label{ssub:legibilidade}
 
 Muitos defendem que os testes devem ser escritos em texto plano, por conta do teste ser escrito em linguagem que qualquer pessoa, mesmo sem nenhum conhecimento em programação, pode ler e validar.
 
@@ -593,19 +444,17 @@ Uma exceção a isto ocorre em áreas que fazem uso pesado de modelagem de proce
 
 Já em um contexto como o do desenvolvimento do kanban-roots, no qual não existe um cliente, onde as pessoas que escrevem e leem as especificações são desenvolvedores, a escrita em texto plano tem um valor ainda menor. O código é uma linguagem natural para desenvolvedores, ainda mais quando é escrito em conjunto com DSLs\footnote{\textit{Domain specific language} (linguagem específica de domínio) é uma linguagem de programação de expressividade limitada, focada num domínio particular.} \nomenclature{DSL}{Domain specific language} como a do Rspec \cite{SteakOverCucumber}.
 
-% subsubsection legibilidade (end)
 
-\subsubsection{Camada adicional} % (fold)
-\label{subsub:camada_adicional}
+\subsubsection{Camada adicional}
+\label{ssub:camada_adicional}
 
 Outra crítica aos testes em texto plano é que enquanto nos testes em código puro todo o código do teste está em concentrado em apenas um lugar, nos testes em texto plano, o código do testes está espalhado em diversos arquivos e métodos, devido a camada adicional dos \textit{steps}, tonando a suíte de testes mais complexa de manter e estender \cite{SteakOverCucumber}.
 
 Além disso, é necessário manter um segundo ambiente de testes, já que para escrever os testes de aceitação em texto plano é necessária uma ferramenta de testes específica para isso. Isso não acontece com a escrita em código puro, já que é utilizada a mesma ferramenta utilizada nos testes unitários \cite{WhyBotherWithCucumberTesting}.
 
-% subsubsection camada_adicional (end)
 
-\subsubsection{Tempo de execução} % (fold)
-\label{subsub:tempo_de_execucao}
+\subsubsection{Tempo de execução}
+\label{ssub:tempo_de_execucao}
 
 Outro questionamento é sobre a velocidade para a execução dos testes. Como o \textit{Cucumber} utiliza a \textit{Gherkin}\footnote{\url{http://github.com/cucumber/cucumber/wiki/Gherkin}}, que é uma DSL externa\footnote{Uma DSL que tem sua própria sintaxe e necessita de um \textit{parser} para processá-la \cite{DSLFowler}.}, o arquivo de \textit{features} é parseado para que os \textit{steps} sejam executados, introduzindo um tempo extra na execução dos testes.
 
@@ -627,9 +476,8 @@ código puro & 0m8.8385s \\
 
 Analisando estes resultados pode-se concluir que os testes em código puro executam, em média, em um tempo 25\% menor que os em texto plano.
 
-% subsubsection tempo_de_execucao (end)
 
-\subsubsection{Um modelo híbrido de escrita} % (fold)
+\subsubsection{Um modelo híbrido de escrita}
 \label{ssub:um_modelo_hibrido_de_escrita}
 
 \citeonline{YankoCapybara} apresenta um modelo alternativo de escrita de testes de aceitação, sendo esta uma união entre os duas maneiras apresentadas anteriormente\footnote{Esta abordagem também é utilizada pelo \textit{framework} easyb para Java. Mais em \url{http://www.easyb.org}}. Os testes são escritos em código puro, porém utilizando \textit{steps} semelhantes aos do testes em texto plano. No código \ref{code:rspec_steps} é apresentado o exemplo anterior utilizando este novo modelo\footnote{Para a escrita deste exemplo, foi utilizada uma ferramenta criada por Yanko chamada \textit{Rspec example steps}. Mais em \url{https://github.com/railsware/rspec-example_steps}}.
@@ -673,10 +521,11 @@ Esta abordagem busca eliminar os problemas com a camada adicional e tempo de exe
 
 No entanto, esta abordagem cai no mesmo dilema da escrita em texto plano: o cliente não irá ler ou validar esta saída. Além disso, a introdução dos métodos \texttt{When/And/Then} juntamente com as \textit{strings} e blocos passados como parâmetros, piora muito a legibilidade do código de teste, prejudicando a manutenibilidade da suíte de testes. Assim, está abordagem, apesar de eliminar a camada adicional, pouco difere da escrita em texto plano, no que diz respeito às desvantagens.
 
-% subsubsection um_modelo_hibrido_de_escrita (end)
 
-\subsubsection{Conclusões} % (fold)
-\label{subsub:conclusoes_bdd}
+TODO: mudar Conclusões para outra coisa
+
+\subsection{Conclusões}
+\label{sub:conclusoes_bdd}
 
 Na opinião do autor, os testes escritos em texto plano em um primeiro momento são muito atraentes, pois, com a facilidade de leitura, a possibilidade de validação de testes executáveis pelo cliente se tornam reais. No entanto, como apresentado anteriormente, na realidade é pouquíssimo provável que o cliente irá validar estes testes. Isto é ainda mais acentuado em projetos como o kanban-roots onde não existe cliente em si, tornando totalmente irrelevante os possíveis benefícios da escrita de testes em texto plano.
 
@@ -684,51 +533,12 @@ Já para projetos grandes, nos quais a suíte de testes é extensa, 25\% a mais 
 
 Apesar dos pontos negativos, os testes em texto plano podem ter valia em situações onde o desenvolvedor tem grandes dificuldades em entender o que o cliente quer ou entender o um determinado processo realizado pelo cliente. Desta forma, o teste em texto plano pode servir como um facilitador na comunicação. Assim, sentados lado a lado, o cliente vai dizendo ao desenvolvedor qual é o fluxo, e o desenvolvedor por sua vez, vai mapeando para o teste. Como ambos conseguem ler e entender o que está sendo escrito, a discussão e entendimento do problema é facilitada.
 
-% subsubsection conclusoes_bdd (end)
 
-% subsection modelos_de_escrita_dos_testes_de_aceitacao (end)
+\section{Contextualizando Integração contínua}
 
-% section bdd (end)
+TODO: escrever introdução da seção
 
-\section{Integração contínua} % (fold)
-\label{sec:integracao_continua}
-
-Em uma equipe com vários desenvolvedores, todos trabalhando na elaboração de um mesmo sistema, existe o problema de unificar as diversas alterações feitas na base de código, assegurando que a base continua consistente \cite{ImproveitCI}. Para resolver esse problema, entra em cena a Integração Contínua (IC) \nomenclature{IC}{Integração Contínua}, que além disso, tem como ponto chave dar um feedback rápido quando a base de código não está consistente.
-
-\cite{FowlerCI} definiu a IC da seguinte maneira:
-
-\begin{citacao}
-Integração Contínua é uma prática de desenvolvimento de software onde os membros de um time integram seu trabalho frequentemente, geralmente cada pessoa integra ao menos uma vez ao dia $-$ podendo haver múltiplas integrações por dia. Cada integração é verificada por um \textit{build} automatizado (incluindo testes) para detectar erros de integração o mais rápido possível. Muitos times acham que essa abordagem leva a uma significante redução nos problemas de integração e permite que um time desenvolva software coeso mais rapidamente. (tradução do autor)
-\end{citacao}
-
-Para assegurar o rápido feedback, o tempo de execução da \textit{build} deve ser o menor possível, tentando manter sempre menor do que dez minutos \cite{FowlerCI}.
-
-Além disso, no servidor de integração, busca-se utilizar as mesmas configurações utilizadas em produção, pois em algumas situações os testes podem estar passando em ambiente de desenvolvimento, mas o \textit{bug} estourar em produção. O intuito é eliminar a famosa frase ``Mas funciona na minha máquina!".
-
-A IC é um dos pilares da agilidade, pois garante que todo o sistema funcione de forma coesa a cada \textit{build}, mesmo que sua equipe seja grande e diversas partes do código estejam sendo alteradas ao mesmo tempo \cite{CaelumCI}.
-
-Existem duas formas de executar a integração contínua: síncrona e assíncrona.
-
-\subsection{Integração contínua síncrona} % (fold)
-\label{sub:integracao_continua_sincrona}
-
-Para a utilização da integração contínua síncrona, todos os desenvolvedores devem trabalhar no mesmo espaço físico, pois deve existir uma máquina dedicada à integração. Assim, apenas um desenvolvedor integra seu código de cada vez e outros só são liberados para integrar ao serem informados do término da integração corrente \cite{ImproveitCI}.
-
-%subsection integracao_continua_assincrona (end)
-
-
-\subsection{Integração contínua assíncrona} % (fold)
-\label{sub:integracao_continua_assincrona}
-
-Na integração contínua assíncrona, não existe a necessidade de todos os desenvolvedores trabalharem no mesmo espaço físico. Esse modelo é ideal para a maioria dos projetos \textit{open source}, onde os desenvolvedores estão espalhados em diversas partes do mundo, pois em tais casos torna-se difícil ou impossível garantir que apenas um desenvolvedor irá integrar de cada vez \cite{ImproveitCI}.
-
-Nesse modelo, o desenvolvedor deve assegurar que todos os testes estejam passando em sua máquina, e com essa condição atendida, pode integrar seu código ao repositório.
-
-Além disso, um servidor de integração contínua, como o Jenkins\footnote{\url{http://jenkins-ci.org}} ou Travis\footnote{\url{http://travis-ci.org}}, deve monitorar o repositório permanentemente. Sempre que o servidor detecta modificações ele roda a \textit{build} e se encontra algum erro, envia um email para os desenvolvedores. Dessa forma, o desenvolvedor responsável deve fazer as correções o mais brevemente possível e enviá-las para o repositório.
-
-% subsection integracao_continua_sincrona (end)
-
-\subsection{Integração contínua síncrona versus assíncrona} % (fold)
+\subsection{Integração contínua síncrona versus assíncrona}
 \label{sub:sincrona_x_assincrona}
 
 Sempre que possível, o melhor modelo de integração a ser utilizado é o síncrono. Pode-se fazer essa afirmação baseado no que \citeonline{ArtOfAgileDevelopment} descrevem como vantagens em utilizar a integração contínua síncrona:
@@ -741,9 +551,8 @@ Sempre que possível, o melhor modelo de integração a ser utilizado é o sínc
 
 \citeonline{ImproveitCI} corrobora dizendo que a integração contínua assíncrona permite o trabalho de desenvolvedores distribuídos geograficamente, porém é um pouco mais arriscada e menos eficiente que a integração síncrona. O risco aumenta porque o repositório pode ficar inconsistente durante alguns períodos de tempo $-$ sempre que um erro ocorre e o responsável por ele ainda não fez o \textit{commit} das correções. Na integração assíncrona, a eficiência diminui porque leva mais tempo para o desenvolvedor descobrir que cometeu um erro. É comum o desenvolvedor receber a notificação de um erro depois de já ter iniciado uma nova atividade. Ao ser notificado, deve parar a nova tarefa, relembrar o que havia feito na tarefa anteriormente e corrigir o erro. O processo síncrono é mais eficiente no uso do \textit{feedback} exatamente porque impede o desenvolvedor de desviar sua atenção para qualquer outra atividade, enquanto a integração não tiver sido concluída com sucesso.
 
-% subsection sincrona_x_assincrona (end)
 
-\subsection{Integração contínua no kanban-roots} % (fold)
+\subsection{Integração contínua no kanban-roots}
 \label{sub:integracao_continua_no_kanban}
 
 Com base no tópico anterior e por ser um projeto \textit{open source}, no kanban-roots foi utilizado o método assíncrono de integração contínua, através do Travis\footnote{Mais informações podem ser encontradas em \url{http://travis-ci.org}}, que foi escolhido por ser um serviço hospedado integração contínua para a comunidade \textit{open source}, o que facilitou bastante pela não necessidade de manutenção de uma estrutura local de integração contínua.
@@ -759,46 +568,12 @@ A integração contínua se mostrou importante em algumas ocasiões durante o de
 
 Com o \textit{feedback} rápido, todas as falhas foram corrigidas muito rapidamente, sem que problemas maiores ocorressem.
 
-% subsection integracao_continua_no_kanban (end)
 
-% section integracao_continua (end)
+\section{Contextualizando dublês de teste}
 
+TODO: escrever introdução da seção
 
-\section{Dublês de Teste} % (fold)
-\label{sec:dubles_de_teste}
-
-Em algumas ocasiões é difícil testar alguns componentes porque eles dependem de outros componentes que não podem ser utilizados em ambiente de teste. Estas situações podem acontecer por esses componentes não estarem disponíveis, por eles não retornarem os resultados necessários ou porque executá-los iria trazer efeitos colaterais indesejados. Em outros casos, a estratégia de testes utilizada requer que se tenha mais controle do comportamento interno do componente.
-
-Quando se escreve um teste onde não se pode/escolhe usar componentes reais, pode-se substitui-los pelos Dublês de Teste que oferecem uma maneira de isolar as dependências ao criar os testes, permitindo a utilização de componentes falsos para cumprir os papéis de componentes reais. Com isso, elimina-se complexidade do código dos testes, pois o código de implementação dos objetos é mantido pequeno e com baixo acoplamento.
-
-Uma outra característica da utilização de dublês é que muitas fezes fazem com que os testes sejam executados mais rapidamente, pois criam o objeto apenas em memória, reduzindo assim o acesso a disco.
-
-Os Dublês de Teste não precisam se comportar exatamente como o componente real, devendo apenas prover a mesma API que o componente real.
-
-\citeonline{XUnit} define cinco categorias de Dublês de Teste:
-
-\begin{itemize}
-\item
-\textbf{\textit{Dummy}} geralmente é utilizado apenas para preencher uma lista de parâmetros e nunca é realmente usado.
-
-\item
-\textbf{\textit{Fake}} é utilizado para substituir uma funcionalidade real. Geralmente, o \textit{fake} implementa a mesma funcionalidade, porém de uma maneira muito mais simples. Um exemplo típico é uma base de dados em memória.
-
-\item
-\textbf{\textit{Stub}} provê respostas prontas para chamadas feitas durante os testes, geralmente não respondendo a qualquer chamada diferente
-das pré-definidas.
-
-\item
-\textbf{\textit{Spy}} é um \textit{stub} que também grava algumas informações baseadas em como ele é chamado. Um exemplo pode ser um serviço de email que grava quantas mensagens foram enviadas.
-
-\item
-\textbf{\textit{Mock}} é um objeto pré-programado para receber determinado conjunto de chamadas, podendo lançar uma exceção se tais chamadas não forem feitas a ele, ou se receber outra chamada diferente das pré-programadas.
-
-\end{itemize}
-
-Destes cinco tipos de dublês, apenas dois serão abordados, sendo eles \textit{mock} e \textit{stub}, por serem os mais amplamente utilizados.
-
-\subsection{Contextualizando o \textit{stub}} % (fold)
+\subsection{Contextualizando o \textit{stub}}
 \label{sub:contextualizando_o_stub}
 
 Um exemplo da utilização simples e eficiente do \textit{stub} foi mostrado na Seção \ref{sub:testes_de_integracao} sobre testes de integração. Naquele exemplo, foi feito um \textit{stub} do método \texttt{can\_pygmentize?} que faz uma consulta ao sistema operacional para verificar se uma determinada dependência de sistema está instalada. Desta forma, o teste ficou isolado, não importando se a máquina em que o teste for executado tem ou não a dependência instalada, sendo assim possível simular as duas situações $-$ logicamente, uma maquina não pode, ao mesmo tempo, ter e não ter uma dependência instalada.
@@ -844,10 +619,8 @@ Contudo, a utilização desta técnica deve ser feita com cautela. Quando se uti
 
 É importante notar a diferença entre os \textit{stubs} e as estratégias de \textit{fixture replacement}\footnote{\textit{Fixture replacement} é uma técnica que tem como objetivo separar a inicialização do teste de sua codificação em si, dando a possibilidade de se criar objetos com estados pré-definidos que possam ser reutilizados em mais de um teste.} baseadas em instâncias. Nestas estratégias, o \textit{fixture} é um objeto real da classe. Assim, um objeto criado via \textit{fixture replacement} de instância, fica sujeito a detalhes de sua implementação da classe real. Dessa forma, o {fixture} não cria o isolamento que um \textit{stub} em seu lugar criaria, pois o stub simplesmente simula uma instância e, portanto, não fica sujeito comportamentos inesperados.
 
-% subsection contextualizando_o_stub (end)
 
-
-\subsection{Contextualizando o \textit{mock}} % (fold)
+\subsection{Contextualizando o \textit{mock}}
 \label{sub:contextualizando_o_mock}
 
 De modo semelhante ao Código \ref{code:todo} apresentado na Seção \ref{sub:a_ubiquidade_do_tdd}, o Código \ref{code:mock} apresenta a implementação de um método de \textit{controller} que é chamado via Ajax e implementa a atualização dos responsáveis por uma tarefa diretamente do kanban do projeto. Além atualizar os responsáveis pela tarefa tarefa na base de dados, este método captura, trata e envia informações para que a interface do kanban seja atualizada. Este é outro caso onde um experimento foi para produção, sem testes e com um código \textbf{extremamente ruim}. Sendo assim, neste caso não foi utilizado TDD para criar os testes, sendo estes escritos após a implementação.
@@ -943,10 +716,8 @@ end
 
 Percebe-se que o teste sem o uso do \textit{mock} fica mais simples e menos acoplado à implementação. Contudo, o teste usando \textit{mock} ganhou um isolamento maior por não ficar sujeito a detalhes da implementação das classes, irrelevantes para o teste. Além disso, os testes rodaram com uma velocidade 58\% maior do que o teste sem \textit{mock}.
 
-% subsection contextualizando_o_mock (end)
 
-
-\subsection{A dicotomia entre o TDD clássico e o mockista} % (fold)
+\subsection{A dicotomia entre o TDD clássico e o mockista}
 \label{sub:tdd_classico_e_mockista}
 
 \citeonline{MocksArentStubs} generaliza os dublês de teste como \textit{mocks} e define duas faces da sua utilização com TDD, onde o divisor é \textbf{quando} utilizar um dublê:
@@ -964,8 +735,3 @@ Como visto anteriormente, a utilização de dublês de teste, em alguns casos, �
 Uma outra questão a ser levada em consideração é que quando não se utiliza dublês, está se testando a integração entre as classes, e isso pode ter um efeito colateral positivo, capturando testes que muitas vezes passam despercebidos ao se utilizar \textit{dublês}. Contudo, quando não se utiliza dublês, para testar uma unidade pode ser necessário desenvolver outras unidades colaboradoras, cada qual com seus correspondentes testes de unidade, assim tirando o foco da tarefa corrente.
 
 Dessa forma, assim como \citeonline{MocksArentStubs} conclui, não existe razão para adotar um estilo TDD mockista, sendo o TDD clássico a melhor opção.
-
-% subsection tdd_classico_e_mockista (end)
-
-% section dubles_de_teste (end)
-
