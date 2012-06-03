@@ -15,7 +15,7 @@ As dependências são baseadas na distribuição Linux Ubuntu.
 
     sudo apt-get install texlive-latex-base abntex texlive-fonts-recommended texlive-lang-portuguese
 
-    sudo easy_install pygments pygments-rspec pygments-github-style
+    sudo easy_install pygments pygments-rspec pygments-style-github
 
 # Compilando
 
