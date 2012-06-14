@@ -354,7 +354,15 @@ When /^I should see "([^"]*)" in a(?:|n) "([^"]*)" tag$/ do |text, tag|
 end
 \end{mycode}
 
-\textbf{TODO: Adicionar aqui uma conclusão para o tópico, com uma tela de execução dos testes. Talvez seja interessante colocar também uma estrutura de pastas (tipo uma saída do tree) mostrando a quantidade de arquivos diferentes que tem que manipular.}
+Na figura \ref{img:cucumber-exec} é apresentada a saída para a execução do teste. Ao lado de cada passo, é mostrado em que arquivo este passo está definido, com o objetivo de facilitar em momentos onde se deseja depurar os erros. Pode-se perceber que neste caso simples, existem cinco arquivos diferentes envolvidos no teste.
+
+\begin{figure}[h]
+  \center
+  \caption{Saída produzida pela execução dos testes utilizando escrita em texto plano com o Cucumber}
+  \includegraphics[scale=0.4]{images/cucumber-exec}
+  \label{img:cucumber-exec}
+\end{figure}
+
 
 \subsubsection{Escrita em código puro}
 \label{ssub:Escrita em codigo puro}
@@ -386,7 +394,14 @@ end
 
 É importante ressaltar que, mesmo sem a utilização dos \textit{templates} de história e cenário, este modelo de escrita não deixa de ser BDD \cite{BDDSolis}, pois o foco da escrita dos testes continua no comportamento.
 
-\textbf{TODO: Adicionar aqui uma conclusão para o tópico, com uma tela de execução dos testes.}
+Na figura \ref{img:rspec-acceptance-exec} é apresentada a saída para a execução do teste. Neste caso, um único arquivo concentra tudo relativo ao teste.
+
+\begin{figure}[h]
+  \center
+  \caption{Saída produzida pela execução dos testes utilizando escrita em código puro com RSpec + Capybara}
+  \includegraphics[scale=0.6]{images/rspec-acceptance-exec}
+  \label{img:rspec-acceptance-exec}
+\end{figure}
 
 
 \subsubsection{Pontos em sobre os modelos de escrita}
