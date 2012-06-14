@@ -536,9 +536,23 @@ Sempre que possível, o melhor modelo de integração a ser utilizado é o sínc
 \subsection{Integração contínua no kanban-roots}
 \label{sub:integracao_continua_no_kanban}
 
-Com base no tópico anterior e por ser um projeto \textit{open source}, no kanban-roots foi utilizado o método assíncrono de integração contínua, através do Travis\footnote{Mais informações podem ser encontradas em \url{http://travis-ci.org}}, que foi escolhido por ser um serviço hospedado integração contínua para a comunidade \textit{open source}, o que facilitou bastante pela não necessidade de manutenção de uma estrutura local de integração contínua.
+Com base no tópico anterior e por ser um projeto \textit{open source}, no kanban-roots foi utilizado o método assíncrono de integração contínua, através do Travis\footnote{Mais informações podem ser encontradas em \url{http://travis-ci.org}}, que foi escolhido por ser um serviço hospedado e gratuito de integração contínua para a comunidade \textit{open source}, o que facilitou bastante pela não necessidade de manutenção de uma estrutura local de integração contínua. Na Figura \ref{img:travis-success} é apresentada a tela do Travis quando a \textit{build} é executada com sucesso e na Figura \ref{img:travis-fail} quando a \textit{build} falha.
 
-Contudo, na Seção \ref{sub:testes_de_integracao} sobre testes de integração, foi apresentado o Código \ref{code:integration_spec} com os testes de integração para o \textit{highlighting} de código. Para que a integração contínua pudesse continuar sendo executada no Travis, o teste que verifica a integração do kaban-roots com o Pygments local foi comentado, uma vez que não é possível fazer instalações de dependências de sistema no Travis. Neste caso, o ideal seria ter um servidor próprio para rodar a integração contínua, pois esta tem que simular um ambiente de produção da forma mais perfeita possível.
+\begin{figure}[h]
+  \center
+  \caption{Tela do Travis quando a \textit{build} é executada com sucesso}
+  \includegraphics[scale=0.55]{images/travis-success}
+  \label{img:travis-success}
+\end{figure}
+
+Na Seção \ref{sub:testes_de_integracao} sobre testes de integração, foi apresentado o Código \ref{code:integration_spec} com os testes de integração para o \textit{highlighting} de código. Para que a integração contínua pudesse continuar sendo executada no Travis, o teste que verifica a integração do kaban-roots com o Pygments local foi comentado, uma vez que não é possível fazer instalações de dependências de sistema no Travis. Neste caso, o ideal seria ter um servidor próprio para rodar a integração contínua, pois esta tem que simular um ambiente de produção da forma mais perfeita possível, utilizando o Jenkins\footnote{Mais informações em \url{http://jenkins-ci.org/}} por exemplo.
+
+\begin{figure}[h]
+  \center
+  \caption{Tela do Travis quando a \textit{build} falha}
+  \includegraphics[scale=0.55]{images/travis-fail}
+  \label{img:travis-fail}
+\end{figure}
 
 A integração contínua se mostrou importante em algumas ocasiões durante o desenvolvimento do kanban-roots, a exemplo:
 
@@ -547,7 +561,7 @@ A integração contínua se mostrou importante em algumas ocasiões durante o de
   \item Em ambiente de desenvolvimento é utilizado o SQLite\footnote{\url{http://www.sqlite.org}} e em ambiente de produção, é utilizado o MySQL\footnote{\url{http://www.mysql.com}}. Assim, foi feita uma \textit{query} que apenas funcionava no SQLite, mas não no MySQL. Ou seja, em desenvolvimento estava perfeito, mas em produção, não.
 \end{itemize}
 
-Com o \textit{feedback} rápido, todas as falhas foram corrigidas muito rapidamente, sem que problemas maiores ocorressem.
+Com o \textit{feedback} rápido da integração contínua, todas as falhas foram corrigidas muito rapidamente, sem que problemas maiores ocorressem e outras modificações na base de código fossem feitas sobre as modificações problemáticas, o que faria com que a correção dos problemas fosse mais complexa e levasse mais tempo.
 
 
 \section{Contextualizando dublês de teste}
