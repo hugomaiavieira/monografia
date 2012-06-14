@@ -404,16 +404,14 @@ Na figura \ref{img:rspec-acceptance-exec} é apresentada a saída para a execuç
 \end{figure}
 
 
-\subsubsection{Pontos em sobre os modelos de escrita}
+\subsubsection{Pontos em aberto sobre os modelos de escrita}
 \label{ssub:pontos em aberto}
-
-\textbf{TODO: ver como fazer para ter sub de subsubsection, pois os itens abaixou são sub desta subsubsection.}
 
 BDD vem se tornando um consenso em automação de testes. Contudo, existem uma divergência grande sobre a forma de escrita dos testes de aceitação entre escrita em código puro e escrita em texto plano, tendo alguns pontos a serem considerados.
 
 
-\subsubsection{Legibilidade}
-\label{ssub:legibilidade}
+\paragraph{Legibilidade}
+\label{sssub:legibilidade}
 
 Muitos defendem que os testes devem ser escritos em texto plano, por conta do teste ser escrito em linguagem que qualquer pessoa, mesmo sem nenhum conhecimento em programação, pode ler e validar.
 
@@ -428,16 +426,16 @@ Uma exceção a isto ocorre em áreas que fazem uso pesado de modelagem de proce
 Já em um contexto como o do desenvolvimento do kanban-roots, no qual não existe um cliente, onde as pessoas que escrevem e leem as especificações são desenvolvedores, a escrita em texto plano tem um valor ainda menor. O código é uma linguagem natural para desenvolvedores, ainda mais quando é escrito em conjunto com DSLs\footnote{\textit{Domain specific language} (linguagem específica de domínio) é uma linguagem de programação de expressividade limitada, focada num domínio particular.} \nomenclature{DSL}{Domain specific language} como a do Rspec \cite{SteakOverCucumber}.
 
 
-\subsubsection{Camada adicional}
-\label{ssub:camada_adicional}
+\paragraph{Camada adicional}
+\label{sssub:camada_adicional}
 
 Outra crítica aos testes em texto plano é que enquanto nos testes em código puro todo o código do teste está em concentrado em apenas um lugar, nos testes em texto plano, o código do testes está espalhado em diversos arquivos e métodos, devido a camada adicional dos \textit{steps}, tonando a suíte de testes mais complexa de manter e estender \cite{SteakOverCucumber}.
 
 Além disso, é necessário manter um segundo ambiente de testes, já que para escrever os testes de aceitação em texto plano é necessária uma ferramenta de testes específica para isso. Isso não acontece com a escrita em código puro, já que é utilizada a mesma ferramenta utilizada nos testes unitários \cite{WhyBotherWithCucumberTesting}.
 
 
-\subsubsection{Tempo de execução}
-\label{ssub:tempo_de_execucao}
+\paragraph{Tempo de execução}
+\label{sssub:tempo_de_execucao}
 
 Outro questionamento é sobre a velocidade para a execução dos testes. Como o \textit{Cucumber} utiliza a \textit{Gherkin}\footnote{\url{http://github.com/cucumber/cucumber/wiki/Gherkin}}, que é uma DSL externa\footnote{Uma DSL que tem sua própria sintaxe e necessita de um \textit{parser} para processá-la \cite{DSLFowler}.}, o arquivo de \textit{features} é parseado para que os \textit{steps} sejam executados, introduzindo um tempo extra na execução dos testes.
 
@@ -508,7 +506,7 @@ No entanto, esta abordagem cai no mesmo dilema da escrita em texto plano: o clie
 \subsection{Conclusões}
 \label{sub:conclusoes_bdd}
 
-\textbf{TODO: mudar Conclusões para outra coisa}
+\textbf{TODO: Annabell, isso vai para as conclusões finais ou deixo aqui mesmo como uma subseção com um título diferente?}
 
 Na opinião do autor, os testes escritos em texto plano em um primeiro momento são muito atraentes, pois, com a facilidade de leitura, a possibilidade de validação de testes executáveis pelo cliente se tornam reais. No entanto, como apresentado anteriormente, na realidade é pouquíssimo provável que o cliente irá validar estes testes. Isto é ainda mais acentuado em projetos como o kanban-roots onde não existe cliente em si, tornando totalmente irrelevante os possíveis benefícios da escrita de testes em texto plano.
 
@@ -519,7 +517,7 @@ Apesar dos pontos negativos, os testes em texto plano podem ter valia em situaç
 
 \section{Contextualizando Integração contínua}
 
-\textbf{TODO: escrever introdução da seção}
+Nesta seção será feita uma discussão acerca das características das integrações síncrona e assíncrona, além de mostrar como a integração contínua foi feita no kanban-roots.
 
 \subsection{Integração contínua síncrona versus assíncrona}
 \label{sub:sincrona_x_assincrona}

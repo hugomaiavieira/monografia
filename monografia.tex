@@ -63,6 +63,33 @@
   \DeleteFile{\jobname.pyg}}
 \makeatother
 
+%------------------------- Numerar subsubsection -------------------------------
+
+\makeatletter
+\newcommand\sparagraph{\@startsection{section}{1}{\z@}%
+                                    {3.25ex \@plus1ex \@minus.2ex}%
+                                    {-1em}%
+                                    {\normalfont\normalsize\bfseries}}
+\newcommand\ssparagraph{\@startsection{subsection}{2}{\z@}%
+                                    {3.25ex \@plus1ex \@minus.2ex}%
+                                    {-1em}%
+                                    {\normalfont\normalsize\bfseries}}
+\newcommand\sssparagraph{\@startsection{subsubsection}{3}{\z@}%
+                                    {3.25ex \@plus1ex \@minus.2ex}%
+                                    {-1em}%
+                                    {\normalfont\normalsize\bfseries}}
+\setcounter{secnumdepth}{3}% Allow numbering up to \subsubsection or \sssparagraph
+\makeatother
+
+%----------------------- Quebra de linha após paragraph ------------------------
+
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+  {-3.25ex\@plus -1ex \@minus -.2ex}%
+  {1.5ex \@plus .2ex}%
+  {\normalfont\normalsize\bfseries}}
+\makeatother
+
 %--------------------------------- Informações ---------------------------------
 
 \newcommand{\meutitulo}{Técnicas emergentes de teste de software: Discussão e Contextualização}
@@ -99,14 +126,14 @@
   \listoftables
   \printnomenclature
 
-  \input{tex/introducao}
-  \input{tex/fundamentacao}
+  % \input{tex/introducao}
+  % \input{tex/fundamentacao}
   \input{tex/contextualizacao}
-  \input{tex/conclusoes}
+  % \input{tex/conclusoes}
 
   \anexo
-  \input{tex/anexo_efetividade_tdd}
-  \input{tex/anexo_codigos_do_comparativo}
+  % \input{tex/anexo_efetividade_tdd}
+  % \input{tex/anexo_codigos_do_comparativo}
 
   %--------------------------------- Bibliografia ------------------------------
 
