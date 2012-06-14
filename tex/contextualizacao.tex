@@ -1,6 +1,7 @@
 \chapter{Discussão das técnicas em um contexto aplicado}
 
-TODO: Refazer esse texto
+\textbf{TODO: Refazer esse texto introdutório}
+
 Neste Capítulo serão apresentadas as técnicas emergentes de teste de software, bem como suas características e discussões sobre os pontos em aberto acerca de tais técnicas.
 
 \section{Contextualizando TDD}
@@ -109,7 +110,7 @@ def tasks_by_position position
 end
 \end{mycode}
 
-Com isso, o ciclo TDD o desenvolvimento da funcionalidade é terminado, produzindo um código legível, limpo e bem coberto por testes.
+Com isso, o ciclo TDD para o desenvolvimento da funcionalidade é terminado, produzindo um código legível, limpo e bem coberto por testes.
 
 \subsection{Design emergente no kanban-roots}
 \label{sub:design_emergente_no_kanban_roots}
@@ -117,7 +118,7 @@ Com isso, o ciclo TDD o desenvolvimento da funcionalidade é terminado, produzin
 Para o desenvolvimento do kanban-roots, foi de extrema importância que o design evoluísse incrementalmente, pois não se sabia ao certo que
 funcionalidades seriam contempladas nem que entidades existiriam.
 
-As entidades \textit{Project} e \textit{Contributor} tinham uma relação direta, n para n, como apresentado na Figura \ref{img:contributor_projetc}. Contudo, em um determinado momento achou-se pertinente a criação de uma nova entidade \textit{Team} que faria a ligação entre as outras duas entidades, como apresentado na Figura \ref{img:contributor_team_projetc}. Isto acarretou uma série de alterações \cite{CommitAddTeam}, dentre outras, na interface das entidades e na estrutura do banco de dados $-$ considerada uma alteração crítica, mas que com ferramentas como \textit{migrations},\footnote{\textit{Migrations} são uma forma conveniente de gerenciar bases de dados de maneira estruturada e organizada. Mais em \url{http://guides.rubyonrails.org/migrations.html}} torna-se possível que o \textit{design} evolua de modo incremental e emergente.
+As entidades \textit{Project} e \textit{Contributor} tinham uma relação direta, n para n, como apresentado na Figura \ref{img:contributor_projetc}. Contudo, em um determinado momento achou-se pertinente a criação de uma nova entidade \textit{Team} que faria a ligação entre as outras duas entidades, como apresentado na Figura \ref{img:contributor_team_projetc}. Isto acarretou uma série de alterações \cite{CommitAddTeam}, dentre outras, na interface das entidades e na estrutura do banco de dados $-$ considerada uma alteração crítica, mas que com ferramentas como \textit{migrations},\footnote{\textit{Migrations} são uma forma conveniente de gerenciar bases de dados de maneira estruturada e organizada. Mais em \url{http://guides.rubyonrails.org/migrations.html}} torna-se simples.
 
 \begin{figure}[h]
   \center
@@ -135,7 +136,7 @@ Meses depois, foi verificado que esta entidade \textit{Team} não era mais neces
   \label{img:contributor_team_projetc}
 \end{figure}
 
-Foram diversas as situações em que mudanças como essa ocorreram durante o desenvolvimento do kanban-roots. Sem o suporte do TDD seria extremamente complicado fazer essas alterações e deixar o design emergir, pois a insegurança de que as modificações pudesse afetar outras partes do código seria muito grande. Além disso, a criação a priori dos testes favoreceu que as modificações fossem feitas de maneira mais simples e direta.
+Foram diversas as situações em que mudanças como essa ocorreram durante o desenvolvimento do kanban-roots. Sem o suporte do TDD seria extremamente complicado fazer essas alterações e deixar o design emergir, pois a insegurança de que as modificações pudesse afetar outras partes do código seria muito grande. Além disso, a criação a priori dos testes favoreceu que as modificações fossem feitas de maneira mais simples, direta e rápida.
 
 \subsection{A ubiquidade do TDD}
 \label{sub:a_ubiquidade_do_tdd}
@@ -144,7 +145,7 @@ Existe uma controvérsia sobre a não utilização do TDD em qualquer situação
 
 \citeonline{CleanCode} define As Três Leis do TDD, onde a primeira delas é: ``Você não pode escrever código de produção até que você tenha escrito um teste de unidade com falha.". Deve-se ter bastante atenção para o trecho ``de produção", pois sem ele, o sentido da frase é completamente distorcido, dando a impressão de que deve-se utilizar em todas as situações.
 
-Introduzindo o kanban-roots na discussão, nos dois únicos casos em que ocorreu um \textit{bug} em produção, ao ser feita uma analise no código em busca da solução, foi encontrado um comentário ``TODO: Make test and refactor"\ nos métodos onde os \textit{bugs} ocorreram. Atualmente, existem 13 comentários semelhantes a esse espalhados no código do kanban-roots. Isso, de certa forma, comprova que caso os testes não sejam escritos antes, para um código que irá entrar em produção, escrevê-lo depois acaba sendo um fardo, e isso é ignorado até que um problema ocorra.
+Introduzindo o kanban-roots na discussão, nos dois únicos casos em que ocorreu um \textit{bug} em produção, ao ser feita uma analise no código em busca da solução, foi encontrado um comentário ``TODO: Make test and refactor"\ nos métodos onde os \textit{bugs} ocorreram. Atualmente, existem 5 comentários semelhantes a esse espalhados no código do kanban-roots. Isso, de certa forma, comprova que caso os testes não sejam escritos antes, para um código que irá entrar em produção, escrevê-lo depois acaba sendo um fardo, e isso é ignorado até que um problema ocorra.
 
 Um exemplo para esta situação é apresentado no Código \ref{code:todo}, onde é mostrado um método de \textit{controller}\footnote{O \textit{controller} é um componente do padrão MVC (do inglês \textit{Model View Controller}) de desenvolvimento de software. Neste padrão, a lógica da aplicação (\textit{Model}) é isolada da interface do usuário (\textit{View}) através de um controlador (\textit{Controller}).} que é chamado via Ajax e implementa a atualização dos pontos de uma tarefa diretamente do kanban do projeto. Além de atualizar os pontos da tarefa na base de dados, este método captura, trata e envia informações para que a interface do kanban seja atualizada. Este foi um típico caso onde um experimento foi para produção, sem testes e com um código \textbf{extremamente ruim}.
 
@@ -199,59 +200,14 @@ Códigos como o apresentado acima são extremamente difíceis de serem testados,
 Conclui-se que, para quem adota TDD, somente nos casos em que um código será posteriormente eliminado, como em provas de conceito temporárias ou experimentos, a utilização da técnica não é invariavelmente necessária. Contudo, a utilização de TDD nesses cenários pode ser muito interessante, pois como dito anteriormente, para a escrita dos testes, é preciso entender bem o problema a ser resolvido, fazendo o desenvolvedor se preparar mais para o que ele ainda não conhece muito bem.
 
 
-\subsection{A efetividade do TDD}
-\label{sub:a_efetividade_do_tdd}
-
-Existem dúvidas sobre a real efetividade do TDD no que diz respeito à qualidade do código, redução de defeitos e ao aumento ou diminuição da produtividade. Empiricamente, é comum observar a sensação subjetiva,  Contudo, por ser um processo complexo, é muito difícil avaliar e chegar a uma conclusão exata sobre os ganhos e benefícios de toda e qualquer prática em engenharia de software.
-
-Nos últimos anos, vem sendo feitos alguns experimentos para tentar mostrar de maneira empírica que TDD realmente é efetivo no processo de desenvolvimento de software.
-
-\subsubsection{Estudos na indústria}
-\label{sub:estudos_na_industria}
-
-Um estudo feito por \citeonline{MaximilienTDD}, fazendo um comparativo de entre o desenvolvimento pré e pós a utilização do TDD, mostrou uma redução de 50\% na taxa de defeitos encontrados no sistema, tendo um mínimo impacto negativo na produtividade da equipe. Além disso, foi percebido que a utilização do TDD os fez produzir um produto que incorporaria mais facilmente alterações posteriores.
-
-Outro estudo feito por \citeonline{ChinaTDD} dividiu dois grupos, um utilizando TDD e outro utilizando Test-last\footnote{Nesta abordagem os testes escritos após o código.}. O estudo mostrou que o time que utilizou TDD produziu menos defeitos e quando estes ocorriam, eram capazes de solucioná-los muito mais rapidamente. No estudo realizado por \citeonline{DammTDD} também é mostrada uma redução nas taxas de defeito.
-
-Já o estudo feito por \citeonline{GeorgeTDD} mostrou que, apesar de TDD poder reduzir inicialmente a produtividade dos desenvolvedores em 16\%, o código produzido apresentou uma cobertura entre 92\% a 98\%. Além disso, uma análise qualitativa mostrou que 87.5\% dos programadores acreditam que TDD facilitou o entendimento dos requisitos e 95.8\% acreditam que TDD reduziu o tempo gasto com \textit{debug}. 78\% também acreditam que TDD aumentou a produtividade da equipe. No entanto, apenas metade dos desenvolvedores acreditam que TDD leva a uma diminuição do tempo de desenvolvimento. Sobre qualidade, 92\% acreditam que TDD ajuda a manter um código de maior qualidade e 79\% acreditam que ele promove um design mais simples e 71\% acreditam que esta abordagem é notavelmente efetiva. Portanto, agregando todos esses dados, o estudo mostra que 80\% dos desenvolvedores acreditam que o uso do TDD é realmente efetivo.
-
-\citeonline{EmpiricalTDD} realizaram um estudo de caso conduzidos em três times na Microsoft e um na IBM. Os resultados indicaram que o número de defeitos diminuiu entre 40\% e 90\% em relação à projetos similares que não usaram TDD. Contudo, o estudo mostrou também que a utilização do TDD aumentou o tempo inicial de desenvolvimento entre 15\% e 35\%.
-
-
-\subsubsection{Estudos na academia}
-\label{sub:estudos_na_academia}
-
-Um estudo feito por \citeonline{JanzenTDD} dividiu um conjunto de alunos em três grupos, onde cada um deles utilizaria uma abordagem distinta. Um grupo utilizou TDD, o outro Test-last e o último não fazia testes. O grupo que utilizou TDD produziu e por volta de duas vezes  mais funcionalidades que os outros dois grupos e com um número similar de defeitos. Além disso, o grupo que utilizou TDD foi o único a completar a interface gráfica. Apesar de ter desenvolvido mais funcionalidades, o grupo que utilizou TDD investiu a mesma quantidade de tempo dos demais grupos para o desenvolvimento.
-
-O Grupo TDD despendeu menos esforço por linha de código e despendeu 88\% menos esforço por funcionalidade do que o grupo que não fez testes, e 57\% menos esforço por funcionalidade do que o grupo Test-last. Além disso, o grupo TDD teve uma cobertura de testes 86\% maior do que o grupo Test-last.
-
-Também foi feita uma micro-avaliação somente do grupo TDD, sendo aferido que nas partes do código para os quais foram feitos testes, a complexidade foi 43\% menor do que as partes sem testes. Além disso, as classes testadas tiveram um acoplamento 104\% menor do que as não testadas.
-
-Já o estudo feito por \citeonline{ErdogmusTDD} com vinte e quatro alunos de graduação mostrou que a utilização do TDD fez com que houvesse um aumento na produtividade, além de reduzir a necessidade de \textit{debug} e retrabalho. Entretanto nenhuma diferença na qualidade no código foi encontrada.
-
-
-TODO: mudar Conclusões para outra coisa
-
-\subsection{Conclusões}
-\label{sub:conclusoes}
-
-A maioria dos experimentos feitos tanto na indústria quanto na academia mostra que TDD melhora o processo de desenvolvimento de software, aumentando a qualidade do código, reduzindo o número de defeitos e diminuindo o tempo gasto com depuração.
-
-Contudo existe uma divergência em relação à produtividade dos desenvolvedores. Os estudos na indústria mostram que o uso do TDD faz com que a produtividade diminua um pouco, diferente dos estudos na academia que mostram um aumento na produtividade. Uma possível conclusão sobre a causa desta divergência é que os desenvolvedores na indústria já utilizam há algum tempo um outro modelo de desenvolvimento e estão acostumados com ele, fazendo com que a mudança para o TDD inicialmente seja um pouco complicada. Isso já não é verdade quando se está falando de alunos de graduação, que não têm que realizar uma mudança de paradigma como os profissionais na indústria neste caso.
-
-Uma outra questão sobre a diminuição da produtividade apresentada nos estudos da indústria, é que essa produtividade tem uma queda maior no início, quando os desenvolvedores ainda estão se acostumando com a técnica e as mudanças no código são constantes. Contudo, com o passar do tempo e o amadurecimento do projeto, essa produtividade tende a ser maior do que sem a utilização do TDD, pois os desenvolvedores já aprenderam e acostumaram com a técnica e, com uma cobertura de testes maior e com código de melhor qualidade, modificações no código são mais simples e rápidas de serem feitas.
-
-Durante o desenvolvimento do kanban-roots não foi realizado nenhum experimento semelhante aos apresentados nos tópicos anteriores. Uma vez que este trabalho se direciona à exposição e à discussão de técnicas emergentes de desenvolvimento de software, aplicadas à construção de software real, tais experimentos, trazidos aqui a título de informação e enriquecimento, fugiriam ao escopo do presente trabalho. Cabe ressaltar, entretanto, que a melhoria na qualidade do código e na diminuição de defeitos, citada pelos estudos, foi percebida subjetivamente pelo autor no decorrer do processo de desenvolvimento do software. Além disto, conforme citado na Seção \ref{sub:a_ubiquidade_do_tdd}, apenas dois defeitos foram encontrados no kanban-roots em produção, ambos em trechos de código não cobertos por testes. Ou seja, onde a aplicação de TDD não foi realizada de modo estrito.
-
-
 \section{Contextualizando BDD}
 
-TODO: fazer introdução da seção
+\textbf{TODO: fazer introdução da seção}
 
 \subsection{A relação entre BDD e TDD}
 \label{sub:a_relacao_entre_bdd_e_tdd}
 
-Como dito a pouco, BDD é uma evolução do TDD. A grande diferença entre os dois é que TDD não abrange a validação do software, ou seja, se o software atende os requisitos. Isso muda tudo, pois em BDD, a ênfase está no comportamento, e não na estrutura. Ao invés de focar em classes e métodos ao escrever os testes, o foco é no comportamento que gera valor para o sistema. Além disso, o pensamento não é voltado à verificação, mas sim no comportamento, em validar que o software faz sem deixar também de verificar se está funcionando como deveria.
+Como dito a anteriormente, BDD é uma evolução do TDD. A grande diferença entre os dois é que TDD não abrange a validação do software, ou seja, se o software atende os requisitos. Isso muda tudo, pois em BDD, a ênfase está no comportamento, e não na estrutura. Ao invés de focar em classes e métodos ao escrever os testes, o foco é no comportamento que gera valor para o sistema. Além disso, o pensamento não é voltado à verificação, mas sim no comportamento, em validar que o software faz sem deixar também de verificar se está funcionando como deveria.
 
 Em BDD não são escritos testes, mas sim especificações, chamadas de \textit{specs} (de \textit{specifications}). Pode-se ter a clara diferença entre testes (TDD) e specs (BDD) comparando o Código \ref{code:tdd_test3} com o Código \ref{code:bdd_spec}, onde palavras chave como \textit{class}, \textit{test} e \textit{assert} dão lugar a \textit{describe}, \textit{it} e \textit{should}, ficando nítido o foco no comportamento. Além disso, a substituição do Test::Unit (TDD) pelo Rspec (BDD) também revela grande mudança nas asserções onde os \textit{asserts} dão lugar aos \textit{matchers}, fazendo com que as asserções possam ser lidas quase como uma linguagem natural.
 
@@ -280,11 +236,10 @@ describe Project do
 end
 \end{mycode}
 
-Em TDD, o nome dos testes é baseado na estrutura do código, e isso pode ter um efeito colateral: criar duplicações. Ao escrever testes como o \texttt{test\_tesks\_by\_position} do Código \ref{code:tdd_test3} e o método \texttt{tasks\_by\_position} é renomeado, o nome do teste também terá que ser renomeado, o que provavelmente é esquecido. Isso torna os testes confusos e desinformativos \cite{ContinuousTesting}. Como por definição, refatorar é melhorar a estrutura e o design do código sem alterar seu comportamento, nomeando os testes com base no comportamento desejado ao invés da estrutura do código, não apenas torna os testes mais informativos como também torna a refatoração menos custosa \cite{ContinuousTesting}.
+Em TDD, o nome dos testes é baseado na estrutura do código, e isso pode ter um efeito colateral: criar duplicações. Ao escrever testes como o \texttt{test\_tesks\_by\_position} do Código \ref{code:tdd_test3} e o método \texttt{tasks\_by\_position} é renomeado, o nome do teste também terá que ser renomeado, o que na maioria das vezes é esquecido. Isso torna os testes confusos e desinformativos \cite{ContinuousTesting}. Como por definição, refatorar é melhorar a estrutura e o design do código sem alterar seu comportamento, nomeando os testes com base no comportamento desejado ao invés da estrutura do código, não apenas torna os testes mais informativos como também torna a refatoração menos custosa \cite{ContinuousTesting}.
 
 % subsection a_relacao_entre_bdd_e_tdd (end)
 
-TODO: Como eu mudo isso para a fundamentação se está intimamente ligado à parte prática?
 
 \subsection{Modelos de escrita dos testes de aceitação}
 \label{sub:modelos_de_escrita_dos_testes_de_aceitacao}
@@ -310,7 +265,7 @@ Uma das maneiras de escrever testes de aceitação é como texto plano, em uma l
 
 Onde Y é uma funcionalidade, Z é o benefício ou valor da funcionalidade e X é a pessoa (ou regra) que irá se beneficiar desta funcionalidade. O mapeamento feito desta forma é interessante pois se não souber completar Z, isso quer dizer que esta funcionalidade pode não ser tão importante quanto se imaginava.
 
-Para finalizar esse \textit{template}, estes critérios de aceitação da história são quebrados em diferentes cenários que tem a seguinte forma:
+Para finalizar esse \textit{template}, os critérios de aceitação da história são quebrados em diferentes cenários que tem a seguinte forma:
 
 \begin{quote}
 \textbf{Given} (Dado) algum contexto inicial\\
@@ -320,7 +275,7 @@ Para finalizar esse \textit{template}, estes critérios de aceitação da histó
 
 Nas ferramentas que implementam esta abordagem, os testes são escritos baseados em \textit{steps} (passos), onde cada \textit{step} (Given/When/Then) é mapeado para um código real.
 
-No Código \ref{code:bdd_cucumber_spec}, é utilizado o \textit{Cucumber} para fazer a especificação. Como pode-se ver, o teste é escrito em linguagem que qualquer pessoa, mesmo sem nenhum conhecimento em programação, pode ler e validar.
+No Código \ref{code:bdd_cucumber_spec}, é utilizado o \textit{Cucumber} para fazer a especificação. Como pode-se ver, o teste é escrito em uma linguagem que qualquer pessoa, mesmo sem nenhum conhecimento em programação, pode ler e validar.
 
 \begin{mycode}{cucumber}%
 {Especificação em texto plano}{code:bdd_cucumber_spec}
@@ -395,6 +350,7 @@ When /^I should see "([^"]*)" in a(?:|n) "([^"]*)" tag$/ do |text, tag|
 end
 \end{mycode}
 
+\textbf{TODO: Adicionar aqui uma conclusão para o tópico, com uma tela de execução dos testes. Talvez seja interessante colocar também uma estrutura de pastas (tipo uma saída do tree) mostrando a quantidade de arquivos diferentes que tem que manipular.}
 
 \subsubsection{Escrita em código puro}
 \label{ssub:Escrita em codigo puro}
@@ -425,6 +381,14 @@ end
 \end{mycode}
 
 É importante ressaltar que, mesmo sem a utilização dos \textit{templates} de história e cenário, este modelo de escrita não deixa de ser BDD \cite{BDDSolis}, pois o foco da escrita dos testes continua no comportamento.
+
+\textbf{TODO: Adicionar aqui uma conclusão para o tópico, com uma tela de execução dos testes.}
+
+
+\subsubsection{Pontos em sobre os modelos de escrita}
+\label{ssub:pontos em aberto}
+
+\textbf{TODO: ver como fazer para ter sub de subsubsection, pois os itens abaixou são sub desta subsubsection.}
 
 BDD vem se tornando um consenso em automação de testes. Contudo, existem uma divergência grande sobre a forma de escrita dos testes de aceitação entre escrita em código puro e escrita em texto plano, tendo alguns pontos a serem considerados.
 
@@ -522,10 +486,10 @@ Esta abordagem busca eliminar os problemas com a camada adicional e tempo de exe
 No entanto, esta abordagem cai no mesmo dilema da escrita em texto plano: o cliente não irá ler ou validar esta saída. Além disso, a introdução dos métodos \texttt{When/And/Then} juntamente com as \textit{strings} e blocos passados como parâmetros, piora muito a legibilidade do código de teste, prejudicando a manutenibilidade da suíte de testes. Assim, está abordagem, apesar de eliminar a camada adicional, pouco difere da escrita em texto plano, no que diz respeito às desvantagens.
 
 
-TODO: mudar Conclusões para outra coisa
-
 \subsection{Conclusões}
 \label{sub:conclusoes_bdd}
+
+\textbf{TODO: mudar Conclusões para outra coisa}
 
 Na opinião do autor, os testes escritos em texto plano em um primeiro momento são muito atraentes, pois, com a facilidade de leitura, a possibilidade de validação de testes executáveis pelo cliente se tornam reais. No entanto, como apresentado anteriormente, na realidade é pouquíssimo provável que o cliente irá validar estes testes. Isto é ainda mais acentuado em projetos como o kanban-roots onde não existe cliente em si, tornando totalmente irrelevante os possíveis benefícios da escrita de testes em texto plano.
 
@@ -536,7 +500,7 @@ Apesar dos pontos negativos, os testes em texto plano podem ter valia em situaç
 
 \section{Contextualizando Integração contínua}
 
-TODO: escrever introdução da seção
+\textbf{TODO: escrever introdução da seção}
 
 \subsection{Integração contínua síncrona versus assíncrona}
 \label{sub:sincrona_x_assincrona}
@@ -571,7 +535,7 @@ Com o \textit{feedback} rápido, todas as falhas foram corrigidas muito rapidame
 
 \section{Contextualizando dublês de teste}
 
-TODO: escrever introdução da seção
+\textbf{TODO: escrever introdução da seção}
 
 \subsection{Contextualizando o \textit{stub}}
 \label{sub:contextualizando_o_stub}

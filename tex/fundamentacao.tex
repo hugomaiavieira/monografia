@@ -5,9 +5,8 @@
 
 O desenvolvimento de software é o ato de elaborar e implementar um sistema computacional que transforme as necessidades de um utilizador ou de um mercado em um produto de software.
 
-O desenvolvimento de software é essencialmente uma atividade intelectual e criativa, exigindo a manipulação de uma gama muito grande de conhecimentos e informações. Além disso, além dos desenvolvedores de um software se preocuparem com o conteúdo e estrutura, eles devem se preocupar também com o comportamento fazendo com o que o desenvolvimento de software seja uma atividade complexa, devendo ser realizada por especialistas munidos de técnicas que os auxiliem da melhor maneira possível.
+O desenvolvimento de software é essencialmente uma atividade intelectual e criativa, exigindo a manipulação de uma gama muito grande de conhecimentos e informações. Além disso, os desenvolvedores de um software se preocuparem com o conteúdo e estrutura, além de deverem se preocupar também com o comportamento fazendo com o que o desenvolvimento de software seja uma atividade complexa, devendo ser realizada por especialistas munidos de técnicas que os auxiliem da melhor maneira possível.
 
-% section desenvolvimento_de_software (end)
 
 \subsection{Agilismo}
 \label{sub:agilismo}
@@ -44,19 +43,16 @@ Uma \textit{release}, mesmo que seja pequena, representa um tempo ainda grande, 
 
 Mas para que isso seja possível, os métodos ágeis contam com um conjunto de técnicas para dar suporte a seu caráter iterativo e incremental, sendo algumas destas técnicas abordadas mais adiante neste trabalho.
 
-% subsection agilismo (end)
-
-% section desenvolvimento_de_software (end)
 
 \section{Teste de software}
 \label{sec:teste_de_software}
 
-
-A maneira como o teste de software é aplicado varia de acordo com a metodologia utilizada no desenvolvimento. Tradicionalmente o teste de software é feito somente após o desenvolvimento ter sido concluído \cite{TesteSoftware, Pressman}. Já nos métodos ágeis um sentido oposto é seguido \cite{ArtOfAgileDevelopment}, sendo utilizadas técnicas como \textit{Test-Driven Development} (abordada na Seção \ref{sec:tdd}) e \textit{Behaviour-Driven Development} (abordada na Seção \ref{sec:bdd}).
+A maneira como o teste de software é aplicado varia de acordo com a metodologia utilizada no desenvolvimento. Tradicionalmente o teste de software é feito somente após o desenvolvimento ter sido concluído \cite{TesteSoftware, Pressman}. Já nos métodos ágeis um sentido oposto é seguido \cite{ArtOfAgileDevelopment}, sendo utilizadas técnicas como \textit{Test-Driven Development} (abordada na Seção \ref{sub:tdd}) e \textit{Behaviour-Driven Development} (abordada na Seção \ref{sub:bdd}).
 
 O uso de estratégias nas quais a escrita dos testes automatizados é feita antes do código de implementação das funcionalidades, como TDD e BDD, não exclui o emprego de técnicas de teste de software tradicionais como classes de equivalência, análise do valor limite, análise da complexidade ciclomática e outras.
 
 Os próximos tópicos definirão os tipos de teste utilizados no contexto do presente trabalho.
+
 
 \subsection{Testes de unidade}
 \label{sub:testes_de_unidade}
@@ -95,7 +91,6 @@ class Category < ActiveRecord::Base
 end
 \end{mycode}
 
-% subsection testes_de_unidade (end)
 
 \subsection{Testes de integração}
 \label{sub:testes_de_integracao}
@@ -112,6 +107,10 @@ Para exemplificar, será utilizada uma extensão criada para fazer o destaque da
 \end{figure}
 
 O Pygments deve ser instalado na máquina onde o kanban-roots está sendo executado. No entanto, o kanban-roots foi projetado rodar em um servidor próprio ou em um VPS\footnote{ \textit{Virtual Private Server}. É um servidor em ambiente compartilhado que possui acesso \textit{root} e processos independentes para cada conta VPS criada.}, mas também no Heroku\footnote{ É um PaaS (\textit{platafom as a service}) que tem uma cota de utilização gratuita. No Heroku não é possível instalar dependências no sistema. Mais em \url{http://heroku.com}}. Sendo assim, foi utilizado um serviço gratuito e não oficial criado por Trevor Turk e hospedado no Google App Engine que permite a utilização da API \nomenclature{API}{Application programming interface} do Pygments através de um POST para o serviço. Dessa forma, deve-se testar a integração com o serviço e também a integração com o Pygments instalado localmente.
+
+No Código \ref{code:integration_spec} é apresentado o teste de integração para o \textit{highlighting} de código englobando os dois casos citados anteriormente e no Código \ref{code:integration} é apresentada a implementação para esta fucnionalidade.
+
+É importante perceber que, para isolar o teste, foi utilizado um dublê de teste (neste caso um \textit{stub}) para simular a resposta do método \texttt{can\_pygmentize?} que faz uma verificação no sistema operacional para identificar se o Pygments está instalado ou não. Dublês de teste serão abordados mais detalhadamente na Seção \ref{sub:dubles_de_teste}.
 
 \begin{mycode}{rspec}%
 {Teste de integração automatizado para o \textit{highlighting} de código}{code:integration_spec}
@@ -160,9 +159,6 @@ class HTMLwithAlbino < Redcarpet::Render::HTML
 end
 \end{mycode}
 
-É importante perceber que, para isolar o \hyperref[code:integration_spec]{teste}, foi utilizado um dublê de teste (neste caso um \textit{stub}) para simular a resposta do método \texttt{can\_pygmentize?} que faz uma verificação no sistema operacional para verificar se o Pygments está instalado ou não. Dublês de teste serão abordados mais detalhadamente na Seção \ref{sec:dubles_de_teste}.
-
-% subsection testes_de_integracao (end)
 
 \subsection{Testes de aceitação}
 \label{ssub:testes_de_aceitacao}
@@ -171,7 +167,9 @@ Testes de aceitação são especificações para o comportamento das funcionalid
 
 Relacionando com os métodos tradicionais, os testes de aceitação implementam os casos de uso levantados na análise orientada a objetos.
 
-No Código \ref{code:acceptance} são apresentados exemplos de teste de aceitação, sendo dois cenários de uma mesma funcionalidade, utilizando BDD com a escrita testes em texto plano. BDD e testes de aceitação serão vistos com mais detalhes na Seção \ref{sec:bdd}.
+No Código \ref{code:acceptance} são apresentados exemplos de teste de aceitação, utilizando BDD com a escrita em texto plano. O primeiro cenário testa a funcionalidade de clicar e arrartar as tarefas de uma posição para outra no kanban. Já o segundo cenário testa a funcionalidade de limpar a divisão \textit{Done} do kanban, ou seja, retirar do quadro todas as tarefas concluídas.
+
+BDD e testes de aceitação serão vistos com mais detalhes na Seção \ref{sub:bdd}.
 
 \begin{mycode}{cucumber}%
 {Teste de aceitação para o registro de um contribuidor}{code:acceptance}
@@ -208,14 +206,11 @@ Feature: Use the board
     And the Done division should be cleaned
 \end{mycode}
 
-% subsection testes_de_aceitacao (end)
-
-% section teste_de_software (end)
 
 \section{Técnicas emergentes de teste de software}
 \label{sec:tecnicas_emergentes_de_teste_de_software}
 
-Neste Capítulo serão apresentadas as técnicas emergentes de teste de software.
+Nesta seção serão apresentadas, conceitualmente, as técnicas emergentes de teste de software, sendo elas o Desenvolvimento Guiado por Testes (do inglês, \textit{Test-Driven Development} - TDD), Desenvolvimento Guiado por Comportamento (do inglês, \textit{Behaviour-Driven Development - BDD}), Integração Contínua e Dublês de Teste.
 
 \subsection{Test-Driven Development (TDD)}
 \label{sub:tdd}
@@ -227,10 +222,10 @@ Esta abordagem encoraja bom design \cite{GrowingOOByTests}, produz código test�
 \citeonline{EmergentDesign} relaciona o entendimento do problema e o fluxo natural do TDD:
 
 \begin{citacao}
-Tentar escrever um teste é uma boa maneira de testar a si mesmo sobre seu conhecimento sobre como a classe deverá funcionar antes de você escrevê-la. Esta é uma boa sequência: tenha certeza de que você entende o que você irá tentar fazer antes de você realmente tentar fazer. De fato, colocando dessa maneira parece muito mais natural considerar os testes como Primeira Tarefa e criar o código como Segunda Tarefa. (tradução do autor)
+Tentar escrever um teste é uma boa maneira de testar a si mesmo sobre seu conhecimento sobre como a classe deverá funcionar antes de você escrevê-la. Esta é uma boa sequência: tenha certeza de que você entende o que você irá tentar fazer antes de você realmente tentar fazer. De fato, colocando dessa maneira, parece muito mais natural considerar os testes como Primeira Tarefa e criar o código como Segunda Tarefa. (tradução do autor)
 \end{citacao}
 
-O TDD vem sendo utilizado esporadicamente há anos, contudo, não existia um nome para identificar essa forma de desenvolver software, que no fim dos anos noventa, ganhou além do nome, uma definição. Atualmente, TDD começa a ganhar força e ser utilizada em times de grandes empresas como Google, Yahoo, Microsoft e IBM \cite{EmpiricalTDD}.
+O TDD vem sendo utilizado esporadicamente há anos, contudo, não existia um nome para identificar essa forma de desenvolver software, que no fim dos anos noventa, ganhou além do nome, uma definição. Atualmente, TDD começa a ganhar força e ser utilizada em times de grandes empresas como Google, Yahoo, Microsoft e IBM \cite{EmpiricalTDD}. O Anexo \ref{cha:a_efetividade_do_tdd} apresenta uma análise de diversos estudos sobre a efetividade de TDD na indústria e na academia.
 
 \subsubsection{Ciclo TDD}
 \label{ssub:ciclo_tdd}
@@ -262,9 +257,7 @@ Ao Executar os testes e todos eles passarem, o código possuirá todos os requis
 
 \item \textbf{Refatorar}
 
-Esta é uma etapa muito importante, onde o código escrito anteriormente é melhorado.
-
-Segundo \citeonline{FowlerRefatoracao}, refatorar é reestruturar o software aplicando uma série de alterações em sua estrutura interna para torná-lo mais fácil de ser entendido e menos custoso de ser modificado, sem alterar seu comportamento observável.
+Esta é uma etapa muito importante, onde o código escrito anteriormente é melhorado. Segundo \citeonline{FowlerRefatoracao}, refatorar é reestruturar o software aplicando uma série de alterações em sua estrutura interna para torná-lo mais fácil de ser entendido e menos custoso de ser modificado, sem alterar seu comportamento observável.
 
 Refatorar melhora o projeto do software, o torna mais fácil de entender e modificar, ajuda a encontrar falhas e ajuda o desenvolvedor a programar mais rapidamente.
 
@@ -285,7 +278,9 @@ A figura \ref{img:ciclo-tdd} resume o ciclo TDD, onde as etapas 1 e 2 são repre
 \subsubsection{Design emergente}
 \label{ssub:design_emergente}
 
-No contexto em que TDD costuma ser aplicado $-$ em processos ágeis, com um ciclo de vida iterativo-incremental $-$ não é realizado um amplo \textit{design} prévio. Sendo assim, o \textit{design} evolui incrementalmente. Sabendo disso, uma característica extremamente importante do TDD é a facilitação ao \textit{design} emergente, que muitos consideram ser sua a principal característica \cite{EmergentDesign}.
+\textbf{TODO: juntar isso com o mesmo tópico em contextualização?}
+
+No contexto em que TDD costuma ser aplicado $-$ em processos ágeis, com um ciclo de vida iterativo-incremental $-$ não é realizado um amplo \textit{design} prévio. Sendo assim, o \textit{design} evolui incrementalmente, ou seja, o \textit{design} emerge de acordo com a necessidade. Sabendo disso, uma característica extremamente importante do TDD é a facilitação ao \textit{design} emergente, que muitos consideram ser sua a principal característica \cite{EmergentDesign}.
 
 TDD é considerada uma técnica essencial para o \textit{design} emergente porque
 quando se está escrevendo um teste anteriormente ao código, o programador contempla e decide não apenas a interface do software (i.e. nomes de classes/métodos, parâmetros, tipos de retorno, lançamento de exceções), mas também o comportamento do software (i.e. resultados esperados para determinadas entradas) \cite{JanzenTDD}.
@@ -300,7 +295,7 @@ Ao longo das iterações, o design precisa evoluir, mas deve manter-se simples e
 
 
 \subsection{Behaviour-Driven Development (BDD)}
-\label{subsec:bdd}
+\label{sub:bdd}
 
 Criado em 2006 \cite{IntroducingBDD}, \textit{Behaviour-Driven Development} (Desenvolvimento guiado por comportamento) é uma técnica de desenvolvimento de software cuja amplitude se estende às atividades de design, documentação, validação e verificação, tratando-as de modo unificado \cite{BDDRodrigo}.
 
@@ -342,7 +337,7 @@ Neste momento, deve-se descer de nível, saindo do nível de aceitação e indo 
 
 \item \textbf{Entra no ciclo TDD}
 
-No nível de unidade, entra-se o \hyperref[ssub:ciclo_tdd]{ciclo TDD} até que todos os testes de unidade estejam passando.
+No nível de unidade, entra-se no \hyperref[ssub:ciclo_tdd]{ciclo TDD} até que todos os testes de unidade estejam passando.
 
 \item \textbf{Retornar para o nível de aceitação}
 
@@ -374,7 +369,7 @@ Integração Contínua é uma prática de desenvolvimento de software onde os me
 
 Para assegurar o rápido feedback, o tempo de execução da \textit{build} deve ser o menor possível, tentando manter sempre menor do que dez minutos \cite{FowlerCI}.
 
-Além disso, no servidor de integração, busca-se utilizar as mesmas configurações utilizadas em produção, pois em algumas situações os testes podem estar passando em ambiente de desenvolvimento, mas o \textit{bug} estourar em produção. O intuito é eliminar a famosa frase ``Mas funciona na minha máquina!".
+Além disso, no servidor de integração, busca-se utilizar as mesmas configurações utilizadas em produção, pois em algumas situações os testes podem estar passando em ambiente de desenvolvimento, mas o \textit{bug} estourar em produção. O intuito é eliminar a famosa frase ``Na minha máquina funciona!".
 
 A IC é um dos pilares da agilidade, pois garante que todo o sistema funcione de forma coesa a cada \textit{build}, mesmo que sua equipe seja grande e diversas partes do código estejam sendo alteradas ao mesmo tempo \cite{CaelumCI}.
 
@@ -405,7 +400,7 @@ Em algumas ocasiões é difícil testar alguns componentes porque eles dependem 
 
 Quando se escreve um teste onde não se pode/escolhe usar componentes reais, pode-se substitui-los pelos Dublês de Teste que oferecem uma maneira de isolar as dependências ao criar os testes, permitindo a utilização de componentes falsos para cumprir os papéis de componentes reais. Com isso, elimina-se complexidade do código dos testes, pois o código de implementação dos objetos é mantido pequeno e com baixo acoplamento.
 
-Uma outra característica da utilização de dublês é que muitas fezes fazem com que os testes sejam executados mais rapidamente, pois criam o objeto apenas em memória, reduzindo assim o acesso a disco.
+Uma outra característica da utilização de dublês é que muitas vezes fazem com que os testes sejam executados mais rapidamente, pois criam o objeto apenas em memória, reduzindo assim o acesso a disco.
 
 Os Dublês de Teste não precisam se comportar exatamente como o componente real, devendo apenas prover a mesma API que o componente real.
 
@@ -413,7 +408,7 @@ Os Dublês de Teste não precisam se comportar exatamente como o componente real
 
 \begin{itemize}
 \item
-\textbf{\textit{Dummy}} geralmente é utilizado apenas para preencher uma lista de parâmetros e nunca é realmente usado.
+\textbf{\textit{Dummy}} geralmente apenas preenche uma lista de parâmetros e nunca é utilizado de fato.
 
 \item
 \textbf{\textit{Fake}} é utilizado para substituir uma funcionalidade real. Geralmente, o \textit{fake} implementa a mesma funcionalidade, porém de uma maneira muito mais simples. Um exemplo típico é uma base de dados em memória.
@@ -430,4 +425,4 @@ das pré-definidas.
 
 \end{itemize}
 
-Destes cinco tipos de dublês, apenas dois serão abordados, sendo eles \textit{mock} e \textit{stub}, por serem os mais amplamente utilizados.
+Destes cinco tipos de dublês, apenas dois serão abordados, sendo eles \textit{mock} e \textit{stub}, por serem os mais amplamente utilizados, além de serem os únicos necessários no desenvolvimento do kanban-roots.

@@ -8,5 +8,5 @@ pdf:
 	@evince monografia.pdf &
 
 clean:
-	@rm *.bbl *.aux *.blg *.log *.toc *.lof *.lol *.out *.pdf *.ilg *.nlo *.nls 2> /dev/null; exit 0
+	@rm *.bbl *.aux *.blg *.log *.toc *.lof *.lol *.out *.pdf *.ilg *.nlo *.nls *.lot 2> /dev/null; exit 0
 
