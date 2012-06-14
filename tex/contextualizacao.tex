@@ -1,15 +1,11 @@
 \chapter{Discussão das técnicas em um contexto aplicado}
 
-\textbf{TODO: Refazer esse texto introdutório}
-
-Neste Capítulo serão apresentadas as técnicas emergentes de teste de software, bem como suas características e discussões sobre os pontos em aberto acerca de tais técnicas.
+Neste Capítulo serão contextualizadas as técnicas emergentes de teste de software, assim como serão feitas discussões sobre os pontos em aberto acerca de tais técnicas. Será utilizado como base para estas contextualizações e discussões o código e experiências envolvidas no desenvolvimento do kanban-roots, agregando uma visão prática e aplicada à um projeto real.
 
 \section{Contextualizando TDD}
 \label{sec:contextualizando_tdd}
 
-Neste tópico será apresentada como a utilização do TDD se dá na prática, utilizando exemplos reais implementados durante do desenvolvimento do kanban-roots.
-
-A seguinte funcionalidade precisa ser implementada:
+Para apresentar como a utilização do TDD se dá na prática, serão mostrados os passos para a implementação da seguinte funcionalidade:
 
 \begin{quote}
 \textit{Precisa-se saber todas as tarefas em uma determinada posição do kanban (quadro) de um projeto.}
@@ -17,7 +13,7 @@ A seguinte funcionalidade precisa ser implementada:
 
 A primeira coisa a ser feita é o teste para o caso mais simples: quando o projeto não tem tarefa alguma naquela determinada posição do kanban.
 
-Desta forma, o teste para o caso mais simples pode ser como mostrado no Código \ref{code:tdd_test1}.
+Desta forma, o teste para o caso mais simples pode ser como mostrado no Código \ref{code:tdd_test1}, onde é criada uma instância da classe \texttt{Project} e é feita uma asserção de que não tem tarefas na posição 4 do quadro.
 
 \begin{mycode}{ruby}%
 {Teste para o método Project\#tasks\_by\_position (versão 1)}{code:tdd_test1}
@@ -30,7 +26,7 @@ class ProjectTest < ActiveSupport::TestCase
 end
 \end{mycode}
 
-Ao rodar este teste, ele irá falhar, informando que o método \texttt{tasks\_by\_position} sequer existe. Como esta era a falha esperada, é escrito então o código mais simples para passar neste teste, apresentado no Código \ref{code:tdd_code1}.
+Ao rodar este teste, ele irá falhar, informando que o método \texttt{tasks\_by\_position} sequer existe. Como esta era a falha esperada, é escrito então o código mais simples para passar neste teste, apresentado no Código \ref{code:tdd_code1}, onde apenas é retornada uma lista vazia.
 
 \begin{mycode}{ruby}%
 {Código do método Project\#tasks\_by\_position (versão 1)}{code:tdd_code1}
@@ -100,7 +96,7 @@ class ProjectTest < ActiveSupport::TestCase
 end
 \end{mycode}
 
-Executando os testes novamente, todos eles passam. Isto indica que já é hora de ir para o item 5 do ciclo TDD e refatorar. Ao comparar o Código \ref{code:tdd_code2} com sua versão refatorada, apresentada no Código \ref{code:tdd_code3}, pode-se perceber como a segunda está mais simples e clara e que ao rodar os testes, estes passam mostrando que o comportamento do método não mudou.
+Executando os testes novamente, todos eles passam, como mostrado na figura \ref{img:test-unit-exec}. Isto indica que já é hora de ir para o item 5 do ciclo TDD e refatorar. Ao comparar o Código \ref{code:tdd_code2} com sua versão refatorada, apresentada no Código \ref{code:tdd_code3}, pode-se perceber como a segunda está mais simples e clara e que ao rodar os testes, estes passam mostrando que o comportamento do método não mudou.
 
 \begin{mycode}{ruby}%
 {Código do método Project\#tasks\_by\_position (versão 3)}{code:tdd_code3}
@@ -110,7 +106,15 @@ def tasks_by_position position
 end
 \end{mycode}
 
-Com isso, o ciclo TDD para o desenvolvimento da funcionalidade é terminado, produzindo um código legível, limpo e bem coberto por testes.
+\begin{figure}[h]
+  \center
+  \caption{Saída produzida pela execução dos testes de unidade com utilizando TDD com testUnit}
+  \includegraphics[scale=0.6]{images/test-unit-exec}
+  \label{img:test-unit-exec}
+\end{figure}
+
+Com isso, o ciclo TDD para o desenvolvimento da funcionalidade é terminado, produzindo um código legível, limpo e bem coberto por testes. Além disso, o código faz exatamente o que se espera dele, nada a mais nem nada a menos, atendendo os requisitos definidos nos testes.
+
 
 \subsection{Design emergente no kanban-roots}
 \label{sub:design_emergente_no_kanban_roots}
@@ -202,7 +206,7 @@ Conclui-se que, para quem adota TDD, somente nos casos em que um código será p
 
 \section{Contextualizando BDD}
 
-\textbf{TODO: fazer introdução da seção}
+Nesta seção será visto como se dá a utilização do BDD se dá na prática, bem como sua relação com TDD, além de uma discussão acerca dos modelos de escrita dos testes com a utilização desta técnica.
 
 \subsection{A relação entre BDD e TDD}
 \label{sub:a_relacao_entre_bdd_e_tdd}
