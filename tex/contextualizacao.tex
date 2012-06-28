@@ -21,7 +21,7 @@ Desta forma, o teste para o caso mais simples pode ser como mostrado no Código 
 class ProjectTest < ActiveSupport::TestCase
   def test_tasks_by_position
     project = Factory.create :project
-    assert_equal(project.tasks_by_position(4), [])
+    assert_equal(project.tasks_by_position("done"), [])
   end
 end
 \end{mycode}
@@ -44,13 +44,13 @@ Os testes irão passar. Mas a funcionalidade ainda não está completa e, conseq
 class ProjectTest < ActiveSupport::TestCase
   def test_tasks_by_position
     project = Factory.create :project
-    tasks = [Factory.create(:task, :project => project, :position => 1),
-             Factory.create(:task, :project => project, :position => 1)]
+    tasks = [Factory.create(:task, :project => project, :position => "backlog"),
+             Factory.create(:task, :project => project, :position => "backlog")]
 
-    assert_equal(project.tasks_by_position(4), [])
+    assert_equal(project.tasks_by_position("done"), [])
 
-    assert_equal(project.tasks_by_position(1).count, 2)
-    tasks.each { |task| assert(project.tasks_by_position(1).include?(task)) }
+    assert_equal(project.tasks_by_position("backlog").count, 2)
+    tasks.each { |task| assert(project.tasks_by_position("backlog").include?(task)) }
   end
 end
 \end{mycode}
@@ -63,7 +63,7 @@ Como o teste foi alterado, este é executado e irá falhar, informando que na \h
 def tasks_by_position position
   task_list = []
   tasks.each do |task|
-    task_list << task if task.position.to_s == position.to_s
+    task_list << task if task.position == position
   end
   task_list
 end
@@ -77,21 +77,21 @@ Desta vez, após a modificação no código e a execução dos testes, todos os 
 class ProjectTest < ActiveSupport::TestCase
   def test_tasks_by_position
     project = Factory.create :project
-    tasks = [Factory.create(:task, :project => project, :position => 1),
-             Factory.create(:task, :project => project, :position => 1),
-             Factory.create(:task, :project => project, :position => 2),
-             Factory.create(:task, :project => project, :position => 3),
-             Factory.create(:task, :project => project, :position => 3)]
+    tasks = [Factory.create(:task, :project => project, :position => "backlog"),
+             Factory.create(:task, :project => project, :position => "backlog"),
+             Factory.create(:task, :project => project, :position => "todo"),
+             Factory.create(:task, :project => project, :position => "doing"),
+             Factory.create(:task, :project => project, :position => "doing")]
 
-    assert_equal(project.tasks_by_position(4), [])
+    assert_equal(project.tasks_by_position("done"), [])
 
-    assert_equal(project.tasks_by_position(1).count, 2)
-    tasks[0..1].each { |task| assert(project.tasks_by_position(1).include?(task)) }
+    assert_equal(project.tasks_by_position("backlog").count, 2)
+    tasks[0..1].each { |task| assert(project.tasks_by_position("backlog").include?(task)) }
 
-    assert_equal(project.tasks_by_position(2), [tasks[2]])
+    assert_equal(project.tasks_by_position("todo"), [tasks[2]])
 
-    assert_equal(project.tasks_by_position("3").count, 2)
-    tasks[3..4].each { |task| assert(project.tasks_by_position("3").include?(task)) }
+    assert_equal(project.tasks_by_position("doing").count, 2)
+    tasks[3..4].each { |task| assert(project.tasks_by_position("doing").include?(task)) }
   end
 end
 \end{mycode}
@@ -102,7 +102,7 @@ Executando os testes novamente, todos eles passam, como mostrado na figura \ref{
 {Código do método Project\#tasks\_by\_position (versão 3)}{code:tdd_code3}
 # app/models/project.rb
 def tasks_by_position position
-  tasks.select { |item| item.position.to_s == position.to_s }
+  tasks.select { |item| item.position == position }
 end
 \end{mycode}
 
