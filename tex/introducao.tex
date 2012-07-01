@@ -27,24 +27,18 @@ Além disso, como o presente trabalho está no contexto dos métodos ágeis, e n
 
 \section{Metodologia}
 
-Será feita uma explanação sobre cada técnica e uma discussão comparando as diferentes abordagens, possibilidades e pontos em aberto no emprego de cada técnica.
+Para atingirmos os objetivos propostos neste trabalho, será feita uma explanação sobre cada uma das técnicas emergentes estudadas, aqui definidas como:
 
-Como base para a discussão, será utilizado o kanban-roots\footnote{\url{http://github.com/hugomaiavieira/kanban-roots}}, que foi desenvolvido pelo autor do presente trabalho utilizando todas as técnicas abordadas neste, possibilitando desta forma a obtenção de dados e experiências da utilização das técnicas em um projeto real.
+\begin{itemize}
+  \item Desenvolvimento guiado por testes (TDD, do inglês \textit{Test-Driven Development})
+  \item Desenvolvimento guiado por comportamento (BDD, do inglês \textit{Behaviour-Driven Development}
+  \item Integração contínua
+  \item Dublês de teste
+\end{itemize}
 
-O kanban-roots é um kanban\footnote{O termo tem origem no sistema Toyota de produção, onde kanban é a maneira como é coordenado o fluxo de peças na cadeia de suprimentos  \cite{AMaquinaQueMudouOMundo}. No contexto do presente trabalho, kanban é um quadro para visualização do fluxo de trabalho (tarefas) em um projeto.} online para auxiliar a organização e acompanhamento das tarefas em um projeto, sendo especialmente interessante para projetos \textit{opensouce} ou, de modo geral, para projetos com equipes geograficamente distribuídas.
+Serão comparadas as diferentes abordagens, possibilidades, pontos em aberto no emprego de cada técnica assim como observando a aplicabilidade de cada uma delas e a eficiência respectiva.
 
-Na figura \ref{img:tela_kaban_roots} pode ser visto um \textit{screen shot} do kanban de um projeto no kanban-roots.
-
-O kanban é muito utilizado em metodologias ágeis como XP e Scrum como um quadro para visualização do fluxo de tarefas nas iterações de um projeto (mais na Seção \ref{sub:agilismo}). As tarefas inicialmente são posicionadas na divisão \textbf{\textit{Backlog}} até serem escolhidas para fazer parte de uma iteração. Nesse momento, as tarefas escolhidas vão para a divisão \textbf{\textit{To Do}} até que sejam escolhidas por um desenvolvedor para serem implementadas, passando para a divisão \textbf{\textit{Doing}}. Após o desenvolvedor concluir a tarefa, esta vai para a divisão \textbf{\textit{Done}}. Dessa maneira, todos os participantes tem a possibilidade de ver como está o andamento da iteração, além de ser possível acompanhar o que cada integrante do projeto está está fazendo naquele instante.
-
-O kanban-roots já está em produção e vem sendo testado e utilizado com sucesso por algumas pessoas em empresas do Brasil como a Algorich, Voxline, Mandic, Quatix, mas também estrangeiras como a infoPiiaf e Free.fr (França), Ginzametrics (Estados Unidos), Osube (China), Centah (Canadá), Podmoskovie.info (Rússia), EvoEnergy (Inglaterra), Forgotten Labs (Lituânia), entre outros.
-
-\begin{figure}[h]
-  \center
-  \caption{Tela do kanban de um projeto no kanban-roots}
-  \includegraphics[scale=0.45]{images/kanban-roots}
-  \label{img:tela_kaban_roots}
-\end{figure}
+Como base para a discussão, será utilizado o kanban-roots\footnote{\url{http://github.com/hugomaiavieira/kanban-roots}}, que será apresentado na Seção \ref{sec:kanban_roots}. O kanban-roots é um projeto que foi desenvolvido pelo autor do presente trabalho utilizando todas as técnicas abordadas neste, possibilitando desta forma a obtenção de dados e experiências da utilização das técnicas em um projeto real.
 
 Todos os trechos de código apresentados neste trabalho são trechos retirados do kanban-roots e a primeira linha de cada trecho sempre será um comentário informando o nome do arquivo original em que o dado trecho se encontra.
 
@@ -54,15 +48,7 @@ Para o desenvolvimento do kanban-roots foram utilizadas diversas ferramentas, se
 
 Como base para o desenvolvimento, foi utilizado o \textit{framework web} Ruby On Rails\footnote{\url{http://rubyonrails.org}}. Para os testes de unidade apresentados na Seção \ref{sub:tdd} foi utilizado o Test::Unit\footnote{\url{http://test-unit.rubyforge.org/}}. Já na Seção \ref{sub:bdd} é utilizado o Rspec\footnote{\url{http://rspec.info/}} para testes unitários, testes de aceitação e dublês de teste. Ainda na Seção \ref{sub:bdd} também foi utilizado o Cucumber\footnote{\url{http://cukes.info/}} para testes de aceitação. Além dessas ferramentas, também foi utilizado o FactoryGirl\footnote{\url{https://github.com/thoughtbot/factory_girl}} para \textit{fixtures replacement} em todos os momentos em que se fez necessário.
 
-\section{Trabalhos relacionados} % (fold)
-\label{sec:trabalhos_relacionados}
+\section{Organização}
+\label{sec:organizacao}
 
-\textbf{TODO: puxar os trabalhos relacionados de todas as técnicas abordadas}
-
-Não existem muitos trabalhos acadêmicos relacionados às técnicas abordadas no presente trabalho, e todos eles abordam o tema apenas conceitualmente, deixando uma lacuna em termos de contextualização.
-
-\citeonline{BDDSolis} apresentam algumas das principais características do \textit{Behaviour-Driven Development} (BDD), tendo como base uma pequena quantidade de estudo publicados sobre o tema e as ferramentas existentes para a utilização da técnica.
-
-Sobre \textit{Test-Driven Development} (TDD), praticamente são apenas encontrados estudos empíricos, com estudos de caso na academia e na indústria, que discutem a efetividade do uso do TDD. Na Seção \ref{sub:a_efetividade_do_tdd} será feita uma análise destes estudos.
-
-% section trabalhos_relacionados (end)
+\textbf{TODO: Falar como a monografia está organizada: no capítulo tal, será abordado isso, isso e aquilo. Na seção tal bla bla bla.}

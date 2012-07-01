@@ -2,6 +2,24 @@
 
 Neste Capítulo serão contextualizadas as técnicas emergentes de teste de software, assim como serão feitas discussões sobre os pontos em aberto acerca de tais técnicas. Será utilizado como base para estas contextualizações e discussões o código e experiências envolvidas no desenvolvimento do kanban-roots, agregando uma visão prática e aplicada à um projeto real.
 
+\section{O kanban-roots}
+\label{sec:kanban_roots}
+
+O kanban-roots é um kanban\footnote{O termo tem origem no sistema Toyota de produção, onde kanban é a maneira como é coordenado o fluxo de peças na cadeia de suprimentos  \cite{AMaquinaQueMudouOMundo}. No contexto do presente trabalho, kanban é um quadro para visualização do fluxo de trabalho (tarefas) em um projeto.} online para auxiliar a organização e acompanhamento das tarefas em um projeto, sendo especialmente interessante para projetos \textit{opensouce} ou, de modo geral, para projetos com equipes geograficamente distribuídas.
+
+Na figura \ref{img:tela_kaban_roots} pode ser visto um \textit{screen shot} do kanban de um projeto no kanban-roots.
+
+O kanban é muito utilizado em metodologias ágeis como XP e Scrum como um quadro para visualização do fluxo de tarefas nas iterações de um projeto (mais na Seção \ref{sub:agilismo}). As tarefas inicialmente são posicionadas na divisão \textbf{\textit{Backlog}} até serem escolhidas para fazer parte de uma iteração. Nesse momento, as tarefas escolhidas vão para a divisão \textbf{\textit{To Do}} até que sejam escolhidas por um desenvolvedor para serem implementadas, passando para a divisão \textbf{\textit{Doing}}. Após o desenvolvedor concluir a tarefa, esta vai para a divisão \textbf{\textit{Done}}. Dessa maneira, todos os participantes tem a possibilidade de ver como está o andamento da iteração, além de ser possível acompanhar o que cada integrante do projeto está está fazendo naquele instante.
+
+O kanban-roots já está em produção e vem sendo testado e utilizado com sucesso por algumas pessoas em empresas do Brasil como a Algorich, Voxline, Mandic, Quatix, mas também estrangeiras como a infoPiiaf e Free.fr (França), Ginzametrics (Estados Unidos), Osube (China), Centah (Canadá), Podmoskovie.info (Rússia), EvoEnergy (Inglaterra), Forgotten Labs (Lituânia), entre outros.
+
+\begin{figure}[h]
+  \center
+  \caption{Tela do kanban de um projeto no kanban-roots}
+  \includegraphics[scale=0.45]{images/kanban-roots}
+  \label{img:tela_kaban_roots}
+\end{figure}
+
 \section{Contextualizando TDD}
 \label{sec:contextualizando_tdd}
 
@@ -13,7 +31,7 @@ Para apresentar como a utilização do TDD se dá na prática, serão mostrados 
 
 A primeira coisa a ser feita é o teste para o caso mais simples: quando o projeto não tem tarefa alguma naquela determinada posição do kanban.
 
-Desta forma, o teste para o caso mais simples pode ser como mostrado no Código \ref{code:tdd_test1}, onde é criada uma instância da classe \texttt{Project} e é feita uma asserção de que não tem tarefas na posição 4 do quadro.
+Desta forma, o teste de unidade para o caso mais simples pode ser como mostrado no Código \ref{code:tdd_test1}, onde é criada uma instância da classe \texttt{Project} e é feita uma asserção de que não tem tarefas na posição 4 do quadro.
 
 \begin{mycode}{ruby}%
 {Teste para o método Project\#tasks\_by\_position (versão 1)}{code:tdd_test1}
@@ -113,7 +131,71 @@ end
   \label{img:test-unit-exec}
 \end{figure}
 
-Com isso, o ciclo TDD para o desenvolvimento da funcionalidade é terminado, produzindo um código legível, limpo e bem coberto por testes. Além disso, o código faz exatamente o que se espera dele, nada a mais nem nada a menos, atendendo os requisitos definidos nos testes.
+Com isso, o ciclo TDD para o desenvolvimento da funcionalidade é terminado, produzindo um código legível, limpo e bem coberto por testes. Além disso, o código faz exatamente o que se espera dele, nada a mais nem nada a menos, atendendo os requisitos definidos nos testes. \textbf{TODO: explicar melhor porque atende os requisitos e está limpo e coberto de testes, "como pode ser visto no Código 11"}
+
+\textbf{TODO: terminar de ajustar o exemplo do teste de integração para o objetivo deste tópico, explicando-o melhor}
+
+Outro exemplo, neste caso de teste de integração, é o de uma extensão criada para fazer o destaque da sintaxe de código na descrição das Tarefas e no conteúdo do Comentários no kanban-roots, como apresentado na Figura \ref{img:highlighting}. Para isso, é utilizado um \textit{framework} em Python chamado Pygments\footnote{ Mais em \url{http://pygments.org/}}.
+
+\begin{figure}[h]
+  \center
+  \caption{Comentário com destaque da sintaxe de código no kanban-roots}
+  \includegraphics[scale=0.5]{images/highlighting}
+  \label{img:highlighting}
+\end{figure}
+
+O Pygments deve ser instalado na máquina onde o kanban-roots está sendo executado. No entanto, o kanban-roots foi projetado rodar em um servidor próprio ou em um VPS\footnote{ \textit{Virtual Private Server}. É um servidor em ambiente compartilhado que possui acesso \textit{root} e processos independentes para cada conta VPS criada.}, mas também no Heroku\footnote{ É um PaaS (\textit{platafom as a service}) que tem uma cota de utilização gratuita. No Heroku não é possível instalar dependências no sistema. Mais em \url{http://heroku.com}}. Sendo assim, além da possibilidade de utilizar o Pygments instalado localmente, foi utilizado um serviço gratuito e não oficial criado por Trevor Turk e hospedado no Google App Engine (GAE)\nomenclature{GAE}{Google App Engine} que permite a utilização da API \nomenclature{API}{Application programming interface} do Pygments através de um POST para o serviço. Dessa forma, deve-se testar a integração do kanban-roots com o Pygments instalado localmente e também com o serviço externo hospedado no GAE.
+
+No Código \ref{code:integration_spec} é apresentado o teste de integração para o \textit{highlighting} de código englobando os dois casos citados anteriormente e no Código \ref{code:integration} é apresentada a implementação para esta funcionalidade.
+
+É importante perceber que foi utilizado um dublê de teste (neste caso um \textit{stub}) para simular a resposta do método \texttt{can\_pygmentize?} que faz uma verificação no sistema operacional para identificar se o Pygments está instalado ou não. Dublês de teste serão abordados mais detalhadamente na Seção \ref{sub:dubles_de_teste}.
+
+\begin{mycode}{rspec}%
+{Teste de integração automatizado para o \textit{highlighting} de código}{code:integration_spec}
+# spec/lib/albino_render_spec.rb
+describe HTMLwithAlbino do
+  before(:all) do
+    @render = HTMLwithAlbino.new
+    @code_text = 'puts "hello!"'
+    @highlighted_code =
+      "<div class=\"highlight\"><pre>" +
+        "<span class=\"nb\">puts</span> <span class=\"s2\">&quot;hello!&quot;</span>\n" +
+      "</pre>\n</div>\n"
+  end
+
+  it "should get the highlighted block code from pygments.appspot.com" do
+    @render.stub(:can_pygmentize?).and_return(false)
+    @render.block_code(@code_text, "ruby").should == @highlighted_code
+  end
+
+  it "should get the highlighted block code from local pygments" do
+    @render.stub(:can_pygmentize?).and_return(true)
+    @render.block_code(@code_text, "ruby").should == @highlighted_code
+  end
+end
+\end{mycode}
+
+\begin{mycode}{ruby}%
+{Implementação do \textit{highlighting} de código}{code:integration}
+# lib/albino_render.rb
+class HTMLwithAlbino < Redcarpet::Render::HTML
+  def block_code(code, lang)
+    if can_pygmentize?
+      Albino.colorize(code, lang)
+    else
+      # This is a hack for pygments work on Heroku
+      require "net/http"
+      Net::HTTP.post_form(URI.parse("http://pygments.appspot.com/"),
+                          {"code"=>code, "lang"=>lang}).body
+    end
+  end
+
+  private
+  def can_pygmentize?
+    system "pygmentize -V"
+  end
+end
+\end{mycode}
 
 
 \subsection{Design emergente no kanban-roots}
