@@ -16,7 +16,7 @@ O kanban-roots já está em produção e vem sendo testado e utilizado com suces
 \begin{figure}[h]
   \center
   \caption{Tela do kanban de um projeto no kanban-roots}
-  \includegraphics[scale=0.45]{images/kanban-roots}
+  \includegraphics[scale=0.35]{images/kanban-roots}
   \label{img:tela_kaban_roots}
 \end{figure}
 
@@ -47,7 +47,7 @@ end
 Ao rodar este teste, ele irá falhar, informando que o método \texttt{tasks\_by\_position} sequer existe. Como esta era a falha esperada, é escrito então o código mais simples para passar neste teste, apresentado no Código \ref{code:tdd_code1}, onde apenas é retornada uma lista vazia.
 
 \begin{mycode}{ruby}%
-{Código do método Project\#tasks\_by\_position (versão 1)}{code:tdd_code1}
+{Implementação do método Project\#tasks\_by\_position (versão 1)}{code:tdd_code1}
 # app/models/project.rb
 def tasks_by_position position
   []
@@ -76,7 +76,7 @@ end
 Como o teste foi alterado, este é executado e irá falhar, informando que na \hyperref[code:tdd_test2]{linha 10} eram esperadas duas tarefas, mas foram obtidas zero. O código então deve ser modificado para passar no novo teste e é apresentado no código \ref{code:tdd_code2}.
 
 \begin{mycode}{ruby}%
-{Código do método Project\#tasks\_by\_position (versão 2)}{code:tdd_code2}
+{Implementação do método Project\#tasks\_by\_position (versão 2)}{code:tdd_code2}
 # app/models/project.rb
 def tasks_by_position position
   task_list = []
@@ -117,7 +117,7 @@ end
 Executando os testes novamente, todos eles passam, como mostrado na figura \ref{img:test-unit-exec}. Isto indica que já é hora de ir para o item 5 do ciclo TDD e refatorar. Ao comparar o Código \ref{code:tdd_code2} com sua versão refatorada, apresentada no Código \ref{code:tdd_code3}, pode-se perceber como a segunda está mais simples e clara e que ao rodar os testes, estes passam mostrando que o comportamento do método não mudou.
 
 \begin{mycode}{ruby}%
-{Código do método Project\#tasks\_by\_position (versão 3)}{code:tdd_code3}
+{Implementação do método Project\#tasks\_by\_position (versão 3)}{code:tdd_code3}
 # app/models/project.rb
 def tasks_by_position position
   tasks.select { |item| item.position == position }
@@ -133,9 +133,7 @@ end
 
 Com isso, o ciclo TDD para o desenvolvimento da funcionalidade é terminado, produzindo um código legível, limpo e bem coberto por testes, como pode ser visto no Código \ref{code:tdd_code3}. Além disso, o código faz exatamente o que se espera dele, nada a mais nem nada a menos, atendendo os requisitos definidos nos testes, que são apresentados no Código \ref{code:tdd_test3}.
 
-\textbf{TODO: terminar de ajustar o exemplo do teste de integração para o objetivo deste tópico, explicando-o melhor}
-
-Outro exemplo, neste caso de teste de integração, é o de uma extensão criada para fazer o destaque da sintaxe de código na descrição das Tarefas e no conteúdo do Comentários no kanban-roots, como apresentado na Figura \ref{img:highlighting}. Para isso, é utilizado um \textit{framework} em Python chamado Pygments\footnote{ Mais em \url{http://pygments.org/}}.
+Outro exemplo, neste caso de teste de integração, é o de uma extensão criada para fazer o destaque da sintaxe (\textit{highlighting}) de código na descrição das Tarefas e no conteúdo do Comentários no kanban-roots, como apresentado na Figura \ref{img:highlighting}. Para isso, é utilizado um \textit{framework} em Python chamado Pygments\footnote{ Mais em \url{http://pygments.org/}}, que recebe como parâmetros uma \textit{string} com o código a ser destacado e a linguagem em que este código está escrito, retornando uma nova \texttt{string} em html com o código destacado.
 
 \begin{figure}[h]
   \center
@@ -144,20 +142,48 @@ Outro exemplo, neste caso de teste de integração, é o de uma extensão criada
   \label{img:highlighting}
 \end{figure}
 
-O Pygments deve ser instalado na máquina onde o kanban-roots está sendo executado. No entanto, o kanban-roots foi projetado rodar em um servidor próprio ou em um VPS\footnote{ \textit{Virtual Private Server}. É um servidor em ambiente compartilhado que possui acesso \textit{root} e processos independentes para cada conta VPS criada.}, mas também no Heroku\footnote{ É um PaaS (\textit{platafom as a service}) que tem uma cota de utilização gratuita. No Heroku não é possível instalar dependências no sistema. Mais em \url{http://heroku.com}}. Sendo assim, além da possibilidade de utilizar o Pygments instalado localmente, foi utilizado um serviço gratuito e não oficial criado por Trevor Turk e hospedado no Google App Engine (GAE)\nomenclature{GAE}{Google App Engine} que permite a utilização da API \nomenclature{API}{Application programming interface} do Pygments através de um POST para o serviço. Dessa forma, deve-se testar a integração do kanban-roots com o Pygments instalado localmente e também com o serviço externo hospedado no GAE.
+O Pygments deve ser instalado na máquina onde o kanban-roots está sendo executado. No entanto, o kanban-roots foi projetado rodar tanto em um servidor próprio ou em um VPS\footnote{ \textit{Virtual Private Server}. É um servidor em ambiente compartilhado que possui acesso \textit{root} e processos independentes para cada conta VPS criada.}, como também no Heroku\footnote{ É um PaaS (\textit{platafom as a service}) que tem uma cota de utilização gratuita. No Heroku não é possível instalar dependências no sistema. Mais em \url{http://heroku.com}}. Sendo assim, além da possibilidade de utilizar o Pygments instalado localmente, foi utilizado um serviço gratuito e não oficial criado por Trevor Turk e hospedado no Google App Engine (GAE)\nomenclature{GAE}{Google App Engine} que permite a utilização da API \nomenclature{API}{Application programming interface} do Pygments através de uma requisição (através do método HTTP POST) para o serviço. \textbf{Dessa forma, deve-se testar a integração do kanban-roots com o Pygments instalado localmente e também com o serviço externo hospedado no GAE}.
 
-No Código \ref{code:integration_spec} é apresentado o teste de integração para o \textit{highlighting} de código englobando os dois casos citados anteriormente e no Código \ref{code:integration} é apresentada a implementação para esta funcionalidade.
-
-É importante perceber que foi utilizado um dublê de teste (neste caso um \textit{stub}) para simular a resposta do método \texttt{can\_pygmentize?} que faz uma verificação no sistema operacional para identificar se o Pygments está instalado ou não. Dublês de teste serão abordados mais detalhadamente na Seção \ref{sub:dubles_de_teste}.
+Primeiramente, é feito o teste para o caso em que o Pygments é instalado localmente, apresentado no Código \ref{code:integration_spec1}.
 
 \begin{mycode}{rspec}%
-{Teste de integração automatizado para o \textit{highlighting} de código}{code:integration_spec}
+{Teste de integração para o \textit{highlighting} de código (versão 1)}{code:integration_spec1}
 # spec/lib/albino_render_spec.rb
 describe HTMLwithAlbino do
-  before(:all) do
-    @render = HTMLwithAlbino.new
-    @code_text = 'puts "hello!"'
-    @highlighted_code =
+  it "should get the highlighted block code from local pygments" do
+    render = HTMLwithAlbino.new
+    render.block_code('puts "hello!"', "ruby").should ==
+      "<div class=\"highlight\"><pre>" +
+        "<span class=\"nb\">puts</span> <span class=\"s2\">&quot;hello!&quot;</span>\n" +
+      "</pre>\n</div>\n"
+  end
+end
+\end{mycode}
+
+A implementação para este teste é apresentado no Código \ref{code:integration1}, onde o método \texttt{colorize} da classe \texttt{Albino} invoca o Pygments do sistema.
+
+\begin{mycode}{ruby}%
+{Implementação do \textit{highlighting} de código (versão 1)}{code:integration1}
+# lib/albino_render.rb
+class HTMLwithAlbino < Redcarpet::Render::HTML
+  def block_code(code, lang)
+    Albino.colorize(code, lang)
+  end
+end
+\end{mycode}
+
+Ao executar o teste, este passa. Como não tem nada para refatorar, é adicionado um novo teste para o caso em que o Pygments não está instalado no servidor, como é apresentado no Código \ref{code:integration_spec2}.
+
+É importante perceber que foi utilizado um dublê de teste (neste caso um \textit{stub}) para simular a resposta do método \texttt{can\_pygmentize?} que fará uma verificação no sistema operacional para identificar se o Pygments está instalado ou não.
+
+\begin{mycode}{rspec}%
+{Teste de integração para o \textit{highlighting} de código (versão 2)}{code:integration_spec2}
+# spec/lib/albino_render_spec.rb
+describe HTMLwithAlbino do
+  it "should get the highlighted block code from local pygments" do
+    @render.stub(:can_pygmentize?).and_return(true)
+    render = HTMLwithAlbino.new
+    render.block_code('puts "hello!"', "ruby").should ==
       "<div class=\"highlight\"><pre>" +
         "<span class=\"nb\">puts</span> <span class=\"s2\">&quot;hello!&quot;</span>\n" +
       "</pre>\n</div>\n"
@@ -165,18 +191,19 @@ describe HTMLwithAlbino do
 
   it "should get the highlighted block code from pygments.appspot.com" do
     @render.stub(:can_pygmentize?).and_return(false)
-    @render.block_code(@code_text, "ruby").should == @highlighted_code
-  end
-
-  it "should get the highlighted block code from local pygments" do
-    @render.stub(:can_pygmentize?).and_return(true)
-    @render.block_code(@code_text, "ruby").should == @highlighted_code
+    render = HTMLwithAlbino.new
+    render.block_code('puts "hello!"', "ruby").should ==
+      "<div class=\"highlight\"><pre>" +
+        "<span class=\"nb\">puts</span> <span class=\"s2\">&quot;hello!&quot;</span>\n" +
+      "</pre>\n</div>\n"
   end
 end
 \end{mycode}
 
+O Código \ref{code:integration2} apresenta a implementação que faz os dois casos de teste passarem. Nessa nova versão, foi preciso criar o método de suporte \texttt{can\_pygmentize?} que, como dito anteriormente, verifica se o Pygments está instalado. Se o Pygments estiver instalado, ele é invocado da mesma forma como na versão 1 da implementação. Porém, se o Pygments não estiver instalado, é feita uma requisição ao serviço externo.
+
 \begin{mycode}{ruby}%
-{Implementação do \textit{highlighting} de código}{code:integration}
+{Implementação do \textit{highlighting} de código (versão 2)}{code:integration2}
 # lib/albino_render.rb
 class HTMLwithAlbino < Redcarpet::Render::HTML
   def block_code(code, lang)
@@ -196,6 +223,37 @@ class HTMLwithAlbino < Redcarpet::Render::HTML
   end
 end
 \end{mycode}
+
+Como ao executar os testes, todos eles passam, podemos refatorar o código. Na implementação não há nada a ser refatorado, contudo, existe diversas duplicidades nos testes. O Código \ref{code:integration_spec3} apresenta os testes refatorados, eliminando as duplicidades com a ajuda do método \texttt{before} que, ao receber o \texttt{:all} como parâmetro, é executado antes de de todos os casos de teste.
+
+\begin{mycode}{rspec}%
+{Teste de integração para o \textit{highlighting} de código (versão 3)}{code:integration_spec3}
+# spec/lib/albino_render_spec.rb
+describe HTMLwithAlbino do
+  before(:all) do
+    @render = HTMLwithAlbino.new
+    @code_text = 'puts "hello!"'
+    @highlighted_code =
+      "<div class=\"highlight\"><pre>" +
+        "<span class=\"nb\">puts</span> <span class=\"s2\">&quot;hello!&quot;</span>\n" +
+      "</pre>\n</div>\n"
+  end
+
+  it "should get the highlighted block code from local pygments" do
+    @render.stub(:can_pygmentize?).and_return(true)
+    @render.block_code(@code_text, "ruby").should == @highlighted_code
+  end
+
+  it "should get the highlighted block code from pygments.appspot.com" do
+    @render.stub(:can_pygmentize?).and_return(false)
+    @render.block_code(@code_text, "ruby").should == @highlighted_code
+  end
+end
+\end{mycode}
+
+Desta forma, mostra-se que não apenas o código da implementação deve ser refatorado, mas também o código dos testes. Assim como o código da implementação, o código dos testes devem ser igualmente legíveis e otimizados, pois também sofrem manutenção e precisam ser executados com rapidez.
+
+É importante lembrar que foram omitidos alguns casos de teste para esta funcionalidade, como por exemplo, o caso em que existe uma falha na requisição ao serviço externo. Esta omissão foi feita para que não o exemplo não ficasse muito extenso, e por este já cumprir seu objetivo.
 
 
 \subsection{Design emergente no kanban-roots}
