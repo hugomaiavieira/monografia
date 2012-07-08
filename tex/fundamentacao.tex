@@ -7,6 +7,8 @@ Em 2001 um grupo de dezessete especialistas, reconhecidos pela comunidade como g
 
 Pode-se dizer então, que o Desenvolvimento Ágil, ou Agilismo, é um rótulo genérico para os métodos de desenvolvimento de software baseados no Manifesto Ágil \cite{BDDRodrigo}.
 
+De acordo com \citeonline{PMNetworkFailureDrop}, o \textit{Chaos Manifesto 2011}\footnote{O \textit{Chaos Manifesto} é uma pesquisa bienal realizada pelo \textit{The Standish Group} e teve início em 1994. As pesquisas publicadas em um ano representam os dados do ano anterior.} mostra que os resultados de 2010 representam, desde sua primeira edição, a maior taxa de sucesso nos projetos de desenvolvimento de software, que aumentou de 32\% em 2008 para 37\% em 2010. Segundo \citeonline{ResumoChaosReport}, o \textit{The Standish Group} conclui que uma das razões para o aumento da taxa de sucesso foi a utilização das metodologias ágeis, que cresce a uma taxa de 22\% CAGR\footnote{\href{http://en.wikipedia.org/wiki/Compound_annual_growth_rate} {Compound annual growth rate}} e hoje são adotados em 9\% de todos os projetos de Tecnologia da Informação em andamento e em 29\% dos novos projetos.
+
 É importante citar que o desenvolvimento ágil sofreu grande influência de um conceito conhecido como \textit{Lean Thinking} (``pensamento enxuto"\ em português), uma linha de pensamento em gestão baseada nos princípios de \textit{Lean Manufacturing}\footnote{Os princípios de \textit{Lean Manufacturing} são originários do sistema Toyota de produção, que propôs um modo inteiramente novo de pensar a respeito de fabricação e logística de automóveis.} que se caracteriza por produção em pequenos lotes, eliminação de desperdícios, obsessão com qualidade, equipes multifuncionais praticando aprendizado contínuo, melhoria contínua de processo, sistema puxado de produção e a qualidade sendo responsabilidade dos trabalhadores como um todo \cite{BDDRodrigo}.
 
 Uma das premissas do agilismo é que os custos de alterações sejam praticamente linear ao longo do tempo, independente do ponto em que esteja, fazendo com que a curva de custo de alterações seja semelhante à apresentada na Figura \ref{img:custo-agile}.
@@ -39,15 +41,9 @@ Mas para que isso seja possível, os métodos ágeis contam com um conjunto de t
 \section{Teste de software}
 \label{sec:teste_de_software}
 
-\textbf{TODO BEGIN}
+O teste de software é considerado por \cite{Sommerville} uma técnica dinâmica de verificação e validação, onde é executada uma implementação do software com dados de teste e se examina as saídas do software e seu comportamento operacional para verificar se seu desempenho está conforme necessário.
 
-Introduzir o que é o teste de software. Por exemplo:
-
-Teste de Software é considerado por [Sommerville, 2007] uma técnica dinâmica de verificação e validação. Onde executamos uma implementação do software desenvolvido, apoiados em dados de teste, examinamos a saída e seu comportamento operacional para verificarmos se o seu desempenho está como solicitado/conforme necessário.
-
-Podemos inserir uma figura do processo de desenvolvimento iterativo, dado por Sommerville na figura 17.1 da pagina 261.
-
-\textbf{TODO END}
+A validação responde a pergunta ``Estamos desenvolvendo o software \textbf{correto}?", ou seja, deve-se validar que o software atende aos requisitos. Já a verificação responde a pergunta ``Estamos desenvolvendo o software \textbf{corretamente}?", ou seja, deve-se verificar se o software possui falhas ou defeitos.
 
 A maneira como o teste de software é aplicado varia de acordo com a metodologia utilizada no desenvolvimento. Tradicionalmente o teste de software é feito somente após o desenvolvimento ter sido concluído \cite{TesteSoftware, Pressman}. Já nos métodos ágeis um sentido oposto é seguido \cite{ArtOfAgileDevelopment}, sendo utilizadas técnicas como \textit{Test-Driven Development} (abordada na Seção \ref{sub:tdd}) e \textit{Behaviour-Driven Development} (abordada na Seção \ref{sub:bdd}).
 
