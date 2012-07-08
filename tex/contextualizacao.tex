@@ -9,7 +9,7 @@ O kanban-roots é um kanban\footnote{O termo tem origem no sistema Toyota de pro
 
 Na figura \ref{img:tela_kaban_roots} pode ser visto um \textit{screen shot} do kanban de um projeto no kanban-roots.
 
-O kanban é muito utilizado em metodologias ágeis como XP e Scrum como um quadro para visualização do fluxo de tarefas nas iterações de um projeto (mais na Seção \ref{sub:agilismo}). As tarefas inicialmente são posicionadas na divisão \textbf{\textit{Backlog}} até serem escolhidas para fazer parte de uma iteração. Nesse momento, as tarefas escolhidas vão para a divisão \textbf{\textit{To Do}} até que sejam escolhidas por um desenvolvedor para serem implementadas, passando para a divisão \textbf{\textit{Doing}}. Após o desenvolvedor concluir a tarefa, esta vai para a divisão \textbf{\textit{Done}}. Dessa maneira, todos os participantes tem a possibilidade de ver como está o andamento da iteração, além de ser possível acompanhar o que cada integrante do projeto está está fazendo naquele instante.
+O kanban é muito utilizado em metodologias ágeis como XP e Scrum como um quadro para visualização do fluxo de tarefas nas iterações de um projeto. As tarefas inicialmente são posicionadas na divisão \textbf{\textit{Backlog}} até serem escolhidas para fazer parte de uma iteração. Nesse momento, as tarefas escolhidas vão para a divisão \textbf{\textit{To Do}} até que sejam escolhidas por um desenvolvedor para serem implementadas, passando para a divisão \textbf{\textit{Doing}}. Após o desenvolvedor concluir a tarefa, esta vai para a divisão \textbf{\textit{Done}}. Dessa maneira, todos os participantes tem a possibilidade de ver como está o andamento da iteração, além de ser possível acompanhar o que cada integrante do projeto está está fazendo naquele instante.
 
 O kanban-roots já está em produção e vem sendo testado e utilizado com sucesso por algumas pessoas em empresas do Brasil como a Algorich, Voxline, Mandic, Quatix, mas também estrangeiras como a infoPiiaf e Free.fr (França), Ginzametrics (Estados Unidos), Osube (China), Centah (Canadá), Podmoskovie.info (Rússia), EvoEnergy (Inglaterra), Forgotten Labs (Lituânia), entre outros.
 
@@ -23,10 +23,10 @@ O kanban-roots já está em produção e vem sendo testado e utilizado com suces
 \section{Contextualizando TDD}
 \label{sec:contextualizando_tdd}
 
-Para apresentar como a utilização do TDD se dá na prática, serão mostrados os passos para a implementação da seguinte funcionalidade:
+Para apresentar como a utilização do TDD se dá na prática, serão mostrados os passos para a implementação da seguinte funcionalidade chave para a montagem kanban:
 
 \begin{quote}
-\textit{Precisa-se saber todas as tarefas em uma determinada posição do kanban (quadro) de um projeto.}
+\textit{Precisa-se saber todas as tarefas posicionadas em uma determinada posição do kanban (quadro) de um projeto.}
 \end{quote}
 
 A primeira coisa a ser feita é o teste para o caso mais simples: quando o projeto não tem tarefa alguma naquela determinada posição do kanban.
@@ -394,6 +394,15 @@ Existem duas maneiras principais de se escrever os testes de aceitação: em tex
 \textit{Os comentários mostrados na página de tarefas devem ser renderizados utilizando a linguagem de marcação Markdown.}
 \end{quote}
 
+O resultado desta funcionalidade implementada é apresentado na Figura \ref{img:markdown}.
+
+\begin{figure}[h]
+  \center
+  \caption{Comentários renderizados com Markdown no kanban-roots}
+  \includegraphics[scale=0.5]{images/markdown}
+  \label{img:markdown}
+\end{figure}
+
 \subsubsection{Escrita em texto plano}
 \label{ssub:escrita_em_texto_plano}
 
@@ -685,7 +694,7 @@ Com base no tópico anterior e por ser um projeto \textit{open source}, no kanba
   \label{img:travis-success}
 \end{figure}
 
-Na Seção \ref{sub:testes_de_integracao} sobre testes de integração, foi apresentado o Código \ref{code:integration_spec} com os testes de integração para o \textit{highlighting} de código. Para que a integração contínua pudesse continuar sendo executada no Travis, o teste que verifica a integração do kaban-roots com o Pygments local foi comentado, uma vez que não é possível fazer instalações de dependências de sistema no Travis. Neste caso, o ideal seria ter um servidor próprio para rodar a integração contínua, pois esta tem que simular um ambiente de produção da forma mais perfeita possível, utilizando o Jenkins\footnote{Mais informações em \url{http://jenkins-ci.org/}} por exemplo.
+Na Seção \ref{sec:contextualizando_tdd} sobre testes de integração, foi apresentado o Código \ref{code:integration_spec3} com os testes de integração para o \textit{highlighting} de código. Para que a integração contínua pudesse continuar sendo executada no Travis, o teste que verifica a integração do kaban-roots com o Pygments local foi comentado, uma vez que não é possível fazer instalações de dependências de sistema no Travis. Neste caso, o ideal seria ter um servidor próprio para rodar a integração contínua, pois esta tem que simular um ambiente de produção da forma mais perfeita possível, utilizando o Jenkins\footnote{Mais informações em \url{http://jenkins-ci.org/}} por exemplo.
 
 \begin{figure}[h]
   \center
@@ -711,9 +720,9 @@ Nesta seção será feita a contextualização dos dublês de teste \textit{stub
 \subsection{Contextualizando o \textit{stub}}
 \label{sub:contextualizando_o_stub}
 
-Um exemplo da utilização simples e eficiente do \textit{stub} foi mostrado na Seção \ref{sub:testes_de_integracao} sobre testes de integração. Naquele exemplo, foi feito um \textit{stub} do método \texttt{can\_pygmentize?} que faz uma consulta ao sistema operacional para verificar se uma determinada dependência de sistema está instalada. Desta forma, o teste ficou isolado, não importando se a máquina em que o teste for executado tem ou não a dependência instalada, sendo assim possível simular as duas situações $-$ logicamente, uma maquina não pode, ao mesmo tempo, ter e não ter uma dependência instalada.
+Um exemplo da utilização simples e eficiente do \textit{stub} foi mostrado no teste de integração apresentado na Seção \ref{sec:contextualizando_tdd}. Naquele exemplo, foi feito um \textit{stub} do método \texttt{can\_pygmentize?} que faz uma consulta ao sistema operacional para verificar se uma determinada dependência de sistema está instalada. Desta forma, o teste ficou isolado, não importando se a máquina em que o teste for executado tem ou não a dependência instalada, sendo assim possível simular as duas situações $-$ logicamente, uma maquina não pode, ao mesmo tempo, ter e não ter uma dependência instalada.
 
-Um outro exemplo é mostrado no Código \ref{code:stub_spec}, onde está sendo testada uma ação da classe \textit{Project}. Contudo, para que esta ação seja realizada, é necessário um conjunto de objetos da classe \textit{Task}. Assim, com o objetivo de criar um teste isolado e concentrado na classe \textit{Project}, é utilizado o método \texttt{stub\_model} que cria um \textit{stub} da classe \textit{Task} que irá reponder apenas aos atributos definidos no \textit{hash} passado como segundo parâmetro. No caso, a ação em questão é contar a soma dos pontos das tarefas alocadas em uma determinada posição do quadro (kanban). Esta ação é exercida através do método \texttt{count\_points}, cuja implementação é apresentada no Código \ref{code:stub}.
+Um outro exemplo é mostrado no Código \ref{code:stub_spec}, onde está sendo testada uma ação da classe \textit{Project}. Contudo, para que esta ação seja realizada, é necessário um conjunto de objetos da classe \textit{Task}. Assim, com o objetivo de criar um teste isolado e concentrado na classe \textit{Project}, é utilizado o método \texttt{stub\_model} que cria um \textit{stub} da classe \textit{Task} que irá reponder apenas aos atributos definidos no \textit{hash} passado como segundo parâmetro. No caso, a ação em questão é contar a soma dos pontos das tarefas alocadas em uma determinada posição do quadro (kanban). Esta ação é exercida através do método \texttt{count\_points}, cuja implementação é apresentada no Código \ref{code:stub}. Na Figura \ref{img:count-points} é apresentada uma utilização do método \texttt{count\_points} no somatório de pontos das tarefas na posição \textit{To Do} do kanban.
 
 \begin{mycode}{rspec}%
 {Exemplo do \textit{stub} da classe \textit{Task}}{code:stub_spec}
@@ -750,6 +759,13 @@ class Project
 end
 \end{mycode}
 
+\begin{figure}[h]
+  \center
+  \caption{Utilização do método \texttt{count\_points} no somatório de pontos das tarefas de uma posição}
+  \includegraphics[scale=0.5]{images/count-points}
+  \label{img:count-points}
+\end{figure}
+
 Contudo, a utilização desta técnica deve ser feita com cautela. Quando se utiliza \textit{stubs} em demasia, cria-se um acoplamento muito grande entre teste e implementação. Por exemplo, se na implementação do método \texttt{count\_points} for preciso fazer uso de mais algum atributo de \textit{Task} (em uma refatoração, por exemplo), o \textit{stub} também deverá possuir esse atributo, fazendo com que o teste tenha que ser alterado. Isso vai contra uma das premissas da refatoração de que se o comportamento do método não é modificado, seu teste deve permanecer o mesmo e continuar passando após ser feita a alteração na implementação.
 
 É importante notar a diferença entre os \textit{stubs} e as estratégias de \textit{fixture replacement}\footnote{\textit{Fixture replacement} é uma técnica que tem como objetivo separar a inicialização do teste de sua codificação em si, dando a possibilidade de se criar objetos com estados pré-definidos que possam ser reutilizados em mais de um teste.} baseadas em instâncias. Nestas estratégias, o \textit{fixture} é um objeto real da classe. Assim, um objeto criado via \textit{fixture replacement} de instância, fica sujeito a detalhes de sua implementação da classe real. Dessa forma, o {fixture} não cria o isolamento que um \textit{stub} em seu lugar criaria, pois o stub simplesmente simula uma instância e, portanto, não fica sujeito comportamentos inesperados.
@@ -758,7 +774,7 @@ Contudo, a utilização desta técnica deve ser feita com cautela. Quando se uti
 \subsection{Contextualizando o \textit{mock}}
 \label{sub:contextualizando_o_mock}
 
-De modo semelhante ao Código \ref{code:todo} apresentado na Seção \ref{sub:a_ubiquidade_do_tdd}, o Código \ref{code:mock} apresenta a implementação de um método de \textit{controller} que é chamado via Ajax e implementa a atualização dos responsáveis por uma tarefa diretamente do kanban do projeto. Além atualizar os responsáveis pela tarefa tarefa na base de dados, este método captura, trata e envia informações para que a interface do kanban seja atualizada. Este é outro caso onde um experimento foi para produção, sem testes e com um código \textbf{extremamente ruim}. Sendo assim, neste caso não foi utilizado TDD para criar os testes, sendo estes escritos após a implementação.
+De modo semelhante ao Código \ref{code:todo} apresentado na Seção \ref{sub:a_ubiquidade_do_tdd}, o Código \ref{code:mock} apresenta a implementação de um método de \textit{controller} que é chamado via AJAX (\textit{Asynchronous Javascript and XML})\nomenclature{AJAX}{Asynchronous Javascript and XML} e implementa a atualização dos responsáveis por uma tarefa diretamente do kanban do projeto, como apresentado na Figura \ref{img:edit-contributors}. Além atualizar os responsáveis pela tarefa tarefa na base de dados, este método captura, trata e envia informações para que a interface do kanban seja atualizada. Este é outro caso onde um experimento foi para produção, sem testes e com um código ruim. Desta forma, neste caso não foi utilizado TDD para criar os testes, sendo estes escritos após a implementação.
 
 \begin{mycode}{ruby}%
 {Código do método que atualiza os responsáveis por uma tarefa assincronamente}{code:mock}
@@ -791,9 +807,16 @@ class BoardsController < InheritedResources::Base
 end
 \end{mycode}
 
+\begin{figure}[h]
+  \center
+  \caption{Atualização dos responsáveis pela tarefa diretamente no kanban do projeto}
+  \includegraphics[scale=0.55]{images/edit-contributors}
+  \label{img:edit-contributors}
+\end{figure}
+
 O teste para o método \texttt{update\_assignees}, com a utilização de \textit{mock}, é apresentado no Código \ref{code:mock_spec_mockista}. Como o teste quer validar a funcionalidade para mais de um responsável (\textit{assignees}), são criados dois objetos mockados da classe \textit{Contributor}, além de também ser necessário cria um objeto mockado da classe \textit{Task}. Com esses 3 objetos mockados, está feito a \textit{setup} para o teste.
 
-Em seguida verificadas as chamadas à métodos sobre os objetos mockados. Isto é feito através do método \texttt{should\_receive} que recebe como parâmetro o método chamado. Em seguida, pode ser aninhado o método \texttt{with} que recebera os parâmetros que devem ser passados para o método chamado no \texttt{should\_receive}. Para finalizar a cadeia, pode ser ainda aninhado o método \texttt{and\_return} que indica o retorno do método chamado no \texttt{should\_receive}.
+Em seguida verificadas as chamadas à métodos sobre os objetos mockados. Isto é feito através do método \texttt{should\_receive} que recebe como parâmetro o método a ser chamado. Em seguida, pode ser aninhado o método \texttt{with} que recebe os parâmetros que devem ser passados para o método chamado no \texttt{should\_receive}. Para finalizar a cadeia, pode ser ainda aninhado o método \texttt{and\_return} que indica o retorno do método chamado no \texttt{should\_receive}.
 
 Por fim, através de um \texttt{get}, é feita a chamada ao método do \textit{controller} testado (\texttt{update\_assignees}), e é verificado se a resposta obtida está de acordo com as expectativas.
 
@@ -849,7 +872,7 @@ describe BoardsController do
 end
 \end{mycode}
 
-Percebe-se que o teste sem o uso do \textit{mock} fica mais simples e menos acoplado à implementação. Contudo, o teste usando \textit{mock} ganhou um isolamento maior por não ficar sujeito a detalhes da implementação das classes, irrelevantes para o teste. Além disso, os testes rodaram com uma velocidade 58\% maior do que o teste sem \textit{mock}.
+Percebe-se que o teste sem o uso do \textit{mock} fica mais simples e menos acoplado à implementação. Contudo, o teste usando \textit{mock} ganhou um isolamento maior por não ficar sujeito a detalhes da implementação das classes, irrelevantes para o teste. Além disso, os testes utilizando mock rodaram com uma velocidade 58\% maior do que o teste sem \textit{mock}. Isso acontece porque os testes sem \textit{mock} (utilizando \textit{fixture replacement}) fazem acesso ao disco para gravar as informações dos objetos reais no banco de dados de teste.
 
 
 \subsection{A dicotomia entre o TDD clássico e o mockista}
@@ -867,6 +890,6 @@ Como visto anteriormente, a utilização de dublês de teste, em alguns casos, �
 
 \citeonline{ArtOfAgileDevelopment} afirma o \textit{mock} é uma técnica útil, e as vezes é a melhor maneira de testar o código. No entanto, ele diz que antes de assumir que o \textit{mock} é apropriado para a situação, deve-se olhar novamente para o design do código, pois pode ser uma oportunidade de aprimoramento.
 
-Uma outra questão a ser levada em consideração é que quando não se utiliza dublês, está se testando a integração entre as classes, e isso pode ter um efeito colateral positivo, capturando testes que muitas vezes passam despercebidos ao se utilizar \textit{dublês}. Contudo, quando não se utiliza dublês, para testar uma unidade pode ser necessário desenvolver outras unidades colaboradoras, cada qual com seus correspondentes testes de unidade, assim tirando o foco da tarefa corrente.
+Uma outra questão a ser levada em consideração é que quando não se utiliza dublês, está se testando a integração entre as classes, e isso pode ter um efeito colateral positivo, capturando erros que muitas vezes passam despercebidos ao se utilizar \textit{dublês}. Contudo, quando não se utiliza dublês, para testar uma unidade pode ser necessário desenvolver outras unidades colaboradoras, cada qual com seus correspondentes testes de unidade, assim tirando o foco da tarefa corrente.
 
-Dessa forma, assim como \citeonline{MocksArentStubs} conclui, não existe razão para adotar um estilo TDD mockista, sendo o TDD clássico a melhor opção.
+Dessa forma, assim como \citeonline{MocksArentStubs} conclui, não existe razão para adotar um estilo TDD mockista, sendo o TDD clássico a melhor opção, utilizando os dublês de teste de forma controlada.
