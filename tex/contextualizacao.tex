@@ -285,13 +285,15 @@ Foram diversas as situações em que mudanças como essa ocorreram durante o des
 \subsection{A ubiquidade do TDD}
 \label{sub:a_ubiquidade_do_tdd}
 
-Existe uma controvérsia sobre a não utilização do TDD em qualquer situação. É dito ``sobre a \textbf{não} utilização"\ pois o autor desconhece qualquer literatura dizendo que TDD deve ser utilizado sempre e em qualquer situação. Porém, muitos defendem a sua não utilização em algumas situações como em fase de descobertas, em fase de experimentos, se o desenvolvedor nunca utilizou a API, se o código não será utilizado novamente ou se levar mais tempo para escrever os testes do que para escrever e executar o código.
+Existe uma controvérsia sobre a não utilização do TDD em qualquer situação. É dito ``sobre a \textbf{não} utilização"\ pois o autor do presente trabalho desconhece qualquer literatura dizendo que TDD deve ser utilizado sempre e em qualquer situação. Porém, muitos defendem a sua não utilização em algumas situações como em fase de descobertas, em fase de experimentos, se o desenvolvedor nunca utilizou a API, se o código não será utilizado novamente ou se levar mais tempo para escrever os testes do que para escrever e executar o código.
 
 \citeonline{CleanCode} define As Três Leis do TDD, onde a primeira delas é: ``Você não pode escrever código de produção até que você tenha escrito um teste de unidade com falha.". Deve-se ter bastante atenção para o trecho ``de produção", pois sem ele, o sentido da frase é completamente distorcido, dando a impressão de que deve-se utilizar em todas as situações.
 
 Introduzindo o kanban-roots na discussão, nos dois únicos casos em que ocorreu um \textit{bug} em produção, ao ser feita uma analise no código em busca da solução, foi encontrado um comentário ``TODO: Make test and refactor"\ nos métodos onde os \textit{bugs} ocorreram. Atualmente, existem 5 comentários semelhantes a esse espalhados no código do kanban-roots. Isso, de certa forma, comprova que caso os testes não sejam escritos antes, para um código que irá entrar em produção, escrevê-lo depois acaba sendo um fardo, e isso é ignorado até que um problema ocorra.
 
 Um exemplo para esta situação é apresentado no Código \ref{code:todo}, onde é mostrado um método de \textit{controller}\footnote{O \textit{controller} é um componente do padrão MVC (do inglês \textit{Model View Controller}) de desenvolvimento de software. Neste padrão, a lógica da aplicação (\textit{Model}) é isolada da interface do usuário (\textit{View}) através de um controlador (\textit{Controller}).} que é chamado via Ajax e implementa a atualização dos pontos de uma tarefa diretamente do kanban do projeto. Além de atualizar os pontos da tarefa na base de dados, este método captura, trata e envia informações para que a interface do kanban seja atualizada. Este foi um típico caso onde um experimento foi para produção, sem testes e com um código \textbf{extremamente ruim}.
+
+\newpage
 
 \begin{mycode}{ruby}%
 {Código do método que atualiza os pontos de uma tarefa diretamente do kanban do projeto}{code:todo}
@@ -554,7 +556,7 @@ Na figura \ref{img:rspec-acceptance-exec} é apresentada a saída para a execuç
 
 
 \subsubsection{Pontos em aberto sobre os modelos de escrita}
-\label{ssub:pontos em aberto}
+\label{ssub:pontos_em_aberto}
 
 BDD vem se tornando um consenso em automação de testes. Contudo, existem uma divergência grande sobre a forma de escrita dos testes de aceitação entre escrita em código puro e escrita em texto plano, tendo alguns pontos a serem considerados.
 
@@ -652,12 +654,10 @@ Esta abordagem busca eliminar os problemas com a camada adicional e tempo de exe
 No entanto, esta abordagem cai no mesmo dilema da escrita em texto plano: o cliente não irá ler ou validar esta saída. Além disso, a introdução dos métodos \texttt{When/And/Then} juntamente com as \textit{strings} e blocos passados como parâmetros, piora muito a legibilidade do código de teste, prejudicando a manutenibilidade da suíte de testes. Assim, está abordagem, apesar de eliminar a camada adicional, pouco difere da escrita em texto plano, no que diz respeito às desvantagens.
 
 
-\subsection{Conclusões}
-\label{sub:conclusoes_bdd}
+\subsubsection{Reflexões acerca do modelo de escrita}
+\label{ssub:reflexoes_bdd}
 
-\textbf{TODO: Annabell, isso vai para as conclusões finais ou deixo aqui mesmo como uma subseção com um título diferente?}
-
-Na opinião do autor, os testes escritos em texto plano em um primeiro momento são muito atraentes, pois, com a facilidade de leitura, a possibilidade de validação de testes executáveis pelo cliente se tornam reais. No entanto, como apresentado anteriormente, na realidade é pouquíssimo provável que o cliente irá validar estes testes. Isto é ainda mais acentuado em projetos como o kanban-roots onde não existe cliente em si, tornando totalmente irrelevante os possíveis benefícios da escrita de testes em texto plano.
+Analisando o exposto anteriormente, pode-se perceber os testes escritos em texto plano em um primeiro momento são muito atraentes, pois, com a facilidade de leitura, a possibilidade de validação de testes executáveis pelo cliente se tornam reais. No entanto, como apresentado anteriormente, na realidade é pouquíssimo provável que o cliente irá validar estes testes. Isto é ainda mais acentuado em projetos como o kanban-roots onde não existe cliente em si, tornando praticamente irrelevante os possíveis benefícios da escrita de testes em texto plano.
 
 Já para projetos grandes, nos quais a suíte de testes é extensa, 25\% a mais no tempo de execução dos testes é um preço alto a ser pago, pois os testes devem ser executados diversas vezes ao dia. Se o tempo necessário para executar a suíte de testes se tornar demasiadamente longo, o desenvolvedor tende a rodar os testes menos vezes, diminuindo, assim, a eficácia da aplicação do BDD. Além disso, a escrita de testes em texto plano prejudica a produtividade, pois é adicionada complexidade ao processo, devido à camada adicional, fazendo com que a produtividade seja reduzida.
 
@@ -776,6 +776,8 @@ Contudo, a utilização desta técnica deve ser feita com cautela. Quando se uti
 
 De modo semelhante ao Código \ref{code:todo} apresentado na Seção \ref{sub:a_ubiquidade_do_tdd}, o Código \ref{code:mock} apresenta a implementação de um método de \textit{controller} que é chamado via AJAX (\textit{Asynchronous Javascript and XML})\nomenclature{AJAX}{Asynchronous Javascript and XML} e implementa a atualização dos responsáveis por uma tarefa diretamente do kanban do projeto, como apresentado na Figura \ref{img:edit-contributors}. Além atualizar os responsáveis pela tarefa tarefa na base de dados, este método captura, trata e envia informações para que a interface do kanban seja atualizada. Este é outro caso onde um experimento foi para produção, sem testes e com um código ruim. Desta forma, neste caso não foi utilizado TDD para criar os testes, sendo estes escritos após a implementação.
 
+\newpage
+
 \begin{mycode}{ruby}%
 {Código do método que atualiza os responsáveis por uma tarefa assincronamente}{code:mock}
 # app/controllers/boards_controller.rb
@@ -848,7 +850,9 @@ end
 
 O grande problema do mock está nas verificações de chamada à métodos dos objetos mockados. Pose-se perceber que está se verificando a ordem em que os métodos são chamados, bem como os parâmetros passados. Desta forma, na realidade, está se testando \textbf{como} a funcionalidade está sendo implementada e não \textbf{o que} ela faz \cite{UnitForAReason}. Com isso, o acoplamento entre o teste e a implementação torna-se extremamente grande, ainda maior do que com a utilização de \textit{stubs}. Qualquer refatoração mínima feita na implementação, mesmo que não interfira em seu comportamento, pode fazer com que os testes quebrem.
 
-Para fazer uma comparação, no Código \ref{code:mock_spec_tradicional} é apresentado um outro teste para o mesmo exemplo, porém, utilizando objetos reais criados através de \textit{fixture replacement}. Note que desta vez foi preciso criar um objeto \textit{Project} para ligar ao objeto \textit{task}, pois quando são utilizados objetos reais, todas as validações são executadas e, neste caso, uma tarefa obrigatoriamente deve estar ligada a um projeto.
+Um exemplo para este problema seria trocar o método \texttt{find} na linha 5 do Código \ref{code:mock} pelo método \texttt{find\_by\_id}. Com essa troca, o comportamento do método \texttt{update\_assignees} continua o mesmo, porém, o teste quebraria na linha 9 do Código \ref{code:mock_spec_mockista} informado que a classe \texttt{Task} esperava receber o método \texttt{find} mas recebeu o método \texttt{find\_by\_id}.
+
+Para fazer uma comparação, no Código \ref{code:mock_spec_tradicional} é apresentado um outro teste para o mesmo exemplo, porém, utilizando objetos reais criados através de \textit{fixture replacement}. Note que desta vez foi preciso criar um objeto \textit{project} para ligar ao objeto \textit{task}, pois quando são utilizados objetos reais, todas as validações são executadas e, neste caso, uma tarefa obrigatoriamente deve estar ligada a um projeto.
 
 \begin{mycode}{rspec}%
 {Teste utilizando \textit{fixture replacement} para o método \texttt{update\_assignees}}{code:mock_spec_tradicional}
