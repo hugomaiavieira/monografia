@@ -11,7 +11,7 @@ De acordo com \citeonline{PMNetworkFailureDrop}, o \textit{Chaos Manifesto 2011}
 
 É importante citar que o desenvolvimento ágil sofreu grande influência de um conceito conhecido como \textit{Lean Thinking} (``pensamento enxuto"\ em português), uma linha de pensamento em gestão baseada nos princípios de \textit{Lean Manufacturing}\footnote{Os princípios de \textit{Lean Manufacturing} são originários do sistema Toyota de produção, que propôs um modo inteiramente novo de pensar a respeito de fabricação e logística de automóveis.} que se caracteriza por produção em pequenos lotes, eliminação de desperdícios, obsessão com qualidade, equipes multifuncionais praticando aprendizado contínuo, melhoria contínua de processo, sistema puxado de produção e a qualidade sendo responsabilidade dos trabalhadores como um todo \cite{BDDRodrigo}.
 
-Uma das premissas do agilismo é que os custos de alterações sejam praticamente lineares ao longo do tempo, independente do ponto em que esteja, fazendo com que a curva de custo de alterações seja semelhante à apresentada na Figura \ref{img:custo-agile}.
+Uma das premissas do agilismo é que os custos de alterações sejam praticamente lineares ao longo do tempo, independente do ponto em que esteja, fazendo com que a curva de custo de alterações seja semelhante à apresentada na figura \ref{img:custo-agile}.
 
 \begin{figure}[h]
   \center
@@ -22,7 +22,7 @@ Uma das premissas do agilismo é que os custos de alterações sejam praticament
 
 Isto é conseguido porque nos métodos ágeis não é feito um planejamento inicial muito abrangente. Ao invés disso, o desenvolvimento é dividido em iterações curtas (de uma a quatro semanas), onde ao início de cada uma delas é feito um novo planejamento, corrigindo o curso do projeto com base no \textit{feedback} obtido nas iterações anteriores. Para isso, a proximidade e interação do cliente com o projeto deve ser constante. Desta forma, o desenvolvimento é baseado em \textit{feedback} concreto e não em especulações sobre o futuro, fazendo com que o aprendizado permanente leve a melhorias e torne o produto final mais adequado para o seu público, além de o tornar mais simples e sem elementos extras que poderiam ser utilizados no futuro. Além disso, os testes, que devem ser 100\% automatizados, são fundamentais para que as modificações realizadas não alterem o comportamento atual do sistema  \cite{XPKent}, dando segurança para que estas sejam feitas, além de permitir que o código melhore continuamente.
 
-Ao utilizar métodos ágeis como \textit{eXtreme Programming} (XP) \nomenclature{XP}{eXtreme Programming} e Scrum, todas as funcionalidades do sistema são levantadas através de histórias, que são escritas pelo próprio cliente em pequenos cartões. A equipe de desenvolvimento utiliza os cartões para saber quais funcionalidades são desejadas pelo cliente. Contudo, os cartões podem acabar representando histórias que consomem muito esforço para serem implementadas. Nesse caso, a equipe divide os cartões em tarefas, que são registradas em novos cartões para serem distribuídas facilmente entre os desenvolvedores. Na Figura \ref{img:projeto_agile} é mostrada divisão de um projeto nos métodos ágeis.
+Ao utilizar métodos ágeis como \textit{eXtreme Programming} (XP) \nomenclature{XP}{eXtreme Programming} e Scrum, todas as funcionalidades do sistema são levantadas através de histórias, que são escritas pelo próprio cliente em pequenos cartões. A equipe de desenvolvimento utiliza os cartões para saber quais funcionalidades são desejadas pelo cliente. Contudo, os cartões podem acabar representando histórias que consomem muito esforço para serem implementadas. Nesse caso, a equipe divide os cartões em tarefas, que são registradas em novos cartões para serem distribuídas facilmente entre os desenvolvedores. Na figura \ref{img:projeto_agile} é mostrada divisão de um projeto nos métodos ágeis.
 
 \begin{figure}[h]
   \center
@@ -57,7 +57,7 @@ Os próximos tópicos definirão os tipos de teste utilizados no contexto do pre
 
 Testes de unidade são testes nos quais unidades individuais do sistema são testadas para determinar se estão aptas para uso. Uma unidade é a menor parte testável de uma aplicação. Em programação procedural uma unidade pode ser uma função. Já em programação orientada a objetos, uma unidade pode ser um método ou uma responsabilidade da classe. \citeonline{TesteSoftware} afirmam que neste contexto, espera-se que sejam identificados erros relacionados a algoritmos incorretos ou mal implementados, estruturas de dados incorretas, ou simplesmente erros de programação.
 
-Para exemplificar, no Código \ref{code:unit_test_spec} é apresentado o teste de unidade para o método \texttt{Category\#name\_as\_css\_class}, cuja implementação é mostrada no Código \ref{code:unit_test}. Este método transforma o nome da Categoria em um nome de classe CSS\footnote{\textit{Cascading Style Sheets}. Mais em \url{http://pt.wikipedia.org/wiki/Cascading_Style_Sheets}}\nomenclature{CSS}{Cascading Style Sheets}, deixando todos seus caracteres em minúsculo e substituindo os caracteres / (barra),  (espaço) e - (traço) por \_ (sublinhado).
+Para exemplificar, no código \ref{code:unit_test_spec} é apresentado o teste de unidade para o método \texttt{Category\#name\_as\_css\_class}, cuja implementação é mostrada no código \ref{code:unit_test}. Este método transforma o nome da Categoria em um nome de classe CSS\footnote{\textit{Cascading Style Sheets}. Mais em \url{http://pt.wikipedia.org/wiki/Cascading_Style_Sheets}}\nomenclature{CSS}{Cascading Style Sheets}, deixando todos seus caracteres em minúsculo e substituindo os caracteres / (barra),  (espaço) e - (traço) por \_ (sublinhado).
 
 \begin{mycode}{rspec}%
 {Teste de unidade automatizado para o método \texttt{Category\#name\_as\_css\_class} }{code:unit_test_spec}
@@ -109,7 +109,7 @@ Testes de aceitação são especificações para o comportamento das funcionalid
 
 Relacionando com os métodos tradicionais, os testes de aceitação implementam os casos de uso levantados na análise orientada a objetos.
 
-No Código \ref{code:acceptance} são apresentados exemplos de teste de aceitação, utilizando BDD com a escrita em texto plano. O primeiro cenário testa a funcionalidade de clicar e arrastar as tarefas de uma posição para outra no kanban. Já o segundo cenário testa a funcionalidade de limpar a divisão \textit{Done} do kanban, ou seja, retirar do quadro todas as tarefas concluídas.
+No código \ref{code:acceptance} são apresentados exemplos de teste de aceitação, utilizando BDD com a escrita em texto plano. O primeiro cenário testa a funcionalidade de clicar e arrastar as tarefas de uma posição para outra no kanban. Já o segundo cenário testa a funcionalidade de limpar a divisão \textit{Done} do kanban, ou seja, retirar do quadro todas as tarefas concluídas.
 
 BDD e testes de aceitação serão vistos com mais detalhes na Seção \ref{sub:bdd}.
 
@@ -253,7 +253,7 @@ Dessa forma, uma \textit{ubiquitous language} estreita a colaboração entre cli
 \subsubsection{O ciclo BDD}
 \label{ssub:o_ciclo_bdd}
 
-O Ciclo BDD (também chamado de ciclo \textit{outside-in}\footnote{O ciclo recebe este nome devido à sequência que deve ser percorrida, que se inicia dos requisitos e da visão do cliente (\textit{outside}) até as entranhas dos artefatos de software (\textit{in}) \cite{BDDRodrigo}.}), apresentado na Figura \ref{img:ciclo-bdd}, tem dois níveis: unidade e aceitação. O nível aceitação é o nível mais alto, onde são escritos os testes de aceitação. Já o nível unidade é o mesmíssimo \hyperref[ssub:ciclo_tdd]{ciclo TDD} visto anteriormente. Este ciclo pode ser explicado na seguinte série de passos:
+O Ciclo BDD (também chamado de ciclo \textit{outside-in}\footnote{O ciclo recebe este nome devido à sequência que deve ser percorrida, que se inicia dos requisitos e da visão do cliente (\textit{outside}) até as entranhas dos artefatos de software (\textit{in}) \cite{BDDRodrigo}.}), apresentado na figura \ref{img:ciclo-bdd}, tem dois níveis: unidade e aceitação. O nível aceitação é o nível mais alto, onde são escritos os testes de aceitação. Já o nível unidade é o mesmíssimo \hyperref[ssub:ciclo_tdd]{ciclo TDD} visto anteriormente. Este ciclo pode ser explicado na seguinte série de passos:
 
 \begin{enumerate}
 \item \textbf{Adicionar um teste de aceitação com foco em um cenário}

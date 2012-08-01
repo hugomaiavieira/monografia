@@ -31,7 +31,7 @@ Para apresentar como a utilização do TDD se dá na prática, serão mostrados 
 
 A primeira coisa a ser feita é o teste para o caso mais simples: quando o projeto não tem tarefa alguma naquela determinada posição do kanban.
 
-Desta forma, o teste de unidade para o caso mais simples pode ser como mostrado no Código \ref{code:tdd_test1}, onde é criada uma instância da classe \texttt{Project} e é feita uma asserção de que não tem tarefas na posição 4 do quadro.
+Desta forma, o teste de unidade para o caso mais simples pode ser como mostrado no código \ref{code:tdd_test1}, onde é criada uma instância da classe \texttt{Project} e é feita uma asserção de que não tem tarefas na posição 4 do quadro.
 
 \begin{mycode}{ruby}%
 {Teste para o método Project\#tasks\_by\_position (versão 1)}{code:tdd_test1}
@@ -44,7 +44,7 @@ class ProjectTest < ActiveSupport::TestCase
 end
 \end{mycode}
 
-Ao rodar este teste, ele irá falhar, informando que o método \texttt{tasks\_by\_position} sequer existe. Como esta era a falha esperada, é escrito então o código mais simples para passar neste teste, apresentado no Código \ref{code:tdd_code1}, onde apenas é retornada uma lista vazia.
+Ao rodar este teste, ele irá falhar, informando que o método \texttt{tasks\_by\_position} sequer existe. Como esta era a falha esperada, é escrito então o código mais simples para passar neste teste, apresentado no código \ref{code:tdd_code1}, onde apenas é retornada uma lista vazia.
 
 \begin{mycode}{ruby}%
 {Implementação do método Project\#tasks\_by\_position (versão 1)}{code:tdd_code1}
@@ -54,7 +54,7 @@ def tasks_by_position position
 end
 \end{mycode}
 
-Os testes irão passar. Mas a funcionalidade ainda não está completa e, consequentemente, o teste também não. Como pode ser visto no Código \ref{code:tdd_test2}, é adicionado ao teste uma verificação de que para a posição 1 devem existir duas tarefas e que estas tarefas devem ser exatamente as criadas anteriormente.
+Os testes irão passar. Mas a funcionalidade ainda não está completa e, consequentemente, o teste também não. Como pode ser visto no código \ref{code:tdd_test2}, é adicionado ao teste uma verificação de que para a posição 1 devem existir duas tarefas e que estas tarefas devem ser exatamente as criadas anteriormente.
 
 \begin{mycode}{ruby}%
 {Teste do método Project\#tasks\_by\_position (versão 2)}{code:tdd_test2}
@@ -87,7 +87,7 @@ def tasks_by_position position
 end
 \end{mycode}
 
-Desta vez, após a modificação no código e a execução dos testes, todos os testes os irão passar. Contudo, a cobertura de testes para este método ainda está fraca, o que pode ser resolvido com a adição de mais algumas tarefas em posições diferentes, como mostrado no Código \ref{code:tdd_test3}.
+Desta vez, após a modificação no código e a execução dos testes, todos os testes os irão passar. Contudo, a cobertura de testes para este método ainda está fraca, o que pode ser resolvido com a adição de mais algumas tarefas em posições diferentes, como mostrado no código \ref{code:tdd_test3}.
 
 \begin{mycode}{ruby}%
 {Teste do método Project\#tasks\_by\_position (versão 3)}{code:tdd_test3}
@@ -114,7 +114,7 @@ class ProjectTest < ActiveSupport::TestCase
 end
 \end{mycode}
 
-Executando os testes novamente, todos eles passam, como mostrado na figura \ref{img:test-unit-exec}. Isto indica que já é hora de ir para o item 5 do ciclo TDD e refatorar. Ao comparar o Código \ref{code:tdd_code2} com sua versão refatorada, apresentada no Código \ref{code:tdd_code3}, pode-se perceber como a segunda está mais simples e clara e que ao rodar os testes, estes passam mostrando que o comportamento do método não mudou.
+Executando os testes novamente, todos eles passam, como mostrado na figura \ref{img:test-unit-exec}. Isto indica que já é hora de ir para o item 5 do ciclo TDD e refatorar. Ao comparar o código \ref{code:tdd_code2} com sua versão refatorada, apresentada no código \ref{code:tdd_code3}, pode-se perceber como a segunda está mais simples e clara e que ao rodar os testes, estes passam mostrando que o comportamento do método não mudou.
 
 \begin{mycode}{ruby}%
 {Implementação do método Project\#tasks\_by\_position (versão 3)}{code:tdd_code3}
@@ -131,9 +131,9 @@ end
   \label{img:test-unit-exec}
 \end{figure}
 
-Com isso, o ciclo TDD para o desenvolvimento da funcionalidade é terminado, produzindo um código legível, limpo e bem coberto por testes, como pode ser visto no Código \ref{code:tdd_code3}. Além disso, o código faz exatamente o que se espera dele, nada a mais nem nada a menos, atendendo os requisitos definidos nos testes, que são apresentados no Código \ref{code:tdd_test3}.
+Com isso, o ciclo TDD para o desenvolvimento da funcionalidade é terminado, produzindo um código legível, limpo e bem coberto por testes, como pode ser visto no código \ref{code:tdd_code3}. Além disso, o código faz exatamente o que se espera dele, nada a mais nem nada a menos, atendendo os requisitos definidos nos testes, que são apresentados no código \ref{code:tdd_test3}.
 
-Outro exemplo, neste caso de teste de integração, é o de uma extensão criada para fazer o destaque da sintaxe (\textit{highlighting}) de código na descrição das Tarefas e no conteúdo do Comentários no kanban-roots, como apresentado na Figura \ref{img:highlighting}. Para isso, é utilizado um \textit{framework} em Python chamado Pygments\footnote{ Mais em \url{http://pygments.org/}}, que recebe como parâmetros uma \textit{string} com o código a ser destacado e a linguagem em que este código está escrito, retornando uma nova \texttt{string} em html com o código destacado.
+Outro exemplo, neste caso de teste de integração, é o de uma extensão criada para fazer o destaque da sintaxe (\textit{highlighting}) de código na descrição das Tarefas e no conteúdo do Comentários no kanban-roots, como apresentado na figura \ref{img:highlighting}. Para isso, é utilizado um \textit{framework} em Python chamado Pygments\footnote{ Mais em \url{http://pygments.org/}}, que recebe como parâmetros uma \textit{string} com o código a ser destacado e a linguagem em que este código está escrito, retornando uma nova \texttt{string} em html com o código destacado.
 
 \begin{figure}[h]
   \center
@@ -144,7 +144,7 @@ Outro exemplo, neste caso de teste de integração, é o de uma extensão criada
 
 O Pygments deve ser instalado na máquina onde o kanban-roots está sendo executado. No entanto, o kanban-roots foi projetado rodar tanto em um servidor próprio ou em um VPS\footnote{ \textit{Virtual Private Server}. É um servidor em ambiente compartilhado que possui acesso \textit{root} e processos independentes para cada conta VPS criada.}, como também no Heroku\footnote{ É um PaaS (\textit{platafom as a service}) que tem uma cota de utilização gratuita. No Heroku não é possível instalar dependências no sistema. Mais em \url{http://heroku.com}}. Sendo assim, além da possibilidade de utilizar o Pygments instalado localmente, foi utilizado um serviço gratuito e não oficial criado por Trevor Turk e hospedado no Google App Engine (GAE)\nomenclature{GAE}{Google App Engine} que permite a utilização da API \nomenclature{API}{Application programming interface} do Pygments através de uma requisição (através do método HTTP POST) para o serviço. \textbf{Dessa forma, deve-se testar a integração do kanban-roots com o Pygments instalado localmente e também com o serviço externo hospedado no GAE}.
 
-Primeiramente, é feito o teste para o caso em que o Pygments é instalado localmente, apresentado no Código \ref{code:integration_spec1}.
+Primeiramente, é feito o teste para o caso em que o Pygments é instalado localmente, apresentado no código \ref{code:integration_spec1}.
 
 \begin{mycode}{rspec}%
 {Teste de integração para o \textit{highlighting} de código (versão 1)}{code:integration_spec1}
@@ -160,7 +160,7 @@ describe HTMLwithAlbino do
 end
 \end{mycode}
 
-A implementação para este teste é apresentado no Código \ref{code:integration1}, onde o método \texttt{colorize} da classe \texttt{Albino} invoca o Pygments do sistema.
+A implementação para este teste é apresentado no código \ref{code:integration1}, onde o método \texttt{colorize} da classe \texttt{Albino} invoca o Pygments do sistema.
 
 \begin{mycode}{ruby}%
 {Implementação do \textit{highlighting} de código (versão 1)}{code:integration1}
@@ -172,7 +172,7 @@ class HTMLwithAlbino < Redcarpet::Render::HTML
 end
 \end{mycode}
 
-Ao executar o teste, este passa. Como não tem nada para refatorar, é adicionado um novo teste para o caso em que o Pygments não está instalado no servidor, como é apresentado no Código \ref{code:integration_spec2}.
+Ao executar o teste, este passa. Como não tem nada para refatorar, é adicionado um novo teste para o caso em que o Pygments não está instalado no servidor, como é apresentado no código \ref{code:integration_spec2}.
 
 É importante perceber que foi utilizado um dublê de teste (neste caso um \textit{stub}) para simular a resposta do método \texttt{can\_pygmentize?} que fará uma verificação no sistema operacional para identificar se o Pygments está instalado ou não.
 
@@ -200,7 +200,7 @@ describe HTMLwithAlbino do
 end
 \end{mycode}
 
-O Código \ref{code:integration2} apresenta a implementação que faz os dois casos de teste passarem. Nessa nova versão, foi preciso criar o método de suporte \texttt{can\_pygmentize?} que, como dito anteriormente, verifica se o Pygments está instalado. Se o Pygments estiver instalado, ele é invocado da mesma forma como na versão 1 da implementação. Porém, se o Pygments não estiver instalado, é feita uma requisição ao serviço externo.
+O código \ref{code:integration2} apresenta a implementação que faz os dois casos de teste passarem. Nessa nova versão, foi preciso criar o método de suporte \texttt{can\_pygmentize?} que, como dito anteriormente, verifica se o Pygments está instalado. Se o Pygments estiver instalado, ele é invocado da mesma forma como na versão 1 da implementação. Porém, se o Pygments não estiver instalado, é feita uma requisição ao serviço externo.
 
 \begin{mycode}{ruby}%
 {Implementação do \textit{highlighting} de código (versão 2)}{code:integration2}
@@ -224,7 +224,7 @@ class HTMLwithAlbino < Redcarpet::Render::HTML
 end
 \end{mycode}
 
-Como ao executar os testes, todos eles passam, podemos refatorar o código. Na implementação não há nada a ser refatorado, contudo, existe diversas duplicidades nos testes. O Código \ref{code:integration_spec3} apresenta os testes refatorados, eliminando as duplicidades com a ajuda do método \texttt{before} que, ao receber o \texttt{:all} como parâmetro, é executado antes de de todos os casos de teste.
+Como ao executar os testes, todos eles passam, podemos refatorar o código. Na implementação não há nada a ser refatorado, contudo, existe diversas duplicidades nos testes. O código \ref{code:integration_spec3} apresenta os testes refatorados, eliminando as duplicidades com a ajuda do método \texttt{before} que, ao receber o \texttt{:all} como parâmetro, é executado antes de de todos os casos de teste.
 
 \begin{mycode}{rspec}%
 {Teste de integração para o \textit{highlighting} de código (versão 3)}{code:integration_spec3}
@@ -262,7 +262,7 @@ Desta forma, mostra-se que não apenas o código da implementação deve ser ref
 Para o desenvolvimento do kanban-roots, foi de extrema importância que o design evoluísse incrementalmente, pois não se sabia ao certo que
 funcionalidades seriam contempladas nem que entidades existiriam.
 
-As entidades \textit{Project} e \textit{Contributor} tinham uma relação direta, n para n, como apresentado na Figura \ref{img:contributor_projetc}. Contudo, em um determinado momento achou-se pertinente a criação de uma nova entidade \textit{Team} que faria a ligação entre as outras duas entidades, como apresentado na Figura \ref{img:contributor_team_projetc}. Isto acarretou uma série de alterações \cite{CommitAddTeam}, dentre outras, na interface das entidades e na estrutura do banco de dados $-$ considerada uma alteração crítica, mas que com ferramentas como \textit{migrations},\footnote{\textit{Migrations} são uma forma conveniente de gerenciar bases de dados de maneira estruturada e organizada. Mais em \url{http://guides.rubyonrails.org/migrations.html}} torna-se simples.
+As entidades \textit{Project} e \textit{Contributor} tinham uma relação direta, n para n, como apresentado na figura \ref{img:contributor_projetc}. Contudo, em um determinado momento achou-se pertinente a criação de uma nova entidade \textit{Team} que faria a ligação entre as outras duas entidades, como apresentado na figura \ref{img:contributor_team_projetc}. Isto acarretou uma série de alterações \cite{CommitAddTeam}, dentre outras, na interface das entidades e na estrutura do banco de dados $-$ considerada uma alteração crítica, mas que com ferramentas como \textit{migrations},\footnote{\textit{Migrations} são uma forma conveniente de gerenciar bases de dados de maneira estruturada e organizada. Mais em \url{http://guides.rubyonrails.org/migrations.html}} torna-se simples.
 
 \begin{figure}[h]
   \center
@@ -271,7 +271,7 @@ As entidades \textit{Project} e \textit{Contributor} tinham uma relação direta
   \label{img:contributor_projetc}
 \end{figure}
 
-Meses depois, foi verificado que esta entidade \textit{Team} não era mais necessária, acarretando novamente em diversas modificações \cite{CommitRemoveTeam}, voltando ao estado apresentado na Figura \ref{img:contributor_projetc}.
+Meses depois, foi verificado que esta entidade \textit{Team} não era mais necessária, acarretando novamente em diversas modificações \cite{CommitRemoveTeam}, voltando ao estado apresentado na figura \ref{img:contributor_projetc}.
 
 \begin{figure}[h]
   \center
@@ -291,7 +291,7 @@ Existe uma controvérsia sobre a não utilização do TDD em qualquer situação
 
 Introduzindo o kanban-roots na discussão, nos dois únicos casos em que ocorreu um \textit{bug} em produção, ao ser feita uma analise no código em busca da solução, foi encontrado um comentário ``TODO: Make test and refactor"\ nos métodos onde os \textit{bugs} ocorreram. Atualmente, existem 5 comentários semelhantes a esse espalhados no código do kanban-roots. Isso, de certa forma, comprova que caso os testes não sejam escritos antes, para um código que irá entrar em produção, escrevê-lo depois acaba sendo um fardo, e isso é ignorado até que um problema ocorra.
 
-Um exemplo para esta situação é apresentado no Código \ref{code:todo}, onde é mostrado um método de \textit{controller}\footnote{O \textit{controller} é um componente do padrão MVC (do inglês \textit{Model View Controller}) de desenvolvimento de software. Neste padrão, a lógica da aplicação (\textit{Model}) é isolada da interface do usuário (\textit{View}) através de um controlador (\textit{Controller}).} que é chamado via Ajax e implementa a atualização dos pontos de uma tarefa diretamente do kanban do projeto. Além de atualizar os pontos da tarefa na base de dados, este método captura, trata e envia informações para que a interface do kanban seja atualizada. Este foi um típico caso onde um experimento foi para produção, sem testes e com um código \textbf{extremamente ruim}.
+Um exemplo para esta situação é apresentado no código \ref{code:todo}, onde é mostrado um método de \textit{controller}\footnote{O \textit{controller} é um componente do padrão MVC (do inglês \textit{Model View Controller}) de desenvolvimento de software. Neste padrão, a lógica da aplicação (\textit{Model}) é isolada da interface do usuário (\textit{View}) através de um controlador (\textit{Controller}).} que é chamado via Ajax e implementa a atualização dos pontos de uma tarefa diretamente do kanban do projeto. Além de atualizar os pontos da tarefa na base de dados, este método captura, trata e envia informações para que a interface do kanban seja atualizada. Este foi um típico caso onde um experimento foi para produção, sem testes e com um código \textbf{extremamente ruim}.
 
 \newpage
 
@@ -355,7 +355,7 @@ Nesta seção será visto como se dá a utilização do BDD se dá na prática, 
 
 Como dito a anteriormente, BDD é uma evolução do TDD. A grande diferença entre os dois é que TDD não abrange a validação do software, ou seja, se o software atende os requisitos. Isso muda tudo, pois em BDD, a ênfase está no comportamento, e não na estrutura. Ao invés de focar em classes e métodos ao escrever os testes, o foco é no comportamento que gera valor para o sistema. Além disso, o pensamento não é voltado à verificação, mas sim no comportamento, em validar que o software faz sem deixar também de verificar se está funcionando como deveria.
 
-Em BDD não são escritos testes, mas sim especificações, chamadas de \textit{specs} (de \textit{specifications}). Pode-se ter a clara diferença entre testes (TDD) e specs (BDD) comparando o Código \ref{code:tdd_test3} com o Código \ref{code:bdd_spec}, onde palavras chave como \textit{class}, \textit{test} e \textit{assert} dão lugar a \textit{describe}, \textit{it} e \textit{should}, ficando nítido o foco no comportamento. Além disso, a substituição do Test::Unit (TDD) pelo Rspec (BDD) também revela grande mudança nas asserções onde os \textit{asserts} dão lugar aos \textit{matchers}, fazendo com que as asserções possam ser lidas quase como uma linguagem natural.
+Em BDD não são escritos testes, mas sim especificações, chamadas de \textit{specs} (de \textit{specifications}). Pode-se ter a clara diferença entre testes (TDD) e specs (BDD) comparando o código \ref{code:tdd_test3} com o código \ref{code:bdd_spec}, onde palavras chave como \textit{class}, \textit{test} e \textit{assert} dão lugar a \textit{describe}, \textit{it} e \textit{should}, ficando nítido o foco no comportamento. Além disso, a substituição do Test::Unit (TDD) pelo Rspec (BDD) também revela grande mudança nas asserções onde os \textit{asserts} dão lugar aos \textit{matchers}, fazendo com que as asserções possam ser lidas quase como uma linguagem natural.
 
 \begin{mycode}{rspec}%
 {Exemplo de uma spec}{code:bdd_spec}
@@ -382,7 +382,7 @@ describe Project do
 end
 \end{mycode}
 
-Em TDD, o nome dos testes é baseado na estrutura do código, e isso pode ter um efeito colateral: criar duplicações. Ao escrever testes como o \texttt{test\_tesks\_by\_position} do Código \ref{code:tdd_test3} e o método \texttt{tasks\_by\_position} é renomeado, o nome do teste também terá que ser renomeado, o que na maioria das vezes é esquecido. Isso torna os testes confusos e desinformativos \cite{ContinuousTesting}. Como por definição, refatorar é melhorar a estrutura e o design do código sem alterar seu comportamento, nomeando os testes com base no comportamento desejado ao invés da estrutura do código, não apenas torna os testes mais informativos como também torna a refatoração menos custosa \cite{ContinuousTesting}.
+Em TDD, o nome dos testes é baseado na estrutura do código, e isso pode ter um efeito colateral: criar duplicações. Ao escrever testes como o \texttt{test\_tesks\_by\_position} do código \ref{code:tdd_test3} e o método \texttt{tasks\_by\_position} é renomeado, o nome do teste também terá que ser renomeado, o que na maioria das vezes é esquecido. Isso torna os testes confusos e desinformativos \cite{ContinuousTesting}. Como por definição, refatorar é melhorar a estrutura e o design do código sem alterar seu comportamento, nomeando os testes com base no comportamento desejado ao invés da estrutura do código, não apenas torna os testes mais informativos como também torna a refatoração menos custosa \cite{ContinuousTesting}.
 
 % subsection a_relacao_entre_bdd_e_tdd (end)
 
@@ -396,7 +396,7 @@ Existem duas maneiras principais de se escrever os testes de aceitação: em tex
 \textit{Os comentários mostrados na página de tarefas devem ser renderizados utilizando a linguagem de marcação Markdown.}
 \end{quote}
 
-O resultado desta funcionalidade implementada é apresentado na Figura \ref{img:markdown}.
+O resultado desta funcionalidade implementada é apresentado na figura \ref{img:markdown}.
 
 \begin{figure}[h]
   \center
@@ -430,7 +430,7 @@ Para finalizar esse \textit{template}, os critérios de aceitação da história
 
 Nas ferramentas que implementam esta abordagem, os testes são escritos baseados em \textit{steps} (passos), onde cada \textit{step} (Given/When/Then) é mapeado para um código real.
 
-No Código \ref{code:bdd_cucumber_spec}, é utilizado o \textit{Cucumber} para fazer a especificação. Como pode-se ver, o teste é escrito em uma linguagem que qualquer pessoa, mesmo sem nenhum conhecimento em programação, pode ler e validar.
+No código \ref{code:bdd_cucumber_spec}, é utilizado o \textit{Cucumber} para fazer a especificação. Como pode-se ver, o teste é escrito em uma linguagem que qualquer pessoa, mesmo sem nenhum conhecimento em programação, pode ler e validar.
 
 \begin{mycode}{cucumber}%
 {Especificação em texto plano}{code:bdd_cucumber_spec}
@@ -453,7 +453,7 @@ Feature: Render comments with Markdown syntax
 
 Para cada \textit{step} existe uma implementação, ou seja, sua definição, chamada de \textit{step definition}. Pode-se pensar nos \textit{steps} como chamadas à métodos, e assim, os \textit{step definitions} serão as definição desses métodos. Deste modo, ao rodar os testes, o arquivo de teste é parseado e os \textit{steps} são executados.
 
-Os \textit{step definitions} para os \textit{steps} do Código \ref{code:bdd_cucumber_spec} são apresentado no Código \ref{code:step_definition}. Como durante o desenvolvimento são escritos muitos \textit{step definitions}, com o intuito de organizá-los, eles são separados por contexto em diferentes arquivos.
+Os \textit{step definitions} para os \textit{steps} do código \ref{code:bdd_cucumber_spec} são apresentado no código \ref{code:step_definition}. Como durante o desenvolvimento são escritos muitos \textit{step definitions}, com o intuito de organizá-los, eles são separados por contexto em diferentes arquivos.
 
 \begin{mycode}{ruby}%
 {Step definitions}{code:step_definition}
@@ -520,7 +520,7 @@ Na figura \ref{img:cucumber-exec} é apresentada a saída para a execução do t
 
 A outra maneira de escrever os testes de aceitação é com código puro. Nesta forma, todo o código dos testes (descrição e implementação) está concentrado em apenas um lugar, utilizando somente código para escrever os testes.
 
-No Código \ref{code:bdd_spec1} pode-se ver a especificação em código puro para a funcionalidade.
+No código \ref{code:bdd_spec1} pode-se ver a especificação em código puro para a funcionalidade.
 
 \begin{mycode}{rspec}%
 {Especificação em código puro}{code:bdd_spec1}
@@ -570,7 +570,7 @@ Em uma situação onde se está desenvolvendo uma aplicação para um cliente, e
 
 O cliente é especialista em problemas e os desenvolvedores em dar soluções. Se o cliente escreve a especificação, na realidade ele está escrevendo parte da solução \cite{SteakOverCucumber}. No caso da funcionalidade exemplificada anteriormente, o cliente apenas sabe que os ``comentários devem ser renderizados com markdown", ele não quer saber se para isso deve entrar em determinada página, preencher determinado campo e clicar em determinado botão. O cliente apenas sabe a funcionalidade que ele deseja, e vê-la funcionando.
 
-Dessa forma, o cliente não tem interesse em ler a especificação como no Código \ref{code:bdd_cucumber_spec}, nem validá-la, muito menos escrevê-la. Ler somente ``Render comments with Markdown syntax" é o suficiente, mais do que isso é superficial \cite{WhyBotherWithCucumberTesting}. Os testes em texto plano se atem a detalhes de interface que são irrelevantes para os objetivos do cliente.
+Dessa forma, o cliente não tem interesse em ler a especificação como no código \ref{code:bdd_cucumber_spec}, nem validá-la, muito menos escrevê-la. Ler somente ``Render comments with Markdown syntax" é o suficiente, mais do que isso é superficial \cite{WhyBotherWithCucumberTesting}. Os testes em texto plano se atem a detalhes de interface que são irrelevantes para os objetivos do cliente.
 
 Uma exceção a isto ocorre em áreas que fazem uso pesado de modelagem de processo de negócio (BPM, do inglês \textit{Business Process Modeling}) \nomenclature{BPM}{Business Process Modeling} como Enterprise Information Systems, na qual descrições executáveis em texto plano podem servir como ligação entre os artefatos de BPM e o código executável \cite{IntroducingBLDD}.
 
@@ -685,7 +685,7 @@ Sempre que possível, o melhor modelo de integração a ser utilizado é o sínc
 \subsection{Integração contínua no kanban-roots}
 \label{sub:integracao_continua_no_kanban}
 
-Com base no tópico anterior e por ser um projeto \textit{open source}, no kanban-roots foi utilizado o método assíncrono de integração contínua, através do Travis\footnote{Mais informações podem ser encontradas em \url{http://travis-ci.org}}, que foi escolhido por ser um serviço hospedado e gratuito de integração contínua para a comunidade \textit{open source}, o que facilitou bastante pela não necessidade de manutenção de uma estrutura local de integração contínua. Na Figura \ref{img:travis-success} é apresentada a tela do Travis quando a \textit{build} é executada com sucesso e na Figura \ref{img:travis-fail} quando a \textit{build} falha.
+Com base no tópico anterior e por ser um projeto \textit{open source}, no kanban-roots foi utilizado o método assíncrono de integração contínua, através do Travis\footnote{Mais informações podem ser encontradas em \url{http://travis-ci.org}}, que foi escolhido por ser um serviço hospedado e gratuito de integração contínua para a comunidade \textit{open source}, o que facilitou bastante pela não necessidade de manutenção de uma estrutura local de integração contínua. Na figura \ref{img:travis-success} é apresentada a tela do Travis quando a \textit{build} é executada com sucesso e na figura \ref{img:travis-fail} quando a \textit{build} falha.
 
 \begin{figure}[h]
   \center
@@ -694,7 +694,7 @@ Com base no tópico anterior e por ser um projeto \textit{open source}, no kanba
   \label{img:travis-success}
 \end{figure}
 
-Na Seção \ref{sec:contextualizando_tdd} sobre testes de integração, foi apresentado o Código \ref{code:integration_spec3} com os testes de integração para o \textit{highlighting} de código. Para que a integração contínua pudesse continuar sendo executada no Travis, o teste que verifica a integração do kaban-roots com o Pygments local foi comentado, uma vez que não é possível fazer instalações de dependências de sistema no Travis. Neste caso, o ideal seria ter um servidor próprio para rodar a integração contínua, pois esta tem que simular um ambiente de produção da forma mais perfeita possível, utilizando o Jenkins\footnote{Mais informações em \url{http://jenkins-ci.org/}} por exemplo.
+Na Seção \ref{sec:contextualizando_tdd} sobre testes de integração, foi apresentado o código \ref{code:integration_spec3} com os testes de integração para o \textit{highlighting} de código. Para que a integração contínua pudesse continuar sendo executada no Travis, o teste que verifica a integração do kaban-roots com o Pygments local foi comentado, uma vez que não é possível fazer instalações de dependências de sistema no Travis. Neste caso, o ideal seria ter um servidor próprio para rodar a integração contínua, pois esta tem que simular um ambiente de produção da forma mais perfeita possível, utilizando o Jenkins\footnote{Mais informações em \url{http://jenkins-ci.org/}} por exemplo.
 
 \begin{figure}[h]
   \center
@@ -722,7 +722,7 @@ Nesta seção será feita a contextualização dos dublês de teste \textit{stub
 
 Um exemplo da utilização simples e eficiente do \textit{stub} foi mostrado no teste de integração apresentado na Seção \ref{sec:contextualizando_tdd}. Naquele exemplo, foi feito um \textit{stub} do método \texttt{can\_pygmentize?} que faz uma consulta ao sistema operacional para verificar se uma determinada dependência de sistema está instalada. Desta forma, o teste ficou isolado, não importando se a máquina em que o teste for executado tem ou não a dependência instalada, sendo assim possível simular as duas situações $-$ logicamente, uma maquina não pode, ao mesmo tempo, ter e não ter uma dependência instalada.
 
-Um outro exemplo é mostrado no Código \ref{code:stub_spec}, onde está sendo testada uma ação da classe \textit{Project}. Contudo, para que esta ação seja realizada, é necessário um conjunto de objetos da classe \textit{Task}. Assim, com o objetivo de criar um teste isolado e concentrado na classe \textit{Project}, é utilizado o método \texttt{stub\_model} que cria um \textit{stub} da classe \textit{Task} que irá reponder apenas aos atributos definidos no \textit{hash} passado como segundo parâmetro. No caso, a ação em questão é contar a soma dos pontos das tarefas alocadas em uma determinada posição do quadro (kanban). Esta ação é exercida através do método \texttt{count\_points}, cuja implementação é apresentada no Código \ref{code:stub}. Na Figura \ref{img:count-points} é apresentada uma utilização do método \texttt{count\_points} no somatório de pontos das tarefas na posição \textit{To Do} do kanban.
+Um outro exemplo é mostrado no código \ref{code:stub_spec}, onde está sendo testada uma ação da classe \textit{Project}. Contudo, para que esta ação seja realizada, é necessário um conjunto de objetos da classe \textit{Task}. Assim, com o objetivo de criar um teste isolado e concentrado na classe \textit{Project}, é utilizado o método \texttt{stub\_model} que cria um \textit{stub} da classe \textit{Task} que irá reponder apenas aos atributos definidos no \textit{hash} passado como segundo parâmetro. No caso, a ação em questão é contar a soma dos pontos das tarefas alocadas em uma determinada posição do quadro (kanban). Esta ação é exercida através do método \texttt{count\_points}, cuja implementação é apresentada no código \ref{code:stub}. Na figura \ref{img:count-points} é apresentada uma utilização do método \texttt{count\_points} no somatório de pontos das tarefas na posição \textit{To Do} do kanban.
 
 \begin{mycode}{rspec}%
 {Exemplo do \textit{stub} da classe \textit{Task}}{code:stub_spec}
@@ -774,7 +774,7 @@ Contudo, a utilização desta técnica deve ser feita com cautela. Quando se uti
 \subsection{Contextualizando o \textit{mock}}
 \label{sub:contextualizando_o_mock}
 
-De modo semelhante ao Código \ref{code:todo} apresentado na Seção \ref{sub:a_ubiquidade_do_tdd}, o Código \ref{code:mock} apresenta a implementação de um método de \textit{controller} que é chamado via AJAX (\textit{Asynchronous Javascript and XML})\nomenclature{AJAX}{Asynchronous Javascript and XML} e implementa a atualização dos responsáveis por uma tarefa diretamente do kanban do projeto, como apresentado na Figura \ref{img:edit-contributors}. Além atualizar os responsáveis pela tarefa tarefa na base de dados, este método captura, trata e envia informações para que a interface do kanban seja atualizada. Este é outro caso onde um experimento foi para produção, sem testes e com um código ruim. Desta forma, neste caso não foi utilizado TDD para criar os testes, sendo estes escritos após a implementação.
+De modo semelhante ao código \ref{code:todo} apresentado na Seção \ref{sub:a_ubiquidade_do_tdd}, o código \ref{code:mock} apresenta a implementação de um método de \textit{controller} que é chamado via AJAX (\textit{Asynchronous Javascript and XML})\nomenclature{AJAX}{Asynchronous Javascript and XML} e implementa a atualização dos responsáveis por uma tarefa diretamente do kanban do projeto, como apresentado na figura \ref{img:edit-contributors}. Além atualizar os responsáveis pela tarefa tarefa na base de dados, este método captura, trata e envia informações para que a interface do kanban seja atualizada. Este é outro caso onde um experimento foi para produção, sem testes e com um código ruim. Desta forma, neste caso não foi utilizado TDD para criar os testes, sendo estes escritos após a implementação.
 
 \newpage
 
@@ -816,7 +816,7 @@ end
   \label{img:edit-contributors}
 \end{figure}
 
-O teste para o método \texttt{update\_assignees}, com a utilização de \textit{mock}, é apresentado no Código \ref{code:mock_spec_mockista}. Como o teste quer validar a funcionalidade para mais de um responsável (\textit{assignees}), são criados dois objetos mockados da classe \textit{Contributor}, além de também ser necessário cria um objeto mockado da classe \textit{Task}. Com esses 3 objetos mockados, está feito a \textit{setup} para o teste.
+O teste para o método \texttt{update\_assignees}, com a utilização de \textit{mock}, é apresentado no código \ref{code:mock_spec_mockista}. Como o teste quer validar a funcionalidade para mais de um responsável (\textit{assignees}), são criados dois objetos mockados da classe \textit{Contributor}, além de também ser necessário cria um objeto mockado da classe \textit{Task}. Com esses 3 objetos mockados, está feito a \textit{setup} para o teste.
 
 Em seguida verificadas as chamadas à métodos sobre os objetos mockados. Isto é feito através do método \texttt{should\_receive} que recebe como parâmetro o método a ser chamado. Em seguida, pode ser aninhado o método \texttt{with} que recebe os parâmetros que devem ser passados para o método chamado no \texttt{should\_receive}. Para finalizar a cadeia, pode ser ainda aninhado o método \texttt{and\_return} que indica o retorno do método chamado no \texttt{should\_receive}.
 
@@ -850,9 +850,9 @@ end
 
 O grande problema do mock está nas verificações de chamada à métodos dos objetos mockados. Pose-se perceber que está se verificando a ordem em que os métodos são chamados, bem como os parâmetros passados. Desta forma, na realidade, está se testando \textbf{como} a funcionalidade está sendo implementada e não \textbf{o que} ela faz \cite{UnitForAReason}. Com isso, o acoplamento entre o teste e a implementação torna-se extremamente grande, ainda maior do que com a utilização de \textit{stubs}. Qualquer refatoração mínima feita na implementação, mesmo que não interfira em seu comportamento, pode fazer com que os testes quebrem.
 
-Um exemplo para este problema seria trocar o método \texttt{find} na linha 5 do Código \ref{code:mock} pelo método \texttt{find\_by\_id}. Com essa troca, o comportamento do método \texttt{update\_assignees} continua o mesmo, porém, o teste quebraria na linha 9 do Código \ref{code:mock_spec_mockista} informado que a classe \texttt{Task} esperava receber o método \texttt{find} mas recebeu o método \texttt{find\_by\_id}.
+Um exemplo para este problema seria trocar o método \texttt{find} na linha 5 do código \ref{code:mock} pelo método \texttt{find\_by\_id}. Com essa troca, o comportamento do método \texttt{update\_assignees} continua o mesmo, porém, o teste quebraria na linha 9 do código \ref{code:mock_spec_mockista} informado que a classe \texttt{Task} esperava receber o método \texttt{find} mas recebeu o método \texttt{find\_by\_id}.
 
-Para fazer uma comparação, no Código \ref{code:mock_spec_tradicional} é apresentado um outro teste para o mesmo exemplo, porém, utilizando objetos reais criados através de \textit{fixture replacement}. Note que desta vez foi preciso criar um objeto \textit{project} para ligar ao objeto \textit{task}, pois quando são utilizados objetos reais, todas as validações são executadas e, neste caso, uma tarefa obrigatoriamente deve estar ligada a um projeto.
+Para fazer uma comparação, no código \ref{code:mock_spec_tradicional} é apresentado um outro teste para o mesmo exemplo, porém, utilizando objetos reais criados através de \textit{fixture replacement}. Note que desta vez foi preciso criar um objeto \textit{project} para ligar ao objeto \textit{task}, pois quando são utilizados objetos reais, todas as validações são executadas e, neste caso, uma tarefa obrigatoriamente deve estar ligada a um projeto.
 
 \begin{mycode}{rspec}%
 {Teste utilizando \textit{fixture replacement} para o método \texttt{update\_assignees}}{code:mock_spec_tradicional}
