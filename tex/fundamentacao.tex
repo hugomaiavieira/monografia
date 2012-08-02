@@ -1,9 +1,9 @@
 \chapter{Fundamentação teórica}
 \label{cha:fundamentacao_teorica}
 
-O desenvolvimento de software é o ato de elaborar e implementar um sistema computacional que transforme as necessidades de um usuário ou de um mercado em um produto de software. É uma atividade essencialmente intelectual e criativa, exigindo a manipulação de uma gama muito grande de conhecimentos e informações. Além disso, os desenvolvedores de um software se preocuparem com o conteúdo e estrutura, além de deverem se preocupar também com o comportamento fazendo com o que o desenvolvimento de software seja uma atividade complexa, devendo ser realizada por especialistas munidos de técnicas que os auxiliem da melhor maneira possível.
+O desenvolvimento de software é o ato de elaborar e implementar um sistema computacional que transforme as necessidades de um usuário ou de um mercado em um produto de software. É uma atividade essencialmente intelectual e criativa, exigindo a manipulação de uma gama muito grande de conhecimentos e informações. Além disso, os desenvolvedores de um software se preocupam com o conteúdo e estrutura, além de deverem se preocupar também com o comportamento fazendo com o que o desenvolvimento de software seja uma atividade complexa, devendo ser realizada por especialistas munidos de técnicas que os auxiliem da melhor maneira possível.
 
-Em 2001 um grupo de dezessete especialistas, reconhecidos pela comunidade como grandes nomes do desenvolvimento software, se reuniu para discutir sobre um conjunto de métodos específicos que vinham surgindo e decidiram usar o termo Agilismo para descrever essa nova geração de métodos \cite{AgileStory}. Na mesma reunião, eles também escreveram o Manifesto Ágil \cite{AgileManifesto}, delineando um conjunto de valores e princípios que, em resumo, trilham um caminho para a eliminação de documentação e processos desnecessários, buscando a simplicidade, com foco na geração de valor e proximidade com o cliente, além de possibilitar respostas rápidas e eficazes às mudanças. Desde então, os métodos ágeis vêm ganhando projeção e importância no cenário da produção de software.
+Em 2001 um grupo de dezessete especialistas, reconhecidos pela comunidade como grandes nomes do desenvolvimento software, se reuniu para discutir sobre um conjunto de métodos específicos que vinham surgindo e decidiram usar o termo Agilismo para descrever essa nova geração de métodos \cite{AgileStory}. Na mesma reunião, eles também escreveram o Manifesto Ágil \cite{AgileManifesto}, delineando um conjunto de valores e princípios que, em resumo, trilham um caminho para a eliminação de documentação e processos considerados desnecessários, buscando a simplicidade, com foco na geração de valor e proximidade com o cliente, além de possibilitar respostas rápidas e eficazes às mudanças. Desde então, os métodos ágeis vêm ganhando projeção e importância no cenário da produção de software.
 
 Pode-se dizer então, que o Desenvolvimento Ágil, ou Agilismo, é um rótulo genérico para os métodos de desenvolvimento de software baseados no Manifesto Ágil \cite{BDDRodrigo}.
 
@@ -54,11 +54,11 @@ Mas para que isso seja possível, os métodos ágeis contam com um conjunto de t
 \section{Teste de software}
 \label{sec:teste_de_software}
 
-O teste de software é considerado por \cite{Sommerville} uma técnica dinâmica de verificação e validação, onde é executada uma implementação do software com dados de teste e se examina as saídas do software e seu comportamento operacional para verificar se seu desempenho está conforme necessário.
+O teste de software é considerado por \citeonline{Sommerville} uma técnica dinâmica de verificação e validação, onde é executada uma implementação do software com dados de teste e se examina as saídas do software e seu comportamento operacional para verificar se seu desempenho está conforme necessário.
 
 A validação responde a pergunta ``Estamos desenvolvendo o software \textbf{correto}?", ou seja, deve-se validar que o software atende aos requisitos. Já a verificação responde a pergunta ``Estamos desenvolvendo o software \textbf{corretamente}?", ou seja, deve-se verificar se o software possui falhas ou defeitos.
 
-A maneira como o teste de software é aplicado varia de acordo com a metodologia utilizada no desenvolvimento. Tradicionalmente o teste de software é feito somente após o desenvolvimento ter sido concluído \cite{TesteSoftware, Pressman}. Já nos métodos ágeis um sentido oposto é seguido \cite{ArtOfAgileDevelopment}, sendo utilizadas técnicas como \textit{Test-Driven Development} (abordada na Seção \ref{sub:tdd}) e \textit{Behaviour-Driven Development} (abordada na Seção \ref{sub:bdd}).
+A maneira como o teste de software é aplicado varia de acordo com a metodologia utilizada no desenvolvimento. Tradicionalmente o teste de software é feito somente após o desenvolvimento ter sido concluído \cite{TesteSoftware, Pressman}. Já nos métodos ágeis um sentido oposto é seguido \cite{ArtOfAgileDevelopment}, sendo os testes feitos antes de qualquer linha de código de implementação. Para isso são utilizadas técnicas como \textit{Test-Driven Development} (abordada na Seção \ref{sub:tdd}) e \textit{Behaviour-Driven Development} (abordada na Seção \ref{sub:bdd}).
 
 O uso de estratégias nas quais a escrita dos testes automatizados é feita antes do código de implementação das funcionalidades, como TDD e BDD, não exclui o emprego de técnicas de teste de software tradicionais como classes de equivalência, análise do valor limite, análise da complexidade ciclomática e outras.
 
@@ -122,7 +122,7 @@ Testes de aceitação são especificações para o comportamento das funcionalid
 
 Relacionando com os métodos tradicionais, os testes de aceitação implementam os casos de uso levantados na análise orientada a objetos.
 
-No código \ref{code:acceptance} são apresentados exemplos de teste de aceitação, utilizando BDD com a escrita em texto plano. O primeiro cenário testa a funcionalidade de clicar e arrastar as tarefas de uma posição para outra no kanban. Já o segundo cenário testa a funcionalidade de limpar a divisão \textit{Done} do kanban, ou seja, retirar do quadro todas as tarefas concluídas.
+No código \ref{code:acceptance} são apresentados exemplos de teste de aceitação utilizando BDD com a escrita em texto plano, onde os testes são escritos em linguagem natural. O primeiro cenário testa a funcionalidade de clicar e arrastar as tarefas de uma posição para outra no kanban. Já o segundo cenário testa a funcionalidade de limpar a divisão \textit{Done} do kanban, ou seja, retirar do quadro todas as tarefas concluídas.
 
 BDD e testes de aceitação serão vistos com mais detalhes na Seção \ref{sub:bdd}.
 
@@ -188,15 +188,15 @@ O TDD vem sendo utilizado esporadicamente há anos, contudo, não existia um nom
 Com base no trabalho de \citeonline{TDDbyExample}, o ciclo de desenvolvimento TDD é composto pelas seguintes etapas:
 
 \begin{enumerate}
-\item \textbf{Adicionar um teste}
+\item \textbf{Adicionar um novo teste}
 
-Cada ciclo se inicia com a criação de um teste de unidade. Este teste inevitavelmente irá falhar, pois é escrito antes do código ser implementado de fato. Para escrever um teste, o desenvolvedor precisa entender claramente as especificações e requisitos da unidade. Isso faz com que o desenvolvedor tenha como foco os requisitos antes do código, o direcionando a escrever código apenas para o que é realmente necessário.
+Cada ciclo se inicia com a criação de um novo teste de unidade. Este teste inevitavelmente irá falhar, pois é escrito antes do código ser implementado de fato. Para escrever um teste, o desenvolvedor precisa entender claramente as especificações e requisitos da unidade. Isso faz com que o desenvolvedor tenha como foco os requisitos antes do código, o direcionando a escrever código apenas para o que é realmente necessário.
 
 Além disso, segundo \citeonline{XPTeles}, ao se pensar e escrever o teste, está sendo feita também a análise e \textit{design} das classes do sistema.
 
 \item \textbf{Executar todos os testes e ver se algum falha}
 
-Todos os testes devem ser executados e o novo teste deve falhar pela razão esperada: a funcionalidade não foi desenvolvida. Isto aumenta a confiança que se está testando a coisa certa.
+Todos os testes devem ser executados e o novo teste deve falhar pela razão esperada: a funcionalidade associada ao novo teste não foi desenvolvida. Isto aumenta a confiança que se está testando a coisa certa.
 
 \item \textbf{Escrever código}
 
@@ -208,7 +208,7 @@ Enquanto código útil é um patrimônio que gera valor, qualquer código criado
 
 \item \textbf{Executar os testes e ter sucesso}
 
-Ao Executar os testes e todos eles passarem, o código possuirá todos os requisitos testados e o programador pode ficar confiante para melhorá-lo.
+Ao executar os testes e todos eles passarem, o código possuirá todos os requisitos testados e o programador pode ficar confiante para melhorá-lo.
 
 \item \textbf{Refatorar}
 
@@ -252,7 +252,7 @@ Ao longo das iterações, o design precisa evoluir, mas deve manter-se simples e
 
 Criado em 2006 \cite{IntroducingBDD}, \textit{Behaviour-Driven Development} (Desenvolvimento guiado por comportamento) é uma técnica de desenvolvimento de software cuja amplitude se estende às atividades de design, documentação, validação e verificação, tratando-as de modo unificado \cite{BDDRodrigo}.
 
-O Principal objetivo do BDD é ter especificações (também consideradas documentações) executáveis do sistema. Tudo que foi dito anteriormente sobre TDD vale também para BDD, mas em BDD os testes são escritos de forma mais clara e são mais facilmente lidos, pois BDD provê uma \textit{ubiquitous language} baseada no domínio do problema. Com isso, o vocabulário do problema (negócios) permeia diretamente para o código \cite{IntroducingBDD}.
+O principal objetivo do BDD é ter especificações (também consideradas documentações) executáveis do sistema. Tudo que foi dito anteriormente sobre TDD vale também para BDD, mas em BDD os testes são escritos de forma mais clara e são mais facilmente lidos, pois BDD provê uma \textit{ubiquitous language} baseada no domínio do problema. Com isso, o vocabulário do problema (negócios) permeia diretamente para o código \cite{IntroducingBDD}.
 
 \subsubsection{Ubiquitous Language}
 \label{ssub:ubiquitous_language}
@@ -266,14 +266,14 @@ Dessa forma, uma \textit{ubiquitous language} estreita a colaboração entre cli
 \subsubsection{O ciclo BDD}
 \label{ssub:o_ciclo_bdd}
 
-O Ciclo BDD (também chamado de ciclo \textit{outside-in}\footnote{O ciclo recebe este nome devido à sequência que deve ser percorrida, que se inicia dos requisitos e da visão do cliente (\textit{outside}) até as entranhas dos artefatos de software (\textit{in}) \cite{BDDRodrigo}.}), apresentado na figura \ref{img:ciclo-bdd}, tem dois níveis: unidade e aceitação. O nível aceitação é o nível mais alto, onde são escritos os testes de aceitação. Já o nível unidade é o mesmíssimo \hyperref[ssub:ciclo_tdd]{ciclo TDD} visto anteriormente. Este ciclo pode ser explicado na seguinte série de passos:
+O ciclo BDD (também chamado de ciclo \textit{outside-in}\footnote{O ciclo recebe este nome devido à sequência que deve ser percorrida, que se inicia dos requisitos e da visão do cliente (\textit{outside}) até as entranhas dos artefatos de software (\textit{in}) \cite{BDDRodrigo}.}), apresentado na figura \ref{img:ciclo-bdd}, tem dois níveis: unidade e aceitação. O nível aceitação é o nível mais alto, onde são escritos os testes de aceitação. Já o nível unidade é o mesmíssimo \hyperref[ssub:ciclo_tdd]{ciclo TDD} visto anteriormente. Este ciclo pode ser explicado na seguinte série de passos:
 
 \begin{enumerate}
-\item \textbf{Adicionar um teste de aceitação com foco em um cenário}
+\item \textbf{Adicionar um novo teste de aceitação com foco em um cenário}
 
-Cada ciclo se inicia com a criação de um teste de aceitação, tendo como foco um cenário que descreve um determinado comportamento de uma funcionalidade do sistema. Para fazer um paralelo com os métodos tradicionais de desenvolvimento de software, pode-se ver os cenários como casos de uso.
+Cada ciclo se inicia com a criação de um novo teste de aceitação, tendo como foco um novo cenário que descreve um determinado comportamento de uma funcionalidade do sistema. Para fazer um paralelo com os métodos tradicionais de desenvolvimento de software, pode-se ver os cenários como casos de uso.
 
-\citeonline{BDDRodrigo} define como que, em BDD, o foco do desenvolvedor deve estar em um único cenário por vez, e os benefícios dessa abordagem:
+\citeonline{BDDRodrigo} define que, em BDD, o foco do desenvolvedor deve estar em um único cenário por vez, e os benefícios dessa abordagem:
 
 \begin{citacao}
 Na terminologia de BDD, um cenário é um exemplo de utilização de uma dada funcionalidade. Uma funcionalidade é algo que o software deve oferecer e que possui um valor bem definido para o cliente. Em BDD, o foco dos desenvolvedores deve estar sempre direcionado à um único cenário de uma única funcionalidade por vez. Isto elimina dispersões e mantém o desenvolvedor concentrado na tarefa a ser realizada. Um desenvolvedor utilizando BDD deve encarar um novo cenário como se todos os requisitos do software fossem apenas os cenários já implementados e o atual, ou seja, não se preocupará, no momento, com as próximas funcionalidades ou cenários. Isto é importante para evitar generalizações baseadas em especulações a respeito do que o software possa eventualmente necessitar no futuro, o que aumenta a complexidade do \textit{design} sem qualquer garantia de que será realmente útil.
@@ -281,7 +281,7 @@ Na terminologia de BDD, um cenário é um exemplo de utilização de uma dada fu
 
 \item \textbf{Executar todos os testes e ver se algum falha}
 
-Assim como no \hyperref[ssub:ciclo_tdd]{ciclo TDD}, todos os testes devem ser executados e o novo teste deve falhar pela razão pois a funcionalidade ainda não foi desenvolvida.
+Assim como no \hyperref[ssub:ciclo_tdd]{ciclo TDD}, todos os testes devem ser executados e o novo teste deve falhar pela razão esperada: a funcionalidade ainda não foi desenvolvida.
 
 \item \textbf{Descer de nível}
 
@@ -350,7 +350,7 @@ Além disso, um servidor de integração contínua, como o Jenkins\footnote{\url
 
 Em algumas ocasiões é difícil testar alguns componentes porque eles dependem de outros componentes que não podem ser utilizados em ambiente de teste. Estas situações podem acontecer por esses componentes não estarem disponíveis, por eles não retornarem os resultados necessários ou porque executá-los iria trazer efeitos colaterais indesejados. Em outros casos, a estratégia de testes utilizada requer que se tenha mais controle do comportamento interno do componente.
 
-Quando se escreve um teste onde não se pode/escolhe usar componentes reais, pode-se substitui-los pelos Dublês de Teste que oferecem uma maneira de isolar as dependências ao criar os testes, permitindo a utilização de componentes falsos para cumprir os papéis de componentes reais. Com isso, elimina-se complexidade do código dos testes, pois o código de implementação dos objetos é mantido pequeno e com baixo acoplamento.
+Quando se escreve um teste onde não se pode/escolhe usar componentes reais, pode-se substitui-los pelos Dublês de Teste que oferecem uma maneira de isolar as dependências ao criar os testes, permitindo a utilização de componentes fictícios para cumprir os papéis de componentes reais. Com isso, elimina-se complexidade do código dos testes, pois o código de implementação dos objetos é mantido pequeno e com baixo acoplamento.
 
 Uma outra característica da utilização de dublês é que muitas vezes fazem com que os testes sejam executados mais rapidamente, pois criam o objeto apenas em memória, reduzindo assim o acesso a disco.
 
