@@ -2,17 +2,17 @@
 
 A tecnologia e os negócios mudam e evoluem de modo extremamente rápido hoje e o mercado demanda e espera software inovadores e de alta qualidade, que sejam adequados a suas necessidades e desenvolvidos o mais rápido possível \cite{TheBusinessOfInnovation}.
 
-O desenvolvimento ágil de software, que neste ano de 2012 completa 11 anos, foi elaborado \cite{AgileManifesto} visando atender à estas expectativas do mercado, focando o processo de desenvolvimento nas pessoas e abraçando as mudanças que naturalmente surgem durante a desenvolvimento do software.
+O desenvolvimento ágil de software, que neste ano de 2012 completa 11 anos, foi elaborado visando atender estas expectativas do mercado \cite{AgileManifesto}, focando o processo de desenvolvimento nas pessoas e abraçando as mudanças que naturalmente surgem durante a desenvolvimento do software.
 
 Como a adoção do desenvolvimento ágil é crescente nos últimos anos \cite{ResumoChaosReport}, diversos métodos e técnicas vem sendo desenvolvidos, tendo como base os princípios e valores ágeis \cite{BDDRodrigo}, principalmente relacionadas ao teste de software. Contudo, estes métodos e técnicas continuam em evolução, tendo alguns de seus pontos ainda em aberto.
 
-Este trabalho pretende contextualizar e discutir a utilização de técnicas emergentes de teste de software, aqui definidas como Desenvolvimento Guiado por Testes (do inglês, \textit{Test-Driven Development} - TDD)\nomenclature{TDD}{Test-Driven Development}, Desenvolvimento Guiado por Comportamento (do inglês, \textit{Behaviour-Driven Development - BDD})\nomenclature{BDD}{Behaviour-Driven Development}, Integração Contínua e Dublês de Teste. Para esta contextualização, será utilizado um sistema web desenvolvido pelo autor aplicando tais técnicas: O kanban-roots.
+Este trabalho pretende contextualizar e discutir a utilização de técnicas emergentes de teste de software, aqui definidas como Desenvolvimento Guiado por Testes (do inglês, \textit{Test-Driven Development} - TDD)\nomenclature{TDD}{Test-Driven Development}, Desenvolvimento Guiado por Comportamento (do inglês, \textit{Behaviour-Driven Development - BDD})\nomenclature{BDD}{Behaviour-Driven Development}, Integração Contínua e Dublês de Teste. Para esta contextualização, será utilizado um sistema web desenvolvido pelo autor aplicando tais técnicas: o kanban-roots.
 
 \section{Justificativas e objetivos}
 
-Na literatura são encontrados alguns poucos trabalhos relacionados ao tema abordado nesta monografia, como constata \citeonline{BDDSolis}. Sendo assim, o objetivo do presente trabalho é oferecer um estudo teórico-prático das técnicas emergentes na área de teste de software com metodologias ágeis de desenvolvimento, em vistas de agregar conhecimentos ora dispersos e difusos, sobre as diferentes abordagens, possibilidades e pontos em aberto no emprego de tais técnicas.
+São encontrados alguns poucos trabalhos relacionados ao tema abordado nesta monografia, como constata \citeonline{BDDSolis}. Sendo assim, o objetivo do presente trabalho é oferecer um estudo teórico-prático das técnicas emergentes na área de teste de software com metodologias ágeis de desenvolvimento, visando de agregar conhecimentos ora dispersos e difusos, sobre as diferentes abordagens, possibilidades e pontos em aberto no emprego de tais técnicas.
 
-As técnicas que serão abordadas neste trabalho tiveram seu conceito definido no mercado e evoluem através da evolução das ferramentas que os implementam. Na figura \ref{img:fluxo_conceito_ferramenta} pode-se visualizar o fluxo de evolução onde primeiramente cria-se um conceito e, em seguida, uma ferramenta que o implemente. Com base na utilização e observação desta ferramenta, há uma percepção de novas necessidades, fazendo que os conceitos evoluam e novas ferramentas sejam criadas.
+As técnicas que serão abordadas neste trabalho tiveram seu conceito definido no mercado e evoluem através da evolução das ferramentas que as implementam. Na figura \ref{img:fluxo_conceito_ferramenta} pode-se visualizar o fluxo de evolução onde primeiramente cria-se um conceito e, em seguida, uma ferramenta que o implemente. Com base na utilização e observação desta ferramenta, há uma percepção de novas necessidades, fazendo que os conceitos evoluam e novas ferramentas sejam criadas.
 
 \begin{figure}[h]
   \center
@@ -21,9 +21,9 @@ As técnicas que serão abordadas neste trabalho tiveram seu conceito definido n
   \label{img:fluxo_conceito_ferramenta}
 \end{figure}
 
-Desta forma, a evolução das ferramentas e a evolução conceitual estão intimamente ligadas. No texto original sobre BDD \cite{IntroducingBDD} já se encontra isto. A inspiração para a criação de BDD foi uma ferramenta chamada \textit{AgileDox}\footnote{Mais informações em \url{http://agiledox.sourceforge.net}}, que fez o autor da mesma antever as novas possibilidades que cristalizou no conceito de BDD. Justamente por esta característica dinâmica de evolução, as informações e os diferentes conceitos sobre as técnicas estão dispersos, pois nunca foram sistematizados, ficando em uma espécie de ``inteligência coletiva"\ da comunidade de desenvolvimento ágil.
+Desta forma, a evolução das ferramentas e a evolução conceitual estão intimamente ligadas. No texto original sobre BDD \cite{IntroducingBDD} já se encontra isto. A inspiração para a criação de BDD foi uma ferramenta chamada \textit{AgileDox}\footnote{Mais informações em \url{http://agiledox.sourceforge.net}}, que fez o autor da mesma antever as novas possibilidades que então cristalizou no conceito de BDD. Justamente por esta característica dinâmica de evolução, as informações e os diferentes conceitos sobre as técnicas estão dispersos, pois nunca foram sistematizados, ficando em uma espécie de ``inteligência coletiva"\ da comunidade de desenvolvimento ágil.
 
-Além disso, como o presente trabalho está no contexto dos métodos ágeis, e nestes as partes conceitual e prática formam um todo inseparável, para toda técnica abordada serão exemplificados os conceitos usando o código de uma ferramenta web desenvolvida pelo próprio autor do presente trabalho, utilizando práticas ágeis de desenvolvimento, especificamente Desenvolvimento guiado por Testes (TDD) e Desenvolvimento guiado por Comportamento (BDD); denominada kanban-roots.
+Além disso, como o presente trabalho está no contexto dos métodos ágeis, e nestes as partes conceitual e prática formam um todo inseparável, para toda técnica abordada serão exemplificados os conceitos usando o código de uma ferramenta web, denominada kanban-roots, desenvolvida pelo próprio autor do presente trabalho, utilizando práticas ágeis de desenvolvimento, especificamente Desenvolvimento guiado por Testes (TDD) e Desenvolvimento guiado por Comportamento (BDD).
 
 \section{Metodologia}
 
@@ -40,7 +40,7 @@ Serão comparadas as diferentes abordagens, possibilidades, pontos em aberto no 
 
 Como base para a discussão, será utilizado o kanban-roots\footnote{\url{http://github.com/hugomaiavieira/kanban-roots}}, que será apresentado na Seção \ref{sec:kanban_roots}. O kanban-roots é um projeto que foi desenvolvido pelo autor do presente trabalho utilizando todas as técnicas abordadas neste, possibilitando desta forma a obtenção de dados e experiências da utilização das técnicas em um projeto real.
 
-Todos os trechos de código apresentados neste trabalho são trechos retirados do kanban-roots e a primeira linha de cada trecho sempre será um comentário informando o nome do arquivo original em que o dado trecho se encontra.
+Todos os trechos de código apresentados neste trabalho são trechos retirados do kanban-roots e a primeira linha de cada trecho sempre será um comentário informando o nome do arquivo original em que o referido trecho se encontra.
 
 \section{Ferramentas utilizadas}
 

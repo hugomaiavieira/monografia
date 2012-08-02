@@ -1,9 +1,9 @@
 \chapter{Fundamentação teórica}
 \label{cha:fundamentacao_teorica}
 
-O desenvolvimento de software é o ato de elaborar e implementar um sistema computacional que transforme as necessidades de um utilizador ou de um mercado em um produto de software. É uma atividade essencialmente intelectual e criativa, exigindo a manipulação de uma gama muito grande de conhecimentos e informações. Além disso, os desenvolvedores de um software se preocuparem com o conteúdo e estrutura, além de deverem se preocupar também com o comportamento fazendo com o que o desenvolvimento de software seja uma atividade complexa, devendo ser realizada por especialistas munidos de técnicas que os auxiliem da melhor maneira possível.
+O desenvolvimento de software é o ato de elaborar e implementar um sistema computacional que transforme as necessidades de um usuário ou de um mercado em um produto de software. É uma atividade essencialmente intelectual e criativa, exigindo a manipulação de uma gama muito grande de conhecimentos e informações. Além disso, os desenvolvedores de um software se preocuparem com o conteúdo e estrutura, além de deverem se preocupar também com o comportamento fazendo com o que o desenvolvimento de software seja uma atividade complexa, devendo ser realizada por especialistas munidos de técnicas que os auxiliem da melhor maneira possível.
 
-Em 2001 um grupo de dezessete especialistas, reconhecidos pela comunidade como grandes nomes do desenvolvimento software, se reuniram para discutir sobre um crescente conjunto de métodos que vinham surgindo e decidiram usar o termo Agilismo para descrever essa nova geração de métodos \cite{AgileStory}. Na mesma reunião, eles também escreveram o Manifesto Ágil \cite{AgileManifesto}, delineando um conjunto de valores e princípios que, em resumo, trilham um caminho para a eliminação de documentação e processos desnecessários, buscando a simplicidade, com foco na geração de valor e proximidade com o cliente, além de possibilitar respostas rápidas e eficazes às mudanças. Desde então, os métodos ágeis vêm ganhando projeção e importância no cenário da produção de software.
+Em 2001 um grupo de dezessete especialistas, reconhecidos pela comunidade como grandes nomes do desenvolvimento software, se reuniu para discutir sobre um conjunto de métodos específicos que vinham surgindo e decidiram usar o termo Agilismo para descrever essa nova geração de métodos \cite{AgileStory}. Na mesma reunião, eles também escreveram o Manifesto Ágil \cite{AgileManifesto}, delineando um conjunto de valores e princípios que, em resumo, trilham um caminho para a eliminação de documentação e processos desnecessários, buscando a simplicidade, com foco na geração de valor e proximidade com o cliente, além de possibilitar respostas rápidas e eficazes às mudanças. Desde então, os métodos ágeis vêm ganhando projeção e importância no cenário da produção de software.
 
 Pode-se dizer então, que o Desenvolvimento Ágil, ou Agilismo, é um rótulo genérico para os métodos de desenvolvimento de software baseados no Manifesto Ágil \cite{BDDRodrigo}.
 
@@ -11,7 +11,20 @@ De acordo com \citeonline{PMNetworkFailureDrop}, o \textit{Chaos Manifesto 2011}
 
 É importante citar que o desenvolvimento ágil sofreu grande influência de um conceito conhecido como \textit{Lean Thinking} (``pensamento enxuto"\ em português), uma linha de pensamento em gestão baseada nos princípios de \textit{Lean Manufacturing}\footnote{Os princípios de \textit{Lean Manufacturing} são originários do sistema Toyota de produção, que propôs um modo inteiramente novo de pensar a respeito de fabricação e logística de automóveis.} que se caracteriza por produção em pequenos lotes, eliminação de desperdícios, obsessão com qualidade, equipes multifuncionais praticando aprendizado contínuo, melhoria contínua de processo, sistema puxado de produção e a qualidade sendo responsabilidade dos trabalhadores como um todo \cite{BDDRodrigo}.
 
-Uma das premissas do agilismo é que os custos de alterações sejam praticamente lineares ao longo do tempo, independente do ponto em que esteja, fazendo com que a curva de custo de alterações seja semelhante à apresentada na figura \ref{img:custo-agile}.
+As metodologias tradicionais de desenvolvimento de software sugerem uma abordagem sistemática e sequencial, que começa com a especificação dos requisitos pelo cliente e progride ao longo do planejamento, modelagem, construção, e implantação, culminando na manutenção progressiva do software acabado \cite{Pressman}.
+
+Além disso, nas metodologias tradicionais, existe uma busca pelo determinismo, que ganha força ao ser amparado pelo famosa curva de custos de correção do software por tempo transcorrido desde o início do processo \cite{Boehm}, mostrada na Figura \ref{img:custo-cascata}.
+
+\begin{figure}[h]
+  \center
+  \caption{O custo das modificações no modelo tradicional - Fonte: \cite{XPKent}}
+  \includegraphics[scale=0.35]{images/custo-cascata}
+  \label{img:custo-cascata}
+\end{figure}
+
+Esta busca pelo determinismo fez com que se pensasse, de forma equivocada, que ao tentar com bastante afinco, consegue-se antecipar todo o conjunto de requisitos e reduzir os custos eliminando as mudanças \cite{TheBusinessOfInnovation}.
+
+Já o agilismo tem como uma de suas premissas que os custos de alterações sejam praticamente lineares ao longo do tempo, independente do ponto em que esteja, fazendo com que a curva de custo de alterações seja semelhante à apresentada na figura \ref{img:custo-agile}, em oposição à curva de custos de Boehm.
 
 \begin{figure}[h]
   \center

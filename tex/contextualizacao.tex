@@ -11,7 +11,7 @@ Na figura \ref{img:tela_kaban_roots} pode ser visto um \textit{screen shot} do k
 
 O kanban é muito utilizado em metodologias ágeis como XP e Scrum como um quadro para visualização do fluxo de tarefas nas iterações de um projeto. As tarefas inicialmente são posicionadas na divisão \textbf{\textit{Backlog}} até serem escolhidas para fazer parte de uma iteração. Nesse momento, as tarefas escolhidas vão para a divisão \textbf{\textit{To Do}} até que sejam escolhidas por um desenvolvedor para serem implementadas, passando para a divisão \textbf{\textit{Doing}}. Após o desenvolvedor concluir a tarefa, esta vai para a divisão \textbf{\textit{Done}}. Dessa maneira, todos os participantes tem a possibilidade de ver como está o andamento da iteração, além de ser possível acompanhar o que cada integrante do projeto está está fazendo naquele instante.
 
-O kanban-roots já está em produção e vem sendo testado e utilizado com sucesso por algumas pessoas em empresas do Brasil como a Algorich, Voxline, Mandic, Quatix, mas também estrangeiras como a infoPiiaf e Free.fr (França), Ginzametrics (Estados Unidos), Osube (China), Centah (Canadá), Podmoskovie.info (Rússia), EvoEnergy (Inglaterra), Forgotten Labs (Lituânia), entre outros.
+O kanban-roots já está em produção e vem sendo testado e utilizado com sucesso por empresas do Brasil como a Algorich, Voxline, Mandic, Quatix e também estrangeiras como a infoPiiaf e Free.fr (França), Ginzametrics (Estados Unidos), Osube (China), Centah (Canadá), Podmoskovie.info (Rússia), EvoEnergy (Inglaterra), Forgotten Labs (Lituânia), entre outros.
 
 \begin{figure}[h]
   \center
@@ -31,7 +31,7 @@ Para apresentar como a utilização do TDD se dá na prática, serão mostrados 
 
 A primeira coisa a ser feita é o teste para o caso mais simples: quando o projeto não tem tarefa alguma naquela determinada posição do kanban.
 
-Desta forma, o teste de unidade para o caso mais simples pode ser como mostrado no código \ref{code:tdd_test1}, onde é criada uma instância da classe \texttt{Project} e é feita uma asserção de que não tem tarefas na posição 4 do quadro.
+Desta forma, o teste de unidade para o caso mais simples pode ser como mostrado no código \ref{code:tdd_test1}, onde é criada uma instância da classe \texttt{Project} e é feita uma asserção de que não tem tarefas na posição ``\textit{Done}"\ do quadro.
 
 \begin{mycode}{ruby}%
 {Teste para o método Project\#tasks\_by\_position (versão 1)}{code:tdd_test1}
@@ -54,7 +54,7 @@ def tasks_by_position position
 end
 \end{mycode}
 
-Os testes irão passar. Mas a funcionalidade ainda não está completa e, consequentemente, o teste também não. Como pode ser visto no código \ref{code:tdd_test2}, é adicionado ao teste uma verificação de que para a posição 1 devem existir duas tarefas e que estas tarefas devem ser exatamente as criadas anteriormente.
+Os testes irão passar, mas a funcionalidade ainda não está completa e, consequentemente, o teste também não. Como pode ser visto no código \ref{code:tdd_test2}, é adicionado ao teste uma verificação de que para a posição 1 devem existir duas tarefas e que estas tarefas devem ser exatamente as criadas anteriormente.
 
 \begin{mycode}{ruby}%
 {Teste do método Project\#tasks\_by\_position (versão 2)}{code:tdd_test2}
@@ -87,7 +87,7 @@ def tasks_by_position position
 end
 \end{mycode}
 
-Desta vez, após a modificação no código e a execução dos testes, todos os testes os irão passar. Contudo, a cobertura de testes para este método ainda está fraca, o que pode ser resolvido com a adição de mais algumas tarefas em posições diferentes, como mostrado no código \ref{code:tdd_test3}.
+Desta vez, após a modificação no código e a execução dos testes, todos os testes irão passar. Contudo, a cobertura de testes para este método ainda está fraca, o que pode ser resolvido com a adição de mais algumas tarefas em posições diferentes, como mostrado no código \ref{code:tdd_test3}.
 
 \begin{mycode}{ruby}%
 {Teste do método Project\#tasks\_by\_position (versão 3)}{code:tdd_test3}
@@ -339,7 +339,7 @@ class BoardsController < InheritedResources::Base
 end
 \end{mycode}
 
-Códigos como o apresentado acima são extremamente difíceis de serem testados, pois, além de possuir complexidade ciclomática acima do aceitável, desempenham tarefas de responsabilidade de outras unidades do software, o que aumenta em muito o seu acoplamento e dificulta a escrita dos testes. Se este código fosse escrito utilizando TDD, certamente estaria melhor escrito e com mais qualidade, pois para escrever o teste, o código teria que ser refatorado de modo a distribuir as diferentes responsabilidades incorporadas no mesmo. Assim, fica clara a íntima relação entre teste e implementação no que tange ao design e à qualidade.
+Códigos como o apresentado acima são extremamente difíceis de serem testados, pois, além de possuir complexidade ciclomática\footnote{Complexidade ciclomática (ou complexidade condicional) é uma métrica de software usada para indicar a complexidade de um programa de computador. Ela mede a quantidade de caminhos de execução independentes a partir de um código fonte.} acima do aceitável, desempenham tarefas de responsabilidade de outras unidades do software, o que aumenta em muito o seu acoplamento e dificulta a escrita dos testes. Se este código fosse escrito utilizando TDD, certamente estaria melhor escrito e com mais qualidade, pois para escrever o teste, o código teria que ser refatorado de modo a distribuir as diferentes responsabilidades incorporadas no mesmo. Assim, fica clara a íntima relação entre teste e implementação no que tange ao design e à qualidade.
 
 \citeonline{LegacyCode} define que \textbf{código legado é código sem testes}. Esta afirmação, que pode parecer extremada, é simplesmente a constatação de que, sem uma ampla cobertura de testes automatizados, e uma vez que é economicamente inviável a aplicação manual de todos os casos de teste $-$ ou mesmo de parte deles $-$ de um software a cada modificação, é muito difícil ter uma margem razoável de segurança de que uma modificação não irá introduzir \textit{bugs} no software. Deste modo, para um código ``que irá para produção"\ a utilização do TDD é essencial, pois do contrário, se está criando código legado. É importante lembrar que o código legado com o tempo vai minando a manutenibilidade do sistema e assim, elevando os custos de introdução de novas funcionalidade e evolução do mesmo.
 
@@ -572,7 +572,7 @@ O cliente é especialista em problemas e os desenvolvedores em dar soluções. S
 
 Dessa forma, o cliente não tem interesse em ler a especificação como no código \ref{code:bdd_cucumber_spec}, nem validá-la, muito menos escrevê-la. Ler somente ``Render comments with Markdown syntax" é o suficiente, mais do que isso é superficial \cite{WhyBotherWithCucumberTesting}. Os testes em texto plano se atem a detalhes de interface que são irrelevantes para os objetivos do cliente.
 
-Uma exceção a isto ocorre em áreas que fazem uso pesado de modelagem de processo de negócio (BPM, do inglês \textit{Business Process Modeling}) \nomenclature{BPM}{Business Process Modeling} como Enterprise Information Systems, na qual descrições executáveis em texto plano podem servir como ligação entre os artefatos de BPM e o código executável \cite{IntroducingBLDD}.
+Uma exceção a isto ocorre em áreas que fazem uso pesado de modelagem de processo de negócio (BPM, do inglês \textit{Business Process Modeling}) \nomenclature{BPM}{Business Process Modeling} como Enterprise Information Systems, na qual descrições executáveis em texto plano podem servir como ligação entre os artefatos de BPM e o código executável, sendo, neste caso, uma forma de explicitar critérios de aceitação. \cite{IntroducingBLDD}.
 
 Já em um contexto como o do desenvolvimento do kanban-roots, no qual não existe um cliente, onde as pessoas que escrevem e leem as especificações são desenvolvedores, a escrita em texto plano tem um valor ainda menor. O código é uma linguagem natural para desenvolvedores, ainda mais quando é escrito em conjunto com DSLs\footnote{\textit{Domain specific language} (linguagem específica de domínio) é uma linguagem de programação de expressividade limitada, focada num domínio particular.} \nomenclature{DSL}{Domain specific language} como a do Rspec \cite{SteakOverCucumber}.
 
