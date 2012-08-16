@@ -302,8 +302,6 @@ Introduzindo o kanban-roots na discussão, nos dois únicos casos em que ocorreu
 
 Um exemplo para esta situação é apresentado no código \ref{code:todo}, onde é mostrado um método de \textit{controller}\footnote{O \textit{controller} é um componente do padrão MVC (do inglês \textit{Model View Controller}) de desenvolvimento de software. Neste padrão, a lógica da aplicação (\textit{Model}) é isolada da interface do usuário (\textit{View}) através de um controlador (\textit{Controller}).} que é chamado via Ajax e implementa a atualização dos pontos de uma tarefa diretamente do kanban do projeto $-$ sem a necessidade de clicar na tarefa, modificar o formulário de edição da mesma, pressionar salvar, e só ai retornar ao kanban do projeto. Além de atualizar os pontos da tarefa na base de dados, este método captura, trata e envia informações para que a interface do kanban seja atualizada. Este foi um típico caso onde um experimento foi para produção, sem testes e com um código \textbf{extremamente ruim}.
 
-\newpage
-
 \begin{mycode}{ruby}%
 {Código do método que atualiza os pontos de uma tarefa diretamente do kanban do projeto}{code:todo}
 # app/controllers/boards_controller.rb
@@ -463,6 +461,8 @@ Feature: Render comments with Markdown syntax
 Para cada \textit{step} existe uma implementação, ou seja, sua definição, chamada de \textit{step definition}. Pode-se pensar nos \textit{steps} como chamadas à métodos, e assim, os \textit{step definitions} serão as definição desses métodos. Deste modo, ao rodar os testes, o arquivo de teste é parseado e os \textit{steps} são executados.
 
 Os \textit{step definitions} para os \textit{steps} do código \ref{code:bdd_cucumber_spec} são apresentado no código \ref{code:step_definition}. Como durante o desenvolvimento são escritos muitos \textit{step definitions}, com o intuito de organizá-los, eles são separados por contexto em diferentes arquivos.
+
+\newpage
 
 \begin{mycode}{ruby}%
 {Step definitions}{code:step_definition}
@@ -782,8 +782,6 @@ Contudo, a utilização desta técnica deve ser feita com cautela. Quando se uti
 \label{sub:contextualizando_o_mock}
 
 De modo semelhante ao código \ref{code:todo} apresentado na Seção \ref{sub:a_ubiquidade_do_tdd}, o código \ref{code:mock} apresenta a implementação de um método de \textit{controller} que é chamado via AJAX (\textit{Asynchronous Javascript and XML})\nomenclature{AJAX}{Asynchronous Javascript and XML} e implementa a atualização dos responsáveis por uma tarefa diretamente do kanban do projeto, como apresentado na figura \ref{img:edit-contributors}. Além atualizar os responsáveis pela tarefa tarefa na base de dados, este método captura, trata e envia informações para que a interface do kanban seja atualizada. Este é outro caso onde um experimento foi para produção, sem testes e com um código ruim. Desta forma, neste caso não foi utilizado TDD para criar os testes, sendo estes escritos após a implementação.
-
-\newpage
 
 \begin{mycode}{ruby}%
 {Código do método que atualiza os responsáveis por uma tarefa assincronamente}{code:mock}
