@@ -300,7 +300,7 @@ Existe uma controvérsia sobre a não utilização do TDD em qualquer situação
 
 Introduzindo o kanban-roots na discussão, nos dois únicos casos em que ocorreu um \textit{bug} em produção, ao ser feita uma analise no código em busca da solução, foi encontrado um comentário ``TODO: Make test and refactor"\ nos métodos onde os \textit{bugs} ocorreram. Atualmente, existem 5 comentários semelhantes a esse espalhados no código do kanban-roots. Isso, de certa forma, comprova que caso os testes não sejam escritos antes, para um código que irá entrar em produção, escrevê-lo depois acaba sendo um fardo, e isso é ignorado até que um problema ocorra.
 
-Um exemplo para esta situação é apresentado no código \ref{code:todo}, onde é mostrado um método de \textit{controller}\footnote{O \textit{controller} é um componente do padrão MVC (do inglês \textit{Model View Controller}) de desenvolvimento de software. Neste padrão, a lógica da aplicação (\textit{Model}) é isolada da interface do usuário (\textit{View}) através de um controlador (\textit{Controller}).} que é chamado via Ajax e implementa a atualização dos pontos de uma tarefa diretamente do kanban do projeto. Além de atualizar os pontos da tarefa na base de dados, este método captura, trata e envia informações para que a interface do kanban seja atualizada. Este foi um típico caso onde um experimento foi para produção, sem testes e com um código \textbf{extremamente ruim}.
+Um exemplo para esta situação é apresentado no código \ref{code:todo}, onde é mostrado um método de \textit{controller}\footnote{O \textit{controller} é um componente do padrão MVC (do inglês \textit{Model View Controller}) de desenvolvimento de software. Neste padrão, a lógica da aplicação (\textit{Model}) é isolada da interface do usuário (\textit{View}) através de um controlador (\textit{Controller}).} que é chamado via Ajax e implementa a atualização dos pontos de uma tarefa diretamente do kanban do projeto $-$ sem a necessidade de clicar na tarefa, modificar o formulário de edição da mesma, pressionar salvar, e só ai retornar ao kanban do projeto. Além de atualizar os pontos da tarefa na base de dados, este método captura, trata e envia informações para que a interface do kanban seja atualizada. Este foi um típico caso onde um experimento foi para produção, sem testes e com um código \textbf{extremamente ruim}.
 
 \newpage
 
@@ -357,7 +357,7 @@ Conclui-se que, para quem adota TDD, somente nos casos em que um código será p
 
 \section{Contextualizando BDD}
 
-Nesta seção será visto como se dá a utilização do BDD se dá na prática, bem como sua relação com TDD, além de uma discussão acerca dos modelos de escrita dos testes com a utilização desta técnica.
+Nesta seção será visto como se dá a utilização do BDD na prática, bem como sua relação com TDD, além de uma discussão acerca dos modelos de escrita dos testes com a utilização desta técnica.
 
 \subsection{A relação entre BDD e TDD}
 \label{sub:a_relacao_entre_bdd_e_tdd}
@@ -402,7 +402,7 @@ Em TDD, o nome dos testes é baseado na estrutura do código, e isso pode ter um
 Existem duas maneiras principais de se escrever os testes de aceitação: em texto plano e em código puro. Para exemplificar cada uma das abordagens, será especificada a seguinte funcionalidade:
 
 \begin{quote}
-\textit{Os comentários mostrados na página de tarefas devem ser renderizados utilizando a linguagem de marcação Markdown.}
+\textit{Os comentários mostrados na página de tarefas devem ser renderizados utilizando a linguagem de marcação Markdown\footnote{Markdown é uma linguagem de marcação para escrever textos de forma simples e legível que posteriormente são convertidas em HTML. Mais em \url{http://daringfireball.net/projects/markdown/}}.}
 \end{quote}
 
 O resultado desta funcionalidade implementada é apresentado na figura \ref{img:markdown}.
@@ -519,7 +519,7 @@ Na figura \ref{img:cucumber-exec} é apresentada a saída para a execução do t
 \begin{figure}[h]
   \center
   \caption{Saída produzida pela execução dos testes utilizando escrita em texto plano com o Cucumber}
-  \includegraphics[scale=0.4]{images/cucumber-exec}
+  \includegraphics[scale=0.41]{images/cucumber-exec}
   \label{img:cucumber-exec}
 \end{figure}
 
@@ -575,21 +575,19 @@ BDD vem se tornando um consenso em automação de testes. Contudo, existem uma d
 
 Muitos defendem que os testes devem ser escritos em texto plano, por conta do teste ser escrito em linguagem que qualquer pessoa, mesmo sem nenhum conhecimento em programação, pode ler e validar.
 
-Em uma situação onde se está desenvolvendo uma aplicação para um cliente, existe um mito sobre o cliente escrever as especificações, contudo está é uma abordagem utópica \cite{SteakOverCucumber, CucumberForVegetarians, ClientsWritingCucumber}. O cliente pode até ler e validar $-$ o que segundo \citeonline{YankoCapybara} nunca acontece $-$ mas mesmo assim esta não é uma abordagem muito interessante.
-
-O cliente é especialista em problemas e os desenvolvedores em dar soluções. Se o cliente escreve a especificação, na realidade ele está escrevendo parte da solução \cite{SteakOverCucumber}. No caso da funcionalidade exemplificada anteriormente, o cliente apenas sabe que os ``comentários devem ser renderizados com markdown", ele não quer saber se para isso deve entrar em determinada página, preencher determinado campo e clicar em determinado botão. O cliente apenas sabe a funcionalidade que ele deseja, e vê-la funcionando.
+Em uma situação onde se está desenvolvendo uma aplicação para um cliente, existe um mito sobre o cliente escrever as especificações, contudo está é uma abordagem utópica \cite{SteakOverCucumber, CucumberForVegetarians, ClientsWritingCucumber}. O cliente pode até ler e validar $-$ o que segundo \citeonline{YankoCapybara} nunca acontece $-$ mas mesmo assim esta não é uma abordagem muito interessante, pois o cliente é especialista em problemas e os desenvolvedores em dar soluções. Se o cliente escreve a especificação, na realidade ele está escrevendo parte da solução \cite{SteakOverCucumber}. No caso da funcionalidade exemplificada anteriormente, o cliente apenas sabe que os quer utilizar o markdown para escrever seus comentários, ele não quer saber se para isso deve entrar em determinada página, preencher determinado campo e clicar em determinado botão. O cliente apenas sabe a funcionalidade que ele deseja, e vê-la funcionando.
 
 Dessa forma, o cliente não tem interesse em ler a especificação como no código \ref{code:bdd_cucumber_spec}, nem validá-la, muito menos escrevê-la. Ler somente ``Render comments with Markdown syntax" é o suficiente, mais do que isso é superficial \cite{WhyBotherWithCucumberTesting}. Os testes em texto plano se atem a detalhes de interface que são irrelevantes para os objetivos do cliente.
 
 Uma exceção a isto ocorre em áreas que fazem uso pesado de modelagem de processo de negócio (BPM, do inglês \textit{Business Process Modeling}) \nomenclature{BPM}{Business Process Modeling} como Enterprise Information Systems, na qual descrições executáveis em texto plano podem servir como ligação entre os artefatos de BPM e o código executável, sendo, neste caso, uma forma de explicitar critérios de aceitação. \cite{IntroducingBLDD}.
 
-Já em um contexto como o do desenvolvimento do kanban-roots, no qual não existe um cliente, onde as pessoas que escrevem e leem as especificações são desenvolvedores, a escrita em texto plano tem um valor ainda menor. O código é uma linguagem natural para desenvolvedores, ainda mais quando é escrito em conjunto com DSLs\footnote{\textit{Domain specific language} (linguagem específica de domínio) é uma linguagem de programação de expressividade limitada, focada num domínio particular.} \nomenclature{DSL}{Domain specific language} como a do Rspec \cite{SteakOverCucumber}.
+Já em um contexto como o do desenvolvimento do kanban-roots, no qual não existe um cliente não técnico, onde as pessoas que escrevem e leem as especificações são desenvolvedores, a escrita em texto plano tem um valor ainda menor. O código é uma linguagem natural para desenvolvedores, ainda mais quando é escrito em conjunto com DSLs\footnote{\textit{Domain specific language} (linguagem específica de domínio) é uma linguagem de programação de expressividade limitada, focada num domínio particular.} \nomenclature{DSL}{Domain specific language} como a do Rspec \cite{SteakOverCucumber}.
 
 
 \paragraph{Camada adicional}
 \label{sssub:camada_adicional}
 
-Outra crítica aos testes em texto plano é que enquanto nos testes em código puro todo o código do teste está em concentrado em apenas um lugar, nos testes em texto plano, o código do testes está espalhado em diversos arquivos e métodos, devido a camada adicional dos \textit{steps}, tonando a suíte de testes mais complexa de manter e estender \cite{SteakOverCucumber}.
+Outra crítica aos testes em texto plano é que enquanto nos testes em código puro todo o código do teste está em concentrado em apenas um lugar, nos testes em texto plano, o código do testes está espalhado em diversos arquivos e métodos, devido a camada adicional dos \textit{steps}, tornando a suíte de testes mais complexa de manter e estender \cite{SteakOverCucumber}.
 
 Além disso, é necessário manter um segundo ambiente de testes, já que para escrever os testes de aceitação em texto plano é necessária uma ferramenta de testes específica para isso. Isso não acontece com a escrita em código puro, já que é utilizada a mesma ferramenta utilizada nos testes unitários \cite{WhyBotherWithCucumberTesting}.
 
@@ -731,7 +729,7 @@ Nesta seção será feita a contextualização dos dublês de teste \textit{stub
 
 Um exemplo da utilização simples e eficiente do \textit{stub} foi mostrado no teste de integração apresentado na Seção \ref{sec:contextualizando_tdd}. Naquele exemplo, foi feito um \textit{stub} do método \texttt{can\_pygmentize?} que faz uma consulta ao sistema operacional para verificar se uma determinada dependência de sistema está instalada. Desta forma, o teste ficou isolado, não importando se a máquina em que o teste for executado tem ou não a dependência instalada, sendo assim possível simular as duas situações $-$ logicamente, uma maquina não pode, ao mesmo tempo, ter e não ter uma dependência instalada.
 
-Um outro exemplo é mostrado no código \ref{code:stub_spec}, onde está sendo testada uma ação da classe \textit{Project}. Contudo, para que esta ação seja realizada, é necessário um conjunto de objetos da classe \textit{Task}. Assim, com o objetivo de criar um teste isolado e concentrado na classe \textit{Project}, é utilizado o método \texttt{stub\_model} que cria um \textit{stub} da classe \textit{Task} que irá reponder apenas aos atributos definidos no \textit{hash} passado como segundo parâmetro. No caso, a ação em questão é contar a soma dos pontos das tarefas alocadas em uma determinada posição do quadro (kanban). Esta ação é exercida através do método \texttt{count\_points}, cuja implementação é apresentada no código \ref{code:stub}. Na figura \ref{img:count-points} é apresentada uma utilização do método \texttt{count\_points} no somatório de pontos das tarefas na posição \textit{To Do} do kanban.
+Um outro exemplo é mostrado no código \ref{code:stub_spec}, onde está sendo testada uma ação da classe \textit{Project}. Contudo, para que esta ação seja realizada, é necessário um conjunto de objetos da classe \textit{Task}. Assim, com o objetivo de criar um teste isolado e concentrado na classe \textit{Project}, é utilizado o método \texttt{stub\_model} que cria um \textit{stub} da classe \textit{Task} que irá responder apenas aos atributos definidos no \textit{hash} passado como segundo parâmetro. No caso, a ação em questão é contar a soma dos pontos das tarefas alocadas em uma determinada posição do quadro (kanban). Esta ação é exercida através do método \texttt{count\_points}, cuja implementação é apresentada no código \ref{code:stub}. Na figura \ref{img:count-points} é apresentada uma utilização do método \texttt{count\_points} no somatório de pontos das tarefas na posição \textit{To Do} do kanban.
 
 \begin{mycode}{rspec}%
 {Exemplo do \textit{stub} da classe \textit{Task}}{code:stub_spec}
@@ -825,7 +823,7 @@ end
   \label{img:edit-contributors}
 \end{figure}
 
-O teste para o método \texttt{update\_assignees}, com a utilização de \textit{mock}, é apresentado no código \ref{code:mock_spec_mockista}. Como o teste quer validar a funcionalidade para mais de um responsável (\textit{assignees}), são criados dois objetos mockados da classe \textit{Contributor}, além de também ser necessário cria um objeto mockado da classe \textit{Task}. Com esses 3 objetos mockados, está feito a \textit{setup} para o teste.
+O teste para o método \texttt{update\_assignees}, com a utilização de \textit{mock}, é apresentado no código \ref{code:mock_spec_mockista}. Como o teste quer validar a funcionalidade para mais de um responsável (\textit{assignees}), são criados dois objetos mockados da classe \textit{Contributor}, além de também ser necessário criar um objeto mockado da classe \textit{Task}. Com esses 3 objetos mockados, está feito a \textit{setup} para o teste.
 
 Em seguida verificadas as chamadas à métodos sobre os objetos mockados. Isto é feito através do método \texttt{should\_receive} que recebe como parâmetro o método a ser chamado. Em seguida, pode ser aninhado o método \texttt{with} que recebe os parâmetros que devem ser passados para o método chamado no \texttt{should\_receive}. Para finalizar a cadeia, pode ser ainda aninhado o método \texttt{and\_return} que indica o retorno do método chamado no \texttt{should\_receive}.
 
@@ -857,7 +855,7 @@ describe BoardsController do
 end
 \end{mycode}
 
-O grande problema do mock está nas verificações de chamada à métodos dos objetos mockados. Pose-se perceber que está se verificando a ordem em que os métodos são chamados, bem como os parâmetros passados. Desta forma, na realidade, está se testando \textbf{como} a funcionalidade está sendo implementada e não \textbf{o que} ela faz \cite{UnitForAReason}. Com isso, o acoplamento entre o teste e a implementação torna-se extremamente grande, ainda maior do que com a utilização de \textit{stubs}. Qualquer refatoração mínima feita na implementação, mesmo que não interfira em seu comportamento, pode fazer com que os testes quebrem.
+O grande problema do mock está nas verificações de chamada à métodos dos objetos mockados. Pose-se perceber nas linhas 9 até 12 do código \ref{code:mock_spec_mockista} que está se verificando a ordem em que os métodos são chamados, bem como os parâmetros passados. Desta forma, na realidade, está se testando \textbf{como} a funcionalidade está sendo implementada e não \textbf{o que} ela faz \cite{UnitForAReason}. Com isso, o acoplamento entre o teste e a implementação torna-se extremamente grande, ainda maior do que com a utilização de \textit{stubs}. Qualquer refatoração mínima feita na implementação, mesmo que não interfira em seu comportamento, pode fazer com que os testes quebrem.
 
 Um exemplo para este problema seria trocar o método \texttt{find} na linha 5 do código \ref{code:mock} pelo método \texttt{find\_by\_id}. Com essa troca, o comportamento do método \texttt{update\_assignees} continua o mesmo, porém, o teste quebraria na linha 9 do código \ref{code:mock_spec_mockista} informado que a classe \texttt{Task} esperava receber o método \texttt{find} mas recebeu o método \texttt{find\_by\_id}.
 
@@ -885,7 +883,7 @@ describe BoardsController do
 end
 \end{mycode}
 
-Percebe-se que o teste sem o uso do \textit{mock} fica mais simples e menos acoplado à implementação. Contudo, o teste usando \textit{mock} ganhou um isolamento maior por não ficar sujeito a detalhes da implementação das classes, irrelevantes para o teste. Além disso, os testes utilizando mock rodaram com uma velocidade 58\% maior do que o teste sem \textit{mock}. Isso acontece porque os testes sem \textit{mock} (utilizando \textit{fixture replacement}) fazem acesso ao disco para gravar as informações dos objetos reais no banco de dados de teste.
+Comparando o código \ref{code:mock_spec_mockista} e o código \ref{code:mock_spec_tradicional} percebe-se que o teste sem o uso do \textit{mock} fica mais simples e menos acoplado à implementação. Contudo, o teste usando \textit{mock} ganhou um isolamento maior por não ficar sujeito a detalhes da implementação das classes, irrelevantes para o teste. Além disso, os testes utilizando mock rodaram com uma velocidade 58\% maior do que o teste sem \textit{mock}. Isso acontece porque os testes sem \textit{mock} (utilizando \textit{fixture replacement}) fazem acesso ao disco para gravar as informações dos objetos reais no banco de dados de teste.
 
 
 \subsection{A dicotomia entre o TDD clássico e o mockista}
