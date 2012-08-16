@@ -202,7 +202,7 @@ describe HTMLwithAlbino do
 end
 \end{mycode}
 
-O código \ref{code:integration2} apresenta a implementação que faz os dois casos de teste passarem. Nessa nova versão, foi preciso criar o método de suporte \texttt{can\_pygmentize?} que, como dito anteriormente, verifica se o Pygments está instalado. Se o Pygments estiver instalado, ele é invocado da mesma forma como na versão 1 da implementação. Porém, se o Pygments não estiver instalado, é feita uma requisição ao serviço externo.
+O código \ref{code:integration2} apresenta a implementação que faz os dois casos de teste passarem. Nessa nova versão, foi preciso criar o método de suporte \texttt{can\_pygmentize?} que, como dito anteriormente, verifica se o Pygments está instalado. Se o Pygments estiver instalado, ele é invocado da mesma forma como na versão 1 da implementação. Porém, se o Pygments não estiver instalado, é feita uma requisição ao serviço externo (linha 9 do código \ref{code:integration2}).
 
 \begin{mycode}{ruby}%
 {Implementação do \textit{highlighting} de código (versão 2)}{code:integration2}
@@ -226,7 +226,7 @@ class HTMLwithAlbino < Redcarpet::Render::HTML
 end
 \end{mycode}
 
-Como ao executar os testes, todos eles passam, podemos refatorar o código. Na implementação não há nada a ser refatorado, contudo, existe diversas duplicidades nos testes. O código \ref{code:integration_spec3} apresenta os testes refatorados, eliminando as duplicidades com a ajuda do método \texttt{before} que, ao receber o \texttt{:all} como parâmetro, é executado antes de de todos os casos de teste.
+Como ao executar os testes, todos eles passam, podemos refatorar o código. Na implementação não há nada a ser refatorado, contudo, existem duplicidades nos testes. O código \ref{code:integration_spec3} apresenta os testes refatorados, eliminando as duplicidades com a ajuda do método \texttt{before} que, ao receber o \texttt{:all} como parâmetro, é executado antes de de todos os casos de teste.
 
 \begin{mycode}{rspec}%
 {Teste de integração para o \textit{highlighting} de código (versão 3)}{code:integration_spec3}
@@ -264,7 +264,7 @@ Desta forma, mostra-se que não apenas o código da implementação deve ser ref
 Para o desenvolvimento do kanban-roots, foi de extrema importância que o design evoluísse incrementalmente, pois não se sabia ao certo que
 funcionalidades seriam contempladas nem que entidades existiriam.
 
-As entidades \textit{Project} e \textit{Contributor} tinham uma relação direta, n para n, como apresentado na figura \ref{img:contributor_projetc}. Contudo, em um determinado momento achou-se pertinente a criação de uma nova entidade \textit{Team} que faria a ligação entre as outras duas entidades, como apresentado na figura \ref{img:contributor_team_projetc}. Isto acarretou uma série de alterações \cite{CommitAddTeam}, dentre outras, na interface das entidades e na estrutura do banco de dados $-$ considerada uma alteração crítica, mas que com ferramentas como \textit{migrations},\footnote{\textit{Migrations} são uma forma conveniente de gerenciar bases de dados de maneira estruturada e organizada. Mais em \url{http://guides.rubyonrails.org/migrations.html}} torna-se simples.
+As entidades \textit{Project} e \textit{Contributor} tinham uma relação direta, n para n, como apresentado na figura \ref{img:contributor_projetc}. Contudo, em um determinado momento achou-se pertinente a criação de uma nova entidade \textit{Team} para facilitar a adição de contribuidores aos projetos, pois muitas vezes a equipe de desenvolvimento era a mesma e adicionar cada contribuidor ao projeto tinha se tornado uma tarefa incômoda. Desta forma, os vários contribuidores seriam adicionados ao projeto através do time, ou seja a entidade \textit{Team} que faria a ligação entre as outras duas entidades, como apresentado na figura \ref{img:contributor_team_projetc}. Isto acarretou uma série de alterações \cite{CommitAddTeam}, dentre outras, na interface das entidades e na estrutura do banco de dados $-$ considerada uma alteração crítica, mas que com ferramentas como \textit{migrations},\footnote{\textit{Migrations} são uma forma conveniente de gerenciar bases de dados de maneira estruturada e organizada. Mais em \url{http://guides.rubyonrails.org/migrations.html}} torna-se simples.
 
 \begin{figure}[h]
   \center
@@ -273,7 +273,14 @@ As entidades \textit{Project} e \textit{Contributor} tinham uma relação direta
   \label{img:contributor_projetc}
 \end{figure}
 
-Meses depois, foi verificado que esta entidade \textit{Team} não era mais necessária, acarretando novamente em diversas modificações \cite{CommitRemoveTeam}, voltando ao estado apresentado na figura \ref{img:contributor_projetc}.
+Meses depois, foi verificado que esta entidade \textit{Team} não era mais necessária por dois motivos:
+
+\begin{itemize}
+  \item Os usuários gostariam de controlar seus projetos pessoais através do kanban-roots e, nesse caso, a entidade \textit{Team} não fazia sentido.
+  \item Nunca eram criados novos times. Todas as empresas que utilizavam o kanban-roots tinha apenas um time.
+\end{itemize}
+
+Desta forma a entidade \textit{Team} foi removida, o que acarretou novamente em diversas modificações \cite{CommitRemoveTeam}, fazendo com que a relação entre \textit{Contributor} e \textit{Project} voltasse ao estado apresentado na figura \ref{img:contributor_projetc}. Além disso, será (ainda não foi implementado) criada uma entidade \textit{Organization} que estará ligada às entidades \textit{Contributor} e \textit{Project}, para que uma organização possa ter seus próprios projetos e contribuidores.
 
 \begin{figure}[h]
   \center
